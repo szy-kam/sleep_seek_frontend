@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-const App = () => {
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes'
 
-    return <div> Home </div>
+class App extends Component {
 
+    render(){
+
+        return (
+            <BrowserRouter>
+                <Routes/>
+            </BrowserRouter>
+        )
+    }
 }
 
 

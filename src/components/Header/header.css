@@ -1,0 +1,31 @@
+.logo a img{
+    color: red;
+    text-decoration: none;
+    width: 100px;
+}
+header {
+    background-color: blue;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+
+.navlink a{
+    color: black;
+    text-decoration: none;
+}
+
+nav {
+    display: inline-block;
+	padding: .5em 1.5em;
+}
+
+nav div {
+    display: inline;
+    text-align: center;
+    margin: 10px;
+    font-size: 25px;
+}
