@@ -1,0 +1,65 @@
+.staysCard{
+    background-color: #f3f3f3;
+    border: gray 1px solid ;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0px;
+    
+}
+.left{
+    
+}
+
+.right{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.image{
+    flex-basis:100%;
+}
+
+.name a{
+    font-size: 25px;
+    text-decoration: none!important;
+    font-weight: 700;
+
+}
+
+.address{
+    
+
+}
+
+.price{
+    font-size: 20px;
+    text-decoration: none!important;
+    font-weight: 700;
+    align-self: flex-end;
+}
+
+.itemButton{
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 15px 32px;
+    margin: 25px auto;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #008CBA;
+    width: 150px;
+    height: 50px;
+    align-self: flex-end;
+  }
+
+
+  .itemButton a {
+    text-decoration: none;
+  }
