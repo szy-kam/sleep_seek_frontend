@@ -86,6 +86,7 @@
 
  .showMoreButton{
     margin: 5px auto;
+    display: block;
   }
 
 
@@ -110,6 +111,7 @@
     flex-direction: row;
     flex-flow: column;
     align-items: center;
+    flex-basis: 100%;
 }
 
 .staysCardT2 .image a img{
@@ -122,7 +124,7 @@
 
 .staysCardT2 .name a{
 
-    font-size: 25px;
+    font-size: 20px;
     text-decoration: none!important;
     font-weight: 700;
 

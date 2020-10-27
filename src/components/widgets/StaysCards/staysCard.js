@@ -1,4 +1,3 @@
-import { template } from '@babel/core';
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import {StaysCardRepository} from '../../../repository/Stays'
@@ -43,7 +42,6 @@ class StaysCard extends Component {
                     </div>
                 ))}
             </div>)
-            break;
             case('mini'):
                 return (
                     <div className={style.staysContainerT2}>
@@ -56,7 +54,6 @@ class StaysCard extends Component {
                     </div>
                 ))}
                 </div>)
-            break;
             default:
                 return <p>No card template choosen.</p>
         }
@@ -67,9 +64,9 @@ class StaysCard extends Component {
     
     render(){
         return (
-        <div >
+        <div className={style.staysCardComponent}>
             {this.renderCards(this.props.template, this.state.stays)}
-            {this.renderMore()}
+            {this.props.loadMore ? this.renderMore() : null}
         </div>
         )
     }

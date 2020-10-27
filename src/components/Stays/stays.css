@@ -1,0 +1,10 @@
+.staysComponent{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.leftColumn{
+    flex-basis: 18%;
+    padding: 20px;
+}
