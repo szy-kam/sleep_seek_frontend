@@ -1,15 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Nav from './nav'
 import style from './header.css'
 
-class Header extends Component {
-    state = {
-
-    }
-
-    render(){
+const Header = (props) => {
         return(
             <header>
                 <div className={style.logo}>
@@ -18,14 +13,12 @@ class Header extends Component {
                 <div className={style.search}>
                     <form action="/search" method="get" className="search">
                         <input type="text" name="q" placeholder="Search"/>
-                        <button type="submit"> <img src="http://www.kurshtml.edu.pl/pliki/cse/search_box_icon.png" /></button>
+                        <button type="submit"> <img src="http://www.kurshtml.edu.pl/pliki/cse/search_box_icon.png" alt="Search ico"/></button>
                     </form>
                 </div>
-                <Nav />
+                <Nav user={props.user} userAuth={props.userAuth} />
             </header>
         )
-    }
-
 }
 
 export default Header;

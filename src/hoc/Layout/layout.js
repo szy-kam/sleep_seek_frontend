@@ -1,23 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './layout.css'
 
 import Header from '../../components/Header/header';
 import Footer from '../../components/Footer/footer';
 
-class Layout extends Component {
+const Layout = (props) => {
 
-    state = {
-    }
-
-    render(){
         return(
             <div className={style.mainContainer}>
-                <Header/>
-                {this.props.children}
+                <Header user={props.user} userAuth={props.userAuth} />
+                {props.children}
                 <Footer/>
             </div>
         )
-    }
 
 }
 
