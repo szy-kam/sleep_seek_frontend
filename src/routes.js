@@ -15,7 +15,7 @@ class Routes extends Component {
         user: null
     }
 
-    userAuth = (v) => {
+    userAuth = (v=true) => {
         this.setState({
             user: v
         })

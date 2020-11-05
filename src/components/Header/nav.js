@@ -45,6 +45,7 @@ class Nav extends Component{
     ]
 
     logOutUser = () => {
+        console.log("wylogowuje")
         this.props.userAuth(null);
     }
 
