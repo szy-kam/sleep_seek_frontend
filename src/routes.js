@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-
+import PrivateRoutes from './components/Routes/privateRoute'
 
 import Layout from './hoc/Layout/layout';
 import Home from './components/Home/home';
@@ -33,7 +33,7 @@ class Routes extends Component {
                     )} />
 
                     <Route path="/register" exact component={Register}/>
-                    <Route path="/my-account" exact component={MyAccount}/>
+                    <PrivateRoutes {...this.props} user={this.state.user} path="/my-account" exact component={MyAccount}/>
                 </Switch>
             </Layout>
            

@@ -13,7 +13,8 @@ class Header extends Component{
 
     searchSubmit = (event) => {
         event.preventDefault();
-        this.props.history.push("/search?q=" + encodeURI(this.state.searchInput));
+        if(this.state.searchInput !== null)
+            this.props.history.push("/search?q=" + encodeURI(this.state.searchInput));
 
     }
 
@@ -32,10 +33,10 @@ class Header extends Component{
                 <div className={style.search}>
                     <form className={style.seachInput}>
                         <input type="text" name="q" placeholder="Search" onChange={this.searchOnChange} />
-                        <button type="submit" onClick={this.searchSubmit} > <img src="http://www.kurshtml.edu.pl/pliki/cse/search_box_icon.png" alt="Search ico"/></button>
+                        <button type="submit" onClick={this.searchSubmit} > <img src="/images/search_icon.png" alt="Search ico"/></button>
                     </form>
                 </div>
-                <Nav user={this.props.user} userAuth={this.props.userAuth} />               
+                <Nav user={this.props.user} userAuth={this.props.userAuth} />
             </header>
         )
     }
