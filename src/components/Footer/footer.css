@@ -1,9 +1,13 @@
 footer {
     background-color: #ededed;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* po zmienie height zmień też w layout.css */
+    height: 3rem;   
 }
 
 .copyright{
     margin: 10px auto;
-    padding: 10px;
     text-align: center;
 }

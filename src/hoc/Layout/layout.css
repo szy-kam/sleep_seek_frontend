@@ -1,12 +1,18 @@
-.mainContainer{
-    font-family: 'Roboto', sans-serif;
-}
-
 * {
     font: inherit;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     border: 0;
+}
 
+.mainContainer{
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    min-height: 100vh;
+}
+
+.innerContainer{
+    /* po zmianie zmień też w footer.css */
+    padding-bottom: 3rem;
 }

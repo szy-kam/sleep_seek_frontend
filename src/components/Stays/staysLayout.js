@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StaysCard from '../widgets/StaysCards/staysCard'
+import style from  './stays.css'
 
 class LeftColumn extends Component {
 
@@ -8,7 +9,10 @@ class LeftColumn extends Component {
 
     render(){
         return(
-            <StaysCard template="mini" loadMore={false}/>
+            <div className={style.leftColumn}>
+                <StaysCard template="mini" loadMore={false}/>
+            </div>
+
         )
     }
 

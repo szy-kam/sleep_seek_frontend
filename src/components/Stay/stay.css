@@ -1,0 +1,52 @@
+.stayComponent{
+    display: flex;
+
+}
+
+.stayContent{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 20px;
+}
+
+.image{
+    flex-basis: 100%;
+    min-height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    max-height: 500px;
+    margin-bottom: 15px;
+}
+
+.name{
+    font-size: 50px;
+}
+
+.address {
+    font-size: 30px;
+}
+
+.price{
+    font-size: 35px;
+    font-weight: bolder;
+    align-self: flex-end;
+}
+
+.description{
+    font-size: 20px;
+}
+
+.imageGrid{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+    
+}
+
+.imageGrid img {
+    margin: 5px;
+    flex-shrink: 1;
+}

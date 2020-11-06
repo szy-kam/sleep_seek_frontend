@@ -5,6 +5,7 @@ import PrivateRoutes from './components/Routes/privateRoute'
 import Layout from './hoc/Layout/layout';
 import Home from './components/Home/home';
 import Stays from './components/Stays/stays';
+import Stay from './components/Stay/stay';
 import SignIn from './components/SignIn/singIn'
 import Register from './components/Register/register'
 import MyAccount from './components/MyAccount/myAccount'
@@ -27,6 +28,7 @@ class Routes extends Component {
                 <Switch>
                     <Route path="/" exact component={Home}/>
                     <Route path="/stays" exact component={Stays}/>
+                    <Route path="/stays/:id" exact component={Stay}/>
                     {/* <Route path="/sign-in" exact component={SignIn} /> */}
                     <Route path="/sign-in" exact render={(props) => (
                         <SignIn {...props} userAuth={this.userAuth} />
@@ -34,6 +36,7 @@ class Routes extends Component {
 
                     <Route path="/register" exact component={Register}/>
                     <PrivateRoutes {...this.props} user={this.state.user} path="/my-account" exact component={MyAccount}/>
+
                 </Switch>
             </Layout>
            

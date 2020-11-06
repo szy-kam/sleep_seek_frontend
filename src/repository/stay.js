@@ -1,4 +1,4 @@
-const url = 'http://localhost:8181/api/stays';
+const url = 'http://localhost:8181/api/stay/1';
 
 export async function StaysCardRepository(){
     const response = await fetch(url);
