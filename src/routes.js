@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import PrivateRoutes from './components/Routes/privateRoute'
-
+import auth from './hoc/auth'
 import Layout from './hoc/Layout/layout';
 import Home from './components/Home/home';
 import Stays from './components/Stays/stays';
 import Stay from './components/Stay/stay';
+import EditStay from './components/Stay/editStay';
 import SignIn from './components/SignIn/singIn'
 import Register from './components/Register/register'
 import MyAccount from './components/MyAccount/myAccount'
+
+
 
 class Routes extends Component {
 
@@ -26,17 +28,13 @@ class Routes extends Component {
         return(
             <Layout user={this.state.user} userAuth={this.userAuth}>
                 <Switch>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/stays" exact component={Stays}/>
-                    <Route path="/stays/:id" exact component={Stay}/>
-                    {/* <Route path="/sign-in" exact component={SignIn} /> */}
-                    <Route path="/sign-in" exact render={(props) => (
-                        <SignIn {...props} userAuth={this.userAuth} />
-                    )} />
-
-                    <Route path="/register" exact component={Register}/>
-                    <PrivateRoutes {...this.props} user={this.state.user} path="/my-account" exact component={MyAccount}/>
-
+                    <Route path="/" exact component={auth(Home, 0, this.state.user, this.userAuth)}/>
+                    <Route path="/stays" exact component={auth(Stays, 0, this.state.user, this.userAuth)}/>
+                    <Route path="/stays/:id" exact component={auth(Stay, 0, this.state.user, this.userAuth)}/>
+                    <Route path="/stays/edit/:id" exact component={auth(EditStay, 1, this.state.user, this.userAuth)}/>
+                    <Route path="/sign-in" exact component={auth(SignIn, 0, this.state.user, this.userAuth)} />
+                    <Route path="/register" exact component={auth(Register, 1, this.state.user, this.userAuth)}/>
+                    <Route path="/my-account" exact component={auth(MyAccount, 1, this.state.user, this.userAuth)}/>
                 </Switch>
             </Layout>
            

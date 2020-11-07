@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import LeftColumn from '../Stays/staysLayout'
 import {StaysCardRepository} from '../../repository/stay'
 import style from './stay.css'
@@ -18,7 +19,9 @@ class Stay extends Component{
                 address: "Śledziowa 8",
                 zipCode: "42-222"
             },
-            mainPhoto: "https://picsum.photos/300/300"
+            mainPhoto: "https://picsum.photos/300/300",
+            price: "4000",
+            contactInfo: "690 000 000"
         },
         images : ["https://picsum.photos/300/300", "https://picsum.photos/301/300", "https://picsum.photos/302/300", "https://picsum.photos/303/300"],
         photoIndex: 0,
@@ -26,15 +29,12 @@ class Stay extends Component{
     }
 
     componentDidMount() {
-        console.log(this.state.stay);
-        StaysCardRepository().then(response => this.setState({ stay: response}))
-        // StaysCardRepository().then(response => console.log(response))
-        console.log(this.state.stay);
+        StaysCardRepository().then(response => this.setState({ stay: response}))    
     }
     
     imageGrid() {
         return this.state.images.map((item,i) => (
-                <img src={item} onClick={() => this.setState({ isOpen: true, photoIndex: i })}></img>
+                <img src={item} key={i} alt={item} onClick={() => this.setState({ isOpen: true, photoIndex: i })}></img>
         ))
     }
 
@@ -67,14 +67,14 @@ class Stay extends Component{
             <div className={style.stayComponent}>
                     <LeftColumn />
                 <div className={style.stayContent}>
-                    <div className={style.name}>{this.state.stay.name}</div>
+                    <div className={style.name}>{this.state.stay.name} | <Link to={"/stays/edit/id"}>Edytuj</Link> </div>
                     <div className={style.image} style={{backgroundImage: `url(${this.state.stay.mainPhoto})`} }></div>
-                    <div className={style.address}>Address: {this.state.stay.address.city}, {this.state.stay.address.address}</div>
-                    <div className={style.price}>{this.state.stay.address.zipCode} zł</div>
-                    <div className={style.description}>{this.state.stay.description}</div>
                     <div className={style.imageGrid}>
                         {this.imageGrid()}
                     </div>
+                    <div className={style.address}>Address: {this.state.stay.address.city}, {this.state.stay.address.street}</div>
+                    <div className={style.price}>{this.state.stay.price} zł</div>
+                    <div className={style.description}>{this.state.stay.description}</div>
                 </div>
                 {this.lightbox()}
             </div>

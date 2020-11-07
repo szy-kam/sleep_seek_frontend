@@ -11,6 +11,7 @@ const SignIn = (props) => {
         
 
         return(
+                
                 <div className={style.signInComponent}>
                         <form  className={style.signInForm} >
                                 <input type="text" name="username" placeholder="Username" autoComplete="on"/>

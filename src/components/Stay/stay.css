@@ -49,4 +49,5 @@
 .imageGrid img {
     margin: 5px;
     flex-shrink: 1;
+    max-height: 100px;
 }
