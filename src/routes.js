@@ -33,7 +33,7 @@ class Routes extends Component {
                     <Route path="/stays/:id" exact component={auth(Stay, 0, this.state.user, this.userAuth)}/>
                     <Route path="/stays/edit/:id" exact component={auth(EditStay, 1, this.state.user, this.userAuth)}/>
                     <Route path="/sign-in" exact component={auth(SignIn, 0, this.state.user, this.userAuth)} />
-                    <Route path="/register" exact component={auth(Register, 1, this.state.user, this.userAuth)}/>
+                    <Route path="/register" exact component={auth(Register, 0, this.state.user, this.userAuth)}/>
                     <Route path="/my-account" exact component={auth(MyAccount, 1, this.state.user, this.userAuth)}/>
                 </Switch>
             </Layout>

@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LeftColumn from '../Stays/staysLayout'
-import {StaysCardRepository} from '../../repository/stay'
+import {StayRepository} from '../../repository/stay'
 import style from './stay.css'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -13,15 +13,16 @@ class Stay extends Component{
     state = {
         stay : {
             id: 2,
-            name: "Super Hote",
+            name: "",
             address: {
-                city: "Katowice",
-                address: "Śledziowa 8",
-                zipCode: "42-222"
+                city: "",
+                address: "",
+                zipCode: ""
             },
-            mainPhoto: "https://picsum.photos/300/300",
-            price: "4000",
-            contactInfo: "690 000 000"
+            mainPhoto: "",
+            description: "",
+            price: "",
+            contactInfo: ""
         },
         images : ["https://picsum.photos/300/300", "https://picsum.photos/301/300", "https://picsum.photos/302/300", "https://picsum.photos/303/300"],
         photoIndex: 0,
@@ -29,7 +30,7 @@ class Stay extends Component{
     }
 
     componentDidMount() {
-        StaysCardRepository().then(response => this.setState({ stay: response}))    
+        StayRepository(this.props.match.params.id).then(response => {this.setState({ stay: response})})    
     }
     
     imageGrid() {
@@ -60,6 +61,10 @@ class Stay extends Component{
             />
           ))
     }
+
+    editLink(){
+         return this.props.user ?  <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link> : null
+    }
   
 
     render(){
@@ -67,7 +72,7 @@ class Stay extends Component{
             <div className={style.stayComponent}>
                     <LeftColumn />
                 <div className={style.stayContent}>
-                    <div className={style.name}>{this.state.stay.name} | <Link to={"/stays/edit/id"}>Edytuj</Link> </div>
+                    <div className={style.name}>{this.state.stay.name} {this.editLink()} </div>
                     <div className={style.image} style={{backgroundImage: `url(${this.state.stay.mainPhoto})`} }></div>
                     <div className={style.imageGrid}>
                         {this.imageGrid()}
