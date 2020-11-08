@@ -59,6 +59,7 @@
 .stayEditCompoment{
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .editForm{
@@ -78,4 +79,14 @@
 .editForm textarea{
     height: 100px;
     width: 400px;
+}
+
+.message{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    background-color: blue;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
 }

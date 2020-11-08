@@ -1,30 +1,25 @@
 
 import React, {Component} from 'react';
-import { GetStayById, EditStayRepo, DeleteStayById } from '../../repository/stay';
+import { AddStayRepo} from '../../repository/stay';
 import style from './stay.css'
 
-class EditStay extends Component{
+class AddStay extends Component{
 
     state = {
         stay : {
-            id: this.props.match.params.id,
-            name: "",
+            name: "Hotel",
             address: {
-                city: "",
-                street: "",
-                zipCode: ""
+                city: "Katowice",
+                street: "Miedziowa",
+                zipCode: "24-222"
             },
-            mainPhoto: "",
-            description: "",
-            price: "",
-            contactInfo: ""
+            mainPhoto: "https://picsum.photos/300",
+            description: "Lorem ibsum dom mit samit",
+            price: "150",
+            contactInfo: "900 909 990"
         },
         images : [],
         message : null,
-    }
-
-    componentDidMount() {
-        GetStayById(this.state.stay.id).then(response => this.setState({ stay: response}))    
     }
 
     handleInput = (event,name) => {
@@ -45,18 +40,14 @@ class EditStay extends Component{
     submitForm = (event) => {
         event.preventDefault();
         // EditStayRepo(this.state.stay).then( ()=> this.setState({ message: "Edited"} ))
-        EditStayRepo(this.state.stay).then( response => console.log(response) )
+        AddStayRepo(this.state.stay).then( response => console.log(response) )
     }
 
-    deleteHandle = () => {
-        DeleteStayById(this.state.stay.id).then( ()=> this.setState({ message: "Deleted"} ))
-    }
-
-
+   
     redirectUser = () => {
         setTimeout(()=>{
             this.props.history.push('/')
-        },3000)
+        }, 3000)
     }
 
     message = () => {
@@ -87,12 +78,11 @@ class EditStay extends Component{
                     <textarea onChange={(event)=>this.handleInput(event,'description')} value={this.state.stay.description} />
                     <label>Main Photo LINK</label>
                     <input onChange={(event)=>this.handleInput(event,'mainPhoto')} value={this.state.stay.mainPhoto} />
-                    <button type="submit">Submit</button>
+                    <button type="submit">Add stay</button>
                 </form>
-                <button className={style.deleteButton} onClick={this.deleteHandle}>Delete stay</button>
             </div>
         )
     }
 
 }
-export default EditStay;
+export default AddStay;

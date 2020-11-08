@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LeftColumn from '../Stays/staysLayout'
-import {StayRepository} from '../../repository/stay'
+import {GetStayById} from '../../repository/stay'
 import style from './stay.css'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -30,7 +30,7 @@ class Stay extends Component{
     }
 
     componentDidMount() {
-        StayRepository(this.props.match.params.id).then(response => {this.setState({ stay: response})})    
+        GetStayById(this.props.match.params.id).then(response => {this.setState({ stay: response})})    
     }
     
     imageGrid() {
@@ -63,7 +63,8 @@ class Stay extends Component{
     }
 
     editLink(){
-         return this.props.user ?  <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link> : null
+        //  return this.props.user ?  <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link> : null
+        return <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link>
     }
   
 
