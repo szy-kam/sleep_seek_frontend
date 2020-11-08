@@ -1,21 +1,29 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import {StaysCardRepository} from '../../../repository/Stays'
+import {StaysCardRepository} from '../../../repository/stays'
 import style from './staysCard.css'
 
 
 class StaysCard extends Component {
 
     state = {
-        stays: []
+        stays: [],
+        page: 0,
+        size: 3,
+        end: false
     }
 
     componentDidMount() {
-        StaysCardRepository().then(response => this.setState({ stays: response}))
+        StaysCardRepository(this.state.page, this.state.size).then(response => this.setState({ stays: response}))
     }
     
     renderMoreHandler=() =>{
-        StaysCardRepository().then(response => this.setState({ stays: [...this.state.stays,...response]}))
+        StaysCardRepository(this.state.page, this.state.size)
+        .then(response =>{
+            this.setState({ stays: [...this.state.stays,...response], page : this.state.page + 1});
+            if(response.length < this.state.size)
+            this.setState({ end: true})
+        })
     }
     
     renderMore(){
@@ -35,9 +43,9 @@ class StaysCard extends Component {
                         </div>
                         <div className={style.right}>
                             <div className={style.name}><Link to={`/stays/${item.id}`}>{item.name}</Link></div>
-                            <div className={style.address}>Address: {item.address.city}, {item.address.address}</div>
-                            <div className={style.price}>{item.address.zipCode} zł</div>
-                            <button className={style.itemButton}><Link to={`/stays/${item.id}`}>View more</Link></button>
+                            <div className={style.address}>Address: {item.address.city}, {item.address.street}</div>
+                            <div className={style.price}>{item.price} zł</div>
+                            <Link to={`/stays/${item.id}`}><button className={style.itemButton}>View more</button></Link>
                         </div>
                     </div>
                 ))}
@@ -49,8 +57,8 @@ class StaysCard extends Component {
                     <div key={i} className={style.staysCardT2}>
                         <div className={style.image}><Link to={`/stays/${item.id}`}><img src={`https://picsum.photos/15${i}.jpg`} alt=""></img></Link></div>
                         <div className={style.name}><Link to={`/stays/${item.id}`}>{item.name}</Link></div>
-                        <div className={style.price}>{item.address.zipCode} zł</div>
-                        <button className={style.itemButton}><Link to={`/stays/${item.id}`}>View more</Link></button>
+                        <div className={style.price}>{item.price} zł</div>
+                        <Link to={`/stays/${item.id}`}><button className={style.itemButton}>View more</button></Link>
                     </div>
                 ))}
                 </div>)
@@ -66,7 +74,7 @@ class StaysCard extends Component {
         return (
         <div className={style.staysCardComponent}>
             {this.renderCards(this.props.template, this.state.stays)}
-            {this.props.loadMore ? this.renderMore() : null}
+            {this.props.loadMore  && !this.state.end ? this.renderMore() : null}
         </div>
         )
     }

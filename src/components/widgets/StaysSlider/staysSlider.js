@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StaysCardRepository} from '../../../repository/Stays'
+import {StaysCardRepository} from '../../../repository/stays'
 import StaySliderTemplates from './staySliderTemplates';
 
 import "slick-carousel/slick/slick.css";
@@ -13,7 +13,7 @@ class StaysSlider extends Component {
 
 
     componentDidMount() {
-        StaysCardRepository().then(response => this.setState({ stays: response}))
+        StaysCardRepository(0,3).then(response => this.setState({ stays: response}))
     }
     
 

@@ -63,8 +63,7 @@ class Stay extends Component{
     }
 
     editLink(){
-        //  return this.props.user ?  <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link> : null
-        return <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link>
+        return this.props.user ?  <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link> : null
     }
   
 
@@ -89,4 +88,4 @@ class Stay extends Component{
 }
 
 export default Stay;
-// kiedyś obczaić https://reactjsexample.com/a-simple-but-functional-light-box-for-react/
+// kiedyś sprawdzić https://reactjsexample.com/a-simple-but-functional-light-box-for-react/

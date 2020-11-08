@@ -27,11 +27,15 @@ class EditStay extends Component{
         GetStayById(this.state.stay.id).then(response => this.setState({ stay: response}))    
     }
 
-    handleInput = (event,name) => {
+    handleInput = (event,field) => {
         const newStay= {
             ...this.state.stay
         }
-        newStay[name] = event.target.value
+
+        if (['city', 'street', 'zipCode'].indexOf(field) >= 0) 
+            newStay.address[field] = event.target.value
+        else
+            newStay[field] = event.target.value
 
         this.setState({
             stay:newStay
@@ -44,8 +48,7 @@ class EditStay extends Component{
 
     submitForm = (event) => {
         event.preventDefault();
-        // EditStayRepo(this.state.stay).then( ()=> this.setState({ message: "Edited"} ))
-        EditStayRepo(this.state.stay).then( response => console.log(response) )
+        EditStayRepo(this.state.stay).then( ()=> this.setState({ message: "Edited"} ))
     }
 
     deleteHandle = () => {
@@ -56,7 +59,7 @@ class EditStay extends Component{
     redirectUser = () => {
         setTimeout(()=>{
             this.props.history.push('/')
-        },3000)
+        }, 2000)
     }
 
     message = () => {

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { AddUserRepo } from '../../repository/user';
-//import { Link } from 'react-router-dom';
-
 import style from './register.css'
 
 class Register extends Component {
 
         state = {
                 form: {
-                        username:"",
+                        email:"",
                         password: "",
                 },
                 message: null
@@ -27,7 +25,6 @@ class Register extends Component {
 
         submitForm = (e) => {
                 e.preventDefault();
-                console.log(this.state);
                 AddUserRepo(this.state.form).then( ()=> this.setState({message: "Account created"}))
         }
 
@@ -49,7 +46,7 @@ class Register extends Component {
                         <div className={style.registerComponent}>
                                 {this.message()}
                                 <form onSubmit={this.submitForm} className={style.registerForm}>
-                                        <input type="text" placeholder="Username" value={this.state.form.username} onChange={(event)=>this.handleInput(event,'username')}/>
+                                        <input type="text" placeholder="Email" value={this.state.form.email} onChange={(event)=>this.handleInput(event,'email')}/>
                                         <input type="password" placeholder="Password" value={this.state.form.password} onChange={(event)=>this.handleInput(event,'password')} autoComplete="off"/>
                                         <button type="submit">Register</button>
                                 </form>

@@ -1,6 +1,6 @@
 const url = 'http://localhost:8080/stays';
 
-export async function StaysCardRepository(pageNumber=0,pageSize = 5){
+export async function StaysCardRepository(pageNumber,pageSize){
     let newUrl = url+'?pageNumber=' + pageNumber + '&pageSize=' + pageSize;
     const response = await fetch(newUrl, {
         headers: {

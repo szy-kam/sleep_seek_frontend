@@ -9,10 +9,9 @@ export async function GetStayById(id){
 }
 
 export async function DeleteStayById(id){
-    const response = await fetch(url + id,{
+    await fetch(url + id,{
         method: 'DELETE'
       });
-    console.log(response);
 }
 
 
@@ -20,15 +19,16 @@ export async function AddStayRepo(stay){
     const response = await fetch('http://localhost:8080/stays',{
         method: 'POST', 
         headers: {
-          'Content-Type': 'application/json'
+            'Origin': '*',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(stay)
       });
-    return response.json();
+    return response;
 }
 
 export async function EditStayRepo(stay){
-    const response = await fetch(url + stay.id, {
+    await fetch(url + stay.id, {
         method: 'PUT', 
         headers: {
           'Origin': '*',
@@ -41,10 +41,7 @@ export async function EditStayRepo(stay){
         console.log(err);
     })
     .then( response  => {
-        console.log(response);
+        return response
     })
-    // .then( response  => {
-    //     return response.json()
-    // })
 }
-
+// TODO error catch

@@ -39,15 +39,14 @@ class AddStay extends Component{
 
     submitForm = (event) => {
         event.preventDefault();
-        // EditStayRepo(this.state.stay).then( ()=> this.setState({ message: "Edited"} ))
-        AddStayRepo(this.state.stay).then( response => console.log(response) )
+        AddStayRepo(this.state.stay).then( ()=> this.setState({ message: "Added"}) )
     }
 
    
     redirectUser = () => {
         setTimeout(()=>{
             this.props.history.push('/')
-        }, 3000)
+        }, 2000)
     }
 
     message = () => {
