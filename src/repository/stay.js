@@ -1,47 +1,44 @@
-const url = 'http://localhost:8080/stays/';
+import { DB_URL } from "../config";
 
-export async function GetStayById(id){
-    const response = await fetch(url + id);
-    if (response.status === 200)
-        return response.json()
-    else
-        return []
+export async function GetStayByIdRepository(id) {
+    const response = await fetch(DB_URL + "/stays/" + id);
+    if (response.status === 200) return response.json();
+    else return [];
 }
 
-export async function DeleteStayById(id){
-    await fetch(url + id,{
-        method: 'DELETE'
-      });
+export async function DeleteStayByIdRepository(id) {
+    await fetch(DB_URL + "/stays/" + id, {
+        method: "DELETE",
+    });
 }
 
-
-export async function AddStayRepo(stay){
-    const response = await fetch('http://localhost:8080/stays',{
-        method: 'POST', 
+export async function AddStayRepository(stay) {
+    const response = await fetch(DB_URL + "/stays", {
+        method: "POST",
         headers: {
-            'Origin': '*',
-            'Content-Type': 'application/json'
+            Origin: "*",
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(stay)
-      });
+        body: JSON.stringify(stay),
+    });
     return response;
 }
 
-export async function EditStayRepo(stay){
-    await fetch(url + stay.id, {
-        method: 'PUT', 
+export async function EditStayRepository(stay) {
+    await fetch(DB_URL + "/stays/" + stay.id, {
+        method: "PUT",
         headers: {
-          'Origin': '*',
-          'Content-Type': 'application/json'
+            Origin: "*",
+            "Content-Type": "application/json",
         },
-        credentials: 'include',
-        body: JSON.stringify(stay)
-      })
-    .catch(err => {
-        console.log(err);
+        credentials: "include",
+        body: JSON.stringify(stay),
     })
-    .then( response  => {
-        return response
-    })
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((response) => {
+            return response;
+        });
 }
 // TODO error catch

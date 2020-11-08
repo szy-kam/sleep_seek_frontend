@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import style from './myAccount.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import style from "./myAccount.css";
 
 const MyAccount = (props) => {
     return (
@@ -8,7 +8,7 @@ const MyAccount = (props) => {
             My Account <br></br>
             <Link to="/add-stay">Add stay</Link>
         </div>
-    )
-}
+    );
+};
 
 export default MyAccount;

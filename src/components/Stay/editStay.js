@@ -1,101 +1,126 @@
+import React, { Component } from "react";
+import { GetStayByIdRepository, EditStayRepository, DeleteStayByIdRepository } from "../../repository/stay";
+import style from "./stay.css";
 
-import React, {Component} from 'react';
-import { GetStayById, EditStayRepo, DeleteStayById } from '../../repository/stay';
-import style from './stay.css'
-
-class EditStay extends Component{
-
+class EditStay extends Component {
     state = {
-        stay : {
+        stay: {
             id: this.props.match.params.id,
             name: "",
             address: {
                 city: "",
                 street: "",
-                zipCode: ""
+                zipCode: "",
             },
             mainPhoto: "",
             description: "",
             price: "",
-            contactInfo: ""
+            contactInfo: "",
         },
-        images : [],
-        message : null,
-    }
+        images: [],
+        message: null,
+    };
 
     componentDidMount() {
-        GetStayById(this.state.stay.id).then(response => this.setState({ stay: response}))    
+        GetStayByIdRepository(this.state.stay.id).then((response) => this.setState({ stay: response }));
     }
 
-    handleInput = (event,field) => {
-        const newStay= {
-            ...this.state.stay
-        }
+    handleInput = (event, field) => {
+        const newStay = {
+            ...this.state.stay,
+        };
 
-        if (['city', 'street', 'zipCode'].indexOf(field) >= 0) 
-            newStay.address[field] = event.target.value
-        else
-            newStay[field] = event.target.value
+        if (["city", "street", "zipCode"].indexOf(field) >= 0)
+            newStay.address[field] = event.target.value;
+        else newStay[field] = event.target.value;
 
         this.setState({
-            stay:newStay
-        })
-    }
+            stay: newStay,
+        });
+    };
 
-    handleUpload(){
+    handleUpload() {
         //TODO
     }
 
     submitForm = (event) => {
         event.preventDefault();
-        EditStayRepo(this.state.stay).then( ()=> this.setState({ message: "Edited"} ))
-    }
+        EditStayRepository(this.state.stay).then(() => this.setState({ message: "Edited" }));
+    };
 
     deleteHandle = () => {
-        DeleteStayById(this.state.stay.id).then( ()=> this.setState({ message: "Deleted"} ))
-    }
-
+        DeleteStayByIdRepository(this.state.stay.id).then(() => this.setState({ message: "Deleted" }));
+    };
 
     redirectUser = () => {
-        setTimeout(()=>{
-            this.props.history.push('/')
-        }, 2000)
-    }
+        setTimeout(() => {
+            this.props.history.push("/");
+        }, 2000);
+    };
 
     message = () => {
         if (this.state.message)
-            return <div className={style.message}> {this.state.message} {this.redirectUser()} </div>
-        else
-            return null
-    }
+            return (
+                <div className={style.message}>
+                    {" "}
+                    {this.state.message} {this.redirectUser()}{" "}
+                </div>
+            );
+        else return null;
+    };
 
-    render(){
-        return(
+    render() {
+        return (
             <div className={style.stayEditCompoment}>
                 {this.message()}
                 <form onSubmit={this.submitForm} className={style.editForm}>
                     <label>Name</label>
-                    <input onChange={(event)=>this.handleInput(event,'name')} value={this.state.stay.name} />
+                    <input
+                        onChange={(event) => this.handleInput(event, "name")}
+                        value={this.state.stay.name}
+                    />
                     <label>City</label>
-                    <input onChange={(event)=>this.handleInput(event,'city')} value={this.state.stay.address.city} />
+                    <input
+                        onChange={(event) => this.handleInput(event, "city")}
+                        value={this.state.stay.address.city}
+                    />
                     <label>Street</label>
-                    <input onChange={(event)=>this.handleInput(event,'street')} value={this.state.stay.address.street} />
+                    <input
+                        onChange={(event) => this.handleInput(event, "street")}
+                        value={this.state.stay.address.street}
+                    />
                     <label>Zip Code</label>
-                    <input onChange={(event)=>this.handleInput(event,'zipCode')} value={this.state.stay.address.zipCode} />
+                    <input
+                        onChange={(event) => this.handleInput(event, "zipCode")}
+                        value={this.state.stay.address.zipCode}
+                    />
                     <label>Price</label>
-                    <input onChange={(event)=>this.handleInput(event,'price')} value={this.state.stay.price} />
+                    <input
+                        onChange={(event) => this.handleInput(event, "price")}
+                        value={this.state.stay.price}
+                    />
                     <label>Contact Info</label>
-                    <input onChange={(event)=>this.handleInput(event,'contactInfo')} value={this.state.stay.contactInfo }/>
+                    <input
+                        onChange={(event) => this.handleInput(event, "contactInfo")}
+                        value={this.state.stay.contactInfo}
+                    />
                     <label>Description</label>
-                    <textarea onChange={(event)=>this.handleInput(event,'description')} value={this.state.stay.description} />
+                    <textarea
+                        onChange={(event) => this.handleInput(event, "description")}
+                        value={this.state.stay.description}
+                    />
                     <label>Main Photo LINK</label>
-                    <input onChange={(event)=>this.handleInput(event,'mainPhoto')} value={this.state.stay.mainPhoto} />
+                    <input
+                        onChange={(event) => this.handleInput(event, "mainPhoto")}
+                        value={this.state.stay.mainPhoto}
+                    />
                     <button type="submit">Submit</button>
                 </form>
-                <button className={style.deleteButton} onClick={this.deleteHandle}>Delete stay</button>
+                <button className={style.deleteButton} onClick={this.deleteHandle}>
+                    Delete stay
+                </button>
             </div>
-        )
+        );
     }
-
 }
 export default EditStay;

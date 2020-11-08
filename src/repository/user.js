@@ -1,11 +1,13 @@
-export async function AddUserRepo(user){
-    const response = await fetch('http://localhost:8080/user',{
-        method: 'POST', 
+import { DB_URL } from "../config";
+
+export async function AddUserRepository(user) {
+    const response = await fetch(DB_URL + "/user", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Origin': '*',
+            "Content-Type": "application/json",
+            Origin: "*",
         },
-        body: JSON.stringify(user)
-      });
+        body: JSON.stringify(user),
+    });
     return response;
 }

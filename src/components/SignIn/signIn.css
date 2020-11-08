@@ -1,10 +1,10 @@
-.signInComponent{
+.signInComponent {
     display: flex;
     align-self: center;
     flex-direction: column;
 }
 
-.signInForm{
+.signInForm {
     display: flex;
     align-self: center;
     flex-direction: column;
@@ -17,14 +17,14 @@
     padding: 10px;
 }
 
-.signInForm button{
+.signInForm button {
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
 }
 
-.message{
+.message {
     position: fixed;
     top: 20%;
     left: 50%;

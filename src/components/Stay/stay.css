@@ -1,16 +1,15 @@
-.stayComponent{
+.stayComponent {
     display: flex;
-
 }
 
-.stayContent{
+.stayContent {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     margin-top: 20px;
 }
 
-.image{
+.image {
     flex-basis: 100%;
     min-height: 100px;
     background-position: center;
@@ -20,7 +19,7 @@
     margin-bottom: 15px;
 }
 
-.name{
+.name {
     font-size: 50px;
 }
 
@@ -28,22 +27,21 @@
     font-size: 30px;
 }
 
-.price{
+.price {
     font-size: 35px;
     font-weight: bolder;
     align-self: flex-end;
 }
 
-.description{
+.description {
     font-size: 20px;
 }
 
-.imageGrid{
+.imageGrid {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     flex-direction: row;
-    
 }
 
 .imageGrid img {
@@ -52,17 +50,16 @@
     max-height: 100px;
 }
 
-
 /* *********************************************
 ******************   Edit Form **************
 ********************************************* */
-.stayEditCompoment{
+.stayEditCompoment {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.editForm{
+.editForm {
     margin: 20px auto;
     padding: 30px;
     border: 1px solid black;
@@ -70,18 +67,19 @@
     flex-direction: column;
 }
 
-.editForm input, .editForm textarea {
+.editForm input,
+.editForm textarea {
     border: 1px solid black;
     margin: 10px;
     padding: 6px;
 }
 
-.editForm textarea{
+.editForm textarea {
     height: 100px;
     width: 400px;
 }
 
-.message{
+.message {
     position: fixed;
     top: 20%;
     left: 50%;

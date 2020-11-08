@@ -1,13 +1,13 @@
-import React from 'react';
-import StaysSlider from '../widgets/StaysSlider/staysSlider'
+import React from "react";
+import StaysSlider from "../widgets/StaysSlider/staysSlider";
 
-const Home = () =>{
+const Home = () => {
     return (
         <div>
-                Home
-            <StaysSlider template="default" height="500px"/>
+            Home
+            <StaysSlider template="default" height="500px" />
         </div>
-    )
-}
+    );
+};
 
 export default Home;
