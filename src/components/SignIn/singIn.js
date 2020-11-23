@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import style from "./signIn.css";
+import { withTranslation } from "react-i18next";
 
 class SignIn extends Component {
     state = {
@@ -29,28 +30,29 @@ class SignIn extends Component {
     };
 
     render() {
+        const { t } = this.props;
         return (
             <div className={style.signInComponent}>
                 <form className={style.signInForm} onSubmit={this.submitForm}>
                     <input
                         type="text"
-                        placeholder="Email"
+                        placeholder={t("EMAIL")}
                         value={this.state.form.email}
                         onChange={(event) => this.handleInput(event, "email")}
                         autoComplete="on"
                     />
                     <input
                         type="password"
-                        placeholder="Password"
+                        placeholder={t("PASSWORD")}
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="on"
                     />
-                    <button type="submit">Log in</button>
+                    <button type="submit">{t("LOG_IN")}</button>
                 </form>
             </div>
         );
     }
 }
 
-export default SignIn;
+export default withTranslation()(SignIn);

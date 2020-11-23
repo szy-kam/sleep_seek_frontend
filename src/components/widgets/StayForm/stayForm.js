@@ -2,29 +2,18 @@ import React, { Component } from "react";
 import FileUploader from "../FileUploader/fileUploader";
 import style from "./stayForm.css";
 import { GetStayByIdRepository } from "../../../repository/stay";
+import { withTranslation } from "react-i18next";
+import { STAY } from "../../../config";
 
 class StayForm extends Component {
     state = {
-        stay: {
-            name: "",
-            address: {
-                city: "",
-                street: "",
-                zipCode: "",
-            },
-            mainPhoto: "",
-            description: "",
-            price: "",
-            contactInfo: "",
-            photos: [],
-            newPhotos: [],
-        },
+        stay: STAY,
     };
 
     componentDidMount() {
         if (this.props.getStay)
             GetStayByIdRepository(this.props.getStay).then((response) =>
-                this.setState({ stay: response }, console.log(response))
+                this.setState({ stay: response })
             );
     }
 
@@ -88,55 +77,58 @@ class StayForm extends Component {
     };
 
     render() {
+        const { t } = this.props;
         return (
             <div className={style.stayEditCompoment}>
                 <form onSubmit={this.handleSubmit} className={style.editForm}>
-                    <label>Name</label>
+                    <label>{t("NAME")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "name")}
                         value={this.state.stay.name}
                     />
-                    <label>City</label>
+                    <label>{t("CITY")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "city")}
                         value={this.state.stay.address.city}
                     />
-                    <label>Street</label>
+                    <label>{t("STREET")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "street")}
                         value={this.state.stay.address.street}
                     />
-                    <label>Zip Code</label>
+                    <label>{t("ZIP_CODE")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "zipCode")}
                         value={this.state.stay.address.zipCode}
                     />
-                    <label>Price</label>
+                    <label>{t("PRICE")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "price")}
                         value={this.state.stay.price}
                     />
-                    <label>Contact Info</label>
+                    <label>{t("CONTACT_INFO")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "contactInfo")}
                         value={this.state.stay.contactInfo}
                     />
-                    <label>Description</label>
+                    <label>{t("DESCRIPTION")}</label>
                     <textarea
                         onChange={(event) => this.handleInput(event, "description")}
                         value={this.state.stay.description}
                     />
-                    <label>Photos</label>
+                    <label>{t("PHOTOS")}</label>
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
-                    {!this.state.stay.mainPhoto && "Select main photo"}
-                    <button type="submit">Add stay</button>
-                    {/* {this.props.handleDelete ? (
-                        <button onClick={this.props.handleDelete}>Delete stay</button>
-                    ) : null} */}
+                    {!this.state.stay.mainPhoto ? t("SELECT_MAIN_PHOTO") : null}
+                    <button type="submit">
+                        {this.props.getStay ? t("EDIT_STAY") : t("ADD_STAY")}
+                    </button>
+                    {this.props.handleDelete ? (
+                        <button onClick={this.props.handleDelete}>{t("DELETE_STAY")}</button>
+                    ) : null}
                 </form>
             </div>
         );
     }
 }
-export default StayForm;
+export default withTranslation()(StayForm);

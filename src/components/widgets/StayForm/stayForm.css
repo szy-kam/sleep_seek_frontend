@@ -27,16 +27,6 @@
     width: 400px;
 }
 
-.message {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    background-color: blue;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
-}
-
 .thumbs {
     display: flex;
     flex-direction: row;

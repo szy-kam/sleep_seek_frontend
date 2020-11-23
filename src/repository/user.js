@@ -1,7 +1,7 @@
-import { DB_URL } from "../config";
+import { BACKEND_URL } from "../config";
 
 export async function AddUserRepository(user) {
-    const response = await fetch(DB_URL + "/user", {
+    const response = await fetch(BACKEND_URL + "/user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

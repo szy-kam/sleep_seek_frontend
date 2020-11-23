@@ -2,43 +2,28 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LeftColumn from "../Stays/staysLayout";
 import { GetStayByIdRepository } from "../../repository/stay";
+import { withTranslation } from "react-i18next";
 import style from "./stay.css";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import { STAY } from "../../config";
 
 class Stay extends Component {
     state = {
-        stay: {
-            id: 2,
-            name: "",
-            address: {
-                city: "",
-                address: "",
-                zipCode: "",
-            },
-            mainPhoto: "",
-            description: "",
-            price: "",
-            contactInfo: "",
-        },
-        images: [
-            "https://picsum.photos/300/300",
-            "https://picsum.photos/301/300",
-            "https://picsum.photos/302/300",
-            "https://picsum.photos/303/300",
-        ],
+        stay: STAY,
+        images: [],
         photoIndex: 0,
         isOpen: false,
     };
 
     componentDidMount() {
         GetStayByIdRepository(this.props.match.params.id).then((response) => {
-            this.setState({ stay: response });
+            this.setState({ stay: response }, console.log(response));
         });
     }
 
     imageGrid() {
-        return this.state.images.map((item, i) => (
+        return this.state.stay.photos.map((item, i) => (
             <img
                 src={item}
                 key={i}
@@ -49,7 +34,8 @@ class Stay extends Component {
     }
 
     lightbox() {
-        const { photoIndex, isOpen, images } = this.state;
+        const { photoIndex, isOpen } = this.state;
+        const { photos: images } = this.state.stay;
         return (
             isOpen && (
                 <Lightbox
@@ -73,12 +59,14 @@ class Stay extends Component {
     }
 
     editLink() {
+        const { t } = this.props;
         return this.props.user ? (
-            <Link to={`/stays/edit/${this.state.stay.id}`}>Edytuj</Link>
+            <Link to={`/stays/edit/${this.state.stay.id}`}>{t("EDIT_STAY")}</Link>
         ) : null;
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div className={style.stayComponent}>
                 <LeftColumn />
@@ -92,9 +80,12 @@ class Stay extends Component {
                     ></div>
                     <div className={style.imageGrid}>{this.imageGrid()}</div>
                     <div className={style.address}>
-                        Address: {this.state.stay.address.city}, {this.state.stay.address.street}
+                        {t("ADDRESS")}: {this.state.stay.address.city},{" "}
+                        {this.state.stay.address.street}
                     </div>
-                    <div className={style.price}>{this.state.stay.price} zł</div>
+                    <div className={style.price}>
+                        {this.state.stay.price} {t("CURRENCY_SYMBOL")}
+                    </div>
                     <div className={style.description}>{this.state.stay.description}</div>
                 </div>
                 {this.lightbox()}
@@ -103,5 +94,4 @@ class Stay extends Component {
     }
 }
 
-export default Stay;
-// kiedyś sprawdzić https://reactjsexample.com/a-simple-but-functional-light-box-for-react/
+export default withTranslation()(Stay);

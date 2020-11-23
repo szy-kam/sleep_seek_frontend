@@ -1,41 +1,44 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./header.css";
+import { withTranslation } from "react-i18next";
 
 class Nav extends Component {
+
     items = [
         {
-            text: "Home",
+            text: this.props.t("NAV_HOME"),
             link: "/",
             loggedIn: true,
             loggedOut: true,
         },
         {
-            text: "Stays",
+            text: this.props.t("NAV_STAYS"),
             link: "/stays",
             loggedIn: true,
             loggedOut: true,
         },
         {
-            text: "My account",
+            text: this.props.t("NAV_MY_ACCOUNT"),
             link: "/my-account",
             loggedIn: true,
             loggedOut: false,
         },
         {
-            text: "Sign in",
+            text: this.props.t("NAV_SIGN_IN"),
             link: "/sign-in",
             loggedIn: false,
             loggedOut: true,
         },
         {
-            text: "Sign out",
+            text: this.props.t("NAV_SIGN_OUT"),
             link: "/",
             loggedIn: true,
             loggedOut: false,
+            signOut: true
         },
         {
-            text: "Register",
+            text: this.props.t("NAV_REGISTER"),
             link: "/register",
             loggedIn: false,
             loggedOut: true,
@@ -56,7 +59,7 @@ class Nav extends Component {
                     <div key={i} className={style.navlink}>
                         <NavLink
                             to={item.link}
-                            onClick={item.text === "Sign out" ? this.logOutUser : null}
+                            onClick={item.signOut? this.logOutUser : null}
                         >
                             {item.text}
                         </NavLink>
@@ -72,4 +75,4 @@ class Nav extends Component {
         return <nav>{this.showItems()}</nav>;
     }
 }
-export default Nav;
+export default withTranslation()(Nav);

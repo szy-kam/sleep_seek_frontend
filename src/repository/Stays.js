@@ -1,7 +1,7 @@
-import { DB_URL } from "../config";
+import { BACKEND_URL } from "../config";
 
 export async function StaysCardRepository(pageNumber, pageSize) {
-    let newUrl = DB_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
+    let newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
     const response = await fetch(newUrl, {
         headers: {
             Origin: "*",

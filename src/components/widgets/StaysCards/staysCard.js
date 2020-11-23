@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { StaysCardRepository } from "../../../repository/stays";
+import { withTranslation } from "react-i18next";
 import style from "./staysCard.css";
 
 class StaysCard extends Component {
+    loadStaysAmount = 3
+
     state = {
         stays: [],
         page: 0,
-        size: 3,
+        size: this.loadStaysAmount,
         end: false,
     };
 
@@ -25,14 +28,16 @@ class StaysCard extends Component {
     };
 
     renderMore() {
+        const { t } = this.props;
         return (
             <button className={style.showMoreButton} onClick={this.renderMoreHandler}>
-                Show more
+                {t("SHOW_MORE")}
             </button>
         );
     }
 
     renderCards(template, stays) {
+        const { t } = this.props;
         switch (template) {
             case "default":
                 return (
@@ -43,8 +48,8 @@ class StaysCard extends Component {
                                     <div className={style.image}>
                                         <Link to={`/stays/${item.id}`}>
                                             <img
-                                                src={`https://picsum.photos/15${i}.jpg`}
-                                                alt=""
+                                                src={item.mainPhoto}
+                                                alt={item.name}
                                             ></img>
                                         </Link>
                                     </div>
@@ -54,11 +59,11 @@ class StaysCard extends Component {
                                         <Link to={`/stays/${item.id}`}>{item.name}</Link>
                                     </div>
                                     <div className={style.address}>
-                                        Address: {item.address.city}, {item.address.street}
+                                        {t("ADDRESS")}: {item.address.city}, {item.address.street}
                                     </div>
-                                    <div className={style.price}>{item.price} zł</div>
+                                    <div className={style.price}>{item.price} {t("CURRENCY_SYMBOL")}</div>
                                     <Link to={`/stays/${item.id}`}>
-                                        <button className={style.itemButton}>View more</button>
+                                        <button className={style.itemButton}>{t("VIEW_MORE")}</button>
                                     </Link>
                                 </div>
                             </div>
@@ -72,22 +77,20 @@ class StaysCard extends Component {
                             <div key={i} className={style.staysCardT2}>
                                 <div className={style.image}>
                                     <Link to={`/stays/${item.id}`}>
-                                        <img src={`https://picsum.photos/15${i}.jpg`} alt=""></img>
+                                        <img src={item.mainPhoto} alt={item.name}></img>
                                     </Link>
                                 </div>
                                 <div className={style.name}>
                                     <Link to={`/stays/${item.id}`}>{item.name}</Link>
                                 </div>
-                                <div className={style.price}>{item.price} zł</div>
+                                <div className={style.price}>{item.price} {t("CURRENCY_SYMBOL")}</div>
                                 <Link to={`/stays/${item.id}`}>
-                                    <button className={style.itemButton}>View more</button>
+                                    <button className={style.itemButton}>{t("VIEW_MORE")}</button>
                                 </Link>
                             </div>
                         ))}
                     </div>
                 );
-            default:
-                return <p>No card template choosen.</p>;
         }
     }
 
@@ -101,4 +104,4 @@ class StaysCard extends Component {
     }
 }
 
-export default StaysCard;
+export default withTranslation()(StaysCard);

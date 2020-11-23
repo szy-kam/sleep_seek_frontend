@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { AddStayRepository } from "../../repository/stay";
 import StayForm from "../widgets/StayForm/stayForm";
 import style from "./stay.css";
+import { withTranslation } from "react-i18next";
 
 class AddStay extends Component {
 
@@ -10,8 +11,8 @@ class AddStay extends Component {
     }
 
     handleSubmit = (stay) => {
-        console.log(stay);
-        AddStayRepository(stay).then(() => this.setState({ message: "Added" }));
+        const { t } = this.props;
+        AddStayRepository(stay).then(() => this.setState({ message: t("STAY_ADDED") }));
     };
 
     redirectUser = () => {
@@ -34,7 +35,7 @@ class AddStay extends Component {
     render() {
         return (
             <div className={style.stayEditCompoment}>
-                {this.message}
+                {this.message()}
                 <StayForm
                     handleSubmit={this.handleSubmit}
                 />
@@ -42,4 +43,4 @@ class AddStay extends Component {
         );
     }
 }
-export default AddStay;
+export default withTranslation()(AddStay);

@@ -1,36 +1,36 @@
 import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import style from './fileUploader.css'
+import style from "./fileUploader.css";
+import { useTranslation } from "react-i18next";
 
 export default function FileUploader(props) {
     const files = props.files;
-    const maxSize= 5242880;
-    const { getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles } = useDropzone(
-        {
-            accept: "image/*",
-            onDrop: props.onDrop,
-            minSize: 0,
-            maxSize: maxSize,
-            multiple: true
-        }
-    );
+    const maxSize = 5242880;
+    const { t, i18n } = useTranslation();
+    const { getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles } = useDropzone({
+        accept: "image/*",
+        onDrop: props.onDrop,
+        minSize: 10,
+        maxSize: maxSize,
+        multiple: true,
+    });
 
     const isFileTooLarge = rejectedFiles && rejectedFiles[0].size > maxSize; //TODO
 
     useEffect(
         () => () => {
-            files.forEach((file) => URL.revokeObjectURL(file.preview));
+            if (files) files.forEach((file) => URL.revokeObjectURL(file.preview));
         },
         [files]
     );
 
     return (
-        <div {...getRootProps({ className: style.fileUploaderComponent})}>
+        <div {...getRootProps({ className: style.fileUploaderComponent })}>
             <input {...getInputProps()} />
-            {!isDragActive && "Click here or drop a file to upload!"}
-            {isDragActive && !isDragReject && "Drop files here"}
-            {isDragReject && "File type not accepted, sorry!"}
-            {isFileTooLarge && <div className="text-danger mt-2">File is too large.</div>} 
+            {!isDragActive && t("FILE_UPLOADER_DEFAULT")}
+            {isDragActive && !isDragReject && t("FILE_UPLOADER_DROP_HERE")}
+            {isDragReject && t("FILE_UPLOADER_WRONG_FILETYPE")}
+            {isFileTooLarge && t("FILE_UPLOADER_TOO_LARGE")}
         </div>
     );
 }

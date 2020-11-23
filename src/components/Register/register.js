@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AddUserRepository } from "../../repository/user";
 import style from "./register.css";
+import { withTranslation } from "react-i18next";
 
 class Register extends Component {
     state = {
@@ -24,7 +25,8 @@ class Register extends Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        AddUserRepository(this.state.form).then(() => this.setState({ message: "Account created" }));
+        const { t } = this.props;
+        AddUserRepository(this.state.form).then(() => this.setState({ message: t("ACCOUNT_CREATED")}));
     };
 
     redirectUser = () => {
@@ -45,27 +47,28 @@ class Register extends Component {
     };
 
     render() {
+        const { t } = this.props;
         return (
             <div className={style.registerComponent}>
                 {this.message()}
                 <form onSubmit={this.submitForm} className={style.registerForm}>
                     <input
                         type="text"
-                        placeholder="Email"
+                        placeholder={t("EMAIL")}
                         value={this.state.form.email}
                         onChange={(event) => this.handleInput(event, "email")}
                     />
                     <input
                         type="password"
-                        placeholder="Password"
+                        placeholder={t("PASSWORD")}
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="off"
                     />
-                    <button type="submit">Register</button>
+                    <button type="submit">{t("REGISTER")}</button>
                 </form>
             </div>
         );
     }
 }
-export default Register;
+export default withTranslation()(Register);

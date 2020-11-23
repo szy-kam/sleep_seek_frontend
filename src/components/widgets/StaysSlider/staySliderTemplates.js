@@ -27,7 +27,7 @@ const StaySliderTemplates = (props) => {
                         <div
                             className={style.image}
                             style={{
-                                background: `url(https://picsum.photos/1920/55${i}.jpg)`,
+                                background: `url(${item.mainPhoto})`,
                                 height: height,
                             }}
                         ></div>

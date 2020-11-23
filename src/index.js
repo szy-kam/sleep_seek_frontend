@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import ReactDOM from "react-dom";
 
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
+import "./i18n";
 
 class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Routes />
+                <Suspense fallback="loading">
+                    <Routes />
+                </Suspense>
             </BrowserRouter>
         );
     }

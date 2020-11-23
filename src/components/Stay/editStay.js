@@ -6,6 +6,7 @@ import {
 } from "../../repository/stay";
 import StayForm from "../widgets/StayForm/stayForm";
 import style from "./stay.css";
+import { withTranslation } from "react-i18next";
 
 class EditStay extends Component {
     state = {
@@ -15,17 +16,20 @@ class EditStay extends Component {
 
     componentDidMount() {
         GetStayByIdRepository(this.props.match.params.id).then((response) =>
-            this.setState({ stay: response }, console.log(response))
+            this.setState({ stay: response })
         );
     }
 
     submitForm = (stay) => {
-        EditStayRepository(stay).then(() => this.setState({ message: "Edited" }));
+        const { t } = this.props;
+        EditStayRepository(stay).then(() => this.setState({ message: t("STAY_EDITED") }));
     };
 
-    handleDelete = () => {
+    handleDelete = (e) => {
+        const { t } = this.props;
+        e.preventDefault();
         DeleteStayByIdRepository(this.state.stay.id).then(() =>
-            this.setState({ message: "Deleted" })
+            this.setState({ message: t("STAY_DELETED") })
         );
     };
 
@@ -57,11 +61,8 @@ class EditStay extends Component {
                     handleDelete={this.handleDelete}
                     getStay={this.props.match.params.id}
                 />
-                <button className={style.deleteButton} onClick={this.handleDelete}>
-                    Delete stay
-                </button>
             </div>
         );
     }
 }
-export default EditStay;
+export default withTranslation()(EditStay);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-
+import { withTranslation } from "react-i18next";
 import Nav from "./nav";
 import style from "./header.css";
 
@@ -23,6 +23,7 @@ class Header extends Component {
     };
 
     render() {
+        const { t } = this.props;
         return (
             <header>
                 <div className={style.logo}>
@@ -35,7 +36,7 @@ class Header extends Component {
                         <input
                             type="text"
                             name="q"
-                            placeholder="Search"
+                            placeholder={t("SEARCH")}
                             onChange={this.searchOnChange}
                         />
                         <button type="submit" onClick={this.searchSubmit}>
@@ -50,4 +51,4 @@ class Header extends Component {
     }
 }
 
-export default withRouter(Header);
+export default withRouter(withTranslation()(Header));

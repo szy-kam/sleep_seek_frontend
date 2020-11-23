@@ -1,19 +1,19 @@
-import { DB_URL } from "../config";
+import { BACKEND_URL } from "../config";
 
 export async function GetStayByIdRepository(id) {
-    const response = await fetch(DB_URL + "/stays/" + id);
+    const response = await fetch(BACKEND_URL + "/stays/" + id);
     if (response.status === 200) return response.json();
     else return [];
 }
 
 export async function DeleteStayByIdRepository(id) {
-    await fetch(DB_URL + "/stays/" + id, {
+    await fetch(BACKEND_URL + "/stays/" + id, {
         method: "DELETE",
     });
 }
 
 export async function AddStayRepository(stay) {
-    const response = await fetch(DB_URL + "/stays", {
+    const response = await fetch(BACKEND_URL + "/stays", {
         method: "POST",
         headers: {
             Origin: "*",
@@ -25,7 +25,7 @@ export async function AddStayRepository(stay) {
 }
 
 export async function EditStayRepository(stay) {
-    await fetch(DB_URL + "/stays/" + stay.id, {
+    await fetch(BACKEND_URL + "/stays/" + stay.id, {
         method: "PUT",
         headers: {
             Origin: "*",
