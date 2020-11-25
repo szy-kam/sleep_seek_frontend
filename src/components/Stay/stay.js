@@ -7,6 +7,7 @@ import style from "./stay.css";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { STAY } from "../../config";
+import {connect} from 'react-redux'
 
 class Stay extends Component {
     state = {
@@ -18,11 +19,12 @@ class Stay extends Component {
 
     componentDidMount() {
         GetStayByIdRepository(this.props.match.params.id).then((response) => {
-            this.setState({ stay: response }, console.log(response));
+            this.setState({ stay: response });
         });
     }
 
     imageGrid() {
+        if (this.state.stay.photos)
         return this.state.stay.photos.map((item, i) => (
             <img
                 src={item}
@@ -31,6 +33,9 @@ class Stay extends Component {
                 onClick={() => this.setState({ isOpen: true, photoIndex: i })}
             ></img>
         ));
+        else
+        return null
+
     }
 
     lightbox() {
@@ -93,5 +98,8 @@ class Stay extends Component {
         );
     }
 }
+const mapStateToProps = state => ({
+    user: state.user.user
+})
 
-export default withTranslation()(Stay);
+export default connect(mapStateToProps)(withTranslation()(Stay));

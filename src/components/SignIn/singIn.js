@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import style from "./signIn.css";
 import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { logInUser } from "../../redux/user/userActions";
 
 class SignIn extends Component {
     state = {
@@ -25,8 +27,8 @@ class SignIn extends Component {
     submitForm = (e) => {
         e.preventDefault();
         // TODO validation
-        this.props.userAuth(true);
-        this.props.history.push("/");
+        this.props.logInUser({userId: 1, role: "admin"})
+        // this.props.history.push("/");
     };
 
     render() {
@@ -55,4 +57,9 @@ class SignIn extends Component {
     }
 }
 
-export default withTranslation()(SignIn);
+const mapDispatchToProps = (dispatch) => ({
+    logInUser: (user) => dispatch(logInUser(user)),
+});
+
+
+export default connect(null, mapDispatchToProps)(withTranslation()(SignIn));

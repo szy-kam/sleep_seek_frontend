@@ -1,18 +1,22 @@
 import React, { Component, Suspense } from "react";
 import ReactDOM from "react-dom";
-
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
 import "./i18n";
+import store from './redux/store'
+
 
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
-                <Suspense fallback="loading">
-                    <Routes />
-                </Suspense>
-            </BrowserRouter>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Suspense fallback="loading">
+                        <Routes />
+                    </Suspense>
+                </BrowserRouter>
+            </Provider>
         );
     }
 }

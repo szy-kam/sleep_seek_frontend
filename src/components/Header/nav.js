@@ -1,66 +1,64 @@
-import React, { Component } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./header.css";
 import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { logOutUser} from "../../redux/user/userActions";
 
-class Nav extends Component {
-
-    items = [
+const Nav = (props) => {
+    const items = [
         {
-            text: this.props.t("NAV_HOME"),
+            text: props.t("NAV_HOME"),
             link: "/",
             loggedIn: true,
             loggedOut: true,
         },
         {
-            text: this.props.t("NAV_STAYS"),
+            text: props.t("NAV_STAYS"),
             link: "/stays",
             loggedIn: true,
             loggedOut: true,
         },
         {
-            text: this.props.t("NAV_MY_ACCOUNT"),
+            text: props.t("NAV_MY_ACCOUNT"),
             link: "/my-account",
             loggedIn: true,
             loggedOut: false,
         },
         {
-            text: this.props.t("NAV_SIGN_IN"),
+            text: props.t("NAV_SIGN_IN"),
             link: "/sign-in",
             loggedIn: false,
             loggedOut: true,
         },
         {
-            text: this.props.t("NAV_SIGN_OUT"),
+            text: props.t("NAV_SIGN_OUT"),
             link: "/",
             loggedIn: true,
             loggedOut: false,
-            signOut: true
+            signOut: true,
         },
         {
-            text: this.props.t("NAV_REGISTER"),
+            text: props.t("NAV_REGISTER"),
             link: "/register",
             loggedIn: false,
             loggedOut: true,
         },
     ];
 
-    logOutUser = () => {
-        this.props.userAuth(null);
+    const logOutUser = () => {
+        props.logOutUser()
     };
 
-    showItems = () => {
-        return this.items.map((item, i) => {
+    const showItems = () => {
+        return items.map((item, i) => {
             if (
-                (this.props.user === null && item.loggedOut) ||
-                (this.props.user !== null && item.loggedIn)
+                (props.user === null && item.loggedOut) ||
+                (props.user !== null && item.loggedIn)
             )
                 return (
                     <div key={i} className={style.navlink}>
-                        <NavLink
-                            to={item.link}
-                            onClick={item.signOut? this.logOutUser : null}
-                        >
+                        <NavLink to={item.link} onClick={item.signOut ? logOutUser : null}>
                             {item.text}
                         </NavLink>
                     </div>
@@ -71,8 +69,16 @@ class Nav extends Component {
         });
     };
 
-    render() {
-        return <nav>{this.showItems()}</nav>;
-    }
+    
+    return <nav>{showItems()}</nav>;
+    
 }
-export default withTranslation()(Nav);
+
+const mapDispatchToProps = (dispatch)=> ({
+    logOutUser: () => dispatch(logOutUser())
+})
+const mapStateToProps = state => ({
+    user: state.user.user
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Nav));

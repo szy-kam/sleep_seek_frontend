@@ -7,7 +7,7 @@ import Footer from "../../components/Footer/footer";
 const Layout = (props) => {
     return (
         <div className={style.mainContainer}>
-            <Header user={props.user} userAuth={props.userAuth} />
+            <Header/>
             <div className={style.innerContainer}>{props.children}</div>
             <Footer />
         </div>

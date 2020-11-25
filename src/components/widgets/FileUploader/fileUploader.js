@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 export default function FileUploader(props) {
     const files = props.files;
     const maxSize = 5242880;
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles } = useDropzone({
         accept: "image/*",
         onDrop: props.onDrop,
