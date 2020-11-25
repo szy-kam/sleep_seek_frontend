@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 import style from "./staysCard.css";
 
 class StaysCard extends Component {
-    loadStaysAmount = 3
+    loadStaysAmount = 3;
 
     state = {
         stays: [],
@@ -47,10 +47,7 @@ class StaysCard extends Component {
                                 <div className={style.left}>
                                     <div className={style.image}>
                                         <Link to={`/stays/${item.id}`}>
-                                            <img
-                                                src={item.mainPhoto}
-                                                alt={item.name}
-                                            ></img>
+                                            <img src={item.mainPhoto} alt={item.name}></img>
                                         </Link>
                                     </div>
                                 </div>
@@ -61,9 +58,13 @@ class StaysCard extends Component {
                                     <div className={style.address}>
                                         {t("ADDRESS")}: {item.address.city}, {item.address.street}
                                     </div>
-                                    <div className={style.price}>{item.price} {t("CURRENCY_SYMBOL")}</div>
+                                    <div className={style.price}>
+                                        {item.price} {t("CURRENCY_SYMBOL")}
+                                    </div>
                                     <Link to={`/stays/${item.id}`}>
-                                        <button className={style.itemButton}>{t("VIEW_MORE")}</button>
+                                        <button className={style.itemButton}>
+                                            {t("VIEW_MORE")}
+                                        </button>
                                     </Link>
                                 </div>
                             </div>
@@ -83,7 +84,9 @@ class StaysCard extends Component {
                                 <div className={style.name}>
                                     <Link to={`/stays/${item.id}`}>{item.name}</Link>
                                 </div>
-                                <div className={style.price}>{item.price} {t("CURRENCY_SYMBOL")}</div>
+                                <div className={style.price}>
+                                    {item.price} {t("CURRENCY_SYMBOL")}
+                                </div>
                                 <Link to={`/stays/${item.id}`}>
                                     <button className={style.itemButton}>{t("VIEW_MORE")}</button>
                                 </Link>
@@ -91,6 +94,8 @@ class StaysCard extends Component {
                         ))}
                     </div>
                 );
+                default:
+                    return <p>No template choosen.</p>
         }
     }
 

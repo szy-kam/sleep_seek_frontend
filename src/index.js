@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
 import "./i18n";
-import store from './redux/store'
-
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
 
 class App extends Component {
     render() {
@@ -13,7 +13,9 @@ class App extends Component {
             <Provider store={store}>
                 <BrowserRouter>
                     <Suspense fallback="loading">
-                        <Routes />
+                        <PersistGate persistor={persistor}>
+                            <Routes />
+                        </PersistGate>
                     </Suspense>
                 </BrowserRouter>
             </Provider>
