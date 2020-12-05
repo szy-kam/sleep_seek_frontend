@@ -7,7 +7,9 @@ import style from "./stay.css";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { STAY } from "../../config";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
+import StayMap from '../widgets/StayMap/stayMap'
+
 
 class Stay extends Component {
     state = {
@@ -25,17 +27,15 @@ class Stay extends Component {
 
     imageGrid() {
         if (this.state.stay.photos)
-        return this.state.stay.photos.map((item, i) => (
-            <img
-                src={item}
-                key={i}
-                alt={item}
-                onClick={() => this.setState({ isOpen: true, photoIndex: i })}
-            ></img>
-        ));
-        else
-        return null
-
+            return this.state.stay.photos.map((item, i) => (
+                <img
+                    src={item}
+                    key={i}
+                    alt={item}
+                    onClick={() => this.setState({ isOpen: true, photoIndex: i })}
+                ></img>
+            ));
+        else return null;
     }
 
     lightbox() {
@@ -72,6 +72,7 @@ class Stay extends Component {
 
     render() {
         const { t } = this.props;
+        const position = [50.06210034570054, 19.936973861659844];
         return (
             <div className={style.stayComponent}>
                 <LeftColumn />
@@ -92,14 +93,18 @@ class Stay extends Component {
                         {this.state.stay.price} {t("CURRENCY_SYMBOL")}
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
+                    <StayMap position={position} zoom={14}/>
                 </div>
+
+                
+
                 {this.lightbox()}
             </div>
         );
     }
 }
-const mapStateToProps = state => ({
-    user: state.user.user
-})
+const mapStateToProps = (state) => ({
+    user: state.user.user,
+});
 
 export default connect(mapStateToProps)(withTranslation()(Stay));

@@ -13,4 +13,6 @@ export let STAY = {
     contactInfo: "",
     photos: [],
     newPhotos: [],
+    latitude: null,
+    longitude: null
 };

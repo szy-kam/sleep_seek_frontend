@@ -4,7 +4,8 @@ import style from "./stayForm.css";
 import { GetStayByIdRepository } from "../../../repository/stay";
 import { withTranslation } from "react-i18next";
 import { STAY } from "../../../config";
-
+import StayMap from "../StayMap/stayMap";
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 class StayForm extends Component {
     state = {
         stay: STAY,
@@ -30,6 +31,26 @@ class StayForm extends Component {
             stay: newStay,
         });
     };
+
+    mapReposition = () => {
+        const address = this.state.stay.address.city + ' ' + this.state.stay.address.street
+        if(address.length > 3) {
+            const provider = new OpenStreetMapProvider();
+            provider.search({ query: address}).then(
+                result => {
+                    const newStay = {
+                        ...this.state.stay,
+                    };
+                    console.log(result);
+                    newStay.longitude = result[0].x
+                    newStay.latitude = result[0].y
+                    this.setState({
+                        stay: newStay,
+                    })
+                }
+            )
+        }
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -78,6 +99,7 @@ class StayForm extends Component {
 
     render() {
         const { t } = this.props;
+        let position = [this.state.stay.latitude, this.state.stay.latitude]
         return (
             <div className={style.stayEditCompoment}>
                 <form onSubmit={this.handleSubmit} className={style.editForm}>
@@ -94,8 +116,10 @@ class StayForm extends Component {
                     <label>{t("STREET")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "street")}
+                        onBlur={this.mapReposition}
                         value={this.state.stay.address.street}
                     />
+                    {this.state.stay.latitude && <StayMap position={[this.state.stay.latitude,this.state.stay.longitude]} zoom={16}/>}
                     <label>{t("ZIP_CODE")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "zipCode")}
@@ -127,6 +151,7 @@ class StayForm extends Component {
                         <button onClick={this.props.handleDelete}>{t("DELETE_STAY")}</button>
                     ) : null}
                 </form>
+                {console.log(this.state.stay)}
             </div>
         );
     }

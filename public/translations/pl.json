@@ -17,7 +17,7 @@
     "____StayForm" : "Stay Form",
     "NAME": "Nazwa",
     "CITY": "Miasto",
-    "STREET": "Ulica",
+    "STREET": "Ulica i numer",
     "ZIP_CODE": "Kod pocztowy",
     "PRICE": "Cena",
     "CONTACT_INFO": "Kontakt",
