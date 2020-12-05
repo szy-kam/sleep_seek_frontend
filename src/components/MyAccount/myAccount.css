@@ -1,0 +1,4 @@
+.myAccountComponent {
+    display: flex;
+    flex-direction: column;
+}

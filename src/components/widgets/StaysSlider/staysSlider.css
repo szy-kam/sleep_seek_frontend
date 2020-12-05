@@ -1,0 +1,19 @@
+.StaySliderT1 {
+    position: relative;
+}
+.image {
+    height: auto;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.name {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+    background-color: rgba(162, 168, 125, 0.377);
+    padding: 20px;
+}
