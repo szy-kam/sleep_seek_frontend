@@ -12,6 +12,8 @@ let STAYS = [
             city: "",
             street: "",
             zipCode: "",
+            latitude: 52.125736,
+            longitude: 19.080392,
         },
         mainPhoto: "",
         description: "",
@@ -19,8 +21,7 @@ let STAYS = [
         contactInfo: "",
         photos: [],
         newPhotos: [],
-        latitude: 52.125736,
-        longitude: 19.080392,
+
     },
     {
         id: 2,
@@ -29,6 +30,8 @@ let STAYS = [
             city: "",
             street: "",
             zipCode: "",
+            latitude: 52.425736,
+            longitude: 19.280392,
         },
         mainPhoto: "",
         description: "",
@@ -36,8 +39,7 @@ let STAYS = [
         contactInfo: "",
         photos: [],
         newPhotos: [],
-        latitude: 52.425736,
-        longitude: 19.280392,
+
     },
 ];
 
@@ -53,7 +55,7 @@ const StaysMap = (props) => {
 
     const markers = () => {
         return stays.map((item, i) => (
-            <Marker position={[item.latitude, item.longitude]} key={i}>
+            <Marker position={[item.address.latitude, item.address.longitude]} key={i}>
                 <Popup>
                     <Link to={`/stays/${item.id}`}>{item.name}</Link>
                 </Popup>
