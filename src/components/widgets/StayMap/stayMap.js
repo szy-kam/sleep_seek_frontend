@@ -2,8 +2,10 @@ import React from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 const StayMap = (props) => {
+    const defaultZoom = 13
+    const defaultHeight = '300px'
     const position = props.position
-    const zoom = props.zoom || 13
+    const zoom = props.zoom || defaultZoom 
     return (
         <MapContainer 
             center={position}
@@ -11,7 +13,7 @@ const StayMap = (props) => {
             minZoom={10}
             scrollWheelZoom={false}
             style={{
-                height: "300px",
+                height: defaultHeight
             }}
         >
             <TileLayer
