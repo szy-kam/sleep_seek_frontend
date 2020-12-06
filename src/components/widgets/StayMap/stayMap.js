@@ -1,21 +1,29 @@
 import React from "react";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 
 const StayMap = (props) => {
-    const defaultZoom = 13
-    const defaultHeight = '300px'
-    const position = props.position
-    const zoom = props.zoom || defaultZoom 
+    const defaultZoom = 13;
+    const defaultHeight = "300px";
+    const position = props.position;
+    const zoom = props.zoom || defaultZoom;
+
+    function CentreMap() {
+        const map = useMap();
+        map.setView(props.position, props.zoom);
+        return null;
+    }
+
     return (
-        <MapContainer 
-            center={position}
+        <MapContainer
+            center={props.position}
             zoom={zoom}
             minZoom={10}
             scrollWheelZoom={false}
             style={{
-                height: defaultHeight
+                height: defaultHeight,
             }}
         >
+            <CentreMap />
             <TileLayer
                 url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

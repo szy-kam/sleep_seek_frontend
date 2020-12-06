@@ -43,14 +43,25 @@ class StayForm extends Component {
         if (address.length > 3) {
             const provider = new OpenStreetMapProvider();
             provider.search({ query: address }).then((result) => {
-                const newStay = {
-                    ...this.state.stay,
-                };
-                newStay.longitude = result[0].x;
-                newStay.latitude = result[0].y;
-                this.setState({
-                    stay: newStay,
-                });
+                if (result.length >= 1) {
+                    const newStay = {
+                        ...this.state.stay,
+                    };
+                    newStay.longitude = result[0].x;
+                    newStay.latitude = result[0].y;
+                    this.setState({
+                        stay: newStay,
+                    });
+                } else {
+                    const newStay = {
+                        ...this.state.stay,
+                    };
+                    newStay.longitude = null;
+                    newStay.latitude = null;
+                    this.setState({
+                        stay: newStay,
+                    });
+                }
             });
         }
     };
@@ -102,6 +113,7 @@ class StayForm extends Component {
 
     render() {
         const { t } = this.props;
+
         return (
             <div className={style.stayEditCompoment}>
                 <form onSubmit={this.handleSubmit} className={style.editForm}>
@@ -113,6 +125,7 @@ class StayForm extends Component {
                     <label>{t("CITY")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "city")}
+                        onBlur={this.mapReposition}
                         value={this.state.stay.address.city}
                     />
                     <label>{t("STREET")}</label>
