@@ -12,25 +12,30 @@ const StayMap = (props) => {
         map.setView(props.position, props.zoom);
         return null;
     }
-
-    return (
-        <MapContainer
-            center={props.position}
-            zoom={zoom}
-            minZoom={10}
-            scrollWheelZoom={false}
-            style={{
-                height: defaultHeight,
-            }}
-        >
-            <CentreMap />
-            <TileLayer
-                url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={position}></Marker>
-        </MapContainer>
-    );
+    if(position[0] !== null){
+        return (
+            <MapContainer
+                center={props.position}
+                zoom={zoom}
+                minZoom={10}
+                scrollWheelZoom={false}
+                style={{
+                    height: defaultHeight,
+                }}
+            >
+                <CentreMap />
+                <TileLayer
+                    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={position}></Marker>
+            </MapContainer>
+        );
+    }
+    else{
+        return null;
+    }
+    
 };
 
 export default StayMap;

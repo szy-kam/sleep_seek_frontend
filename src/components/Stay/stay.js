@@ -73,7 +73,8 @@ class Stay extends Component {
 
     render() {
         const { t } = this.props;
-        const position = [50.06210034570054, 19.936973861659844]; //TODO
+        const position = [this.state.stay.address.latitude, this.state.stay.address.longitude]; //TODO
+        // const position = [50.06210034570054, 19.936973861659844]; //TODO
         return (
             <div className={style.stayComponent}>
                 <LeftColumn />
