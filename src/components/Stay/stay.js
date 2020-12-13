@@ -9,6 +9,7 @@ import "react-image-lightbox/style.css";
 import { STAY } from "../../config";
 import { connect } from "react-redux";
 import StayMap from '../widgets/StayMap/stayMap'
+import Reviews from "../widgets/Reviews/reviews";
 
 
 class Stay extends Component {
@@ -94,6 +95,7 @@ class Stay extends Component {
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
                     <StayMap position={position} zoom={14}/>
+                    <Reviews />
                 </div>
 
                 

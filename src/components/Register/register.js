@@ -6,6 +6,7 @@ import { withTranslation } from "react-i18next";
 class Register extends Component {
     state = {
         form: {
+            username: "",
             email: "",
             password: "",
         },
@@ -26,7 +27,9 @@ class Register extends Component {
     submitForm = (e) => {
         e.preventDefault();
         const { t } = this.props;
-        AddUserRepository(this.state.form).then(() => this.setState({ message: t("ACCOUNT_CREATED")}));
+        AddUserRepository(this.state.form)
+            .then(() => this.setState({ message: t("ACCOUNT_CREATED") }))
+            .catch(() => this.setState({ message: t("ERROR") }));
     };
 
     redirectUser = () => {
@@ -39,8 +42,8 @@ class Register extends Component {
         if (this.state.message)
             return (
                 <div className={style.message}>
-                    {" "}
-                    {this.state.message} {this.redirectUser()}{" "}
+                    {this.state.message}
+                    {/* {this.redirectUser()} */}
                 </div>
             );
         else return null;
@@ -52,6 +55,12 @@ class Register extends Component {
             <div className={style.registerComponent}>
                 {this.message()}
                 <form onSubmit={this.submitForm} className={style.registerForm}>
+                    <input
+                        type="text"
+                        placeholder={t("USERNAME")}
+                        value={this.state.form.username}
+                        onChange={(event) => this.handleInput(event, "username")}
+                    />
                     <input
                         type="text"
                         placeholder={t("EMAIL")}

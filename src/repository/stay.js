@@ -16,9 +16,10 @@ export async function AddStayRepository(stay) {
     const response = await fetch(BACKEND_URL + "/stays", {
         method: "POST",
         headers: {
-            Origin: "*",
+            "Origin": "*",
             "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(stay),
     });
     return response;
@@ -41,4 +42,19 @@ export async function EditStayRepository(stay) {
             return response;
         });
 }
+
 // TODO error catch
+export async function GetReviewsByStayIdRepository(stayId, pageNumber, pageSize) {
+    await fetch(
+        BACKEND_URL + "/review/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
+        {
+            method: "GET",
+        }
+    )
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((response) => {
+            return response;
+        });
+}

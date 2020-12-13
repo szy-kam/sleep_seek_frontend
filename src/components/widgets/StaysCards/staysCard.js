@@ -11,19 +11,21 @@ class StaysCard extends Component {
         stays: [],
         page: 0,
         size: this.loadStaysAmount,
-        end: false,
+        endLoading: false,
     };
 
     componentDidMount() {
-        StaysCardRepository(this.state.page, this.state.size).then((response) =>
-            this.setState({ stays: response })
-        );
+        StaysCardRepository(this.state.page, this.state.size)
+            .then((response) => this.setState({ stays: response }))
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     renderMoreHandler = () => {
         StaysCardRepository(this.state.page, this.state.size).then((response) => {
             this.setState({ stays: [...this.state.stays, ...response], page: this.state.page + 1 });
-            if (response.length < this.state.size) this.setState({ end: true });
+            if (response.length < this.state.size) this.setState({ endLoading: true });
         });
     };
 
@@ -94,8 +96,8 @@ class StaysCard extends Component {
                         ))}
                     </div>
                 );
-                default:
-                    return <p>No template choosen.</p>
+            default:
+                return <p>No template choosen.</p>;
         }
     }
 
@@ -103,7 +105,7 @@ class StaysCard extends Component {
         return (
             <div className={style.staysCardComponent}>
                 {this.renderCards(this.props.template, this.state.stays)}
-                {this.props.loadMore && !this.state.end ? this.renderMore() : null}
+                {this.props.loadMore && !this.state.endLoading ? this.renderMore() : null}
             </div>
         );
     }

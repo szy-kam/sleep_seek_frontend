@@ -3,6 +3,7 @@ import style from "./signIn.css";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logInUser } from "../../redux/user/userActions";
+import { SignInUserRepository } from "../../repository/user";
 
 class SignIn extends Component {
     state = {
@@ -25,10 +26,19 @@ class SignIn extends Component {
     };
 
     submitForm = (e) => {
+        const { t } = this.props;
         e.preventDefault();
-        // TODO validation
-        this.props.logInUser({userId: 1, role: "admin"})
-        // this.props.history.push("/");
+        SignInUserRepository(this.state.form)
+            .then((response) => {
+                if (response.status === 200) {
+                    this.setState({ message: t("LOGGED") });
+                    this.props.logInUser({ userId: 1, role: "admin" }); //TODO tokeny
+                    //this.props.history.push("/");
+                } else {
+                    this.setState({ message: t(`ERROR ${response.status}`) });
+                }
+            })
+            .catch(() => this.setState({ message: t("ERROR PROMISE") }));
     };
 
     render() {
@@ -60,6 +70,5 @@ class SignIn extends Component {
 const mapDispatchToProps = (dispatch) => ({
     logInUser: (user) => dispatch(logInUser(user)),
 });
-
 
 export default connect(null, mapDispatchToProps)(withTranslation()(SignIn));
