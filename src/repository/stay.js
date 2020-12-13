@@ -16,13 +16,13 @@ export async function AddStayRepository(stay, files) {
     var formData = new FormData();
 
     if(files){
-        files.map((file, index) => {
-            formData.append(`file${index}`, file);
+        files.map((file) => {
+            formData.append(`newPhotos`, file);
             return null;
         });
     }
     
-    formData.append('stay', stay);
+    formData.append('stay', JSON.stringify(stay));
 
     const response = await fetch(BACKEND_URL + "/stays", {
         method: "POST",
