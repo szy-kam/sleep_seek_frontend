@@ -28,7 +28,6 @@ export async function AddStayRepository(stay, files) {
         method: "POST",
         headers: {
             "Origin": "*",
-            "Content-Type": "application/json",
         },
         credentials: "include",
         body: formData
