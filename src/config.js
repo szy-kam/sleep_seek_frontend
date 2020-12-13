@@ -18,5 +18,4 @@ export let STAY = {
     email: "",
     phoneNumber: "",
     photos: [],
-    newPhotos: [],
 };

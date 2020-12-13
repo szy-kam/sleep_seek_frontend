@@ -69,6 +69,7 @@ class StayForm extends Component {
             });
         }
     };
+
     countrysOptions = () => {
         return countrysList.map((item, i) => {
             return <option key={i}>{item}</option>;
@@ -77,22 +78,19 @@ class StayForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.handleSubmit(this.state.stay);
+        this.props.handleSubmit(this.state.stay, this.state.newPhotos);
     };
 
     onDrop = (acceptedFiles) => {
-        const newStay = {
-            ...this.state.stay,
-        };
+
         acceptedFiles.map((file) =>
             Object.assign(file, {
                 preview: URL.createObjectURL(file),
             })
         );
-        newStay.newPhotos = acceptedFiles;
 
         this.setState({
-            stay: newStay,
+            newPhotos: acceptedFiles,
         });
     };
 
@@ -107,8 +105,8 @@ class StayForm extends Component {
     };
 
     thumbs = () => {
-        if (this.state.stay.newPhotos && this.state.stay.newPhotos.length > 0)
-            return this.state.stay.newPhotos.map((file) => (
+        if (this.state.newPhotos && this.state.newPhotos.length > 0)
+            return this.state.newPhotos.map((file) => (
                 <img
                     src={file.preview}
                     key={file.name}
@@ -188,13 +186,17 @@ class StayForm extends Component {
                     <label>{t("PHOTOS")}</label>
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
+
                     {!this.state.stay.mainPhoto ? t("SELECT_MAIN_PHOTO") : null}
+
                     <button type="submit">
                         {this.props.getStay ? t("EDIT_STAY") : t("ADD_STAY")}
                     </button>
+
                     {this.props.handleDelete ? (
                         <button onClick={this.props.handleDelete}>{t("DELETE_STAY")}</button>
                     ) : null}
+                    
                 </form>
             </div>
         );

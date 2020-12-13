@@ -10,9 +10,9 @@ class AddStay extends Component {
         message: ""
     }
 
-    handleSubmit = (stay) => {
+    handleSubmit = (stay, files) => {
         const { t } = this.props;
-        AddStayRepository(stay).then(() => this.setState({ message: t("STAY_ADDED") }));
+        AddStayRepository(stay, files).then(() => this.setState({ message: t("STAY_ADDED") }));
     };
 
     redirectUser = () => {

@@ -6,13 +6,7 @@ class Rewiews extends Component {
     defaultPageSize = 5;
 
     state = {
-        review: {
-            id: null,
-            stayId: null,
-            userId: null,
-            message: "",
-            rating: null,
-        },
+        reviews: [],
         stayId: this.props.stayId,
         pageNumber: 0,
         pageSize: this.props.pageSize || this.defaultPageSize,
@@ -22,7 +16,7 @@ class Rewiews extends Component {
     componentDidMount() {
         GetReviewsByStayIdRepository(this.state.stayId, this.state.pageNumber, this.state.pageSize)
         .then((response) => {
-            this.setState({ review: response });
+            this.setState({ reviews: response });
             if(response.length < this.state.pageSize) {
                 this.setState({ endLoading: true })
             }
@@ -31,7 +25,7 @@ class Rewiews extends Component {
     }
 
     renderMoreHandler = () => {
-        GetReviewsByStayIdRepository(this.stay.stayId, this.stay.pageNumber, this.stay.pageSize).then((response) => {this.setState({ stays: [...this.state.stays, ...response], pageNumber: this.state.pageSize + 1 });
+        GetReviewsByStayIdRepository(this.state.stayId, this.state.pageNumber, this.state.pageSize).then((response) => {this.setState({ reviews: [...this.state.stays, ...response], pageNumber: this.state.pageSize + 1 });
             if (response.length < this.state.pageSize) this.setState({ endLoading: true })})
         .catch((err) => { console.log(err) })
     };
@@ -48,14 +42,17 @@ class Rewiews extends Component {
     renderReview(){
         return (
             <div>
-                Review
+                {this.state.reviews && this.state.reviews.map((item, i) => ( 
+                    item.message
+                ))}
             </div>
         )
     }
 
     render() {
         return <div>
-            {this.props.loadMore && !this.state.endLoading ? this.renderMore() : null}
+            {this.renderReview()}
+            {!this.state.endLoading ? this.renderMore() : null}
         </div>;
     }
 }

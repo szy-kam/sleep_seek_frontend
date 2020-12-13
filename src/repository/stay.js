@@ -12,7 +12,18 @@ export async function DeleteStayByIdRepository(id) {
     });
 }
 
-export async function AddStayRepository(stay) {
+export async function AddStayRepository(stay, files) {
+    var formData = new FormData();
+
+    if(files){
+        files.map((file, index) => {
+            formData.append(`file${index}`, file);
+            return null;
+        });
+    }
+    
+    formData.append('stay', stay);
+
     const response = await fetch(BACKEND_URL + "/stays", {
         method: "POST",
         headers: {
@@ -20,7 +31,7 @@ export async function AddStayRepository(stay) {
             "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify(stay),
+        body: formData
     });
     return response;
 }
@@ -45,16 +56,17 @@ export async function EditStayRepository(stay) {
 
 // TODO error catch
 export async function GetReviewsByStayIdRepository(stayId, pageNumber, pageSize) {
-    await fetch(
-        BACKEND_URL + "/review/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
-        {
-            method: "GET",
-        }
-    )
-        .catch((err) => {
-            console.log(err);
-        })
-        .then((response) => {
-            return response;
-        });
+    if(stayId)
+        await fetch(
+            BACKEND_URL + "/review/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
+            {
+                method: "GET",
+            }
+        )
+            .catch((err) => {
+                console.log(err);
+            })
+            .then((response) => {
+                return response;
+            });
 }
