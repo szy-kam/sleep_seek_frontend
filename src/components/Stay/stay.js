@@ -24,6 +24,7 @@ class Stay extends Component {
         GetStayByIdRepository(this.props.match.params.id).then((response) => {
             this.setState({ stay: response });
         });
+
     }
 
     imageGrid() {
@@ -72,9 +73,9 @@ class Stay extends Component {
     }
 
     render() {
+        console.log(this.state.stay)
         const { t } = this.props;
-        const position = [this.state.stay.address.latitude, this.state.stay.address.longitude]; //TODO
-        // const position = [50.06210034570054, 19.936973861659844]; //TODO
+        const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
         return (
             <div className={style.stayComponent}>
                 <LeftColumn />
