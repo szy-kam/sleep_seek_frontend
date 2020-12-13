@@ -95,11 +95,11 @@ class Stay extends Component {
                         {this.state.stay.price} {t("CURRENCY_SYMBOL")}
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
-                    <StayMap position={position} zoom={14}/>
-                    <Reviews />
+                    <StayMap position={position} zoom={14} />
+                    <Reviews stayId={this.props.match.params.id} />
                 </div>
 
-                
+
 
                 {this.lightbox()}
             </div>

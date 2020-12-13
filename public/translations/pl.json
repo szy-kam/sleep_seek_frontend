@@ -43,6 +43,8 @@
     "FILE_UPLOADER_DEFAULT": "Kilikj lub upuść pliki tutaj",
     "FILE_UPLOADER_DROP_HERE": "Upuść pliki",
     "FILE_UPLOADER_WRONG_FILETYPE": "Nieobsługiwany format pliku",
-    "FILE_UPLOADER_TOO_LARGE": "Plik zbyt duży"
-
+    "FILE_UPLOADER_TOO_LARGE": "Plik zbyt duży",
+    "___Reviews": "Reviews",
+    "ADD_REVIEW": "Dodaj recenzje",
+    "ADD_REVIEW_PLACEHOLDER": "Napisz swoją recenzje"
   }
