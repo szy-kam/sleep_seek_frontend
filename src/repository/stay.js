@@ -13,24 +13,39 @@ export async function DeleteStayByIdRepository(id) {
 }
 
 export async function AddStayRepository(stay, files) {
-    var formData = new FormData();
 
-    if(files){
-        files.map((file) => {
-            formData.append(`newPhotos`, file);
-            return null;
-        });
+    let newPhotos = []
+
+    async function UpdateStayImage(image) {
+        let formData = new FormData();
+        formData.append('image', image)
+        return await fetch(BACKEND_URL + "/image",
+            {
+                method: "POST",
+                body: formData
+            })
     }
-    
-    formData.append('stay', JSON.stringify(stay));
+
+    if (files) {
+        files.forEach(file => {
+            UpdateStayImage(file)
+                .then(resposne => {
+                    if (resposne.status === 200)
+                        newPhotos.push(" 2 ")
+                })
+                .catch(resposne => console.log(resposne))
+        })
+    }
+    console.log(newPhotos);
 
     const response = await fetch(BACKEND_URL + "/stays", {
         method: "POST",
         headers: {
             "Origin": "*",
+            "Content-Type": "application/json",
         },
         credentials: "include",
-        body: formData
+        body: JSON.stringify(stay)
     });
     return response;
 }
@@ -55,7 +70,7 @@ export async function EditStayRepository(stay) {
 
 // TODO error catch
 export async function GetReviewsByStayIdRepository(stayId, pageNumber, pageSize) {
-    if(stayId)
+    if (stayId)
         await fetch(
             BACKEND_URL + "/review/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
             {

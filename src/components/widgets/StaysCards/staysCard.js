@@ -5,25 +5,28 @@ import { withTranslation } from "react-i18next";
 import style from "./staysCard.css";
 
 class StaysCard extends Component {
-    loadStaysAmount = 3;
+    defaultStaysQuantity = 4;
 
     state = {
         stays: [],
         page: 0,
-        size: this.loadStaysAmount,
+        size: this.defaultStaysQuantity,
         endLoading: false,
     };
 
     componentDidMount() {
         StaysCardRepository(this.state.page, this.state.size)
-            .then((response) => this.setState({ stays: response }))
+            .then((response) => {
+                this.setState({ stays: response })
+                if (response.length < this.state.size) this.setState({ endLoading: true });
+            })
             .catch((err) => {
                 console.log(err);
             });
     }
 
     renderMoreHandler = () => {
-        StaysCardRepository(this.state.page, this.state.size).then((response) => {
+        StaysCardRepository(this.state.page + 1, this.state.size).then((response) => {
             this.setState({ stays: [...this.state.stays, ...response], page: this.state.page + 1 });
             if (response.length < this.state.size) this.setState({ endLoading: true });
         });

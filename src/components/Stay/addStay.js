@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 
 class AddStay extends Component {
 
-    state={
+    state = {
         message: ""
     }
 
