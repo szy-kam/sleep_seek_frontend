@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { AddUserRepository } from "../../repository/user";
+import { AddUserRepository, GetUserIdByEmail } from "../../repository/user";
 import style from "./register.css";
 import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { logInUser } from "../../redux/user/userActions";
 
 class Register extends Component {
     state = {
@@ -28,7 +30,18 @@ class Register extends Component {
         e.preventDefault();
         const { t } = this.props;
         AddUserRepository(this.state.form)
-            .then(() => this.setState({ message: t("ACCOUNT_CREATED") }))
+            .then(response => {
+                if (response.status === 200) {
+                    this.setState({ message: t("ACCOUNT_CREATED") })
+                    GetUserIdByEmail(this.state.form.email)
+                        .then(data => {
+                            data.json()
+                                .then(id => {
+                                    this.props.logInUser({userId: id})
+                                })
+                        })
+                }
+            })
             .catch(() => this.setState({ message: t("ERROR") }));
     };
 
@@ -80,4 +93,9 @@ class Register extends Component {
         );
     }
 }
-export default withTranslation()(Register);
+
+const mapDispatchToProps = (dispatch) => ({
+    logInUser: (user) => dispatch(logInUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(withTranslation()(Register));

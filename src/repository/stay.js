@@ -14,40 +14,69 @@ export async function DeleteStayByIdRepository(id) {
 
 export async function AddStayRepository(stay, files) {
 
-    let newPhotos = []
+    // async function UpdateStayImage(image) {
+    //     let formData = new FormData();
+    //     formData.append('image', image)
+    //     return await fetch(BACKEND_URL + "/image",
+    //         {
+    //             method: "POST",
+    //             body: formData
+    //         })
+    // }
 
-    async function UpdateStayImage(image) {
-        let formData = new FormData();
-        formData.append('image', image)
-        return await fetch(BACKEND_URL + "/image",
-            {
-                method: "POST",
-                body: formData
-            })
-    }
+    // if (files) {
+    //     files.forEach(file => {
+    //         await UpdateStayImage(file)
+    //             .then(response => {
+    //                 response.json()
+    //                     .then(data => {
+    //                         console.log(data);
+    //                         newPhotos.push(data.url)
+    //                     })
+    //             })
+    //             .catch(resposne => console.log(resposne))
+    //     })
+    // }
 
+    let images = [];
     if (files) {
-        files.forEach(file => {
-            UpdateStayImage(file)
-                .then(resposne => {
-                    if (resposne.status === 200)
-                        newPhotos.push(" 2 ")
-                })
-                .catch(resposne => console.log(resposne))
-        })
+        for (let image of files) {
+            let formData = new FormData();
+            let isMainPhoto = false
+            if (image.name === stay.mainPhoto)
+                isMainPhoto = true
+            formData.append("image", image);
+            const response = await fetch(BACKEND_URL + "/image", {
+                method: "POST",
+                headers: {
+                    "Origin": "*"
+                },
+                body: formData
+            });
+            if (response.ok) {
+                const json = await response.json();
+                images.push(json.url);
+                if (isMainPhoto)
+                    stay.mainPhoto = json.url
+            }
+            else {
+                console.log("IMAGE ERROR");
+                console.log(response);
+            }
+        }
     }
-    console.log(newPhotos);
-
-    const response = await fetch(BACKEND_URL + "/stays", {
-        method: "POST",
-        headers: {
-            "Origin": "*",
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(stay)
-    });
-    return response;
+    stay.photos = images
+    console.log(stay);
+    // const response = await fetch(BACKEND_URL + "/stays", {
+    //     method: "POST",
+    //     headers: {
+    //         "Origin": "*",
+    //         "Content-Type": "application/json",
+    //     },
+    //     credentials: "include",
+    //     body: JSON.stringify(stay)
+    // });
+    // return response;
 }
 
 export async function EditStayRepository(stay) {

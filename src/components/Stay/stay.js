@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import LeftColumn from "../Stays/staysLayout";
 import { GetStayByIdRepository } from "../../repository/stay";
 import { withTranslation } from "react-i18next";
@@ -11,7 +10,6 @@ import { connect } from "react-redux";
 import StayMap from '../widgets/StayMap/stayMap'
 import Reviews from "../widgets/Reviews/reviews";
 
-
 class Stay extends Component {
     state = {
         stay: STAY,
@@ -21,10 +19,12 @@ class Stay extends Component {
     };
 
     componentDidMount() {
-        GetStayByIdRepository(this.props.match.params.id).then((response) => {
-            this.setState({ stay: response });
+        GetStayByIdRepository(this.props.match.params.id).then((stay) => {
+            if (stay) { this.setState({ stay: stay }); }
+            else {
+                this.props.history.push("/404");
+            }
         });
-
     }
 
     imageGrid() {
@@ -65,13 +65,6 @@ class Stay extends Component {
         );
     }
 
-    editLink() {
-        const { t } = this.props;
-        return this.props.user ? (
-            <Link to={`/stays/edit/${this.state.stay.id}`}>{t("EDIT_STAY")}</Link>
-        ) : null;
-    }
-
     render() {
         console.log(this.state.stay)
         const { t } = this.props;
@@ -81,7 +74,7 @@ class Stay extends Component {
                 <LeftColumn />
                 <div className={style.stayContent}>
                     <div className={style.name}>
-                        {this.state.stay.name} {this.editLink()}{" "}
+                        {this.state.stay.name}
                     </div>
                     <div
                         className={style.image}

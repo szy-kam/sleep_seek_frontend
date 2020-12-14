@@ -4,14 +4,15 @@ import style from "./myAccount.css";
 import { withTranslation } from "react-i18next";
 import { GetStaysByUserId } from "../../repository/stays"
 import StaysCard from "../widgets/StaysCards/staysCard";
+import { connect } from "react-redux";
 
 const MyAccount = (props) => {
     const { t } = props;
     let stays
+    let userId = props.user.userId
 
-    GetStaysByUserId(4, 0, 5)
+    GetStaysByUserId(userId, 0, 5)
         .then(response => {
-            console.log(response);
             stays = response.data
         })
         .catch((err) => {
@@ -21,10 +22,12 @@ const MyAccount = (props) => {
     return (
         <div className={style.myAccountComponent}>
             <Link to="/add-stay">{t("ADD_STAY")}</Link>
-            <StaysCard stays={stays} template="edit" />
-
+            <StaysCard stays={stays} template="edit" loadMore={true}/>
         </div>
     );
 };
 
-export default withTranslation()(MyAccount);
+const mapStateToProps = state => ({
+    user: state.user.user
+})
+export default connect(mapStateToProps)(withTranslation()(MyAccount));

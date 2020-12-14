@@ -7,6 +7,7 @@ import { STAY } from "../../../config";
 import StayMap from "../StayMap/stayMap";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import countrysList from "../../../repository/countrysList";
+import { connect } from "react-redux";
 
 class StayForm extends Component {
     state = {
@@ -28,6 +29,8 @@ class StayForm extends Component {
         if (["city", "street", "zipCode", "country"].indexOf(field) >= 0)
             newStay.address[field] = event.target.value;
         else newStay[field] = event.target.value;
+
+        newStay.userId = this.props.user.userId
 
         this.setState({
             stay: newStay,
@@ -82,7 +85,6 @@ class StayForm extends Component {
     };
 
     onDrop = (acceptedFiles) => {
-
         acceptedFiles.map((file) =>
             Object.assign(file, {
                 preview: URL.createObjectURL(file),
@@ -98,6 +100,7 @@ class StayForm extends Component {
         const newStay = {
             ...this.state.stay,
         };
+        console.log(e.target);
         newStay.mainPhoto = e.target.alt;
         this.setState({
             stay: newStay,
@@ -196,10 +199,15 @@ class StayForm extends Component {
                     {this.props.handleDelete ? (
                         <button onClick={this.props.handleDelete}>{t("DELETE_STAY")}</button>
                     ) : null}
-                    
+
                 </form>
             </div>
         );
     }
 }
-export default withTranslation()(StayForm);
+
+const mapStateToProps = state => ({
+    user: state.user.user
+})
+
+export default connect(mapStateToProps)(withTranslation()(StayForm));

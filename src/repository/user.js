@@ -24,3 +24,10 @@ export async function SignInUserRepository(user) {
     });
     return response;
 }
+
+export async function GetUserIdByEmail(email) {
+    const response = await fetch(BACKEND_URL + "/user/" + email, {
+        method: "GET",
+    });
+    return response;
+}
