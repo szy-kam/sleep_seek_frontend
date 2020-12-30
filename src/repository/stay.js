@@ -66,17 +66,16 @@ export async function AddStayRepository(stay, files) {
         }
     }
     stay.photos = images
-    console.log(stay);
-    // const response = await fetch(BACKEND_URL + "/stays", {
-    //     method: "POST",
-    //     headers: {
-    //         "Origin": "*",
-    //         "Content-Type": "application/json",
-    //     },
-    //     credentials: "include",
-    //     body: JSON.stringify(stay)
-    // });
-    // return response;
+    const response = await fetch(BACKEND_URL + "/stays", {
+        method: "POST",
+        headers: {
+            "Origin": "*",
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(stay)
+    });
+    return response;
 }
 
 export async function EditStayRepository(stay) {
@@ -146,4 +145,61 @@ export async function AddReviewRepository(review) {
         .then((response) => {
             return response;
         });
+}
+
+export async function GetAccomodationByStayId(stayId, pageNumber, pageSize) {
+    // if (stayId)
+    //     await fetch(
+    //         BACKEND_URL + "/accomodation/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
+    //         {
+    //             method: "GET",
+    //         }
+    //     )
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //         .then((response) => {
+    //             return response;
+    //         });
+    return [
+        {
+            id: "1",
+            stayId: "1",
+            sleepersCapacity: "13",
+            quantity: "2",
+            price: "22"
+        },
+        {
+            id: "1",
+            stayId: "1",
+            sleepersCapacity: "13",
+            quantity: "1",
+            price: "242"
+        },
+    ]
+}
+
+export async function GetAccomodationById(Id) {
+    // if (stayId)
+    //     await fetch(
+    //         BACKEND_URL + "/accomodation/" + Id,
+    //         {
+    //             method: "GET",
+    //         }
+    //     )
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //         .then((response) => {
+    //             return response;
+    //         });
+    return [
+        {
+            id: "1",
+            stayId: "1",
+            sleepersCapacity: "13",
+            quantity: "2",
+            price: "22"
+        }
+    ]
 }

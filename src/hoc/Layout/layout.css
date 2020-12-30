@@ -16,3 +16,9 @@
     /* po zmianie zmień też w footer.css */
     padding-bottom: 3rem;
 }
+
+input,
+select,
+textarea {
+    border: 1px solid black;
+}

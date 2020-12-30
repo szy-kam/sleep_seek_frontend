@@ -7,6 +7,7 @@ import {
 import StayForm from "../widgets/StayForm/stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
+import AccomodationForm from '../widgets/AccomodationForm/accomodationForm'
 
 class EditStay extends Component {
     state = {
@@ -39,6 +40,10 @@ class EditStay extends Component {
         }, 2000);
     };
 
+    submitAccomodationForm = (accomodationForm) =>{
+        console.log(accomodationForm);
+    }
+
     message = () => {
         if (this.state.message)
             return (
@@ -61,6 +66,10 @@ class EditStay extends Component {
                     handleDelete={this.handleDelete}
                     getStay={this.props.match.params.id}
                 />
+                <AccomodationForm
+                    stayId={this.props.match.params.id} 
+                    handleSubmit={this.submitAccomodationForm}
+                    />
             </div>
         );
     }
