@@ -9,6 +9,7 @@ import { STAY } from "../../config";
 import { connect } from "react-redux";
 import StayMap from '../widgets/StayMap/stayMap'
 import Reviews from "../widgets/Reviews/reviews";
+import Accomodation from "../Accomodation/accomodation";
 
 class Stay extends Component {
     state = {
@@ -66,7 +67,6 @@ class Stay extends Component {
     }
 
     render() {
-        console.log(this.state.stay)
         const { t } = this.props;
         const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
         return (
@@ -90,11 +90,9 @@ class Stay extends Component {
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
                     <StayMap position={position} zoom={14} />
+                    <Accomodation stayId={this.props.match.params.id} />
                     <Reviews stayId={this.props.match.params.id} />
                 </div>
-
-
-
                 {this.lightbox()}
             </div>
         );

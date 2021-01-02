@@ -27,6 +27,7 @@ class AccomodationEdit extends Component {
             accomodation: newAccomodation,
         });
     }
+    
     render() {
         const { t } = this.props;
         console.log(this.state.accomodations);
