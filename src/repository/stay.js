@@ -165,16 +165,16 @@ export async function GetAccomodationByStayId(stayId, pageNumber, pageSize) {
         {
             id: "1",
             stayId: "1",
-            sleepersCapacity: "13",
-            quantity: "2",
-            price: "22"
+            sleepersCapacity: "1",
+            quantity: "11",
+            price: "111"
         },
         {
-            id: "1",
+            id: "2",
             stayId: "1",
-            sleepersCapacity: "13",
-            quantity: "1",
-            price: "242"
+            sleepersCapacity: "22",
+            quantity: "22",
+            price: "222"
         },
     ]
 }

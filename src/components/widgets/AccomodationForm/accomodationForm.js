@@ -1,25 +1,17 @@
 import React, { Component } from "react";
 import style from "./accomodationForm.css";
-import { GetAccomodationById } from "../../../repository/stay";
 import { withTranslation } from "react-i18next";
 
 class AccomodationForm extends Component {
     state = {
         accomodation: {
-            id: null,
-            stayId: null,
-            sleepersCapacity: "",
-            quantity: "",
-            price: ""
+            id: this.props.accomodation.id,
+            stayId: this.props.accomodation.stayId,
+            sleepersCapacity: this.props.accomodation.sleepersCapacity || "",
+            quantity: this.props.accomodation.quantity || "",
+            price: this.props.accomodation.price || ""
         }
     };
-
-    componentDidMount() {
-        if (this.props.stayId)
-            GetAccomodationById(this.props.getAccomodation).then((response) =>
-                this.setState({ accomodation: response })
-            );
-    }
 
     handleInput = (event, field) => {
         const newAccomodation = {
@@ -43,7 +35,6 @@ class AccomodationForm extends Component {
 
     render() {
         const { t } = this.props;
-
         return (
             <div className={style.accomodationFormCompoment}>
                 <form onSubmit={this.handleSubmit} className={style.accomodationForm}>
@@ -63,7 +54,7 @@ class AccomodationForm extends Component {
                         value={this.state.accomodation.quantity}
                     />
                     <button type="submit">
-                        {this.props.stayId ? t("EDIT_ACCOMODATION") : t("ADD_ACCOMODATION")}
+                        { t("SAVE_ACCOMODATION") }
                     </button>
                 </form>
             </div>

@@ -7,6 +7,8 @@
     "CURRENCY_SYMBOL": "zł",
     "VIEW_MORE": "Pokaż więcej",
     "SHOW_MORE": "Załaduj więcej",
+    "PRICE": "Cena",
+    "QUANTITY": "Liczba",
     "____Nav" : "NavBar",
     "NAV_HOME": "Home",
     "NAV_STAYS": "Obiekty",
@@ -46,5 +48,10 @@
     "FILE_UPLOADER_TOO_LARGE": "Plik zbyt duży",
     "___Reviews": "Reviews",
     "ADD_REVIEW": "Dodaj recenzje",
-    "ADD_REVIEW_PLACEHOLDER": "Napisz swoją recenzje"
+    "ADD_REVIEW_PLACEHOLDER": "Napisz swoją recenzje",
+    "___Accomodation": "Accomodation",
+    "SLEEPERS_CAPACITY": "Liczba miejsc",
+    "SAVE_ACCOMODATION": "Zapisz",
+    "ADD_ACCOMODATION": "Dodaj",
+    "DELETE_ACCOMODATION": "Usuń"
   }

@@ -158,13 +158,16 @@ class StayForm extends Component {
                         value={this.state.stay.address.zipCode}
                     />
                     {this.state.stay.address.latitude && (
-                        <StayMap
-                            position={[
-                                this.state.stay.address.latitude,
-                                this.state.stay.address.longitude,
-                            ]}
-                            zoom={16}
-                        />
+                        <div className={style.map}>
+                            <StayMap
+                                position={[
+                                    this.state.stay.address.latitude,
+                                    this.state.stay.address.longitude,
+                                ]}
+                                zoom={16}
+                            />
+                        </div>
+
                     )}
                     <label>{t("MIN_PRICE")}</label>
                     <input

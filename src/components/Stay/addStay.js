@@ -3,7 +3,7 @@ import { AddStayRepository } from "../../repository/stay";
 import StayForm from "../widgets/StayForm/stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
-import accomodationForm from "../widgets/AccomodationForm/accomodationForm";
+import AccomodationEdit from "../AccomodationEdit/accomodationEdit";
 
 class AddStay extends Component {
 
@@ -39,6 +39,10 @@ class AddStay extends Component {
                 {this.message()}
                 <StayForm
                     handleSubmit={this.handleSubmit}
+                />
+                <AccomodationEdit
+                    stayId={this.props.match.params.id}
+                    handleSubmit={this.submitAccomodationForm}
                 />
             </div>
         );
