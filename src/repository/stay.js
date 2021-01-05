@@ -203,3 +203,65 @@ export async function GetAccomodationById(Id) {
         }
     ]
 }
+
+export async function GetStayPropertiesById(Id) {
+    // if (stayId)
+    //     await fetch(
+    //         BACKEND_URL + "/accomodation/" + Id,
+    //         {
+    //             method: "GET",
+    //         }
+    //     )
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //         .then((response) => {
+    //             return response;
+    //         });
+    return [
+        {
+            id: "1",
+            name: "parking",
+            ico: "parking",
+        },
+        {
+            id: "2",
+            name: "obiad",
+            ico: "obiad",
+        }
+    ]
+}
+
+
+export async function GetAccomodationPropertiesById(Id) {
+    // if (stayId)
+    //     await fetch(
+    //         BACKEND_URL + "/accomodation/" + Id,
+    //         {
+    //             method: "GET",
+    //         }
+    //     )
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //         .then((response) => {
+    //             return response;
+    //         });
+    return [
+        {
+            id: "1",
+            name: "parking",
+            ico: "parking",
+        },
+        {
+            id: "2",
+            name: "obiad",
+            ico: "obiad",
+        },
+        {
+            id: "3",
+            name: "kuchnia",
+            ico: "kuchnia",
+        }
+    ]
+}
