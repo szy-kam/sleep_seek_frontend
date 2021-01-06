@@ -30,7 +30,6 @@ class AccomodationEdit extends Component {
     
     render() {
         const { t } = this.props;
-        console.log(this.state.accomodations);
         return (
             <div>
                 {this.state.accomodations.map((item, i) => (

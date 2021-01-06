@@ -8,10 +8,12 @@ import StayMap from "../StayMap/stayMap";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import countrysList from "../../../repository/countrysList";
 import { connect } from "react-redux";
+import PropertiesForm from "../../PropertiesForm/propertiesForm";
 
 class StayForm extends Component {
     state = {
         stay: STAY,
+        properties: []
     };
 
     componentDidMount() {
@@ -121,9 +123,16 @@ class StayForm extends Component {
         else return null;
     };
 
+    handlePropertiesInput = (val) => {
+        if (val !== this.state.properties)
+            this.setState({
+                properties: val,
+            });
+    }
+
     render() {
         const { t } = this.props;
-
+        // console.log(this.state);
         return (
             <div className={style.stayEditCompoment}>
                 <form onSubmit={this.handleSubmit} className={style.editForm}>
@@ -194,6 +203,8 @@ class StayForm extends Component {
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
                     {!this.state.stay.mainPhoto ? t("SELECT_MAIN_PHOTO") : null}
+                    <label>{t("PROPERTIES")}</label>
+                    <PropertiesForm handleInput={this.handlePropertiesInput} stay={true} stayId={this.props.getStay} />
 
                     <button type="submit">
                         {this.props.getStay ? t("EDIT_STAY") : t("ADD_STAY")}

@@ -30,7 +30,6 @@ class Properties extends Component {
     }
 
     render() {
-        const { t } = this.props;
         return (
             <div className={style.propertiesComponent}>
                 {this.renderProperties()}

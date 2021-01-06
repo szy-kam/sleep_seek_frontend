@@ -265,3 +265,79 @@ export async function GetAccomodationPropertiesById(Id) {
         }
     ]
 }
+
+export async function GetAllAccomodationProperties() {
+    // if (stayId)
+    //     await fetch(
+    //         BACKEND_URL + "/accomodation/" + Id,
+    //         {
+    //             method: "GET",
+    //         }
+    //     )
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //         .then((response) => {
+    //             return response;
+    //         });
+    return [
+        {
+            id: "1",
+            name: "parking",
+            ico: "parking",
+        },
+        {
+            id: "2",
+            name: "obiad",
+            ico: "obiad",
+        },
+        {
+            id: "3",
+            name: "kuchnia",
+            ico: "kuchnia",
+        },
+        {
+            id: "4",
+            name: "czajnik",
+            ico: "czajnik",
+        }
+    ]
+}
+
+export async function GetAllStayProperties() {
+    // if (stayId)
+    //     await fetch(
+    //         BACKEND_URL + "/accomodation/" + Id,
+    //         {
+    //             method: "GET",
+    //         }
+    //     )
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //         .then((response) => {
+    //             return response;
+    //         });
+    return [
+        {
+            id: "1",
+            name: "parking",
+            ico: "parking",
+        },
+        {
+            id: "2",
+            name: "obiad",
+            ico: "obiad",
+        },
+        {
+            id: "3",
+            name: "wifi",
+            ico: "wifi",
+        },
+        {
+            id: "4",
+            name: "24/h",
+            ico: "24/h",
+        }
+    ]
+}
