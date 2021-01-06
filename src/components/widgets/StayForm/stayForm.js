@@ -83,7 +83,7 @@ class StayForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.handleSubmit(this.state.stay, this.state.newPhotos);
+        this.props.handleSubmit(this.state.stay, this.state.newPhotos, this.state.properties);
     };
 
     onDrop = (acceptedFiles) => {

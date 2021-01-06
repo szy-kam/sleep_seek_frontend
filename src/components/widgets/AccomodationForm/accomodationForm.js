@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import style from "./accomodationForm.css";
 import { withTranslation } from "react-i18next";
+import PropertiesForm from '../../PropertiesForm/propertiesForm'
 
 class AccomodationForm extends Component {
     state = {
@@ -10,7 +11,8 @@ class AccomodationForm extends Component {
             sleepersCapacity: this.props.accomodation.sleepersCapacity || "",
             quantity: this.props.accomodation.quantity || "",
             price: this.props.accomodation.price || ""
-        }
+        },
+        properties: []
     };
 
     handleInput = (event, field) => {
@@ -29,8 +31,16 @@ class AccomodationForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.handleSubmit(this.state.accomodation);
+        // this.props.handleSubmit(this.state.accomodation);
+        //TODO
     };
+
+    handlePropertiesInput = (val) => {
+        if (val !== this.state.properties)
+            this.setState({
+                properties: val,
+            });
+    }
 
 
     render() {
@@ -53,8 +63,9 @@ class AccomodationForm extends Component {
                         onChange={(event) => this.handleInput(event, "quantity")}
                         value={this.state.accomodation.quantity}
                     />
+                    <PropertiesForm accomodation={true} accomodationId={this.props.accomodation.id} handleInput={this.handlePropertiesInput} />
                     <button type="submit">
-                        { t("SAVE_ACCOMODATION") }
+                        {t("SAVE_ACCOMODATION")}
                     </button>
                 </form>
             </div>

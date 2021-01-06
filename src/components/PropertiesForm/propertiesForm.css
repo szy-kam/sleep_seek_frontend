@@ -1,0 +1,7 @@
+.propertiesFormComponent{
+    border: 1px solid black;
+    margin: 5px;
+}
+.propertiesFormComponent ul{
+    list-style: none;
+}
