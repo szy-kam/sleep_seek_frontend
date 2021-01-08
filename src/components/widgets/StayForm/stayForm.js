@@ -132,7 +132,6 @@ class StayForm extends Component {
 
     render() {
         const { t } = this.props;
-        // console.log(this.state);
         return (
             <div className={style.stayEditCompoment}>
                 <form onSubmit={this.handleSubmit} className={style.editForm}>

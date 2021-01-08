@@ -43,8 +43,8 @@ export default function PropertiesForm(props) {
     }, [])
 
     const onChange = (e) => {
-        props.handleInput([...checkedItems]);
         handleCheck(e)
+        props.handleInput([...checkedItems]);
     }
 
     return (
