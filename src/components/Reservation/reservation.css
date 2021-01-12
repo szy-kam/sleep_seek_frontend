@@ -1,0 +1,8 @@
+.stay{
+    display: flex;
+    flex-direction: row;
+}
+
+.Calendar__monthArrow{
+    width: auto!important;
+}

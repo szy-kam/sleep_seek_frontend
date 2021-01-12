@@ -55,5 +55,11 @@
     "BOOK_IT": "Zarezerwuj",
     "SAVE_ACCOMODATION": "Zapisz",
     "ADD_ACCOMODATION": "Dodaj",
-    "DELETE_ACCOMODATION": "Usuń"
+    "DELETE_ACCOMODATION": "Usuń",
+    "___Reservation": "Reservation",
+    "FROM": "Od",
+    "TO": "Do",
+    "DAY_AMOUNT": "Liczba dni",
+    "CHOOSE_DATE": "Wymierz daty pobytu poprzez kalendarz",
+    "WHOLE_PRICE": "Cena za cały pobyt"
   }

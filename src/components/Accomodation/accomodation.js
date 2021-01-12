@@ -27,7 +27,7 @@ class Accomodation extends Component {
             <td><Properties accomodationId={item.id} /></td>
             <td>{item.quantity}</td>
             <td>{item.price} {t('CURRENCY_SYMBOL')}</td>
-            <td><Link to={`/book/${item.stayId}/${item.id}`}>{t('BOOK_IT')}</Link></td>
+            <td><Link to={`/reservation/${item.stayId}/${item.id}`}>{t('BOOK_IT')}</Link></td>
         </tr>
     }
 

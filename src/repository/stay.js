@@ -193,15 +193,14 @@ export async function GetAccomodationById(Id) {
     //         .then((response) => {
     //             return response;
     //         });
-    return [
-        {
+    return {
             id: "1",
             stayId: "1",
             sleepersCapacity: "13",
             quantity: "2",
             price: "22"
         }
-    ]
+    
 }
 
 export async function GetStayPropertiesById(Id) {
