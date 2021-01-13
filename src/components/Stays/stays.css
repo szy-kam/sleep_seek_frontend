@@ -4,7 +4,14 @@
 }
 
 .leftColumn {
-    flex-basis: 18%;
+    flex-basis: 15%;
     padding: 20px;
     max-width: 300px;
+}
+.middleColumn {
+    flex-basis: 40%;
+}
+
+.rightColumn {
+    flex-basis: 40%;
 }

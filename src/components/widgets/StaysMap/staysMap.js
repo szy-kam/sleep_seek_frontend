@@ -7,7 +7,7 @@ require("react-leaflet-markercluster/dist/styles.min.css");
 
 class StaysMap extends Component {
     state = {
-        stays: []
+        stays: this.props.stays || []
     }
 
     defaultHeight = "450px";
@@ -19,10 +19,19 @@ class StaysMap extends Component {
     height = this.props.height || this.defaultHeight;
 
     componentDidMount = () => {
-        let defaultQuantity = 5;
-        GetStaysRepository(0, defaultQuantity)
-            .then(response => this.setState({ stays: response }))
-            .catch(err => console.log(err))
+        if (!this.props.stays) {
+            const defaultQuantity = 100;
+            GetStaysRepository(0, defaultQuantity)
+                .then(response => this.setState({ stays: response }))
+                .catch(err => console.log(err))
+        }
+
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (prevProps !== this.props) {
+            this.setState({ stays: this.props.stays })
+        }
     }
 
     markers = () => {
@@ -31,6 +40,7 @@ class StaysMap extends Component {
                 return (
                     <Marker position={[item.address.latitude, item.address.longitude]} key={i}>
                         <Popup>
+                            <Link to={`/stays/${item.id}`}><img src={item.mainPhoto}/></Link>
                             <Link to={`/stays/${item.id}`}>{item.name}</Link>
                         </Popup>
                     </Marker>
@@ -40,13 +50,11 @@ class StaysMap extends Component {
         })
     }
 
-
     render() {
         return (
             <MapContainer
                 center={this.position}
                 zoom={this.zoom}
-                minZoom={1}
                 scrollWheelZoom={false}
                 style={{
                     height: this.height,

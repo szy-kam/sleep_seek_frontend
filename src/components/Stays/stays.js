@@ -3,6 +3,8 @@ import StaysCard from "../widgets/StaysCards/staysCard";
 import { GetStaysWithParamsRepository } from "../../repository/stays";
 import style from "./stays.css";
 import AdvancedSearchForm from "../AdvancedSearchForm/advancedSearchForm";
+import StaysMap from "../widgets/StaysMap/staysMap";
+import { withTranslation } from "react-i18next";
 
 class Stays extends Component {
     defaultStaysQuantity = 3;
@@ -53,11 +55,15 @@ class Stays extends Component {
                     <AdvancedSearchForm handleSubmit={this.handleSearchSubmit} />
                     <StaysCard template="mini" loadMore={false} />
                 </div>
-
-                <StaysCard template="default" loadMore={this.state.loadMore} stays={this.state.stays} renderMoreHandler={this.renderMoreHandler} />
+                <div className={style.middleColumn}>
+                    <StaysCard template="default" loadMore={this.state.loadMore} stays={this.state.stays} renderMoreHandler={this.renderMoreHandler} />
+                </div>
+                <div className={style.rightColumn}>
+                    <StaysMap stays={this.state.stays} position={[52.125736, 19.080392]} zoom={6} height="500px"/>
+                </div>
             </div>
         );
     }
 }
 
-export default Stays;
+export default withTranslation()(Stays);
