@@ -35,16 +35,34 @@ class SignIn extends Component {
                     this.props.logInUser({ userId: 1, role: "admin" }); //TODO tokeny
                     //this.props.history.push("/");
                 } else {
-                    this.setState({ message: t(`ERROR ${response.status}`) });
+                    this.setState({ message: t(`USER_ERROR_${response.status}`) });
                 }
             })
             .catch(() => this.setState({ message: t("ERROR PROMISE") }));
+    };
+
+    redirectUser = () => {
+        setTimeout(() => {
+            this.props.history.push("/my-account");
+        }, 3000);
+    };
+
+    message = () => {
+        if (this.state.message)
+            return (
+                <div className={style.message}>
+                    {this.state.message}
+                    {this.redirectUser()}
+                </div>
+            );
+        else return null;
     };
 
     render() {
         const { t } = this.props;
         return (
             <div className={style.signInComponent}>
+                {this.message()}
                 <form className={style.signInForm} onSubmit={this.submitForm}>
                     <input
                         type="text"

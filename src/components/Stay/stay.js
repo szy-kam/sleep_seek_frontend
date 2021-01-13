@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import LeftColumn from "../Stays/staysLayout";
 import { GetStayByIdRepository } from "../../repository/stay";
 import { withTranslation } from "react-i18next";
 import style from "./stay.css";
@@ -20,13 +19,23 @@ class Stay extends Component {
         isOpen: false,
     };
 
-    componentDidMount() {
+    getStay = () => {
         GetStayByIdRepository(this.props.match.params.id).then((stay) => {
             if (stay) { this.setState({ stay: stay }); }
             else {
                 this.props.history.push("/404");
             }
         });
+    }
+
+    componentDidMount() {
+        this.getStay();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props !== prevProps){
+            this.getStay()
+        }
     }
 
     imageGrid() {
@@ -72,7 +81,6 @@ class Stay extends Component {
         const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
         return (
             <div className={style.stayComponent}>
-                <LeftColumn />
                 <div className={style.stayContent}>
                     <div className={style.name}>
                         {this.state.stay.name}

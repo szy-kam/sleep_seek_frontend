@@ -30,7 +30,7 @@
     "ADD_STAY": "Dodaj obiekt",
     "EDIT_STAY": "Edytuj obiekt",
     "DELETE_STAY": "Usuń obiekt",
-    "SELECT_MAIN_PHOTO": "Wybierz główne zdjęcie",
+    "SELECT_MAIN_PHOTO": "Wybierz główne zdjęcie klikając na nie",
     "___EditStay": "Edit Stay",
     "STAY_EDITED": "Obiekty edytowany",
     "STAY_DELETED": "Obiekt usunięty",
@@ -42,7 +42,7 @@
     "LOGGED": "Zalogowano",
     "LOG_IN": "Zaloguj się",
     "___FileUploader": "FIle Uploader",
-    "FILE_UPLOADER_DEFAULT": "Kilikj lub upuść pliki tutaj",
+    "FILE_UPLOADER_DEFAULT": "Kliknij lub upuść pliki tutaj",
     "FILE_UPLOADER_DROP_HERE": "Upuść pliki",
     "FILE_UPLOADER_WRONG_FILETYPE": "Nieobsługiwany format pliku",
     "FILE_UPLOADER_TOO_LARGE": "Plik zbyt duży",
@@ -61,5 +61,9 @@
     "TO": "Do",
     "DAY_AMOUNT": "Liczba dni",
     "CHOOSE_DATE": "Wymierz daty pobytu poprzez kalendarz",
-    "WHOLE_PRICE": "Cena za cały pobyt"
+    "WHOLE_PRICE": "Cena za cały pobyt",
+    "__Response Error": "Response starus",
+    "USER_ERROR_400": "E-mail zajęty",
+    "USER_ERROR_403": "Nieprawidłowe hasło",
+    "USER_ERROR_401": "Użytkownika nie znaleziono"
   }

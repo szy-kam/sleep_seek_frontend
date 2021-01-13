@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { Link } from "react-router-dom";
-import { StaysCardRepository } from '../../../repository/stays'
+import { GetStaysRepository } from '../../../repository/stays'
 require("react-leaflet-markercluster/dist/styles.min.css");
 
 class StaysMap extends Component {
@@ -20,7 +20,7 @@ class StaysMap extends Component {
 
     componentDidMount = () => {
         let defaultQuantity = 5;
-        StaysCardRepository(0, defaultQuantity)
+        GetStaysRepository(0, defaultQuantity)
             .then(response => this.setState({ stays: response }))
             .catch(err => console.log(err))
     }

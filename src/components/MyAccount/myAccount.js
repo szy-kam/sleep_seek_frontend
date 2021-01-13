@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import style from "./myAccount.css";
 import { withTranslation } from "react-i18next";
@@ -6,25 +6,45 @@ import { GetStaysByUserId } from "../../repository/stays"
 import StaysCard from "../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
 
-const MyAccount = (props) => {
-    const { t } = props;
-    let stays
-    let userId = props.user.userId
 
-    GetStaysByUserId(userId, 0, 5)
-        .then(response => {
-            stays = response.data
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+class MyAccount extends Component {
+    defaultStaysQuantity = 3;
+    state = {
+        stays: null,
+        page: 0,
+        pageSize: this.defaultStaysQuantity,
+        loadMore: true,
+    }
+    componentDidMount() {
+        GetStaysByUserId(this.props.user.userId, this.state.page, this.state.pageSize)
+            .then(response => {
+                this.setState({ stays: response })
+                if (response.length < this.state.size) this.setState({ loadMore: false });
 
-    return (
-        <div className={style.myAccountComponent}>
-            <Link to="/add-stay">{t("ADD_STAY")}</Link>
-            <StaysCard stays={stays} template="edit" loadMore={true}/>
-        </div>
-    );
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    renderMoreHandler = () => {
+        GetStaysByUserId(this.props.user.userId, this.state.page + 1, this.state.pageSize)
+            .then((response) => {
+                this.setState({ stays: [...this.state.stays, ...response], page: this.state.page + 1 });
+                if (response.length < this.state.pageSize) this.setState({ loadMore: false });
+            });
+    };
+
+
+    render() {
+        const { t } = this.props;
+        return (
+            <div className={style.myAccountComponent}>
+                <Link to="/add-stay">{t("ADD_STAY")}</Link>
+                <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler}/>
+            </div>
+        );
+    }
 };
 
 const mapStateToProps = state => ({

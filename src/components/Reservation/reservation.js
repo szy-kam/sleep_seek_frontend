@@ -82,9 +82,7 @@ const Reservation = (props) => {
             const dateDiff = calculateDateDifference()
             return dateDiff * accomodation.price
         }
-
     }
-
 
     const myCustomLocale = {
         // months list by order

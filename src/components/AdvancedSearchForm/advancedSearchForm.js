@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import style from './advancedSearch.css'
+import style from './advancedSearchForm.css'
 import countrysList from "../../repository/countrysList";
 import { withTranslation } from "react-i18next";
 import PropertiesForm from '../PropertiesForm/propertiesForm'
@@ -14,7 +14,7 @@ class AdvancedSearch extends Component {
             minPrice: "",
             sleepersCapacity: ""
         },
-        properties: []
+        properties: [],
     }
 
     countrysOptions = () => {
@@ -44,11 +44,12 @@ class AdvancedSearch extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const searchParams = Object.assign({propertice: this.state.properties}, this.state.inputs)
+        this.props.handleSubmit(searchParams)
     }
 
     render() {
         const { t } = this.props;
-        console.log(this.state);
         return (
             <div className={style.advancedSearchComponent}>
                 <form onSubmit={this.handleSubmit} className={style.advancedSearchForm}>

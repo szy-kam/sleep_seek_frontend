@@ -37,9 +37,12 @@ class Register extends Component {
                         .then(data => {
                             data.json()
                                 .then(id => {
-                                    this.props.logInUser({userId: id})
+                                    this.props.logInUser({ userId: id })
                                 })
                         })
+                }
+                else {
+                    this.setState({ message: t(`USER_ERROR_${response.status}`) });
                 }
             })
             .catch(() => this.setState({ message: t("ERROR") }));
@@ -56,7 +59,7 @@ class Register extends Component {
             return (
                 <div className={style.message}>
                     {this.state.message}
-                    {/* {this.redirectUser()} */}
+                    {this.redirectUser()}
                 </div>
             );
         else return null;
@@ -73,12 +76,14 @@ class Register extends Component {
                         placeholder={t("USERNAME")}
                         value={this.state.form.username}
                         onChange={(event) => this.handleInput(event, "username")}
+                        required
                     />
                     <input
-                        type="text"
+                        type="email"
                         placeholder={t("EMAIL")}
                         value={this.state.form.email}
                         onChange={(event) => this.handleInput(event, "email")}
+                        required
                     />
                     <input
                         type="password"
@@ -86,6 +91,7 @@ class Register extends Component {
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="off"
+                        required
                     />
                     <button type="submit">{t("REGISTER")}</button>
                 </form>
