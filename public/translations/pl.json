@@ -1,6 +1,7 @@
 {
     "EMAIL" : "E-mail",
     "USERNAME": "Nazwa użytkownika",
+    "DISPLAY_NAME": "Nazwa wyświetlana",
     "PASSWORD": "Hasło",
     "SEARCH": "Szukaj",
     "ADDRESS": "Adres",

@@ -18,16 +18,31 @@ export async function SignInUserRepository(user) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Origin: "*",
+            "Origin": "*",
+            'Accept': 'application/json'
         },
         body: JSON.stringify(user),
     });
     return response;
 }
 
-export async function GetUserIdByEmail(email) {
-    const response = await fetch(BACKEND_URL + "/user/" + email, {
-        method: "GET",
+// export async function GetUserIdByEmail(email) {
+//     const response = await fetch(BACKEND_URL + "/user/" + email, {
+//         method: "GET",
+//     });
+//     return response;
+// }
+
+export async function GetUsernameByTokenRepository(token) {
+    const response = await fetch(BACKEND_URL + "/username", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Origin": "*",
+            'Accept': 'application/json',
+            'Authorization': token
+        },
+        // body: JSON.stringify(token),
     });
     return response;
 }

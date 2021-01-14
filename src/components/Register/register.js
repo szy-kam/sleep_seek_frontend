@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AddUserRepository, GetUserIdByEmail } from "../../repository/user";
+import { AddUserRepository } from "../../repository/user";
 import style from "./register.css";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
@@ -8,8 +8,8 @@ import { logInUser } from "../../redux/user/userActions";
 class Register extends Component {
     state = {
         form: {
+            displayName: "",
             username: "",
-            email: "",
             password: "",
         },
         message: null,
@@ -33,13 +33,13 @@ class Register extends Component {
             .then(response => {
                 if (response.status === 200) {
                     this.setState({ message: t("ACCOUNT_CREATED") })
-                    GetUserIdByEmail(this.state.form.email)
-                        .then(data => {
-                            data.json()
-                                .then(id => {
-                                    this.props.logInUser({ userId: id })
-                                })
-                        })
+                    // GetUserIdByEmail(this.state.form.email)
+                    //     .then(data => {
+                    //         data.json()
+                    //             .then(id => {
+                    //                 this.props.logInUser({ userId: id })
+                    //             })
+                    //     })
                 }
                 else {
                     this.setState({ message: t(`USER_ERROR_${response.status}`) });
@@ -73,16 +73,16 @@ class Register extends Component {
                 <form onSubmit={this.submitForm} className={style.registerForm}>
                     <input
                         type="text"
-                        placeholder={t("USERNAME")}
-                        value={this.state.form.username}
-                        onChange={(event) => this.handleInput(event, "username")}
+                        placeholder={t("DISPLAY_NAME")}
+                        value={this.state.form.displayName}
+                        onChange={(event) => this.handleInput(event, "displayName")}
                         required
                     />
                     <input
-                        type="email"
+                        type="text"
                         placeholder={t("EMAIL")}
-                        value={this.state.form.email}
-                        onChange={(event) => this.handleInput(event, "email")}
+                        value={this.state.form.username}
+                        onChange={(event) => this.handleInput(event, "username")}
                         required
                     />
                     <input

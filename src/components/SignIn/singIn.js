@@ -3,12 +3,12 @@ import style from "./signIn.css";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logInUser } from "../../redux/user/userActions";
-import { SignInUserRepository } from "../../repository/user";
+import { GetUsernameByTokenRepository, SignInUserRepository } from "../../repository/user";
 
 class SignIn extends Component {
     state = {
         form: {
-            email: "",
+            username: "",
             password: "",
         },
         message: null,
@@ -29,17 +29,27 @@ class SignIn extends Component {
         const { t } = this.props;
         e.preventDefault();
         SignInUserRepository(this.state.form)
-            .then((response) => {
-                if (response.status === 200) {
-                    this.setState({ message: t("LOGGED") });
-                    this.props.logInUser({ userId: 1, role: "admin" }); //TODO tokeny
-                    //this.props.history.push("/");
-                } else {
-                    this.setState({ message: t(`USER_ERROR_${response.status}`) });
-                }
+            // .then((response) => {
+            //     if (response.status === 200) {
+            //         this.setState({ message: t("LOGGED") });
+            //         console.log(response.json());
+            //         // console.log('My JWT:', response.headers.get('authorization'));
+            //         // this.props.logInUser({ userId: 1, role: "admin" }); //TODO tokeny
+            //         //this.props.history.push("/");
+            //     } else {
+            //         this.setState({ message: t(`USER_ERROR_${response.status}`) });
+            //     }
+            // })
+            .then(response => response.text())
+            .then(token => {
+                GetUsernameByTokenRepository(token)
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
             })
-            .catch(() => this.setState({ message: t("ERROR PROMISE") }));
-    };
+            .catch(() => this.setState({ message: t("USER_ERROR_LOGIN") }));
+        }
+
 
     redirectUser = () => {
         setTimeout(() => {
@@ -68,7 +78,7 @@ class SignIn extends Component {
                         type="text"
                         placeholder={t("EMAIL")}
                         value={this.state.form.email}
-                        onChange={(event) => this.handleInput(event, "email")}
+                        onChange={(event) => this.handleInput(event, "username")}
                         autoComplete="on"
                     />
                     <input
