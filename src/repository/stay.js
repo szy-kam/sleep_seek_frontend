@@ -1,13 +1,30 @@
+import { loadPartialConfig } from "@babel/core";
 import { BACKEND_URL } from "../config";
 
+async function fetchWithAutorization(method, url, body = null) {
+    const ls = JSON.parse(localStorage.getItem('persist:root'))
+    const parseUser = JSON.parse(ls.user)
+    const token = parseUser.user.userToken;
+    if (!token) console.log("LS_ERROR" + parseUser);
+    return await fetch(url,
+        {
+            method: method,
+            headers: {
+                "Access-Control-Allow-Origin": "http://localhost:3000",
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: body ? JSON.stringify(body) : null
+        });
+}
+
 export async function GetStayByIdRepository(id) {
-    const response = await fetch(BACKEND_URL + "/stays/" + id);
-    if (response.status === 200) return response.json();
-    else return [];
+    const response = await fetch(BACKEND_URL + "/stays/" + id)
+    return response;
 }
 
 export async function DeleteStayByIdRepository(id) {
-    await fetch(BACKEND_URL + "/stays/" + id, {
+    return await fetch(BACKEND_URL + "/stays/" + id, {
         method: "DELETE",
     });
 }
@@ -49,7 +66,7 @@ export async function AddStayRepository(stay, files) {
             const response = await fetch(BACKEND_URL + "/image", {
                 method: "POST",
                 headers: {
-                    "Origin": "*"
+                    "Origin": "http://localhost:3000"
                 },
                 body: formData
             });
@@ -66,85 +83,79 @@ export async function AddStayRepository(stay, files) {
         }
     }
     stay.photos = images
-    const response = await fetch(BACKEND_URL + "/stays", {
-        method: "POST",
-        headers: {
-            "Origin": "*",
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(stay)
-    });
-    return response;
+    // const response = await fetch(BACKEND_URL + "/stays", {
+    //     method: "POST",
+    //     headers: {
+    //         "Access-Control-Allow-Origin": "http://localhost:3000",
+    //         "Content-Type": "application/json",
+    //         "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhIiwiZXhwIjoxNjExNjAxNzE5fQ.Q124rn87VUxpwOPK6riTx5nYpgvyuR6tdyNwYarWf7Pb--wA9l2_qPdUP0JPNMQhozHlQvMM71D263HxhutQbg"
+    //     },
+    //     // credentials: "include",
+    //     body: JSON.stringify(stay)
+    // });
+    const url = BACKEND_URL + "/stays"
+    return fetchWithAutorization("POST", url, stay)
 }
 
 export async function EditStayRepository(stay) {
-    await fetch(BACKEND_URL + "/stays/" + stay.id, {
-        method: "PUT",
-        headers: {
-            Origin: "*",
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(stay),
-    })
-        .catch((err) => {
-            console.log(err);
-        })
-        .then((response) => {
-            return response;
-        });
+    // await fetch(BACKEND_URL + "/stays/" + stay.id, {
+    //     method: "PUT",
+    //     headers: {
+    //         "Access-Control-Allow-Origin": "http://localhost:3000",
+    //         "Content-Type": "application/json",
+    //     },
+    //     credentials: "include",
+    //     body: JSON.stringify(stay),
+    // })
+    const url = BACKEND_URL + "/stays/" + stay.id
+    return fetchWithAutorization("PUT", url, stay)
+
 }
 
 // TODO error catch
 export async function GetReviewsByStayIdRepository(stayId, pageNumber, pageSize) {
-    // if (stayId)
-    //     await fetch(
-    //         BACKEND_URL + "/review/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
-    //         {
-    //             method: "GET",
-    //         }
-    //     )
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    //         .then((response) => {
-    //             return response;
-    //         });
-    return [
+    console.log(stayId);
+    return await fetch(BACKEND_URL + "/review/" + stayId + "?pageNumber=" + pageNumber + "&pageSize" + pageSize,
         {
-            id: "1",
-            stayId: "1",
-            userId: "13",
-            message: "super duper",
-            rating: "2"
-        },
-        {
-            id: "2",
-            stayId: "1",
-            userId: "14",
-            message: "super duper 22222",
-            rating: "5"
+            method: "GET",
         }
-    ]
+    )
+    // return [
+    //     {
+    //         id: "1",
+    //         stayId: "1",
+    //         userId: "13",
+    //         message: "super duper",
+    //         rating: "2"
+    //     },
+    //     {
+    //         id: "2",
+    //         stayId: "1",
+    //         userId: "14",
+    //         message: "super duper 22222",
+    //         rating: "5"
+    //     }
+    // ]
 }
 
 export async function AddReviewRepository(review) {
-    await fetch(BACKEND_URL + "/review", {
-        method: "PUT",
-        headers: {
-            "Origin": "*",
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(review),
-    })
-        .catch((err) => {
-            console.log(err);
-        })
-        .then((response) => {
-            return response;
-        });
+    // await fetch(BACKEND_URL + "/review/" + review.stayId, {
+    //     method: "PUT",
+    //     headers: {
+    //         "Origin": "*",
+    //         "Content-Type": "application/json",
+    //     },
+    //     credentials: "include",
+    //     body: JSON.stringify(review),
+    // })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     })
+    //     .then((response) => {
+    //         return response;
+    //     });
+    const url = BACKEND_URL + "/review/" + review.stayId
+    return fetchWithAutorization("POST", url, review)
 }
 
 export async function GetAccomodationByStayId(stayId, pageNumber, pageSize) {
@@ -194,13 +205,13 @@ export async function GetAccomodationById(Id) {
     //             return response;
     //         });
     return {
-            id: "1",
-            stayId: "1",
-            sleepersCapacity: "13",
-            quantity: "2",
-            price: "22"
-        }
-    
+        id: "1",
+        stayId: "1",
+        sleepersCapacity: "13",
+        quantity: "2",
+        price: "22"
+    }
+
 }
 
 export async function GetStayPropertiesById(Id) {

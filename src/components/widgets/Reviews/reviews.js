@@ -11,6 +11,7 @@ class Rewiews extends Component {
         newReview: {
             stayId: this.props.stayId,
             message: "",
+            rating: ""
         },
         pageNumber: 0,
         pageSize: this.props.pageSize || this.defaultPageSize,
@@ -18,10 +19,13 @@ class Rewiews extends Component {
     };
 
     componentDidMount() {
-        GetReviewsByStayIdRepository(this.state.stayId, this.state.pageNumber, this.state.pageSize)
-            .then((response) => {
-                this.setState({ reviews: response });
-                if (response.length < this.state.pageSize) {
+        console.log(this.props.stayId);
+        GetReviewsByStayIdRepository(this.props.stayId, this.state.pageNumber, this.state.pageSize)
+            .then(response => response.json())
+            .then(reviews => 
+            {
+                this.setState({ reviews: reviews });
+                if (reviews.length < this.state.pageSize) {
                     this.setState({ endLoading: true })
                 }
             })
@@ -72,7 +76,7 @@ class Rewiews extends Component {
 
     submitReview = () => {
         AddReviewRepository(this.state.newReview)
-            .then() //TODO
+            .then(response => console.log(response)) //TODO
             .catch((err) => {
                 console.log(err);
             })
@@ -90,6 +94,7 @@ class Rewiews extends Component {
     }
 
     render() {
+        console.log(this.state);
         return <div className={style.reviewsComponent}>
             {this.renderReview()}
             {!this.state.endLoading ? this.renderMore() : null}

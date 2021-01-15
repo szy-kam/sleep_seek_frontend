@@ -20,12 +20,15 @@ class Stay extends Component {
     };
 
     getStay = () => {
-        GetStayByIdRepository(this.props.match.params.id).then((stay) => {
+        GetStayByIdRepository(this.props.match.params.id)
+        .then(resp => resp.json())
+        .then((stay) => {
             if (stay) { this.setState({ stay: stay }); }
             else {
                 this.props.history.push("/404");
             }
-        });
+        })
+        .catch(err => console.log(err))
     }
 
     componentDidMount() {
@@ -99,7 +102,7 @@ class Stay extends Component {
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
                     <StayMap position={position} zoom={14} />
-                    <Properties stayId={this.props.match.params.id} />
+                    {/* <Properties stayId={this.props.match.params.id} /> */}
                     <Accomodation stayId={this.props.match.params.id} />
                     <Reviews stayId={this.props.match.params.id} />
                 </div>

@@ -32,8 +32,6 @@ class StayForm extends Component {
             newStay.address[field] = event.target.value;
         else newStay[field] = event.target.value;
 
-        newStay.userId = this.props.user.userId
-
         this.setState({
             stay: newStay,
         });

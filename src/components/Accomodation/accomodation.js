@@ -36,6 +36,7 @@ class Accomodation extends Component {
         return (
             <div className={style.accomodationComponent}>
                 <table>
+                    <thead>
                     <tr>
                         <td>{t('SLEEPERS_CAPACITY')}</td>
                         <td>{t('PROPERTIES')}</td>
@@ -43,9 +44,12 @@ class Accomodation extends Component {
                         <td>{t('PRICE')}</td>
                         <td>{t('BOOK_IT')}</td>
                     </tr>
+                    </thead>
+                    <tbody>
                     {this.state.accomodations.map((item, i) => (
                         this.renderAccomodation(item, i)
                     ))}
+                    </tbody>
                 </table>
             </div>
         )

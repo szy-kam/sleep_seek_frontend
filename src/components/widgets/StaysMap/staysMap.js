@@ -40,7 +40,7 @@ class StaysMap extends Component {
                 return (
                     <Marker position={[item.address.latitude, item.address.longitude]} key={i}>
                         <Popup>
-                            <Link to={`/stays/${item.id}`}><img src={item.mainPhoto}/></Link>
+                            <Link to={`/stays/${item.id}`}><img src={item.mainPhoto} alt={item.name}/></Link>
                             <Link to={`/stays/${item.id}`}>{item.name}</Link>
                         </Popup>
                     </Marker>

@@ -29,27 +29,22 @@ class SignIn extends Component {
         const { t } = this.props;
         e.preventDefault();
         SignInUserRepository(this.state.form)
-            // .then((response) => {
-            //     if (response.status === 200) {
-            //         this.setState({ message: t("LOGGED") });
-            //         console.log(response.json());
-            //         // console.log('My JWT:', response.headers.get('authorization'));
-            //         // this.props.logInUser({ userId: 1, role: "admin" }); //TODO tokeny
-            //         //this.props.history.push("/");
-            //     } else {
-            //         this.setState({ message: t(`USER_ERROR_${response.status}`) });
-            //     }
-            // })
-            .then(response => response.text())
-            .then(token => {
-                GetUsernameByTokenRepository(token)
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(err => console.log(err))
+            .then(response => {
+                if (response.ok) {
+                    return response.text()
+                }
+                else {
+                    this.setState({ message: t(`USER_ERROR_${response.status}`) });
+                }
             })
-            .catch(() => this.setState({ message: t("USER_ERROR_LOGIN") }));
-        }
-
+            .then(token => {
+                if (token) {
+                    this.props.logInUser({ userToken: token, userId: this.state.form.username })
+                    this.setState({ message: t("LOGGED") });
+                }
+            })
+            .catch(() => this.setState({ message: t("USER_ERROR_${response.status}") }))
+    }
 
     redirectUser = () => {
         setTimeout(() => {

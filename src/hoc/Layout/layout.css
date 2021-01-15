@@ -20,5 +20,26 @@
 input,
 select,
 textarea {
-    border: 1px solid black;
+    border: 3px solid black;
+    width: 95%;
+    margin: 5px auto;
+    height: 20px;
+    border-radius: 15px;
+}
+
+select{
+    width: 97%;
+    height: 40px;
+    margin-left: 10px;
+}
+
+button{
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

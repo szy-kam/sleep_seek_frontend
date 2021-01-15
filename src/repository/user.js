@@ -35,14 +35,30 @@ export async function SignInUserRepository(user) {
 
 export async function GetUsernameByTokenRepository(token) {
     const response = await fetch(BACKEND_URL + "/username", {
-        method: "POST",
+        method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Origin": "*",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
             'Accept': 'application/json',
             'Authorization': token
         },
         // body: JSON.stringify(token),
     });
     return response;
+
+
+    // const ls = JSON.parse(localStorage.getItem('persist:root'))
+    // const parseUser = JSON.parse(ls.user)
+    // const token = parseUser.user.userToken;
+    // if (!token) console.log("LS_ERROR" + parseUser);
+    // return await fetch(url,
+    //     {
+    //         method: method,
+    //         headers: {
+    //             "Access-Control-Allow-Origin": "http://localhost:3000",
+    //             "Content-Type": "application/json",
+    //             "Authorization": token
+    //         },
+    //         body: body ? JSON.stringify(body) : null
+    //     });
 }
