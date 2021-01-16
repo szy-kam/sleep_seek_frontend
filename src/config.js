@@ -2,7 +2,6 @@ export const BACKEND_URL = "http://localhost:8080";
 
 export let STAY = {
     id: null,
-    userId: null,
     name: "",
     address: {
         country: "",
@@ -12,6 +11,7 @@ export let STAY = {
         latitude: null,
         longitude: null,
     },
+    category: "",
     mainPhoto: "",
     description: "",
     minPrice: "",

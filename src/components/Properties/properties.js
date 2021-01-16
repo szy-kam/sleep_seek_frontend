@@ -23,7 +23,7 @@ class Properties extends Component {
 
     renderProperties = () => {
         return this.state.properties.map((item, i) => (
-            <div className={style.property}>
+            <div className={style.property} key={i}>
                 {item.name}
             </div>
         ))

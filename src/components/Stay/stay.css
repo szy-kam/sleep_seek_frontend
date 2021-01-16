@@ -5,8 +5,9 @@
 .stayContent {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     margin-top: 20px;
+    flex-basis: 80%;
+    margin: 0 auto;
 }
 
 .image {

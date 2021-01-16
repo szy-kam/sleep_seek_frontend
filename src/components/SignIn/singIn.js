@@ -3,7 +3,7 @@ import style from "./signIn.css";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logInUser } from "../../redux/user/userActions";
-import { GetUsernameByTokenRepository, SignInUserRepository } from "../../repository/user";
+import { SignInUserRepository } from "../../repository/user";
 
 class SignIn extends Component {
     state = {
@@ -43,7 +43,7 @@ class SignIn extends Component {
                     this.setState({ message: t("LOGGED") });
                 }
             })
-            .catch(() => this.setState({ message: t("USER_ERROR_${response.status}") }))
+            .catch( err => console.log(err))
     }
 
     redirectUser = () => {

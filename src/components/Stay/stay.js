@@ -21,22 +21,22 @@ class Stay extends Component {
 
     getStay = () => {
         GetStayByIdRepository(this.props.match.params.id)
-        .then(resp => resp.json())
-        .then((stay) => {
-            if (stay) { this.setState({ stay: stay }); }
-            else {
-                this.props.history.push("/404");
-            }
-        })
-        .catch(err => console.log(err))
+            .then(resp => resp.json())
+            .then((stay) => {
+                if (stay) { this.setState({ stay: stay }); }
+                else {
+                    this.props.history.push("/404");
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     componentDidMount() {
         this.getStay();
     }
 
-    componentDidUpdate(prevProps){
-        if(this.props !== prevProps){
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
             this.getStay()
         }
     }
@@ -85,24 +85,27 @@ class Stay extends Component {
         return (
             <div className={style.stayComponent}>
                 <div className={style.stayContent}>
-                    <div className={style.name}>
-                        {this.state.stay.name}
+                    <div className={style.stayInfo}>
+                        <div className={style.name}>
+                            {this.state.stay.name}
+                        </div>
+                        <div
+                            className={style.image}
+                            style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
+                        >
+                        </div>
+                        <div className={style.imageGrid}>{this.imageGrid()}</div>
+                        <div className={style.address}>
+                            {t("ADDRESS")}: {this.state.stay.address.city},{" "}
+                            {this.state.stay.address.street}
+                        </div>
+                        <div className={style.price}>
+                            {this.state.stay.price} {t("CURRENCY_SYMBOL")}
+                        </div>
+                        <div className={style.description}>{this.state.stay.description}</div>
                     </div>
-                    <div
-                        className={style.image}
-                        style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
-                    ></div>
-                    <div className={style.imageGrid}>{this.imageGrid()}</div>
-                    <div className={style.address}>
-                        {t("ADDRESS")}: {this.state.stay.address.city},{" "}
-                        {this.state.stay.address.street}
-                    </div>
-                    <div className={style.price}>
-                        {this.state.stay.price} {t("CURRENCY_SYMBOL")}
-                    </div>
-                    <div className={style.description}>{this.state.stay.description}</div>
                     <StayMap position={position} zoom={14} />
-                    {/* <Properties stayId={this.props.match.params.id} /> */}
+                    <Properties stayId={this.props.match.params.id} />
                     <Accomodation stayId={this.props.match.params.id} />
                     <Reviews stayId={this.props.match.params.id} />
                 </div>

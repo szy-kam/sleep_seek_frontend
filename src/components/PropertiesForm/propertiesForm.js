@@ -14,33 +14,36 @@ export default function PropertiesForm(props) {
     });
 
     useEffect(() => {
-        if (props.stayId && properties !== []) {
-            GetStayPropertiesById(props.stayId).then((response) => {
-                setProperties(response);
-                for (let item of response) {
-                    checkedItems.add(item.id.toString())
-                }
-            })
+        const getProperties = () => {
+            if (props.stayId && properties !== []) {
+                GetStayPropertiesById(props.stayId).then((response) => {
+                    setProperties(response);
+                    for (let item of response) {
+                        checkedItems.add(item.id.toString())
+                    }
+                })
+            }
+            if (props.accomodationId && properties !== []) {
+                GetAccomodationPropertiesById(props.accomodationId).then((response) => {
+                    setProperties(response)
+                    for (let item of response) {
+                        checkedItems.add(item.id.toString())
+                    }
+                })
+            }
+            if (props.stay && allProperties !== []) {
+                GetAllStayProperties().then((response) => {
+                    setAllProperties(response)
+                })
+            }
+            if (props.accomodation && allProperties !== []) {
+                GetAllAccomodationProperties().then((response) => {
+                    setAllProperties(response)
+                })
+            }
         }
-        if (props.accomodationId && properties !== []) {
-            GetAccomodationPropertiesById(props.accomodationId).then((response) => {
-                setProperties(response)
-                for (let item of response) {
-                    checkedItems.add(item.id.toString())
-                }
-            })
-        }
-        if (props.stay && allProperties !== []) {
-            GetAllStayProperties().then((response) => {
-                setAllProperties(response)
-            })
-        }
-        if (props.accomodation && allProperties !== []) {
-            GetAllAccomodationProperties().then((response) => {
-                setAllProperties(response)
-            })
-        }
-    }, [])
+        getProperties()
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (e) => {
         handleCheck(e)

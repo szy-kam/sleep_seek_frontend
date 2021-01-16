@@ -20,7 +20,7 @@ class StaysMap extends Component {
 
     componentDidMount = () => {
         if (!this.props.stays) {
-            const defaultQuantity = 100;
+            const defaultQuantity = 50;
             GetStaysRepository(0, defaultQuantity)
                 .then(response => this.setState({ stays: response }))
                 .catch(err => console.log(err))
