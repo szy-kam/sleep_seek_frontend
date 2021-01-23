@@ -19,11 +19,11 @@ class StayForm extends Component {
     componentDidMount() {
         if (this.props.getStay) {
             GetStayByIdRepository(this.props.getStay)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ stay: data })
-            }
-            );
+                .then(response => response.json())
+                .then(data => {
+                    this.setState({ stay: data })
+                }
+                );
         }
         else {
             // To set default values in select
@@ -93,9 +93,9 @@ class StayForm extends Component {
         });
     };
 
-    stayCategoryOptions = () =>{
+    stayCategoryOptions = () => {
         const categories = GetAllStayCategories();
-        return  categories.map((item, i) => {
+        return categories.map((item, i) => {
             return <option key={i}>{item}</option>;
         });
     }
@@ -228,7 +228,10 @@ class StayForm extends Component {
 
                     {!this.state.stay.mainPhoto ? t("SELECT_MAIN_PHOTO") : null}
                     <label>{t("PROPERTIES")}</label>
-                    <PropertiesForm handleInput={this.handlePropertiesInput} stay={true} stayId={this.props.getStay} />
+                    <div className={style.properties}>
+                        <PropertiesForm handleInput={this.handlePropertiesInput} stay={true} stayId={this.props.getStay} />
+                    </div>
+
 
                     <button type="submit">
                         {this.props.getStay ? t("EDIT_STAY") : t("ADD_STAY")}

@@ -2,10 +2,12 @@
     border: 3px solid black;
     margin: 5px;
     border-radius: 15px;
+    height: 100%;
 }
 .propertiesFormComponent ul{
     list-style: none;
-    height: 200px;
+    /* height: 200px; */
+    max-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -16,10 +18,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 300px;
+    /* width: 300px; */
+    width: 100%;
+    max-width: 300px;
+    flex-grow: 1;
 }
 .propertiesFormComponent ul li input{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     margin: 8px;
+    flex: none;
 }
