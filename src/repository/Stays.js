@@ -24,8 +24,7 @@ export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchP
             Origin: "*",
         },
     });
-    if (response.status === 200) return response.json();
-    else return [];
+    return response
 }
 
 export async function GetStaysByUserId(userId, pageNumber, pageSize) {

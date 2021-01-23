@@ -79,7 +79,7 @@ class Register extends Component {
                         required
                     />
                     <input
-                        type="text"
+                        type="email"
                         placeholder={t("EMAIL")}
                         value={this.state.form.username}
                         onChange={(event) => this.handleInput(event, "username")}

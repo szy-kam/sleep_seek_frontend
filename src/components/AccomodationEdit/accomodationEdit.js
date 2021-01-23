@@ -1,43 +1,65 @@
 import React, { Component } from 'react'
-import AccomodationForm from '../widgets/AccomodationForm/accomodationForm'
-import { GetAccomodationByStayId } from '../../repository/stay'
+import AccommodationForm from '../widgets/AccommodationForm/accommodationForm'
+import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
 import { withTranslation } from "react-i18next";
 
-class AccomodationEdit extends Component {
+class AccommodationEdit extends Component {
     state = {
-        accomodations: []
+        accommodations: []
     }
 
     componentDidMount() {
         if (this.props.stayId) {
-            GetAccomodationByStayId(this.props.stayId).then((response) => {
-                this.setState({ accomodations: response })
-            })
+            GetAccommodationsByStayIdRepository(this.props.stayId)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    else return []
+                })
+                .then(data => {
+                    this.setState({ accommodations: data })
+                })
+                .catch(err => console.log(err))
         }
         else
-            this.setState({ accomodations: [{}] })
+            this.setState({ accommodations: [{}] })
+    }
+
+    handleSubmit = (accommodation) => {
+        console.log(accommodation);
+        AddAccommodationRepository(accommodation)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch( err => console.log(err))
+    }
+
+    handleDelete = (accommodation) => {
+        DeleteAccommodationRepository(accommodation)
+            .then(response => console.log(response))
     }
 
     addForm = () => {
-        const newAccomodation = this.state.accomodations;
+        const newAccommodation = this.state.accommodations;
 
-        newAccomodation.push({})
+        newAccommodation.push({})
 
         this.setState({
-            accomodation: newAccomodation,
+            accommodation: newAccommodation,
         });
     }
-    
+
     render() {
         const { t } = this.props;
+        console.log(this.state.accommodations);
         return (
             <div>
-                {this.state.accomodations.map((item, i) => (
-                    <AccomodationForm accomodation={item} key={i} />
+                {this.state.accommodations !== [] && this.state.accommodations.map((item, i) => (
+                    <AccommodationForm accommodation={item} key={i} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} stayId={this.props.stayId} />
                 ))}
-                <button onClick={this.addForm}>{t('ADD_ACCOMODATION')}</button>
+                <button onClick={this.addForm}>{t('ADD_ACCOMMODATION')}</button>
             </div>
         )
     }
 }
-export default withTranslation()(AccomodationEdit)
+export default withTranslation()(AccommodationEdit)

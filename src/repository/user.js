@@ -9,7 +9,6 @@ export async function AddUserRepository(user) {
         },
         body: JSON.stringify(user),
     });
-    console.log(response);
     return response;
 }
 

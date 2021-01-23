@@ -3,6 +3,7 @@ import style from './advancedSearchForm.css'
 import countrysList from "../../repository/countrysList";
 import { withTranslation } from "react-i18next";
 import PropertiesForm from '../PropertiesForm/propertiesForm'
+import {  GetAllStayCategories } from "../../repository/stay";
 
 class AdvancedSearch extends Component {
     state = {
@@ -12,7 +13,8 @@ class AdvancedSearch extends Component {
             city: "",
             zipCode: "",
             minPrice: "",
-            sleepersCapacity: ""
+            sleepersCapacity: "",
+            category: "Hotel"
         },
         properties: [],
     }
@@ -22,6 +24,13 @@ class AdvancedSearch extends Component {
             return <option key={i}>{item}</option>;
         });
     };
+
+    stayCategoryOptions = () =>{
+        const categories = GetAllStayCategories();
+        return  categories.map((item, i) => {
+            return <option key={i}>{item}</option>;
+        });
+    }
 
     handleInput = (event, field) => {
         const newInputs = {
@@ -45,6 +54,7 @@ class AdvancedSearch extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const searchParams = Object.assign({propertice: this.state.properties}, this.state.inputs)
+        console.log(searchParams);
         this.props.handleSubmit(searchParams)
     }
 
@@ -58,6 +68,13 @@ class AdvancedSearch extends Component {
                         onChange={(event) => this.handleInput(event, "name")}
                         value={this.state.inputs.name}
                     />
+                     <label>{t("CATEGORY")}</label>
+                    <select
+                        onChange={(event) => this.handleInput(event, "category")}
+                        value={this.state.inputs.category}
+                    >
+                        {this.stayCategoryOptions()}
+                    </select>
                     <label>{t("COUNTRY")}</label>
                     <select
                         onChange={(event) => this.handleInput(event, "country")}

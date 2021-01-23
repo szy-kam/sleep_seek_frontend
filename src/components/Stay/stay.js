@@ -8,7 +8,7 @@ import { STAY } from "../../config";
 import { connect } from "react-redux";
 import StayMap from '../widgets/StayMap/stayMap'
 import Reviews from "../widgets/Reviews/reviews";
-import Accomodation from "../Accomodation/accomodation";
+import Accommodation from "../Accommodation/accommodation";
 import Properties from '../Properties/properties'
 
 class Stay extends Component {
@@ -28,7 +28,10 @@ class Stay extends Component {
                     this.props.history.push("/404");
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                this.props.history.push("/404");
+            })
     }
 
     componentDidMount() {
@@ -96,17 +99,17 @@ class Stay extends Component {
                         </div>
                         <div className={style.imageGrid}>{this.imageGrid()}</div>
                         <div className={style.address}>
-                            {t("ADDRESS")}: {this.state.stay.address.city},{" "}
-                            {this.state.stay.address.street}
+                            {t("ADDRESS")}: {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
+                            {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
                         </div>
                         <div className={style.price}>
-                            {this.state.stay.price} {t("CURRENCY_SYMBOL")}
+                            {this.state.stay.minPrice} {t("CURRENCY_SYMBOL")}
                         </div>
                         <div className={style.description}>{this.state.stay.description}</div>
                     </div>
                     <StayMap position={position} zoom={14} />
                     <Properties stayId={this.props.match.params.id} />
-                    <Accomodation stayId={this.props.match.params.id} />
+                    <Accommodation stayId={this.props.match.params.id} />
                     <Reviews stayId={this.props.match.params.id} />
                 </div>
                 {this.lightbox()}

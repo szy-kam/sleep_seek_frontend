@@ -23,7 +23,16 @@ class EditStay extends Component {
 
     submitForm = (stay) => {
         const { t } = this.props;
-        EditStayRepository(stay).then(() => this.setState({ message: t("STAY_EDITED") }));
+        EditStayRepository(stay)
+            .then((response) => {
+                if (response.ok) {
+                    this.setState({ message: t("STAY_EDITED") })
+                }
+                else {
+                    console.log(response);
+                    this.setState({ message: t("ERROR_") })
+                }
+            });
     };
 
     handleDelete = (e) => {

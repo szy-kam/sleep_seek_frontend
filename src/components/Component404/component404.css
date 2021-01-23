@@ -1,0 +1,18 @@
+.Component404{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.number{
+    font-weight: 300;
+    font-size: 200px;
+    color: #f35d4b;
+}
+
+.text{
+    font-weight: 300;
+    font-size: 70px;
+    color: #f35d4b;
+}

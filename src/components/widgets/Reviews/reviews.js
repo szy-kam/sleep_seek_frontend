@@ -3,16 +3,17 @@ import { GetReviewsByStayIdRepository, AddReviewRepository } from "../../../repo
 import { withTranslation } from "react-i18next";
 import style from './reviews.css'
 import { IsUserLogged } from "../../../repository/user";
+import 'font-awesome/css/font-awesome.min.css';
 
 class Rewiews extends Component {
-    defaultPageSize = 3;
+    defaultPageSize = 4;
 
     state = {
         reviews: [],
         newReview: {
             stayId: this.props.stayId,
             message: "",
-            rating: ""
+            rating: "5"
         },
         pageNumber: 0,
         pageSize: this.props.pageSize || this.defaultPageSize,
@@ -20,7 +21,7 @@ class Rewiews extends Component {
         renderAddReview: true
     };
 
-    componentDidMount() {
+    getReviews = () => {
         GetReviewsByStayIdRepository(this.props.stayId, this.state.pageNumber, this.state.pageSize)
             .then(response => response.json())
             .then(reviews => {
@@ -30,10 +31,14 @@ class Rewiews extends Component {
                 }
             })
             .catch((err) => { console.log(err) })
-        
-        if(this.state.renderAddReview && !IsUserLogged()){
+
+        if (this.state.renderAddReview && !IsUserLogged()) {
             this.setState({ renderAddReview: false });
         }
+    }
+
+    componentDidMount() {
+        this.getReviews()
     }
 
     renderMoreHandler = () => {
@@ -62,19 +67,23 @@ class Rewiews extends Component {
                 {this.state.reviews && this.state.reviews.map((item, i) => (
                     <div className={style.review} key={i}>
                         <div className={style.user}>{item.userId}</div>
-                        <div className={style.message}>"{item.message}"</div>
-                        <div className={style.rating}>{item.rating}</div>
+                        <div className={style.message}>
+                            <i className={"fa fa-quote-left"}></i>
+                            {item.message}
+                            <i className={"fa fa-quote-right"}></i>
+                        </div>
+                        <div className={style.rating}><strong>{item.rating}</strong> / 5 </div>
                     </div>
                 ))}
             </div>
         )
     }
 
-    textareHandler(event) {
+    inputHandler(event, field) {
         const temp = {
             ...this.state.newReview,
         };
-        temp["message"] = event.target.value;
+        temp[field] = event.target.value;
 
         this.setState({
             newReview: temp
@@ -83,15 +92,17 @@ class Rewiews extends Component {
 
     submitReview = () => {
         AddReviewRepository(this.state.newReview)
-            .then(response => console.log(response))
+            .then(response => {
+                this.setState({
+                    renderAddReview: false,
+                    endLoading: false,
+                })
+
+                this.getReviews()
+            })
             .catch((err) => {
                 console.log(err);
             })
-
-        this.setState({
-            renderAddReview: false
-        })
-        this.renderMoreHandler();
 
     }
 
@@ -99,7 +110,15 @@ class Rewiews extends Component {
         const { t } = this.props
         return (
             <div className={style.addReview}>
-                <textarea onChange={event => this.textareHandler(event)} placeholder={t('ADD_REVIEW_PLACEHOLDER')} value={this.state.newReview.message}></textarea>
+                <textarea onChange={event => this.inputHandler(event, "message")} placeholder={t('ADD_REVIEW_PLACEHOLDER')} value={this.state.newReview.message}></textarea>
+                <select onChange={(event) => this.inputHandler(event, "rating")}
+                    value={this.state.newReview.rating}>
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5">★★★★★</option>
+                </select>
                 <button onClick={this.submitReview}>{t('ADD_REVIEW')}</button>
             </div>
         )

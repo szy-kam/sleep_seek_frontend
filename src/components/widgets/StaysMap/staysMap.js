@@ -35,19 +35,22 @@ class StaysMap extends Component {
     }
 
     markers = () => {
-        return this.state.stays.map((item, i) => {
-            if (item.address.latitude)
-                return (
-                    <Marker position={[item.address.latitude, item.address.longitude]} key={i}>
-                        <Popup>
-                            <Link to={`/stays/${item.id}`}><img src={item.mainPhoto} alt={item.name}/></Link>
-                            <Link to={`/stays/${item.id}`}>{item.name}</Link>
-                        </Popup>
-                    </Marker>
-                )
-            else
-                return null
-        })
+        if (this.state.stays){
+            return this.state.stays.map((item, i) => {
+                if (item.address.latitude)
+                    return (
+                        <Marker position={[item.address.latitude, item.address.longitude]} key={i}>
+                            <Popup>
+                                <Link to={`/stays/${item.id}`}><img src={item.mainPhoto} alt={item.name}/></Link>
+                                <Link to={`/stays/${item.id}`}>{item.name}</Link>
+                            </Popup>
+                        </Marker>
+                    )
+                else
+                    return null
+            })
+        }
+        else return null
     }
 
     render() {

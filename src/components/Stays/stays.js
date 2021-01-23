@@ -19,9 +19,10 @@ class Stays extends Component {
 
     componentDidMount() {
         GetStaysWithParamsRepository(this.state.page, this.state.pageSize, this.state.searchParams)
-            .then((response) => {
-                this.setState({ stays: response })
-                if (response.length < this.state.pageSize) this.setState({ loadMore: false });
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ stays: data })
+                if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch((err) => {
                 console.log(err);
@@ -30,18 +31,20 @@ class Stays extends Component {
 
     renderMoreHandler = () => {
         GetStaysWithParamsRepository(this.state.page + 1, this.state.pageSize, this.state.searchParams)
-            .then((response) => {
-                this.setState({ stays: [...this.state.stays, ...response], page: this.state.page + 1 });
-                if (response.length < this.state.pageSize) this.setState({ loadMore: false });
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ stays: [...this.state.stays, ...data], page: this.state.page + 1 });
+                if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             });
     };
 
     handleSearchSubmit = (searchParams) => {
         this.setState({ stays: [], page: 0, loadMore: true, searchParams: searchParams });
         GetStaysWithParamsRepository(this.state.page, this.state.pageSize, searchParams)
-            .then((response) => {
-                this.setState({ stays: response })
-                if (response.length < this.state.pageSize) this.setState({ loadMore: false });
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ stays: data })
+                if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch((err) => {
                 console.log(err);
@@ -59,7 +62,7 @@ class Stays extends Component {
                     <StaysCard template="default" loadMore={this.state.loadMore} stays={this.state.stays} renderMoreHandler={this.renderMoreHandler} />
                 </div>
                 <div className={style.rightColumn}>
-                    <StaysMap stays={this.state.stays} position={[52.125736, 19.080392]} zoom={6} height="500px"/>
+                    <StaysMap stays={this.state.stays} position={[52.125736, 19.080392]} zoom={6} height="500px" />
                 </div>
             </div>
         );

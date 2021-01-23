@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useChecklist } from 'react-checklist';
-import { GetStayPropertiesById, GetAccomodationPropertiesById, GetAllAccomodationProperties, GetAllStayProperties } from '../../repository/stay'
+import { GetStayPropertiesById, GetAccommodationPropertiesById, GetAllAccommodationProperties, GetAllStayProperties } from '../../repository/stay'
 import style from './propertiesForm.css'
 
 export default function PropertiesForm(props) {
@@ -24,7 +24,7 @@ export default function PropertiesForm(props) {
                 })
             }
             if (props.accomodationId && properties !== []) {
-                GetAccomodationPropertiesById(props.accomodationId).then((response) => {
+                GetAccommodationPropertiesById(props.accomodationId).then((response) => {
                     setProperties(response)
                     for (let item of response) {
                         checkedItems.add(item.id.toString())
@@ -37,7 +37,7 @@ export default function PropertiesForm(props) {
                 })
             }
             if (props.accomodation && allProperties !== []) {
-                GetAllAccomodationProperties().then((response) => {
+                GetAllAccommodationProperties().then((response) => {
                     setAllProperties(response)
                 })
             }

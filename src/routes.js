@@ -11,6 +11,7 @@ import Register from "./components/Register/register";
 import MyAccount from "./components/MyAccount/myAccount";
 import AddStay from "./components/Stay/addStay";
 import Reservation from "./components/Reservation/reservation"
+import Component404 from "./components/Component404/component404";
 
 class Routes extends Component {
 
@@ -62,6 +63,11 @@ class Routes extends Component {
                         path="/reservation/:stayId/:accomodationId"
                         exact
                         component={auth(Reservation, 1)}
+                    />
+                    <Route
+                        path="/404"
+                        exact
+                        component={auth(Component404, 0)}
                     />
                 </Switch>
             </Layout>

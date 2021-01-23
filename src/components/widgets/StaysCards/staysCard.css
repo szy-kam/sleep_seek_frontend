@@ -58,20 +58,6 @@
 
 .staysCardT1 .itemButton,
 .showMoreButton {
-    border: none;
-    border-radius: 3px;
-    color: white;
-    padding: 15px 32px;
-    margin: 25px auto;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: #008cba;
-    width: 150px;
-    height: 50px;
-    align-self: flex-end;
 }
 
 .staysCardT1 .itemButton {

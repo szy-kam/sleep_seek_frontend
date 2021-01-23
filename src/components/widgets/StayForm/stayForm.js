@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FileUploader from "../FileUploader/fileUploader";
 import style from "./stayForm.css";
-import { GetStayByIdRepository } from "../../../repository/stay";
+import { GetStayByIdRepository, GetAllStayCategories } from "../../../repository/stay";
 import { withTranslation } from "react-i18next";
 import { STAY } from "../../../config";
 import StayMap from "../StayMap/stayMap";
@@ -17,10 +17,24 @@ class StayForm extends Component {
     };
 
     componentDidMount() {
-        if (this.props.getStay)
-            GetStayByIdRepository(this.props.getStay).then((response) =>
-                this.setState({ stay: response })
+        if (this.props.getStay) {
+            GetStayByIdRepository(this.props.getStay)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ stay: data })
+            }
             );
+        }
+        else {
+            // To set default values in select
+            const stay = this.state.stay
+            stay.address.country = "Polska"
+            stay.category = "Hotel"
+            this.setState({
+                stay: stay
+            })
+        }
+
     }
 
     handleInput = (event, field) => {
@@ -79,6 +93,13 @@ class StayForm extends Component {
         });
     };
 
+    stayCategoryOptions = () =>{
+        const categories = GetAllStayCategories();
+        return  categories.map((item, i) => {
+            return <option key={i}>{item}</option>;
+        });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.handleSubmit(this.state.stay, this.state.newPhotos, this.state.properties);
@@ -100,7 +121,6 @@ class StayForm extends Component {
         const newStay = {
             ...this.state.stay,
         };
-        console.log(e.target);
         newStay.mainPhoto = e.target.alt;
         this.setState({
             stay: newStay,
@@ -138,6 +158,13 @@ class StayForm extends Component {
                         onChange={(event) => this.handleInput(event, "name")}
                         value={this.state.stay.name}
                     />
+                    <label>{t("CATEGORY")}</label>
+                    <select
+                        onChange={(event) => this.handleInput(event, "category")}
+                        value={this.state.stay.category}
+                    >
+                        {this.stayCategoryOptions()}
+                    </select>
                     <label>{t("COUNTRY")}</label>
                     <select
                         onChange={(event) => this.handleInput(event, "country")}
@@ -178,17 +205,17 @@ class StayForm extends Component {
                     <label>{t("MIN_PRICE")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "minPrice")}
-                        value={this.state.stay.price}
+                        value={this.state.stay.minPrice}
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "phoneNumber")}
-                        value={this.state.stay.contactInfo}
+                        value={this.state.stay.phoneNumber}
                     />
                     <label>{t("EMAIL")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "email")}
-                        value={this.state.stay.contactInfo}
+                        value={this.state.stay.email}
                     />
                     <label>{t("DESCRIPTION")}</label>
                     <textarea

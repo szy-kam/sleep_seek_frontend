@@ -31,12 +31,17 @@
     padding: 15px;
     display: flex;
     flex-direction: row;
+
 }
 
 .addReview textarea{
     padding: 15px;
     border: 1px solid black;
-    width: 90%;
+    width: 80%;
+}
+.addReview select {
+    width: 10%;
+    margin: 15px;
 }
 
 .addReview button{

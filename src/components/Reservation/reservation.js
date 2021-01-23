@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './reservation.css'
 import { withTranslation } from "react-i18next";
 import { STAY } from '../../config'
-import { GetStayByIdRepository, GetAccomodationById } from '../../repository/stay'
+import { GetStayByIdRepository, GetAccommodationByIdRepository } from '../../repository/stay'
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 
@@ -31,7 +31,7 @@ const Reservation = (props) => {
             }
         });
 
-        GetAccomodationById(props.match.params.accomodationId).then((response) => {
+        GetAccommodationByIdRepository(props.match.params.accomodationId).then((response) => {
             setAccomodation(response)
         })
     }, [props.history, props.match.params.accomodationId, props.match.params.stayId]);
