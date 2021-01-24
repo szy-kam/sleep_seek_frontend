@@ -23,7 +23,6 @@ class AccommodationForm extends Component {
         newAccommodation[field] = event.target.value;
         newAccommodation["stayId"] = this.props.stayId
 
-
         this.setState({
             accommodation: newAccommodation,
         });
@@ -34,13 +33,16 @@ class AccommodationForm extends Component {
         this.props.handleSubmit(this.state.accommodation);
     };
 
+    handleDelete = () => {
+        this.props.handleDelete(this.props.accommodation.id);
+    };
+
     handlePropertiesInput = (val) => {
         if (val !== this.state.properties)
             this.setState({
                 properties: val,
             });
     }
-
 
     render() {
         const { t } = this.props;
@@ -63,6 +65,9 @@ class AccommodationForm extends Component {
                         value={this.state.accommodation.quantity}
                     />
                     <PropertiesForm accommodation={true} accommodationId={this.props.accommodation.id} handleInput={this.handlePropertiesInput} />
+                    <button onClick={this.handleDelete} type="button">
+                        {t("DELETE")}
+                    </button>
                     <button type="submit">
                         {t("SAVE_ACCOMMODATION")}
                     </button>

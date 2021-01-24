@@ -12,6 +12,7 @@ const StayMap = (props) => {
         map.setView(props.position, props.zoom);
         return null;
     }
+    
     if(position[0] !== null){
         return (
             <MapContainer

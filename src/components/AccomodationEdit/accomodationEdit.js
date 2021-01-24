@@ -31,11 +31,11 @@ class AccommodationEdit extends Component {
         AddAccommodationRepository(accommodation)
             .then(response => response.json())
             .then(data => console.log(data))
-            .catch( err => console.log(err))
+            .catch(err => console.log(err))
     }
 
-    handleDelete = (accommodation) => {
-        DeleteAccommodationRepository(accommodation)
+    handleDelete = (accommodationId) => {
+        DeleteAccommodationRepository(accommodationId)
             .then(response => console.log(response))
     }
 
@@ -51,7 +51,6 @@ class AccommodationEdit extends Component {
 
     render() {
         const { t } = this.props;
-        console.log(this.state.accommodations);
         return (
             <div>
                 {this.state.accommodations !== [] && this.state.accommodations.map((item, i) => (

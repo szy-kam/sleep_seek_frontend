@@ -62,8 +62,8 @@ const Reservation = (props) => {
                 />
                 {selectedDayRange.from ? <div>{t('FROM')} {selectedDayRange.from.day}.{selectedDayRange.from.month}.{selectedDayRange.from.year}</div> : null}
                 {selectedDayRange.to ? <div>{t('TO')} {selectedDayRange.to.day}.{selectedDayRange.to.month}.{selectedDayRange.to.year}</div> : null}
-                {selectedDayRange.from && selectedDayRange.to ? <div>{t('DAY_AMOUNT')}: {calculateDateDifference() }</div> : null}
-                {selectedDayRange.from && selectedDayRange.to ? <div>{t('WHOLE_PRICE')}: {calculatePrice() }</div> : null}
+                {selectedDayRange.from && selectedDayRange.to ? <div>{t('DAY_AMOUNT')}: {calculateDateDifference()}</div> : null}
+                {selectedDayRange.from && selectedDayRange.to ? <div>{t('WHOLE_PRICE')}: {calculatePrice()}</div> : null}
             </div>
         )
     }
@@ -84,66 +84,6 @@ const Reservation = (props) => {
         }
     }
 
-    const myCustomLocale = {
-        // months list by order
-        months: [
-            'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
-        ],
-
-        // week days by order
-        weekDays: [
-            {
-                short: 'P',
-            },
-            {
-                short: 'W',
-            },
-            {
-                short: 'Ś',
-            },
-            {
-                short: 'C',
-            },
-            {
-                short: 'P',
-            },
-            {
-                short: 'S',
-                isWeekend: true,
-            },
-            {
-                short: 'S',
-                isWeekend: true,
-            }
-        ],
-
-        // just play around with this number between 0 and 6
-        weekStartingIndex: 1,
-
-        // return a { year: number, month: number, day: number } object
-        getToday(gregorainTodayObject) {
-            return gregorainTodayObject;
-        },
-
-        // return a native JavaScript date here
-        toNativeDate(date) {
-            return new Date(date.year, date.month - 1, date.day);
-        },
-
-        // return a number for date's month length
-        getMonthLength(date) {
-            return new Date(date.year, date.month, 0).getDate();
-        },
-
-        // return a transformed digit to your locale
-        transformDigit(digit) {
-            return digit;
-        },
-
-        digitSeparator: ',',
-    }
-
-
     const { t } = props;
     return (
         <div className={style.ReservationComponent}>
@@ -153,3 +93,64 @@ const Reservation = (props) => {
     )
 }
 export default withTranslation()(Reservation)
+
+export const myCustomLocale = {
+    // months list by order
+    months: [
+        'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
+    ],
+
+    // week days by order
+    weekDays: [
+        {
+            short: 'P',
+        },
+        {
+            short: 'W',
+        },
+        {
+            short: 'Ś',
+        },
+        {
+            short: 'C',
+        },
+        {
+            short: 'P',
+        },
+        {
+            short: 'S',
+            isWeekend: true,
+        },
+        {
+            short: 'S',
+            isWeekend: true,
+        }
+    ],
+
+    // just play around with this number between 0 and 6
+    weekStartingIndex: 1,
+
+    from: 'od',
+    to: 'do',
+    // return a { year: number, month: number, day: number } object
+    getToday(gregorainTodayObject) {
+        return gregorainTodayObject;
+    },
+
+    // return a native JavaScript date here
+    toNativeDate(date) {
+        return new Date(date.year, date.month - 1, date.day);
+    },
+
+    // return a number for date's month length
+    getMonthLength(date) {
+        return new Date(date.year, date.month, 0).getDate();
+    },
+
+    // return a transformed digit to your locale
+    transformDigit(digit) {
+        return digit;
+    },
+
+    digitSeparator: ',',
+}

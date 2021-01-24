@@ -138,23 +138,16 @@ export async function GetAccommodationByIdRepository(stayId) {
         .catch((err) => {
             console.log(err);
         })
-
-    // return {
-    //     id: "1",
-    //     stayId: "1",
-    //     sleepersCapacity: "13",
-    //     quantity: "2",
-    //     price: "22"
-    // }
 }
 
-export async function AddAccommodationRepository(accomodation) {
-    const url = BACKEND_URL + "/accommodation?stayId=" + accomodation.stayId
-    return fetchWithAutorization("POST", url, accomodation)
+export async function AddAccommodationRepository(accommodation) {
+    const url = BACKEND_URL + "/accommodation?stayId=" + accommodation.stayId
+    return fetchWithAutorization("POST", url, accommodation)
 }
 
-export async function DeleteAccommodationRepository(accomodation) {
-    const url = BACKEND_URL + "/accommodation?stayId=" + accomodation.stayId
+export async function DeleteAccommodationRepository(accommodationId) {
+    console.log("Delete");
+    const url = BACKEND_URL + "/accommodation?id=" + accommodationId
     return fetchWithAutorization("Delete", url)
 }
 
@@ -174,57 +167,52 @@ export async function GetAllStayProperties() {
     //         });
     return [
         {
-            id: "1",
-            name: "parking",
+            id: "PARKING",
+            name: "Parking",
             ico: "parking",
         },
         {
-            id: "2",
+            id: "RESTAURANT",
             name: "Restauracja",
             ico: "utensils",
         },
         {
-            id: "3",
-            name: "wifi",
+            id: "WIFI",
+            name: "Wifi",
             ico: "wifi",
         },
         {
-            id: "4",
+            id: "24H",
             name: "Recepcja 24h",
             ico: "history",
         },
         {
-            id: "5",
+            id: "PETS_ALLOWED",
             name: "Zwierzęta mile widziane",
             ico: "paw",
         },
         {
-            id: "6",
+            id: "CARD_ACCEPTED",
             name: "Akceptują karty",
             ico: "money-check",
         },
         {
-            id: "7",
+            id: "DISABLED_ACCESSIBLE",
             name: "Przyjazny dla niepełnosprawnych",
             ico: "wheelchair",
         },
         {
-            id: "8",
-            name: "Przyjazny dla dzieci",
-            ico: "baby",
-        },
-        {
-            id: "9",
+            id: "BAR",
             name: "Bar",
             ico: "cocktail",
         },
         {
-            id: "10",
+            id: "GIM",
             name: "Siłownia",
             ico: "dumbbell",
         },
         {
-            id: "11",
+            id: "POOL",
             name: "Basen",
             ico: "swimmer",
         },
@@ -247,57 +235,37 @@ export async function GetStayPropertiesById(Id) {
     //         });
     return [
         {
-            id: "1",
-            name: "parking",
-            ico: "car",
+            id: "PARKING",
+            name: "Parking",
+            ico: "parking",
         },
         {
-            id: "2",
+            id: "RESTAURANT",
             name: "Restauracja",
-            ico: "cutlery",
+            ico: "utensils",
         },
         {
-            id: "3",
-            name: "wifi",
+            id: "WIFI",
+            name: "Wifi",
             ico: "wifi",
         },
         {
-            id: "4",
+            id: "24H",
             name: "Recepcja 24h",
             ico: "history",
         },
         {
-            id: "5",
+            id: "PETS_ALLOWED",
             name: "Zwierzęta mile widziane",
             ico: "paw",
         },
         {
-            id: "6",
+            id: "CARD_ACCEPTED",
             name: "Akceptują karty",
-            ico: "credit-card",
+            ico: "money-check",
         },
         {
-            id: "7",
-            name: "Przyjazny dla niepełnosprawnych",
-            ico: "wheelchair",
-        },
-        {
-            id: "8",
-            name: "Przyjazny dla dzieci",
-            ico: "baby",
-        },
-        {
-            id: "9",
-            name: "Bar",
-            ico: "cocktail",
-        },
-        {
-            id: "10",
-            name: "Siłownia",
-            ico: "dumbbell",
-        },
-        {
-            id: "11",
+            id: "POOL",
             name: "Basen",
             ico: "swimmer",
         },
