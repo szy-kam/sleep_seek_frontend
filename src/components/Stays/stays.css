@@ -9,9 +9,6 @@
     max-width: 300px;
 }
 .middleColumn {
-    flex-basis: 40%;
+    flex-basis: 85%;
 }
 
-.rightColumn {
-    flex-basis: 40%;
-}

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import AccommodationForm from '../widgets/AccommodationForm/accommodationForm'
 import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
 import { withTranslation } from "react-i18next";
-
+import style from './accomodationEdit.css'
 class AccommodationEdit extends Component {
     state = {
-        accommodations: []
+        accommodations: [{}]
     }
 
     componentDidMount() {
@@ -15,12 +15,15 @@ class AccommodationEdit extends Component {
                     if (response.ok) {
                         return response.json()
                     }
-                    else return []
+                    else return [{}]
                 })
                 .then(data => {
+                    if (data.length === 0) {
+                        data = [{}]
+                    }
                     this.setState({ accommodations: data })
                 })
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         }
         else
             this.setState({ accommodations: [{}] })
@@ -40,22 +43,25 @@ class AccommodationEdit extends Component {
     }
 
     addForm = () => {
-        const newAccommodation = this.state.accommodations;
+        const newAccommodations = this.state.accommodations;
 
-        newAccommodation.push({})
+        newAccommodations.push({})
 
         this.setState({
-            accommodation: newAccommodation,
+            accommodations: newAccommodations,
         });
     }
 
     render() {
+        console.log(this.state);
         const { t } = this.props;
         return (
-            <div>
-                {this.state.accommodations !== [] && this.state.accommodations.map((item, i) => (
+            <div className={style.accommodationEditComponent} id={"accommodationEdit"}>
+                <div>{t('MANAGE_ACCOMMODATIONS')}</div>
+                <div className={style.accommodationsForms}>{Array.isArray(this.state.accommodations) && this.state.accommodations.map((item, i) => (
                     <AccommodationForm accommodation={item} key={i} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} stayId={this.props.stayId} />
-                ))}
+                ))} </div>
+
                 <button onClick={this.addForm}>{t('ADD_ACCOMMODATION')}</button>
             </div>
         )

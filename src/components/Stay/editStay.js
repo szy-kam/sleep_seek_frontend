@@ -12,14 +12,7 @@ import AccomodationEdit from "../AccomodationEdit/accomodationEdit";
 class EditStay extends Component {
     state = {
         message: "",
-        stay: null,
     };
-
-    componentDidMount() {
-        GetStayByIdRepository(this.props.match.params.id).then((response) =>
-            this.setState({ stay: response })
-        );
-    }
 
     submitForm = (stay, files) => {
         const { t } = this.props;
@@ -30,7 +23,7 @@ class EditStay extends Component {
                 }
                 else {
                     console.log(response);
-                    this.setState({ message: t("ERROR_") })
+                    this.setState({ message: t(`ERROR_${response.status}`) })
                 }
             });
     };
@@ -38,9 +31,10 @@ class EditStay extends Component {
     handleDelete = (e) => {
         const { t } = this.props;
         e.preventDefault();
-        DeleteStayByIdRepository(this.state.stay.id).then(() =>
-            this.setState({ message: t("STAY_DELETED") })
-        );
+        DeleteStayByIdRepository(this.props.match.params.id)
+            .then(() =>
+                this.setState({ message: t("STAY_DELETED") })
+            );
     };
 
     redirectUser = () => {

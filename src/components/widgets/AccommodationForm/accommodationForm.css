@@ -1,12 +1,12 @@
+.accommodationFormCompoment{
+    display: flex;
+}
+
 .accommodationForm{
     margin: 20px auto;
     padding: 30px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-}
-
-input{
-    margin: 10px;
-    padding: 6px;
+    width: 250px;
 }

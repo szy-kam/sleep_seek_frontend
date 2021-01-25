@@ -227,6 +227,7 @@ class StayForm extends Component {
                         onChange={(event) => this.handleInput(event, "zipCode")}
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.zipCode}
+                        placeholder="00-000"
                     />
                     {this.state.stay.address.latitude && (
                         <div className={style.map}>
@@ -244,6 +245,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "minPrice")}
                         value={this.state.stay.minPrice}
+                        type="number"
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
@@ -254,6 +256,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "email")}
                         value={this.state.stay.email}
+                        type="emial"
                     />
                     <label>{t("DESCRIPTION")}</label>
                     <textarea
@@ -273,7 +276,7 @@ class StayForm extends Component {
                     </div>
 
                     <button type="submit">
-                        {this.props.getStay ? t("EDIT_STAY") : t("ADD_STAY")}
+                        {this.props.getStay ? t("SAVE") : t("ADD_STAY")}
                     </button>
 
                     {this.props.handleDelete ? (

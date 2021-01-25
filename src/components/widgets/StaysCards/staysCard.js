@@ -25,9 +25,9 @@ const StaysCard = (props) => {
                                 <div key={i} className={style.staysCardT1}>
                                     <div className={style.left}>
                                         <div className={style.image}>
-                                            <Link to={`/stays/${item.id}`}>
+                                            {item.mainPhoto && <Link to={`/stays/${item.id}`}>
                                                 <img src={item.mainPhoto} alt={item.name}></img>
-                                            </Link>
+                                            </Link>}
                                         </div>
                                     </div>
                                     <div className={style.right}>
@@ -38,7 +38,7 @@ const StaysCard = (props) => {
                                             {t("ADDRESS")}: {item.address.city}, {item.address.street}
                                         </div>
                                         <div className={style.price}>
-                                            {item.price} {t("CURRENCY_SYMBOL")}
+                                            {item.minPrice} {t("CURRENCY_SYMBOL")}
                                         </div>
                                         <Link to={`/stays/${item.id}`}>
                                             <button className={style.itemButton}>
@@ -56,15 +56,15 @@ const StaysCard = (props) => {
                             {stays.map((item, i) => (
                                 <div key={i} className={style.staysCardT2}>
                                     <div className={style.image}>
-                                        <Link to={`/stays/${item.id}`}>
+                                        {item.mainPhoto && <Link to={`/stays/${item.id}`}>
                                             <img src={item.mainPhoto} alt={item.name}></img>
-                                        </Link>
+                                        </Link>}
                                     </div>
                                     <div className={style.name}>
                                         <Link to={`/stays/${item.id}`}>{item.name}</Link>
                                     </div>
                                     <div className={style.price}>
-                                        {item.price} {t("CURRENCY_SYMBOL")}
+                                        {item.minPrice} {t("CURRENCY_SYMBOL")}
                                     </div>
                                     <Link to={`/stays/${item.id}`}>
                                         <button className={style.itemButton}>{t("VIEW_MORE")}</button>
@@ -80,9 +80,9 @@ const StaysCard = (props) => {
                                 <div key={i} className={style.staysCardT1}>
                                     <div className={style.left}>
                                         <div className={style.image}>
-                                            <Link to={`/stays/${item.id}`}>
+                                            {item.mainPhoto && <Link to={`/stays/${item.id}`}>
                                                 <img src={item.mainPhoto} alt={item.name}></img>
-                                            </Link>
+                                            </Link>}
                                         </div>
                                     </div>
                                     <div className={style.right}>
@@ -93,7 +93,7 @@ const StaysCard = (props) => {
                                             {t("ADDRESS")}: {item.address.city}, {item.address.street}
                                         </div>
                                         <div className={style.price}>
-                                            {item.price} {t("CURRENCY_SYMBOL")}
+                                            {item.minPrice} {t("CURRENCY_SYMBOL")}
                                         </div>
                                         <Link to={`/stays/edit/${item.id}`}>
                                             <button className={style.itemButton}>

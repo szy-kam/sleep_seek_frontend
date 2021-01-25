@@ -23,7 +23,7 @@ class Stay extends Component {
         GetStayByIdRepository(this.props.match.params.id)
             .then(resp => resp.json())
             .then((stay) => {
-                if (stay) { this.setState({ stay: stay }); }
+                if (stay.name) { this.setState({ stay: stay }); }
                 else {
                     this.props.history.push("/404");
                 }
@@ -82,38 +82,51 @@ class Stay extends Component {
         );
     }
 
-    render() {
-        console.log(this.state.stay);
+    renderContent = () => {
         const { t } = this.props;
-        const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
+        if (this.state.stay.name) {
+            const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
+            return <div className={style.stayContent}>
+                <div className={style.stayInfo}>
+                    <div className={style.name}>
+                        {this.state.stay.name}
+                    </div>
+                    <div
+                        className={style.image}
+                        style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
+                    >
+                    </div>
+                    <div className={style.imageGrid}>{this.imageGrid()}</div>
+                    <div className={style.address}>
+                        {t("ADDRESS")}: {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
+                        {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
+                    </div>
+                    <div className={style.price}>
+                        {this.state.stay.minPrice} {t("CURRENCY_SYMBOL")}
+                    </div>
+                    <div className={style.contact}>
+                        <div>{this.state.stay.phoneNumber}</div>
+                        <div>{this.state.stay.email}</div>
+
+                    </div>
+                    <div className={style.description}>{this.state.stay.description}</div>
+                </div>
+                <StayMap position={position} zoom={14} />
+                <Properties stayId={this.props.match.params.id} />
+                <Accommodation stayId={this.props.match.params.id} />
+                <Reviews stayId={this.props.match.params.id} />
+                {this.lightbox()}
+            </div>
+        }
+
+    }
+
+    render() {
+
+
         return (
             <div className={style.stayComponent}>
-                <div className={style.stayContent}>
-                    <div className={style.stayInfo}>
-                        <div className={style.name}>
-                            {this.state.stay.name}
-                        </div>
-                        <div
-                            className={style.image}
-                            style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
-                        >
-                        </div>
-                        <div className={style.imageGrid}>{this.imageGrid()}</div>
-                        <div className={style.address}>
-                            {t("ADDRESS")}: {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
-                            {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
-                        </div>
-                        <div className={style.price}>
-                            {this.state.stay.minPrice} {t("CURRENCY_SYMBOL")}
-                        </div>
-                        <div className={style.description}>{this.state.stay.description}</div>
-                    </div>
-                    <StayMap position={position} zoom={14} />
-                    <Properties stayId={this.props.match.params.id} />
-                    <Accommodation stayId={this.props.match.params.id} />
-                    <Reviews stayId={this.props.match.params.id} />
-                </div>
-                {this.lightbox()}
+                {this.renderContent()}
             </div>
         );
     }

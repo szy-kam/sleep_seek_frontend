@@ -147,24 +147,6 @@ export async function GetAccommodationsByStayIdRepository(stayId) {
         .catch((err) => {
             console.log(err);
         })
-
-
-    // return [
-    //     {
-    //         id: "1",
-    //         stayId: "1",
-    //         sleepersCapacity: "1",
-    //         quantity: "11",
-    //         price: "111"
-    //     },
-    //     {
-    //         id: "2",
-    //         stayId: "1",
-    //         sleepersCapacity: "22",
-    //         quantity: "22",
-    //         price: "222"
-    //     },
-    // ]
 }
 
 
@@ -192,19 +174,6 @@ export async function DeleteAccommodationRepository(accommodationId) {
 }
 
 export async function GetAllStayProperties() {
-    // if (stayId)
-    //     await fetch(
-    //         BACKEND_URL + "/accomodation/" + Id,
-    //         {
-    //             method: "GET",
-    //         }
-    //     )
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    //         .then((response) => {
-    //             return response;
-    //         });
     return [
         {
             id: "PARKING",
@@ -313,60 +282,38 @@ export async function GetStayPropertiesById(Id) {
 }
 
 export async function GetAllAccommodationProperties() {
-    // if (stayId)
-    //     await fetch(
-    //         BACKEND_URL + "/accomodation/" + Id,
-    //         {
-    //             method: "GET",
-    //         }
-    //     )
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    //         .then((response) => {
-    //             return response;
-    //         });
+
     return [
         {
-            id: "1",
-            name: "toaleta",
-            ico: "toilet",
-        },
-        {
-            id: "2",
-            name: "mikrofalówka",
-            ico: "microwave",
-        },
-        {
-            id: "3",
+            id: "BATH",
             name: "wanna",
             ico: "bath",
         },
         {
-            id: "4",
+            id: "SHOWER",
             name: "prysznic",
             ico: "shower",
         },
         {
-            id: "5",
+            id: "TV",
             name: "TV",
             ico: "tv",
         },
         {
-            id: "6",
-            name: "Lodówka",
-            ico: "refrigerator",
-        },
-        {
-            id: "7",
+            id: "USER_PLUS",
             name: "Możliwa dostawka",
             ico: "user-plus",
         },
         {
-            id: "8",
+            id: "SMOKING",
             name: "Dla palących",
             ico: "smoking",
         },
+        {
+            id: "COOLING",
+            name: "Klimatyzacja",
+            ico: "snowflake-o",
+        }
     ]
 }
 
@@ -386,29 +333,24 @@ export async function GetAccommodationPropertiesById(Id) {
     //         });
     return [
         {
-            id: "2",
-            name: "mikrofalówka",
-            ico: "microwave",
+            id: "BATH",
+            name: "wanna",
+            ico: "bath",
         },
         {
-            id: "4",
-            name: "prysznic",
-            ico: "shower",
-        },
-        {
-            id: "5",
+            id: "TV",
             name: "TV",
             ico: "tv",
         },
         {
-            id: "7",
+            id: "USER_PLUS",
             name: "Możliwa dostawka",
-            ico: "couch",
+            ico: "user-plus",
         },
         {
-            id: "8",
-            name: "Dla palących",
-            ico: "smoking",
-        },
+            id: "COOLING",
+            name: "Klimatyzacja",
+            ico: "snowflake-o",
+        }
     ]
 }

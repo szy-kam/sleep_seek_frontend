@@ -13,3 +13,7 @@
 .Calendar__monthArrow{
     width: 30px!important;
 }
+.DatePicker__calendarContainer{
+    height: 33em;
+
+}

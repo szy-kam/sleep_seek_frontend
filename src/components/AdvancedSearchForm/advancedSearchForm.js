@@ -89,6 +89,7 @@ const AdvancedSearch = (props) => {
                     minimumDate={utils().getToday()}
                     locale={myCustomLocale}
                     inputPlaceholder={t('CLICK_HERE')}
+                    calendarClassName={"style.calendar"}
                 />
                 <label>{t("COUNTRY")}</label>
                 <select

@@ -16,21 +16,27 @@ class AddStay extends Component {
         AddStayRepository(stay, files)
             .then((response) => {
                 if (response.ok) {
-                    this.setState({ message: t("STAY_ADDED") })
+                    response.json()
+                        .then(data => {
+                            const editUrl = `/stays/edit/${data}#accommodationEdit`
+                            console.log(editUrl);
+                            this.redirectUser(editUrl)
+                            this.setState({ message: t("STAY_ADDED") })
+                        })
                 }
                 else {
                     console.log(response);
                     response.json().then(data => {
                         console.log(data);
                     })
-                    this.setState({ message: t("ERROR") })
+                    this.setState({ message: t(`ERROR_${response.status}`) })
                 }
             });
     };
 
-    redirectUser = () => {
+    redirectUser = (url = "/") => {
         setTimeout(() => {
-            this.props.history.push("/");
+            this.props.history.push(url);
         }, 2000);
     };
 
@@ -38,8 +44,7 @@ class AddStay extends Component {
         if (this.state.message)
             return (
                 <div className={style.message}>
-                    {" "}
-                    {this.state.message} {this.redirectUser()}{" "}
+                    {this.state.message}
                 </div>
             );
         else return null;
@@ -51,10 +56,6 @@ class AddStay extends Component {
                 {this.message()}
                 <StayForm
                     handleSubmit={this.handleSubmit}
-                />
-                <AccomodationEdit
-                    stayId={this.props.match.params.id}
-                    handleSubmit={this.submitAccomodationForm}
                 />
             </div>
         );

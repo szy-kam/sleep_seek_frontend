@@ -31,7 +31,7 @@
     "DESCRIPTION": "Opis",
     "MAIN_PHOTO": "Główne zdjęcie",
     "PHOTOS": "Zdjęcia",
-    "ADD_STAY": "Dodaj obiekt",
+    "SAVE": "Zapisz",
     "EDIT_STAY": "Edytuj obiekt",
     "DELETE_STAY": "Usuń obiekt",
     "SELECT_MAIN_PHOTO": "Wybierz główne zdjęcie klikając na nie",
@@ -40,6 +40,9 @@
     "STAY_DELETED": "Obiekt usunięty",
     "___AddStay": "Add Stay",
     "STAY_ADDED": "Obiekt dodany",
+    "___MyAccount": "My account",
+    "ADD_STAY": "Dodaj obiekt",
+    "YOURS_STAYS": "Twoje obiekty",
     "___MiniComponents": "Małe komponenty",
     "REGISTER" : "Zarejestruj się",
     "ACCOUNT_CREATED" : "Utworzono konto",
@@ -65,6 +68,7 @@
     "SLEEPERS_CAPACITY": "Liczba miejsc",
     "PROPERTIES": "Cechy",
     "BOOK_IT": "Zarezerwuj",
+    "MANAGE_ACCOMMODATIONS": "Zarządzaj pokojami",
     "SAVE_ACCOMMODATION": "Zapisz",
     "ADD_ACCOMMODATION": "Dodaj",
     "DELETE_ACCOMMODATION": "Usuń",
@@ -77,5 +81,6 @@
     "__Response Error": "Response starus",
     "USER_ERROR_400": "E-mail zajęty",
     "USER_ERROR_403": "Nieprawidłowe hasło",
-    "USER_ERROR_401": "Użytkownika nie znaleziono"
+    "USER_ERROR_401": "Użytkownika nie znaleziono",
+    "ERROR_500": "Błąd serwera"
   }

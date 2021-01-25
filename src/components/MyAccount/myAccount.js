@@ -40,8 +40,12 @@ class MyAccount extends Component {
         const { t } = this.props;
         return (
             <div className={style.myAccountComponent}>
-                <Link to="/add-stay">{t("ADD_STAY")}</Link>
+                <button><Link to="/add-stay">{t("ADD_STAY")}</Link></button>
+                <div>
+                    <div>{t("YOURS_STAYS")}</div>
                 <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler}/>
+                </div>
+                
             </div>
         );
     }

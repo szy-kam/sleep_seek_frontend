@@ -19,8 +19,9 @@
     font-weight: bold;
 }
 
-.message{
+.messageContent{
     font-style: italic;
+    font-size: 25px;
 }
 
 .rating{

@@ -89,10 +89,9 @@ class Stays extends Component {
                 </div>
                 <div className={style.middleColumn}>
                     <StaysCard template="default" loadMore={this.state.loadMore} stays={this.state.stays} renderMoreHandler={this.renderMoreHandler} />
-                </div>
-                <div className={style.rightColumn}>
                     <StaysMap stays={this.state.stays} position={this.state.mapPosition} zoom={this.state.mapZoom} height="500px" />
                 </div>
+
             </div>
         );
     }

@@ -40,7 +40,7 @@
 
 .imageGrid {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
     flex-direction: row;
 }
@@ -59,9 +59,11 @@
     padding: 20px;
     color: white;
     border-radius: 5px;
+    z-index: 4;
 }
 
 .stayEditCompoment{
     display: flex;
+    flex-direction: column;
     
 }

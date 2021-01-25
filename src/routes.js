@@ -37,12 +37,12 @@ class Routes extends Component {
                     <Route
                         path="/stays/edit/:id"
                         exact
-                        component={auth(EditStay, 0)}
+                        component={auth(EditStay, 1)}
                     />
                     <Route
                         path="/add-stay"
                         exact
-                        component={auth(AddStay, 0)}
+                        component={auth(AddStay, 1)}
                     />
                     <Route
                         path="/sign-in"
@@ -65,8 +65,6 @@ class Routes extends Component {
                         component={auth(Reservation, 1)}
                     />
                     <Route
-                        path="/404"
-                        exact
                         component={auth(Component404, 0)}
                     />
                 </Switch>

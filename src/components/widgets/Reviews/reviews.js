@@ -64,13 +64,15 @@ class Rewiews extends Component {
     renderReview() {
         return (
             <div className={style.reviews}>
-                {this.state.reviews && this.state.reviews.map((item, i) => (
+                {Array.isArray(this.state.reviews) && this.state.reviews.map((item, i) => (
                     <div className={style.review} key={i}>
                         <div className={style.user}>{item.userId}</div>
                         <div className={style.message}>
-                            <i className={"fa fa-quote-left"}></i>
+                            {/* <i className={"fa fa-quote-left"}></i> */}
+                            <span className={style.messageContent}>
                             {item.message}
-                            <i className={"fa fa-quote-right"}></i>
+                            </span>
+                            {/* <i className={"fa fa-quote-right"}></i> */}
                         </div>
                         <div className={style.rating}><strong>{item.rating}</strong> / 5 </div>
                     </div>
