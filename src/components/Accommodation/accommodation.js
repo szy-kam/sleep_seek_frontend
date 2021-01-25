@@ -45,7 +45,7 @@ class Accommodation extends Component {
     renderComponent = () => {
         const { t } = this.props;
         if (this.state.accommodations.length) {
-            return <table>
+            return <table className={style.accommodationTable}>
                 <thead>
                     <tr>
                         <td>{t('SLEEPERS_CAPACITY')}</td>

@@ -167,6 +167,11 @@ export async function AddAccommodationRepository(accommodation) {
     return fetchWithAutorization("POST", url, accommodation)
 }
 
+export async function EditAccomodationRepository(accommodation) {
+    const url = BACKEND_URL + "/accommodation?stayId=" + accommodation.stayId
+    return fetchWithAutorization("PUT", url, accommodation)
+}
+
 export async function DeleteAccommodationRepository(accommodationId) {
     console.log("Delete");
     const url = BACKEND_URL + "/accommodation?id=" + accommodationId
@@ -286,12 +291,12 @@ export async function GetAllAccommodationProperties() {
     return [
         {
             id: "BATH",
-            name: "wanna",
+            name: "Wanna",
             ico: "bath",
         },
         {
             id: "SHOWER",
-            name: "prysznic",
+            name: "Prysznic",
             ico: "shower",
         },
         {
@@ -334,7 +339,7 @@ export async function GetAccommodationPropertiesById(Id) {
     return [
         {
             id: "BATH",
-            name: "wanna",
+            name: "Wanna",
             ico: "bath",
         },
         {
@@ -354,3 +359,12 @@ export async function GetAccommodationPropertiesById(Id) {
         }
     ]
 }
+
+export async function GetStayAverageRatingById(Id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(function () {
+            resolve("4.6"); 
+        }, 250);
+    });
+
+}      

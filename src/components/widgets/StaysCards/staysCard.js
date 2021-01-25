@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import style from "./staysCard.css";
+import { GetStayAverageRatingById } from "../../../repository/stay";
 
 const StaysCard = (props) => {
 
@@ -12,6 +13,11 @@ const StaysCard = (props) => {
                 {t("SHOW_MORE")}
             </button>
         );
+    }
+
+    const getAverageRating = (id) => {
+        GetStayAverageRatingById(id)
+            .then(response => { console.log(response); return response })
     }
 
     const renderCards = (template, stays) => {
@@ -35,16 +41,22 @@ const StaysCard = (props) => {
                                             <Link to={`/stays/${item.id}`}>{item.name}</Link>
                                         </div>
                                         <div className={style.address}>
-                                            {t("ADDRESS")}: {item.address.city}, {item.address.street}
+                                            {item.address.city}
+                                        </div>
+                                        <div className={style.averageRating}>
+                                            {getAverageRating(item.id)}
                                         </div>
                                         <div className={style.price}>
-                                            {item.minPrice} {t("CURRENCY_SYMBOL")}
+                                            {t("FROM")} <span className={style.priceAmount}>{item.minPrice}</span> {t("CURRENCY_SYMBOL")}
                                         </div>
-                                        <Link to={`/stays/${item.id}`}>
-                                            <button className={style.itemButton}>
-                                                {t("VIEW_MORE")}
-                                            </button>
-                                        </Link>
+                                        <div className={style.itemButton}>
+                                            <Link to={`/stays/${item.id}`}>
+                                                <button >
+                                                    {t("VIEW_MORE")}
+                                                </button>
+                                            </Link>
+                                        </div>
+
                                     </div>
                                 </div>
                             ))}

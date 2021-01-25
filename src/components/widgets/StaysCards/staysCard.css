@@ -10,39 +10,55 @@
 }
 
 .staysCardT1 {
-    background-color: #f3f3f3;
-    border: gray 1px solid;
     padding: 15px;
     display: flex;
-    flex-wrap: wrap;
     margin: 10px 0px;
+    max-height: 250px;
+    flex-direction: row;
+    box-shadow: 0px 3px 4px 3px rgba(22,34,42,.15)
+    /* flex: 0 0 auto; */
+}
+.staysCardT1:hover{
+    background-color: #f0f0f0;
 }
 .staysCardT1 .left {
-    margin-right: 10px;
-    max-width: 30%;
+    align-self: flex-start;
+    min-width: 250px;
+    width: 30%;
+    flex-shrink: 1;
 }
+@media only screen and (max-width: 1000px) {
+    .staysCardT1 {
+        flex-direction: column;
+    }
+  }
 
 .staysCardT1 .right {
-    padding: 10px;
+    flex-shrink: 3;
+    width: 65%;
+    flex: 1 1 auto;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    flex-grow: 1;
 }
 
 .staysCardT1 .image {
+    align-self: flex-start;
     flex-basis: 100%;
 }
 
 .staysCardT1 .image a img {
-    width: 100%;
-    max-width: 400px;
+    max-height: 200px;
+    max-width: 250px;
+    object-position: center;
+    object-fit: cover;
 }
 
 .staysCardT1 .name a {
     font-size: 25px;
     text-decoration: none !important;
     font-weight: 700;
+    color: cornflowerblue
 }
 
 .staysCardT1 .address {
@@ -52,8 +68,19 @@
 .staysCardT1 .price {
     font-size: 20px;
     text-decoration: none !important;
+    align-self: flex-end;
+}
+
+.staysCardT1 .priceAmount {
+    font-size: 35px;
+    text-decoration: none !important;
     font-weight: 700;
     align-self: flex-end;
+    color: darkblue;
+}
+
+.averageRating{
+    border: darkblue;
 }
 
 .staysCardT1 .itemButton,
@@ -61,8 +88,7 @@
 }
 
 .staysCardT1 .itemButton {
-    text-decoration: none;
-    color: white;
+    align-self: flex-end;
 }
 
 .showMoreButton {

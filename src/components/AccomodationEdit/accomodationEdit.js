@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AccommodationForm from '../widgets/AccommodationForm/accommodationForm'
-import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
+import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, EditAccomodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
 import { withTranslation } from "react-i18next";
 import style from './accomodationEdit.css'
 class AccommodationEdit extends Component {
@@ -30,7 +30,9 @@ class AccommodationEdit extends Component {
     }
 
     handleSubmit = (accommodation) => {
-        console.log(accommodation);
+        if (accommodation.id) {
+            EditAccomodationRepository(accommodation)
+        }
         AddAccommodationRepository(accommodation)
             .then(response => response.json())
             .then(data => console.log(data))
@@ -53,7 +55,6 @@ class AccommodationEdit extends Component {
     }
 
     render() {
-        console.log(this.state);
         const { t } = this.props;
         return (
             <div className={style.accommodationEditComponent} id={"accommodationEdit"}>

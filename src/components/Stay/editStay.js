@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-    GetStayByIdRepository,
     EditStayRepository,
     DeleteStayByIdRepository,
 } from "../../repository/stay";
@@ -13,6 +12,8 @@ class EditStay extends Component {
     state = {
         message: "",
     };
+
+
 
     submitForm = (stay, files) => {
         const { t } = this.props;
@@ -58,6 +59,11 @@ class EditStay extends Component {
         else return null;
     };
 
+    scrollToBottom = () => {
+        const { messageList } = this.refs;
+        messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    }
+
     render() {
         return (
             <div className={style.stayEditCompoment}>
@@ -72,6 +78,7 @@ class EditStay extends Component {
                 <AccomodationEdit
                     stayId={this.props.match.params.id}
                     handleSubmit={this.submitAccomodationForm}
+        
                 />
             </div>
         );

@@ -3,7 +3,6 @@ import { AddStayRepository } from "../../repository/stay";
 import StayForm from "../widgets/StayForm/stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
-import AccomodationEdit from "../AccomodationEdit/accomodationEdit";
 
 class AddStay extends Component {
 

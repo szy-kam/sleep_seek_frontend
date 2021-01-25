@@ -23,8 +23,8 @@ export default function PropertiesForm(props) {
                     }
                 })
             }
-            if (props.accomodationId && properties !== []) {
-                GetAccommodationPropertiesById(props.accomodationId).then((response) => {
+            if (props.accommodationId && properties !== []) {
+                GetAccommodationPropertiesById(props.accommodationId).then((response) => {
                     setProperties(response)
                     for (let item of response) {
                         checkedItems.add(item.id.toString())
@@ -36,7 +36,7 @@ export default function PropertiesForm(props) {
                     setAllProperties(response)
                 })
             }
-            if (props.accomodation && allProperties !== []) {
+            if (props.accommodation && allProperties !== []) {
                 GetAllAccommodationProperties().then((response) => {
                     setAllProperties(response)
                 })

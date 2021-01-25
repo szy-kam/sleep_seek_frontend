@@ -4,17 +4,17 @@
 }
 
 .accomodation{
-    border: 1px solid black;
     padding: 3px;
 }
 
-table{
+.accommodationTable {
     width: 100%;
 }
 
-table, th, td {
-    border: 1px solid black;
-    padding: 8px;
+
+.accommodationTable > thead {
+    background-color: rgba(26, 26, 204, 0.418);
+    height: 25px;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
