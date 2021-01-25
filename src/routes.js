@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import auth from "./hoc/auth";
 import Layout from "./hoc/Layout/layout";
-import Home from "./components/Home/home";
-import Stays from "./components/Stays/stays";
-import Stay from "./components/Stay/stay";
-import EditStay from "./components/Stay/editStay";
-import SignIn from "./components/SignIn/singIn";
-import Register from "./components/Register/register";
-import MyAccount from "./components/MyAccount/myAccount";
-import AddStay from "./components/Stay/addStay";
-import Reservation from "./components/Reservation/reservation"
+import Home from "./components/pages/Home/home";
+import Stays from "./components/pages/Stays/stays";
+import Stay from "./components/pages/Stay/stay";
+import EditStay from "./components/StayForm/editStay";
+import AddStay from "./components/StayForm/addStay";
+import SignIn from "./components/pages/SignIn/singIn";
+import Register from "./components/pages/Register/register";
+import MyAccount from "./components/pages/MyAccount/myAccount";
+import Reservation from "./components/pages/Reservation/reservation"
 import Component404 from "./components/Component404/component404";
 
 class Routes extends Component {

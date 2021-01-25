@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import style from "./signIn.css";
+import { AddUserRepository } from "../../../repository/user";
+import style from "./register.css";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import { logInUser } from "../../redux/user/userActions";
-import { SignInUserRepository } from "../../repository/user";
-import { Link } from "react-router-dom";
+import { logInUser } from "../../../redux/user/userActions";
 
-class SignIn extends Component {
+class Register extends Component {
     state = {
         form: {
+            displayName: "",
             username: "",
             password: "",
         },
@@ -27,29 +27,30 @@ class SignIn extends Component {
     };
 
     submitForm = (e) => {
-        const { t } = this.props;
         e.preventDefault();
-        SignInUserRepository(this.state.form)
+        const { t } = this.props;
+        AddUserRepository(this.state.form)
             .then(response => {
-                if (response.ok) {
-                    return response.text()
+                if (response.status === 200) {
+                    this.setState({ message: t("ACCOUNT_CREATED") })
+                    // GetUserIdByEmail(this.state.form.email)
+                    //     .then(data => {
+                    //         data.json()
+                    //             .then(id => {
+                    //                 this.props.logInUser({ userId: id })
+                    //             })
+                    //     })
                 }
                 else {
                     this.setState({ message: t(`USER_ERROR_${response.status}`) });
                 }
             })
-            .then(token => {
-                if (token) {
-                    this.props.logInUser({ userToken: token, userId: this.state.form.username })
-                    this.setState({ message: t("LOGGED") });
-                }
-            })
-            .catch( err => console.log(err))
-    }
+            .catch(() => this.setState({ message: t("ERROR") }));
+    };
 
     redirectUser = () => {
         setTimeout(() => {
-            this.props.history.push("/my-account");
+            this.props.history.push("/sign-in");
         }, 3000);
     };
 
@@ -67,32 +68,34 @@ class SignIn extends Component {
     render() {
         const { t } = this.props;
         return (
-            <div className={style.signInComponent}>
+            <div className={style.registerComponent}>
                 {this.message()}
-                <form className={style.signInForm} onSubmit={this.submitForm}>
+                <form onSubmit={this.submitForm} className={style.registerForm}>
                     <input
                         type="text"
-                        placeholder={t("EMAIL")}
-                        value={this.state.form.email}
-                        onChange={(event) => this.handleInput(event, "username")}
-                        autoComplete="on"
+                        placeholder={t("DISPLAY_NAME")}
+                        value={this.state.form.displayName}
+                        onChange={(event) => this.handleInput(event, "displayName")}
                         required
                         autoFocus
+                    />
+                    <input
+                        type="email"
+                        placeholder={t("EMAIL")}
+                        value={this.state.form.username}
+                        onChange={(event) => this.handleInput(event, "username")}
+                        required
                     />
                     <input
                         type="password"
                         placeholder={t("PASSWORD")}
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
-                        autoComplete="on"
+                        autoComplete="off"
                         required
                     />
-                    <div><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div>
-                    <button type="submit">{t("LOG_IN")}</button>
+                    <button type="submit">{t("REGISTER")}</button>
                 </form>
-                <div>
-                    <div><Link to="/register"><button>{t("CREATE_ACCOUNT")}</button></Link></div>
-                </div>
             </div>
         );
     }
@@ -102,4 +105,4 @@ const mapDispatchToProps = (dispatch) => ({
     logInUser: (user) => dispatch(logInUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(withTranslation()(SignIn));
+export default connect(null, mapDispatchToProps)(withTranslation()(Register));

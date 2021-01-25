@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import style from "./myAccount.css";
 import { withTranslation } from "react-i18next";
-import { GetStaysByUserId } from "../../repository/stays"
-import StaysCard from "../widgets/StaysCards/staysCard";
+import { GetStaysByUserId } from "../../../repository/stays"
+import StaysCard from "../../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
 
 

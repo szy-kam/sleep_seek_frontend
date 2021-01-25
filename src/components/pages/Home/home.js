@@ -1,7 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import StaysMap from "../widgets/StaysMap/staysMap";
-import StaysSlider from "../widgets/StaysSlider/staysSlider";
+import StaysMap from "../../widgets/StaysMap/staysMap";
+import StaysSlider from "../../widgets/StaysSlider/staysSlider";
 
 const Home = () => {
     return (

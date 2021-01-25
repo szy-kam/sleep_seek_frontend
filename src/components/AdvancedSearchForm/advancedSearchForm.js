@@ -6,7 +6,7 @@ import PropertiesForm from '../PropertiesForm/propertiesForm'
 import { GetAllStayCategories } from "../../repository/stay";
 import DataPicker, { utils } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { myCustomLocale } from '../Reservation/reservation'
+import { myCustomLocale } from '../pages/Reservation/reservation'
 
 const AdvancedSearch = (props) => {
 

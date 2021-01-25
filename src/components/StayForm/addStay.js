@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AddStayRepository } from "../../repository/stay";
-import StayForm from "../widgets/StayForm/stayForm";
+import StayForm from "./stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
 

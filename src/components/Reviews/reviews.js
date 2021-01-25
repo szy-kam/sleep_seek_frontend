@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { GetReviewsByStayIdRepository, AddReviewRepository } from "../../../repository/stay";
+import { GetReviewsByStayIdRepository, AddReviewRepository } from "../../repository/stay";
 import { withTranslation } from "react-i18next";
 import style from './reviews.css'
-import { IsUserLogged } from "../../../repository/user";
+import { IsUserLogged } from "../../repository/user";
 import 'font-awesome/css/font-awesome.min.css';
 
 class Rewiews extends Component {
@@ -70,11 +70,11 @@ class Rewiews extends Component {
                         <div className={style.message}>
                             {/* <i className={"fa fa-quote-left"}></i> */}
                             <span className={style.messageContent}>
-                            {item.message}
+                                {item.message}
                             </span>
                             {/* <i className={"fa fa-quote-right"}></i> */}
                         </div>
-                        
+
                     </div>
                 ))}
             </div>

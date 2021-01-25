@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { GetStayByIdRepository } from "../../repository/stay";
+import { GetStayByIdRepository } from "../../../repository/stay";
 import { withTranslation } from "react-i18next";
 import style from "./stay.css";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { STAY } from "../../config";
+import { STAY } from "../../../config";
 import { connect } from "react-redux";
-import StayMap from '../widgets/StayMap/stayMap'
-import Reviews from "../widgets/Reviews/reviews";
-import Accommodation from "../Accommodation/accommodation";
-import Properties from '../Properties/properties'
+import StayMap from '../../widgets/StayMap/stayMap'
+import Reviews from "../../Reviews/reviews";
+import Accommodation from "../../Accommodation/accommodation";
+import Properties from '../../Properties/properties'
 
 class Stay extends Component {
     state = {

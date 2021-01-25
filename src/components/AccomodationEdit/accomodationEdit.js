@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AccommodationForm from '../widgets/AccommodationForm/accommodationForm'
+import AccommodationForm from '../AccommodationForm/accommodationForm'
 import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, EditAccomodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
 import { withTranslation } from "react-i18next";
 import style from './accomodationEdit.css'

@@ -3,7 +3,7 @@ import {
     EditStayRepository,
     DeleteStayByIdRepository,
 } from "../../repository/stay";
-import StayForm from "../widgets/StayForm/stayForm";
+import StayForm from "./stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
 import AccomodationEdit from "../AccomodationEdit/accomodationEdit";

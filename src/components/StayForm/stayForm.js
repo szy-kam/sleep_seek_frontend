@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import FileUploader from "../FileUploader/fileUploader";
+import FileUploader from "../widgets/FileUploader/fileUploader";
 import style from "./stayForm.css";
-import { GetStayByIdRepository, GetAllStayCategories, DeleteStayPhotoRepository } from "../../../repository/stay";
+import { GetStayByIdRepository, GetAllStayCategories, DeleteStayPhotoRepository } from "../../repository/stay";
 import { withTranslation } from "react-i18next";
-import { STAY } from "../../../config";
-import StayMap from "../StayMap/stayMap";
+import { STAY } from "../../config";
+import StayMap from "../widgets/StayMap/stayMap";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import countrysList from "../../../repository/countrysList";
+import countrysList from "../../repository/countrysList";
 import { connect } from "react-redux";
-import PropertiesForm from "../../PropertiesForm/propertiesForm";
+import PropertiesForm from "../PropertiesForm/propertiesForm";
 
 class StayForm extends Component {
     state = {

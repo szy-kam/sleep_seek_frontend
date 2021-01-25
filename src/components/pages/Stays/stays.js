@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import StaysCard from "../widgets/StaysCards/staysCard";
-import { GetStaysWithParamsRepository } from "../../repository/stays";
+import StaysCard from "../../widgets/StaysCards/staysCard";
+import { GetStaysWithParamsRepository } from "../../../repository/stays";
 import style from "./stays.css";
-import AdvancedSearchForm from "../AdvancedSearchForm/advancedSearchForm";
-import StaysMap from "../widgets/StaysMap/staysMap";
+import AdvancedSearchForm from "../../AdvancedSearchForm/advancedSearchForm";
+import StaysMap from "../../widgets/StaysMap/staysMap";
 import { withTranslation } from "react-i18next";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 

@@ -1,0 +1,16 @@
+.message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    background-color: blue;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    z-index: 4;
+}
+
+.stayEditCompoment{
+    display: flex;
+    flex-direction: column;
+    
+}

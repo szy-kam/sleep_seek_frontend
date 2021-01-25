@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import style from './reservation.css'
 import { withTranslation } from "react-i18next";
-import { STAY } from '../../config'
-import { GetStayByIdRepository, GetAccommodationByIdRepository } from '../../repository/stay'
+import { STAY } from '../../../config'
+import { GetStayByIdRepository, GetAccommodationByIdRepository } from '../../../repository/stay'
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 

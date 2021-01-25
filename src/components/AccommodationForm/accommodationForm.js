@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import style from "./accommodationForm.css";
 import { withTranslation } from "react-i18next";
-import PropertiesForm from '../../PropertiesForm/propertiesForm'
+import PropertiesForm from '../PropertiesForm/propertiesForm'
 
 class AccommodationForm extends Component {
     state = {
