@@ -11,6 +11,7 @@ import { myCustomLocale } from '../Reservation/reservation'
 const AdvancedSearch = (props) => {
 
     const inputsInit = {
+        orderBy: "",
         name: "",
         country: "Polska",
         city: "",
@@ -38,6 +39,13 @@ const AdvancedSearch = (props) => {
         });
     }
 
+    const orderByOptions = () => {
+        const options = ["NAME", "PRICE", "RATE"]
+        return options.map((item, i) => {
+            return <option key={i}>{t(item)}</option>;
+        });
+    }
+
     const handleInput = (event, field) => {
         const newInputs = {
             ...inputs
@@ -56,7 +64,7 @@ const AdvancedSearch = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const searchParams = Object.assign({ propertice: properties }, inputs)
-        if(selectedDayRange.from && selectedDayRange.to){
+        if (selectedDayRange.from && selectedDayRange.to) {
             searchParams.dateFrom = myCustomLocale.toNativeDate(selectedDayRange.from)
             searchParams.dateTo = myCustomLocale.toNativeDate(selectedDayRange.to)
         }
@@ -68,6 +76,13 @@ const AdvancedSearch = (props) => {
     return (
         <div className={style.advancedSearchComponent}>
             <form onSubmit={handleSubmit} className={style.advancedSearchForm}>
+                <label>{t("ORDER_BY")}</label>
+                <select
+                    onChange={(event) => handleInput(event, "orderBy")}
+                    value={inputs.orderBy}
+                >
+                    {orderByOptions()}
+                </select>
                 <label>{t("NAME")}</label>
                 <input
                     onChange={(event) => handleInput(event, "name")}

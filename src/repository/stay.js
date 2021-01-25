@@ -133,7 +133,7 @@ export async function AddReviewRepository(review) {
 
 export function GetAllStayCategories() {
     return [
-        "Hotel", "Pensjonat", "Hostel", "Domki", "Apartament", "Mieszkanie", "Kwatera prywatna"
+        "Hotel", "Pensjonat", "Hostel", "Domek", "Apartament", "Mieszkanie", "Kwatera prywatna", "Schronisko", "Ośrodek wypoczynkowy"
     ]
 }
 

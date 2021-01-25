@@ -77,7 +77,7 @@ class Register extends Component {
                         value={this.state.form.displayName}
                         onChange={(event) => this.handleInput(event, "displayName")}
                         required
-                        autofocus
+                        autoFocus
                     />
                     <input
                         type="email"

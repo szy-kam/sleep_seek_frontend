@@ -32,11 +32,14 @@ class AccommodationEdit extends Component {
     handleSubmit = (accommodation) => {
         if (accommodation.id) {
             EditAccomodationRepository(accommodation)
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
         }
-        AddAccommodationRepository(accommodation)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
+        else {
+            AddAccommodationRepository(accommodation)
+        }
+
     }
 
     handleDelete = (accommodationId) => {

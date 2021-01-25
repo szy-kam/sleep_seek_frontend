@@ -53,16 +53,19 @@ class AccommodationForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "sleepersCapacity")}
                         value={this.state.accommodation.sleepersCapacity}
+                        type="number"
                     />
-                    <label>{t("PRICE")}</label>
+                    <label>{t("PRICE")} ({t("CURRENCY_SYMBOL")})</label>
                     <input
                         onChange={(event) => this.handleInput(event, "price")}
                         value={this.state.accommodation.price}
+                        type="number"
                     />
                     <label>{t("QUANTITY")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "quantity")}
                         value={this.state.accommodation.quantity}
+                        type="number"
                     />
                     <PropertiesForm accommodation={true} accommodationId={this.props.accommodation.id} handleInput={this.handlePropertiesInput} />
                     <button onClick={this.handleDelete} type="button">

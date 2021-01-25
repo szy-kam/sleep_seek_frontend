@@ -24,16 +24,24 @@ const Reservation = (props) => {
     const [accomodation, setAccomodation] = useState(accomodationInit);
 
     useEffect(() => {
-        GetStayByIdRepository(props.match.params.stayId).then((stay) => {
-            if (stay) { setStay(stay) }
-            else {
-                props.history.push("/404");
-            }
-        });
+        GetStayByIdRepository(props.match.params.stayId)
+            .then((stay) => {
+                if (stay) { setStay(stay) }
+                else {
+                    props.history.push("/404");
+                }
+            });
 
-        GetAccommodationByIdRepository(props.match.params.accomodationId).then((response) => {
-            setAccomodation(response)
-        })
+        GetAccommodationByIdRepository(props.match.params.accomodationId)
+            .then((response) => {
+                if (response.ok) {
+                    setAccomodation(response)
+                }
+                else {
+                    props.history.push("/404");
+                }
+            })
+
     }, [props.history, props.match.params.accomodationId, props.match.params.stayId]);
 
     const renderStay = () => {

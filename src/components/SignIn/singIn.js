@@ -77,7 +77,7 @@ class SignIn extends Component {
                         onChange={(event) => this.handleInput(event, "username")}
                         autoComplete="on"
                         required
-                        autofocus
+                        autoFocus
                     />
                     <input
                         type="password"
