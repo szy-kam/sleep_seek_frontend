@@ -55,3 +55,39 @@
     max-height: 200px;
     margin: 20px 0;
 }
+
+
+.photos {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+}
+
+.photoContainer {
+    position: relative;
+}
+
+.photoContainer  img {
+    max-height: 100px;
+    object-fit: contain;
+    margin: 0 3px;
+}
+
+.deletePhoto {
+    top: 4px;
+    right: 8px;
+    z-index: 2;
+    position: absolute;
+    color: #fff;
+    font-weight: 300;
+    background-color: red;
+    border: 1px solid black;
+    width: 20px;
+    height: 20px;
+    line-height: 17px;
+    text-align: center;
+    font-size: 25px;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: 600;
+}

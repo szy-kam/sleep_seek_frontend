@@ -4,6 +4,7 @@ import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logInUser } from "../../redux/user/userActions";
 import { SignInUserRepository } from "../../repository/user";
+import { Link } from "react-router-dom";
 
 class SignIn extends Component {
     state = {
@@ -75,6 +76,8 @@ class SignIn extends Component {
                         value={this.state.form.email}
                         onChange={(event) => this.handleInput(event, "username")}
                         autoComplete="on"
+                        required
+                        autofocus
                     />
                     <input
                         type="password"
@@ -82,9 +85,14 @@ class SignIn extends Component {
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="on"
+                        required
                     />
+                    <div><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div>
                     <button type="submit">{t("LOG_IN")}</button>
                 </form>
+                <div>
+                    <div><Link to="/register"><button>{t("CREATE_ACCOUNT")}</button></Link></div>
+                </div>
             </div>
         );
     }

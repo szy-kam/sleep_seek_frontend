@@ -21,9 +21,9 @@ class EditStay extends Component {
         );
     }
 
-    submitForm = (stay) => {
+    submitForm = (stay, files) => {
         const { t } = this.props;
-        EditStayRepository(stay)
+        EditStayRepository(stay, files)
             .then((response) => {
                 if (response.ok) {
                     this.setState({ message: t("STAY_EDITED") })

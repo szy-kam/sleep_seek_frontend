@@ -81,7 +81,6 @@ class Stays extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className={style.staysComponent}>
                 <div className={style.leftColumn}>

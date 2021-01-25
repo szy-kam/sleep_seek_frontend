@@ -38,11 +38,9 @@ export async function AddStayRepository(stay, files) {
                 isMainPhoto = true
             formData.append("image", image);
 
-
             const ls = JSON.parse(localStorage.getItem('persist:root'))
             const parseUser = JSON.parse(ls.user)
             const token = parseUser.user.userToken;
-
 
             const response = await fetch(BACKEND_URL + "/image", {
                 method: "POST",
@@ -52,8 +50,6 @@ export async function AddStayRepository(stay, files) {
                 },
                 body: formData
             });
-            // const imgUrl = BACKEND_URL + "/image"
-            // const response = fetchWithAutorization("POST", imgUrl, formData, "multipart/form-data")
 
             if (response.ok) {
                 const json = await response.json();
@@ -75,18 +71,62 @@ export async function AddStayRepository(stay, files) {
     return fetchWithAutorization("POST", url, stay)
 }
 
-export async function EditStayRepository(stay) {
+export async function EditStayRepository(stay, files) {
+    let images = stay.photos;
+    if (files) {
+        for (let image of files) {
+            let formData = new FormData();
+            let isMainPhoto = false
+            if (image.name === stay.mainPhoto)
+                isMainPhoto = true
+            formData.append("image", image);
+
+            const ls = JSON.parse(localStorage.getItem('persist:root'))
+            const parseUser = JSON.parse(ls.user)
+            const token = parseUser.user.userToken;
+
+            const response = await fetch(BACKEND_URL + "/image", {
+                method: "POST",
+                headers: {
+                    "Origin": "http://localhost:3000",
+                    "Authorization": token
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                const json = await response.json();
+                images.push(json.url);
+                if (isMainPhoto)
+                    stay.mainPhoto = json.url
+            }
+            else {
+                console.log("IMAGE ERROR");
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data);
+                })
+            }
+        }
+    }
+    stay.photos = images
     const url = BACKEND_URL + "/stays/" + stay.id
     return fetchWithAutorization("PUT", url, stay)
 
 }
+
+export async function DeleteStayPhotoRepository(photo) {
+    // const url = BACKEND_URL + "/photo?url=" + photo
+    console.log("DEL" + photo);
+    // return fetchWithAutorization("DELETE", url)
+}
+
 
 export async function GetReviewsByStayIdRepository(stayId, pageNumber, pageSize) {
     return await fetch(BACKEND_URL + "/review?stayId=" + stayId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize)
 }
 
 export async function AddReviewRepository(review) {
-    console.log(review);
     const url = BACKEND_URL + "/review?stayId=" + review.stayId
     return fetchWithAutorization("POST", url, review)
 }

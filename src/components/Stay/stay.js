@@ -83,6 +83,7 @@ class Stay extends Component {
     }
 
     render() {
+        console.log(this.state.stay);
         const { t } = this.props;
         const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
         return (

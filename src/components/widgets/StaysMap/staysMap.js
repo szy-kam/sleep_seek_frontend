@@ -6,18 +6,18 @@ import { GetStaysRepository } from '../../../repository/stays'
 require("react-leaflet-markercluster/dist/styles.min.css");
 
 class StaysMap extends Component {
+    defaultHeight = "450px";
+    defaultZoom = 6;
+    defaultPosition = [52.125736, 19.080392]; // geometric center of Poland
+    defaultQuantity = 50;
+
     state = {
         stays: this.props.stays || [],
         position: this.props.position || this.defaultPosition,
         zoom: this.props.zoom || this.defaultZoom
     }
 
-    defaultHeight = "450px";
-    defaultZoom = 6;
-    defaultPosition = [52.125736, 19.080392]; // geometric center of Poland
-
     height = this.props.height || this.defaultHeight;
-    defaultQuantity = 50;
 
     componentDidMount = () => {
         if (!this.props.stays) {
@@ -42,8 +42,10 @@ class StaysMap extends Component {
                     return (
                         <Marker position={[item.address.latitude, item.address.longitude]} key={i}>
                             <Popup>
-                                <Link to={`/stays/${item.id}`}><img src={item.mainPhoto} alt={item.name} /></Link>
-                                <Link to={`/stays/${item.id}`}>{item.name}</Link>
+                                <div>
+                                    <Link to={`/stays/${item.id}`}><img src={item.mainPhoto} alt={item.name} height="100px" width="auto" /></Link>
+                                    <Link to={`/stays/${item.id}`}><p>{item.name}</p></Link>
+                                </div>
                             </Popup>
                         </Marker>
                     )

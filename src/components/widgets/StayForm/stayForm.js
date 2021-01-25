@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FileUploader from "../FileUploader/fileUploader";
 import style from "./stayForm.css";
-import { GetStayByIdRepository, GetAllStayCategories } from "../../../repository/stay";
+import { GetStayByIdRepository, GetAllStayCategories, DeleteStayPhotoRepository } from "../../../repository/stay";
 import { withTranslation } from "react-i18next";
 import { STAY } from "../../../config";
 import StayMap from "../StayMap/stayMap";
@@ -148,6 +148,44 @@ class StayForm extends Component {
             });
     }
 
+    handleDeletePhoto = (event) => {
+
+        const newStay = {
+            ...this.state.stay,
+        };
+        newStay.photos = newStay.photos.filter(photo => {
+            return photo !== event.target.id
+        });
+        this.setState({
+            stay: newStay,
+        });
+
+        DeleteStayPhotoRepository(event.target.id)
+            .catch(err => console.log(err))
+    }
+
+    renderPhotos = () => {
+        if (this.state.stay.photos) {
+            return this.state.stay.photos.map((item, i) => {
+                return (
+                    <div className={style.photoContainer} key={i}>
+                        <div id={item} className={style.deletePhoto} onClick={this.handleDeletePhoto}>x</div>
+                        <div className={style.deletedPhoto}></div>
+                        <img
+                            src={item}
+                            key={i}
+                            alt={item}
+                            onClick={this.mainPhotoSelected}
+                            className={item === this.state.stay.mainPhoto ? style.selectedPhoto : null}
+                        />
+
+                    </div>
+                )
+            })
+        }
+    }
+
+
     render() {
         const { t } = this.props;
         return (
@@ -223,15 +261,16 @@ class StayForm extends Component {
                         value={this.state.stay.description}
                     />
                     <label>{t("PHOTOS")}</label>
+                    <div className={style.photos}>{this.renderPhotos()}</div>
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
                     {!this.state.stay.mainPhoto ? t("SELECT_MAIN_PHOTO") : null}
+
                     <label>{t("PROPERTIES")}</label>
                     <div className={style.properties}>
                         <PropertiesForm handleInput={this.handlePropertiesInput} stay={true} stayId={this.props.getStay} />
                     </div>
-
 
                     <button type="submit">
                         {this.props.getStay ? t("EDIT_STAY") : t("ADD_STAY")}
