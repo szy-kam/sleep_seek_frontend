@@ -19,3 +19,6 @@ export let STAY = {
     phoneNumber: "",
     photos: [],
 };
+
+
+

@@ -21,17 +21,19 @@
 .staysCardT1:hover{
     background-color: #f0f0f0;
 }
+
 .staysCardT1 .left {
     align-self: flex-start;
     min-width: 250px;
     width: 30%;
     flex-shrink: 1;
 }
-@media only screen and (max-width: 1000px) {
+
+@media only screen and (max-width: 800px) {
     .staysCardT1 {
         flex-direction: column;
     }
-  }
+}
 
 .staysCardT1 .right {
     flex-shrink: 3;

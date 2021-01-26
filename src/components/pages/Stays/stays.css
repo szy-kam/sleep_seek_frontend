@@ -3,6 +3,19 @@
     flex-direction: row;
 }
 
+@media only screen and (max-width: 1000px) {
+
+    .staysComponent {
+        flex-direction: column;
+    }
+
+    .leftColumn {
+        flex-basis: 85%;
+        max-width: none!important;
+    }
+
+}
+
 .leftColumn {
     flex-basis: 15%;
     padding: 20px;
