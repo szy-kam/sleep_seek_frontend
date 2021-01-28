@@ -33,10 +33,10 @@ class Accommodation extends Component {
         return this.state.accommodations.map((item, i) => (
             <tr className={style.accommodation} key={i}>
                 <td>{item.sleepersCapacity}</td>
-                <td><Properties accommodationId={item.id} /></td>
+                <td><Properties properties={item.properties}/></td>
                 <td>{item.quantity}</td>
                 <td>{item.price} {t('CURRENCY_SYMBOL')}</td>
-                <td><Link to={`/reservation/${item.stayId}/${item.id}`}>{t('BOOK_IT')}</Link></td>
+                <td><Link to={`/reservation/${item.stayId}/${item.id}`}><button className={style.bookButton}>{t('BOOK_IT')}</button></Link></td>
             </tr>
         ))
 

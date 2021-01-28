@@ -17,7 +17,9 @@ export let STAY = {
     minPrice: "",
     email: "",
     phoneNumber: "",
+    avgRate: "",
     photos: [],
+    properties: []
 };
 
 

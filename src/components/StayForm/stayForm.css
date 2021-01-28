@@ -1,18 +1,16 @@
 /* *********************************************
 ******************   Edit Form **************
 ********************************************* */
-.stayEditCompoment {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
 
 .editForm {
     margin: 20px auto;
     padding: 30px;
     border: 1px solid black;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
+    flex-basis: 80%;
+    width: 70%;
 }
 
 /* .editForm input,
@@ -92,4 +90,13 @@
     vertical-align: middle;
     cursor: pointer;
     font-weight: 600;
+}
+
+.selectMainPhoto{
+    margin: 10px 0;
+    color: rgb(255, 0, 0);
+}
+
+.submitButton, .deleteButton {
+    align-self: center;
 }

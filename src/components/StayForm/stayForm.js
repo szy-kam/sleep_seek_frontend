@@ -7,13 +7,12 @@ import { STAY } from "../../config";
 import StayMap from "../widgets/StayMap/stayMap";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import countrysList from "../../repository/countrysList";
-import { connect } from "react-redux";
 import PropertiesForm from "../PropertiesForm/propertiesForm";
 
 class StayForm extends Component {
     state = {
         stay: STAY,
-        properties: []
+        categories: []
     };
 
     componentDidMount() {
@@ -29,12 +28,19 @@ class StayForm extends Component {
             // To set default values in select
             const stay = this.state.stay
             stay.address.country = "Polska"
-            stay.category = "Hotel"
+            stay.category = "HOTEL"
             this.setState({
                 stay: stay
             })
         }
 
+        GetAllStayCategories()
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    this.setState({ categories: data })
+                }
+            })
     }
 
     handleInput = (event, field) => {
@@ -94,10 +100,10 @@ class StayForm extends Component {
     };
 
     stayCategoryOptions = () => {
-        const categories = GetAllStayCategories();
-        return categories.map((item, i) => {
-            return <option key={i}>{item}</option>;
+        return this.state.categories.map((item, i) => {
+            return <option key={i} value={item}>{this.props.t(item)}</option>;
         });
+
     }
 
     handleSubmit = (event) => {
@@ -142,10 +148,14 @@ class StayForm extends Component {
     };
 
     handlePropertiesInput = (val) => {
-        if (val !== this.state.properties)
-            this.setState({
-                properties: val,
-            });
+        const newStay = {
+            ...this.state.stay,
+        };
+        newStay.properties = val
+
+        this.setState({
+            stay: newStay
+        });
     }
 
     handleDeletePhoto = (event) => {
@@ -195,6 +205,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "name")}
                         value={this.state.stay.name}
+                        required
                     />
                     <label>{t("CATEGORY")}</label>
                     <select
@@ -246,6 +257,7 @@ class StayForm extends Component {
                         onChange={(event) => this.handleInput(event, "minPrice")}
                         value={this.state.stay.minPrice}
                         type="number"
+                        required
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
@@ -262,25 +274,26 @@ class StayForm extends Component {
                     <textarea
                         onChange={(event) => this.handleInput(event, "description")}
                         value={this.state.stay.description}
+                        maxlength="10000"
                     />
                     <label>{t("PHOTOS")}</label>
                     <div className={style.photos}>{this.renderPhotos()}</div>
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
-                    {!this.state.stay.mainPhoto ? t("SELECT_MAIN_PHOTO") : null}
+                    {!this.state.stay.mainPhoto ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
 
                     <label>{t("PROPERTIES")}</label>
                     <div className={style.properties}>
-                        <PropertiesForm handleInput={this.handlePropertiesInput} stay={true} stayId={this.props.getStay} />
+                        <PropertiesForm handleInput={this.handlePropertiesInput} stay={true} properties={this.state.stay.properties} />
                     </div>
 
-                    <button type="submit">
+                    <button type="submit" className={style.submitButton}>
                         {this.props.getStay ? t("SAVE") : t("ADD_STAY")}
                     </button>
 
                     {this.props.handleDelete ? (
-                        <button onClick={this.props.handleDelete}>{t("DELETE_STAY")}</button>
+                        <button onClick={this.props.handleDelete} className={style.deleteButton}>{t("DELETE_STAY")}</button>
                     ) : null}
 
                 </form>
@@ -289,8 +302,4 @@ class StayForm extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user: state.user.user
-})
-
-export default connect(mapStateToProps)(withTranslation()(StayForm));
+export default withTranslation()(StayForm)

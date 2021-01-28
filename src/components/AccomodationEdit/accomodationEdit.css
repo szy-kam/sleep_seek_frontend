@@ -8,3 +8,7 @@
     flex-wrap: wrap;
     place-content: center;
 }
+
+.addAccommodationButton, .goToStayButton {
+    align-self: center;
+}

@@ -1,8 +1,113 @@
+.reservationComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservationContent {
+    display: flex;
+    width: 80%;
+    align-self: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.reservationContent h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .stay{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    max-width: 33%;
+}
+
+.stay > div {
+    font-size: 22px;
+}
+
+.stay > div > b {
+    font-weight: 900;
 }
 
 .Calendar__monthArrow{
     width: 30px!important;
+}
+
+.properties div {
+    font-size: 16px!important;
+}
+
+.name {
+    font-size: 40px!important;
+    color: #278abb;
+    font-weight: 900;
+}
+
+.photo img {
+    width: 300px;
+    height: auto;
+}
+
+.dateInputs {
+    display: flex;
+    flex-direction: column;
+    max-width: 33%;
+}
+
+.dataInfo {
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.dataInfo div b {
+    font-weight: 900;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    max-width: 33%;
+}
+
+.numberInCircleContainer{
+    display: flex;
+    align-self: center;
+}
+
+.numberInCircle {
+    width: 120px;
+    line-height: 120px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 105px;
+    border: 2px solid #278abb;
+    color: #278abb;
+}
+
+.makeReservation {
+    display: flex;
+    align-self: center;
+    margin-top: 150px;
+    padding: 35px;
+    font-size: 25px;
+}
+
+.message{
+    color: tomato;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 1300px){
+
+    .reservationContent {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 1100px){
+
+    .reservationContent {
+        flex-direction: column;
+        width: 70%;
+    }
 }

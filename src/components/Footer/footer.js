@@ -6,7 +6,7 @@ class Footer extends Component {
     render() {
         return (
             <footer>
-                <div className={style.copyright}>Copyright © 1996–2020</div>
+                <div className={style.copyright}>Copyright © SleepSeek </div>
             </footer>
         );
     }

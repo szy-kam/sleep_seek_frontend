@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import style from './advancedSearchForm.css'
 import countrysList from "../../repository/countrysList";
 import { withTranslation } from "react-i18next";
@@ -25,6 +25,17 @@ const AdvancedSearch = (props) => {
         from: null,
         to: null
     });
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        GetAllStayCategories()
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    setCategories(data)
+                }
+            })
+    }, [])
 
     const countrysOptions = () => {
         return countrysList.map((item, i) => {
@@ -33,9 +44,8 @@ const AdvancedSearch = (props) => {
     };
 
     const stayCategoryOptions = () => {
-        const categories = GetAllStayCategories();
         return categories.map((item, i) => {
-            return <option key={i}>{item}</option>;
+            return <option key={i} value={item}>{props.t(item)}</option>;
         });
     }
 
@@ -137,7 +147,7 @@ const AdvancedSearch = (props) => {
                 <label>{t("PROPERTIES")}</label>
                 <PropertiesForm handleInput={handlePropertiesInput} stay={true} />
 
-                <button type="submit">
+                <button type="submit" className={style.submitButton}>
                     {t("SEARCH")}
                 </button>
             </form>

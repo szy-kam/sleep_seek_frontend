@@ -30,7 +30,7 @@ class StaysMap extends Component {
 
     componentDidUpdate = (prevProps) => {
         if (prevProps !== this.props) {
-            this.setState({ stays: this.props.stays})
+            this.setState({ stays: this.props.stays })
         }
     }
 
@@ -74,9 +74,13 @@ class StaysMap extends Component {
             >
                 <this.CentreMap />
                 <TileLayer
+                    url='https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png'
+                    attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                />
+                {/* <TileLayer
                     url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                />
+                /> */}
                 <MarkerClusterGroup>{this.markers()}</MarkerClusterGroup>
             </MapContainer>
         );

@@ -10,9 +10,9 @@ class AccommodationForm extends Component {
             stayId: this.props.accommodation.stayId || this.props.stayId,
             sleepersCapacity: this.props.accommodation.sleepersCapacity || "",
             quantity: this.props.accommodation.quantity || "",
-            price: this.props.accommodation.price || ""
-        },
-        properties: []
+            price: this.props.accommodation.price || "",
+            properties: this.props.accommodation.properties || []
+        }
     };
 
     handleInput = (event, field) => {
@@ -38,10 +38,14 @@ class AccommodationForm extends Component {
     };
 
     handlePropertiesInput = (val) => {
-        if (val !== this.state.properties)
-            this.setState({
-                properties: val,
-            });
+        const newAccommdation = {
+            ...this.state.accommodation,
+        };
+        newAccommdation.properties = val
+
+        this.setState({
+            accommodation: newAccommdation
+        });
     }
 
     render() {
@@ -55,23 +59,29 @@ class AccommodationForm extends Component {
                         value={this.state.accommodation.sleepersCapacity}
                         type="number"
                     />
+
                     <label>{t("PRICE")} ({t("CURRENCY_SYMBOL")})</label>
                     <input
                         onChange={(event) => this.handleInput(event, "price")}
                         value={this.state.accommodation.price}
                         type="number"
                     />
-                    <label>{t("QUANTITY")}</label>
+
+                    <label>{t("ACCOMMODATION_QUANTITY")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "quantity")}
                         value={this.state.accommodation.quantity}
                         type="number"
                     />
-                    <PropertiesForm accommodation={true} accommodationId={this.props.accommodation.id} handleInput={this.handlePropertiesInput} />
-                    <button onClick={this.handleDelete} type="button">
-                        {t("DELETE")}
-                    </button>
-                    <button type="submit">
+                    <PropertiesForm accommodation={true} properties={this.state.accommodation.properties} handleInput={this.handlePropertiesInput} />
+
+                    {this.state.accommodation.id &&
+                        <button onClick={this.handleDelete} type="button" className={style.deleteAccommodationButton}>
+                            {t("DELETE")}
+                        </button>
+                    }
+
+                    <button type="submit" className={style.addAccommodationButton}>
                         {t("SAVE_ACCOMMODATION")}
                     </button>
                 </form>

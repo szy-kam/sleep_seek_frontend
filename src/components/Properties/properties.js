@@ -1,42 +1,51 @@
-import React, { Component } from 'react'
-import { GetStayPropertiesById, GetAccommodationPropertiesById } from '../../repository/stay'
+import React from 'react'
 import style from './properties.css'
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import 'font-awesome/css/font-awesome.min.css';
 
-class Properties extends Component {
-    state = {
-        properties: []
-    }
+const Properties = (props) => {
 
-    componentDidMount() {
-        if (this.props.stayId) {
-            GetStayPropertiesById(this.props.stayId).then((response) => {
-                this.setState({ properties: response })
-            })
+    const matchIco = (name) => {
+        switch (name) {
+            case 'PARKING': return "parking";
+            case '24h': return "clock";
+            case "BATH": return "bath";
+            case "SHOWER": return "shower";
+            case 'TV': return 'TV';
+            case 'USER_PLUS': return "user-plus";
+            case "COOLING": return "snowflake-o";
+            case "PARKING": return "parking";
+            case "GYM": return "dumbbell";
+            case "POOL": return "swimmer";
+            case "RESTAURANT": return "utensils";
+            case "WIFI": return "wifi";
+            case "RECEPTION24H": return "history";
+            case "PETS_ALLOWED": return "paw";
+            case "CARD_ACCEPTED": return "money-check";
+            case "DISABLED_ACCESSIBLE": return "wheelchair";
+            case "BAR": return "cocktail";
+            default: return null
         }
-        if (this.props.accommodationId) {
-            GetAccommodationPropertiesById(this.props.accommodationId).then((response) => {
-                this.setState({ properties: response })
-            })
+    }
+
+    const { t } = useTranslation()
+
+    const renderProperties = () => {
+        if (Array.isArray(props.properties)) {
+            return props.properties.map((item, i) => (
+                <div className={style.property} key={i}>
+                    <i className={`fa fa-${matchIco(item)}`}></i>
+                    {t(item)}
+                </div>
+            ))
         }
     }
 
-    renderProperties = () => {
-        return this.state.properties.map((item, i) => (
-            <div className={style.property} key={i}>
-                <i className={`fa fa-${item.ico}`}></i>
-                {item.name}
-            </div>
-        ))
-    }
+    return (
+        <div className={style.propertiesComponent}>
+            {renderProperties()}
+        </div>
+    )
 
-    render() {
-        return (
-            <div className={style.propertiesComponent}>
-                {this.renderProperties()}
-            </div>
-        )
-    }
 }
-export default withTranslation()(Properties)
+export default Properties

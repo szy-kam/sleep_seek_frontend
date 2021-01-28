@@ -12,34 +12,41 @@
     display: flex;
     flex-direction: row;
     border: 1px solid black;
+    border-radius: 15px;
     padding: 15px;
+    margin: 3px 0;
 }
 
 .user{
     font-weight: bold;
 }
 
+.createdAt {
+    color: #6e6e6e;
+}
+
 .messageContent{
     font-style: italic;
-    font-size: 25px;
+    font-size: 17px;
 }
 
 .rating{
+    min-width: 50px;
     font-size: larger;
-    padding-right: 30px;
+    margin-right: 10px;
 }
 
 .rating strong{
     font-weight: 700;
     font-size: 150%;
-    color: darkblue;
+    color: #278abb;
 }
 
 .addReview{
     padding: 15px;
     display: flex;
     flex-direction: row;
-
+    align-items: center;
 }
 
 .addReview textarea{
@@ -54,11 +61,11 @@
 
 .addReview button{
     padding: 15px;
-    border: 1px solid black;
     width: 10%;
+    
 }
 
 .showMore{
     padding: 15px;
-    border: 1px solid black;
+    align-self: center;
 }

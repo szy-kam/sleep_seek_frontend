@@ -1,50 +1,53 @@
 import React, { Component } from 'react'
 import AccommodationForm from '../AccommodationForm/accommodationForm'
-import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, EditAccomodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
+import { GetAccommodationsByStayIdRepository, AddAccommodationRepository, EditAccommodationRepository, DeleteAccommodationRepository } from '../../repository/stay'
 import { withTranslation } from "react-i18next";
 import style from './accomodationEdit.css'
+import { Link } from 'react-router-dom';
+
 class AccommodationEdit extends Component {
     state = {
-        accommodations: [{}]
+        accommodations: null
+    }
+
+
+    getAccomodations = () => {
+        this.setState({ accommodations: null })
+        GetAccommodationsByStayIdRepository(this.props.match.params.id)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    data = [{}]
+                }
+                this.setState({ accommodations: data })
+            })
+            .catch(err => console.log(err));
     }
 
     componentDidMount() {
-        if (this.props.stayId) {
-            GetAccommodationsByStayIdRepository(this.props.stayId)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    else return [{}]
-                })
-                .then(data => {
-                    if (data.length === 0) {
-                        data = [{}]
-                    }
-                    this.setState({ accommodations: data })
-                })
-                .catch(err => console.log(err));
-        }
-        else
-            this.setState({ accommodations: [{}] })
+        this.getAccomodations()
     }
 
-    handleSubmit = (accommodation) => {
+    handleSubmit = async (accommodation) => {
         if (accommodation.id) {
-            EditAccomodationRepository(accommodation)
-                .then(response => response.json())
-                .then(data => console.log(data))
+            await EditAccommodationRepository(accommodation)
+                .then(() => this.getAccomodations())
                 .catch(err => console.log(err))
         }
         else {
-            AddAccommodationRepository(accommodation)
+            await AddAccommodationRepository(accommodation)
+                .then(() => this.getAccomodations())
+                .catch(err => console.log(err))
         }
-
+        this.getAccomodations()
     }
 
-    handleDelete = (accommodationId) => {
-        DeleteAccommodationRepository(accommodationId)
-            .then(response => console.log(response))
+    handleDelete = async (accommodationId) => {
+        await DeleteAccommodationRepository(accommodationId)
+            .then(() => {
+                this.getAccomodations()
+            })
+            .catch(err => console.log(err))
     }
 
     addForm = () => {
@@ -61,12 +64,16 @@ class AccommodationEdit extends Component {
         const { t } = this.props;
         return (
             <div className={style.accommodationEditComponent} id={"accommodationEdit"}>
-                <div>{t('MANAGE_ACCOMMODATIONS')}</div>
-                <div className={style.accommodationsForms}>{Array.isArray(this.state.accommodations) && this.state.accommodations.map((item, i) => (
-                    <AccommodationForm accommodation={item} key={i} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} stayId={this.props.stayId} />
-                ))} </div>
+                <h3>{t('MANAGE_ACCOMMODATIONS')}</h3>
+                <p>{t('SAVE_ACCOMMODATIONS_REMAINDER')}</p>
+                <div className={style.accommodationsForms}>
+                    {Array.isArray(this.state.accommodations) && this.state.accommodations.map((item, i) => (
+                        <AccommodationForm accommodation={item} key={i} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} stayId={this.props.match.params.id} />
+                    ))}
+                </div>
 
-                <button onClick={this.addForm}>{t('ADD_ACCOMMODATION')}</button>
+                <button onClick={this.addForm} className={style.addAccommodationButton}>{t('ADD_ACCOMMODATION')}</button>
+                <Link to={`/stays/${this.props.match.params.id}`} className={style.goToStayButton}><button >{t('GO_TO_STAY')}</button></Link>
             </div>
         )
     }

@@ -68,11 +68,12 @@ class Rewiews extends Component {
                     <div className={style.review} key={i}>
                         <div className={style.rating}><strong>{item.rating}</strong> / 5 </div>
                         <div className={style.message}>
-                            {/* <i className={"fa fa-quote-left"}></i> */}
-                            <span className={style.messageContent}>
+                            <div className={style.createdAt}>
+                                {item.createdAt.slice(0, 10)}
+                            </div>
+                            <div className={style.messageContent}>
                                 {item.message}
-                            </span>
-                            {/* <i className={"fa fa-quote-right"}></i> */}
+                            </div>
                         </div>
 
                     </div>
@@ -112,7 +113,7 @@ class Rewiews extends Component {
         const { t } = this.props
         return (
             <div className={style.addReview}>
-                <textarea onChange={event => this.inputHandler(event, "message")} placeholder={t('ADD_REVIEW_PLACEHOLDER')} value={this.state.newReview.message}></textarea>
+                <textarea onChange={event => this.inputHandler(event, "message")} placeholder={t('ADD_REVIEW_PLACEHOLDER')} value={this.state.newReview.message} maxlength="1000"></textarea>
                 <select onChange={(event) => this.inputHandler(event, "rating")}
                     value={this.state.newReview.rating}>
                     <option value="1">★</option>

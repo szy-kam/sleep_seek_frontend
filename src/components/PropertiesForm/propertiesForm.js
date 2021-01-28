@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useChecklist } from 'react-checklist';
-import { GetStayPropertiesById, GetAccommodationPropertiesById, GetAllAccommodationProperties, GetAllStayProperties } from '../../repository/stay'
+import { GetAllAccommodationProperties, GetAllStayProperties } from '../../repository/stay'
 import style from './propertiesForm.css'
+import { useTranslation } from "react-i18next";
 
 export default function PropertiesForm(props) {
 
-    const [properties, setProperties] = useState([])
+    // const [properties, setProperties] = useState(props.properties)
     const [allProperties, setAllProperties] = useState([])
 
     const { handleCheck, checkedItems } = useChecklist(allProperties, {
@@ -15,53 +16,55 @@ export default function PropertiesForm(props) {
 
     useEffect(() => {
         const getProperties = () => {
-            if (props.stayId && properties !== []) {
-                GetStayPropertiesById(props.stayId).then((response) => {
-                    setProperties(response);
-                    for (let item of response) {
-                        checkedItems.add(item.id.toString())
-                    }
-                })
+            if (Array.isArray(props.properties)) {
+                for (let item of props.properties) {
+                    checkedItems.add(item)
+                }
             }
-            if (props.accommodationId && properties !== []) {
-                GetAccommodationPropertiesById(props.accommodationId).then((response) => {
-                    setProperties(response)
-                    for (let item of response) {
-                        checkedItems.add(item.id.toString())
-                    }
-                })
-            }
+
             if (props.stay && allProperties !== []) {
-                GetAllStayProperties().then((response) => {
-                    setAllProperties(response)
-                })
+                GetAllStayProperties()
+                    .then(resposne => resposne.json())
+                    .then(data => {
+                        setAllProperties(data.map(item => {
+                            return { name: item, id: item }
+                        }))
+                    })
             }
+
             if (props.accommodation && allProperties !== []) {
-                GetAllAccommodationProperties().then((response) => {
-                    setAllProperties(response)
-                })
+                GetAllAccommodationProperties()
+                    .then(resposne => resposne.json())
+                    .then(data => {
+                        setAllProperties(data.map(item => {
+                            return { name: item, id: item }
+                        }))
+                        // setAllProperties(data)
+                    })
             }
         }
         getProperties()
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [props.properties]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (e) => {
         handleCheck(e)
         props.handleInput([...checkedItems]);
     }
 
+    const { t } = useTranslation()
+
     return (
         <div className={style.propertiesFormComponent}>
             <ul>
-                {allProperties.map((v, i) => (
+                {Array.isArray(allProperties) && allProperties.map((v, i) => (
                     <li key={i}>
                         <input
                             type="checkbox"
-                            data-key={v.id}
+                            data-key={v.name}
                             onChange={onChange}
-                            checked={checkedItems.has(v.id)}
+                            checked={checkedItems.has(v.name)}
                         />
-                        <label>{v.name}</label>
+                        <label>{t(v.name)}</label>
                     </li>
                 ))}
             </ul>

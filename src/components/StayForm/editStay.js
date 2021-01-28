@@ -6,14 +6,12 @@ import {
 import StayForm from "./stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
-import AccomodationEdit from "../AccomodationEdit/accomodationEdit";
+import { Link } from "react-router-dom";
 
 class EditStay extends Component {
     state = {
         message: "",
     };
-
-
 
     submitForm = (stay, files) => {
         const { t } = this.props;
@@ -40,7 +38,7 @@ class EditStay extends Component {
 
     redirectUser = () => {
         setTimeout(() => {
-            this.props.history.push("/");
+            this.props.history.push("/my-account");
         }, 2000);
     };
 
@@ -65,8 +63,9 @@ class EditStay extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
-            <div className={style.stayEditCompoment}>
+            <div className={style.editStayCompoment}>
                 {this.message()}
                 <StayForm
                     handleInput={this.handleInput}
@@ -75,11 +74,7 @@ class EditStay extends Component {
                     handleDelete={this.handleDelete}
                     getStay={this.props.match.params.id}
                 />
-                <AccomodationEdit
-                    stayId={this.props.match.params.id}
-                    handleSubmit={this.submitAccomodationForm}
-        
-                />
+                <Link to={`/stays/editAccommodations/${this.props.match.params.id}`}><button>{t('EDIT_ACCOMMODATIONS')}</button></Link>
             </div>
         );
     }

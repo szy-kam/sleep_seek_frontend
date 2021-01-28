@@ -17,14 +17,13 @@ class AddStay extends Component {
                 if (response.ok) {
                     response.json()
                         .then(data => {
-                            const editUrl = `/stays/edit/${data}#accommodationEdit`
+                            const editUrl = `/stays/editAccommodations/${data}`
                             console.log(editUrl);
                             this.redirectUser(editUrl)
                             this.setState({ message: t("STAY_ADDED") })
                         })
                 }
                 else {
-                    console.log(response);
                     response.json().then(data => {
                         console.log(data);
                     })
@@ -51,7 +50,7 @@ class AddStay extends Component {
 
     render() {
         return (
-            <div className={style.stayEditCompoment}>
+            <div className={style.addStayCompoment}>
                 {this.message()}
                 <StayForm
                     handleSubmit={this.handleSubmit}

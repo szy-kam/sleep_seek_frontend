@@ -10,6 +10,14 @@
     flex-direction: column;
 }
 
+.submitButton {
+    align-self: center;
+}
+
+.DatePicker__input {
+    border: 1px solid black !important
+}
+
 .Calendar__monthArrow{
     width: 30px!important;
 }

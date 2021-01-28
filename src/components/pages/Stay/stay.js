@@ -88,32 +88,35 @@ class Stay extends Component {
             const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
             return <div className={style.stayContent}>
                 <div className={style.stayInfo}>
-                    <div className={style.name}>
-                        {this.state.stay.name}
-                    </div>
-                    <div
+                    {this.state.stay.mainPhoto && <div
                         className={style.image}
                         style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
                     >
-                    </div>
+                    </div>}
                     <div className={style.imageGrid}>{this.imageGrid()}</div>
+                    <div className={style.name}>
+                        {this.state.stay.name}
+                    </div>
                     <div className={style.address}>
                         {t("ADDRESS")}: {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
                         {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
                     </div>
-                    <div className={style.price}>
-                        {this.state.stay.minPrice} {t("CURRENCY_SYMBOL")}
-                    </div>
                     <div className={style.contact}>
-                        <div>{this.state.stay.phoneNumber}</div>
-                        <div>{this.state.stay.email}</div>
-
+                        <div className={style.contacUs}>Skontaktuj się z nami!</div>
+                        <div><span className={style.contactDetail}>Telefon: </span>{this.state.stay.phoneNumber}</div>
+                        <div><span className={style.contactDetail}>E-mail: </span>{this.state.stay.email}</div>
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
+                    
                 </div>
-                <StayMap position={position} zoom={14} />
-                <Properties stayId={this.props.match.params.id} />
+                
+                <h3 className={style.title}>UDOGODNIENIA</h3>
+                <Properties properties={this.state.stay.properties} />
+                <h3 className={style.title}>POKOJE</h3>
                 <Accommodation stayId={this.props.match.params.id} />
+                <h3 className={style.title}>ZNAJDŹ NAS NA MAPIE</h3>
+                <StayMap position={position} zoom={14} />
+                <h3 className={style.title}>OPINIE</h3>
                 <Reviews stayId={this.props.match.params.id} />
                 {this.lightbox()}
             </div>
@@ -122,8 +125,6 @@ class Stay extends Component {
     }
 
     render() {
-
-
         return (
             <div className={style.stayComponent}>
                 {this.renderContent()}

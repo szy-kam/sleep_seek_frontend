@@ -12,6 +12,8 @@ import Register from "./components/pages/Register/register";
 import MyAccount from "./components/pages/MyAccount/myAccount";
 import Reservation from "./components/pages/Reservation/reservation"
 import Component404 from "./components/Component404/component404";
+import AccomodationEdit from "./components/AccomodationEdit/accomodationEdit";
+import ReservationsEdit from "./components/ReservationsEdit/reservationsEdit";
 
 class Routes extends Component {
 
@@ -40,6 +42,11 @@ class Routes extends Component {
                         component={auth(EditStay, 1)}
                     />
                     <Route
+                        path="/stays/editAccommodations/:id"
+                        exact
+                        component={auth(AccomodationEdit, 1)}
+                    />
+                    <Route
                         path="/add-stay"
                         exact
                         component={auth(AddStay, 1)}
@@ -60,9 +67,14 @@ class Routes extends Component {
                         component={auth(MyAccount, 1)}
                     />
                     <Route
-                        path="/reservation/:stayId/:accomodationId"
+                        path="/reservation/:stayId/:accommodationId"
                         exact
                         component={auth(Reservation, 1)}
+                    />
+                    <Route
+                        path="/reservationsEdit/:stayId"
+                        exact
+                        component={auth(ReservationsEdit, 1)}
                     />
                     <Route
                         component={auth(Component404, 0)}

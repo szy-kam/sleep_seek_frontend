@@ -5,26 +5,39 @@ import { withTranslation } from "react-i18next";
 import { GetStaysByUserId } from "../../../repository/stays"
 import StaysCard from "../../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
+import { GetReservationsByUsernameRepository } from "../../../repository/stay";
+import ReservationsForm from "../../ReservationsForm/reservationsForm";
 
 
 class MyAccount extends Component {
-    defaultStaysQuantity = 3;
+    defaultStaysQuantity = 10;
     state = {
         stays: null,
         page: 0,
         pageSize: this.defaultStaysQuantity,
         loadMore: true,
+        reservations: []
     }
     componentDidMount() {
         GetStaysByUserId(this.props.user.userId, this.state.page, this.state.pageSize)
             .then(response => {
                 this.setState({ stays: response })
-                if (response.length < this.state.size) this.setState({ loadMore: false });
-
+                if (response.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch(err => {
                 console.log(err);
             })
+
+        GetReservationsByUsernameRepository(this.props.user.userId)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ reservations: data })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
     }
 
     renderMoreHandler = () => {
@@ -40,12 +53,16 @@ class MyAccount extends Component {
         const { t } = this.props;
         return (
             <div className={style.myAccountComponent}>
-                <button><Link to="/add-stay">{t("ADD_STAY")}</Link></button>
+                <button className={style.addStayButton}><Link to="/add-stay">{t("ADD_STAY")}</Link></button>
                 <div>
-                    <div>{t("YOURS_STAYS")}</div>
-                <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler}/>
+                    <h3>{t("YOURS_RESERVATIONS")}</h3>
+                    {this.state.reservations.length ? <ReservationsForm reservations={this.state.reservations} template="edit" /> : t('NO_RESERVATIONS')}
                 </div>
-                
+                <div>
+                    <h3>{t("YOURS_STAYS")}</h3>
+                    <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler} />
+                </div>
+
             </div>
         );
     }

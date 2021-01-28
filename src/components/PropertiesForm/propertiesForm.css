@@ -3,6 +3,8 @@
     margin: 5px;
     border-radius: 15px;
     height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 .propertiesFormComponent ul{
     list-style: none;

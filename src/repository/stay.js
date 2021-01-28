@@ -23,9 +23,8 @@ export async function GetStayByIdRepository(id) {
 }
 
 export async function DeleteStayByIdRepository(id) {
-    return await fetch(BACKEND_URL + "/stays/" + id, {
-        method: "DELETE",
-    });
+    const url = BACKEND_URL + "/stays/" + id
+    return fetchWithAutorization("DELETE", url)
 }
 
 export async function AddStayRepository(stay, files) {
@@ -131,10 +130,8 @@ export async function AddReviewRepository(review) {
     return fetchWithAutorization("POST", url, review)
 }
 
-export function GetAllStayCategories() {
-    return [
-        "Hotel", "Pensjonat", "Hostel", "Domek", "Apartament", "Mieszkanie", "Kwatera prywatna", "Schronisko", "Ośrodek wypoczynkowy"
-    ]
+export async function GetAllStayCategories() {
+    return await fetch(BACKEND_URL + "/stayCategories")
 }
 
 export async function GetAccommodationsByStayIdRepository(stayId) {
@@ -149,10 +146,9 @@ export async function GetAccommodationsByStayIdRepository(stayId) {
         })
 }
 
-
-export async function GetAccommodationByIdRepository(stayId) {
+export async function GetAccommodationByIdRepository(Id) {
     return await fetch(
-        BACKEND_URL + "/accommodation?stayId" + stayId,
+        BACKEND_URL + "/accommodation/" + Id,
         {
             method: "GET",
         }
@@ -167,204 +163,45 @@ export async function AddAccommodationRepository(accommodation) {
     return fetchWithAutorization("POST", url, accommodation)
 }
 
-export async function EditAccomodationRepository(accommodation) {
-    const url = BACKEND_URL + "/accommodation?stayId=" + accommodation.stayId
+export async function EditAccommodationRepository(accommodation) {
+    const url = BACKEND_URL + "/accommodation/" + accommodation.id
     return fetchWithAutorization("PUT", url, accommodation)
 }
 
 export async function DeleteAccommodationRepository(accommodationId) {
-    console.log("Delete");
-    const url = BACKEND_URL + "/accommodation?id=" + accommodationId
-    return fetchWithAutorization("Delete", url)
+    const url = BACKEND_URL + "/accommodation/" + accommodationId
+    return fetchWithAutorization("DELETE", url)
 }
 
 export async function GetAllStayProperties() {
-    return [
-        {
-            id: "PARKING",
-            name: "Parking",
-            ico: "parking",
-        },
-        {
-            id: "RESTAURANT",
-            name: "Restauracja",
-            ico: "utensils",
-        },
-        {
-            id: "WIFI",
-            name: "Wifi",
-            ico: "wifi",
-        },
-        {
-            id: "24H",
-            name: "Recepcja 24h",
-            ico: "history",
-        },
-        {
-            id: "PETS_ALLOWED",
-            name: "Zwierzęta mile widziane",
-            ico: "paw",
-        },
-        {
-            id: "CARD_ACCEPTED",
-            name: "Akceptują karty",
-            ico: "money-check",
-        },
-        {
-            id: "DISABLED_ACCESSIBLE",
-            name: "Przyjazny dla niepełnosprawnych",
-            ico: "wheelchair",
-        },
-        {
-            id: "BAR",
-            name: "Bar",
-            ico: "cocktail",
-        },
-        {
-            id: "GIM",
-            name: "Siłownia",
-            ico: "dumbbell",
-        },
-        {
-            id: "POOL",
-            name: "Basen",
-            ico: "swimmer",
-        },
-    ]
-}
-
-export async function GetStayPropertiesById(Id) {
-    // if (stayId)
-    //     await fetch(
-    //         BACKEND_URL + "/accomodation/" + Id,
-    //         {
-    //             method: "GET",
-    //         }
-    //     )
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    //         .then((response) => {
-    //             return response;
-    //         });
-    return [
-        {
-            id: "PARKING",
-            name: "Parking",
-            ico: "parking",
-        },
-        {
-            id: "RESTAURANT",
-            name: "Restauracja",
-            ico: "utensils",
-        },
-        {
-            id: "WIFI",
-            name: "Wifi",
-            ico: "wifi",
-        },
-        {
-            id: "24H",
-            name: "Recepcja 24h",
-            ico: "history",
-        },
-        {
-            id: "PETS_ALLOWED",
-            name: "Zwierzęta mile widziane",
-            ico: "paw",
-        },
-        {
-            id: "CARD_ACCEPTED",
-            name: "Akceptują karty",
-            ico: "money-check",
-        },
-        {
-            id: "POOL",
-            name: "Basen",
-            ico: "swimmer",
-        },
-    ]
+    return await fetch(BACKEND_URL + "/stayProperties")
 }
 
 export async function GetAllAccommodationProperties() {
-
-    return [
-        {
-            id: "BATH",
-            name: "Wanna",
-            ico: "bath",
-        },
-        {
-            id: "SHOWER",
-            name: "Prysznic",
-            ico: "shower",
-        },
-        {
-            id: "TV",
-            name: "TV",
-            ico: "tv",
-        },
-        {
-            id: "USER_PLUS",
-            name: "Możliwa dostawka",
-            ico: "user-plus",
-        },
-        {
-            id: "SMOKING",
-            name: "Dla palących",
-            ico: "smoking",
-        },
-        {
-            id: "COOLING",
-            name: "Klimatyzacja",
-            ico: "snowflake-o",
-        }
-    ]
+    return await fetch(BACKEND_URL + "/accommodationProperties")
 }
 
-export async function GetAccommodationPropertiesById(Id) {
-    // if (stayId)
-    //     await fetch(
-    //         BACKEND_URL + "/accomodation/" + Id,
-    //         {
-    //             method: "GET",
-    //         }
-    //     )
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    //         .then((response) => {
-    //             return response;
-    //         });
-    return [
-        {
-            id: "BATH",
-            name: "Wanna",
-            ico: "bath",
-        },
-        {
-            id: "TV",
-            name: "TV",
-            ico: "tv",
-        },
-        {
-            id: "USER_PLUS",
-            name: "Możliwa dostawka",
-            ico: "user-plus",
-        },
-        {
-            id: "COOLING",
-            name: "Klimatyzacja",
-            ico: "snowflake-o",
-        }
-    ]
+export async function MakeReservationRepository(reservation) {
+    const url = BACKEND_URL + "/reservation"
+    return fetchWithAutorization("POST", url, reservation)
 }
 
-export async function GetStayAverageRatingById(Id) {
-    return new Promise((resolve, reject) => {
-        setTimeout(function () {
-            resolve("4.6"); 
-        }, 250);
-    });
+export async function GetReservationsByUsernameRepository(username) {
+    const url = BACKEND_URL + "/reservation?username=" + username;
+    return await fetchWithAutorization("GET", url)
+}
 
-}      
+export async function GetReservationsByStayIdRepository(id) {
+    const url = BACKEND_URL + "/reservation?stayId=" + id;
+    return await fetchWithAutorization("GET", url)
+}
+
+export async function EditReservationRepository(reservation) {
+    const url = BACKEND_URL + "/reservation/" + reservation.id;
+    return await fetchWithAutorization("PUT", url, reservation)
+}
+
+export async function DeleteReservationRepository(reservation) {
+    const url = BACKEND_URL + "/reservation/" + reservation.id;
+    return await fetchWithAutorization("DELETE", url)
+}

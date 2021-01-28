@@ -8,7 +8,7 @@ import { withTranslation } from "react-i18next";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 
 class Stays extends Component {
-    defaultStaysQuantity = 3;
+    defaultStaysQuantity = 10;
 
     state = {
         stays: [],

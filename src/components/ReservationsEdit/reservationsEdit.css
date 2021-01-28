@@ -1,8 +1,9 @@
-.myAccountComponent {
+.reservationsEditComponent {
     display: flex;
     flex-direction: column;
 }
 
-.addStayButton{
+
+.goToStayButton {
     align-self: center;
 }
