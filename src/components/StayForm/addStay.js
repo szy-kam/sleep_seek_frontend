@@ -18,7 +18,6 @@ class AddStay extends Component {
                     response.json()
                         .then(data => {
                             const editUrl = `/stays/editAccommodations/${data}`
-                            console.log(editUrl);
                             this.redirectUser(editUrl)
                             this.setState({ message: t("STAY_ADDED") })
                         })

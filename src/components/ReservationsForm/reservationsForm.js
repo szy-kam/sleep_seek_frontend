@@ -9,6 +9,7 @@ const Reservations = (props) => {
     const { t } = useTranslation()
 
     const renderTable = () => {
+        console.log(props.reservations);
         if (Array.isArray(props.reservations)) {
             return <table className={style.reservationsTable}>
                 <thead>
@@ -50,8 +51,8 @@ const Reservations = (props) => {
                     <td>{item.dateTo}</td>
                     <td>{item.customer.fullName}</td>
                     <td>{item.customer.phoneNumber}</td>
-                    <td><input type="checkbox" disabled value={item.confirmed}></input></td>
-                    <td><input type="checkbox" disabled value={item.completed}></input></td>
+                    <td><input type="checkbox" disabled checked={item.confirmed}></input></td>
+                    <td><input type="checkbox" disabled checked={item.completed}></input></td>
                 </tr>
             ))
         }

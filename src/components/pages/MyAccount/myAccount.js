@@ -53,6 +53,7 @@ class MyAccount extends Component {
         const { t } = this.props;
         return (
             <div className={style.myAccountComponent}>
+                <h1>{t("MY_ACCOUNT")}</h1>
                 <button className={style.addStayButton}><Link to="/add-stay">{t("ADD_STAY")}</Link></button>
                 <div>
                     <h3>{t("YOURS_RESERVATIONS")}</h3>

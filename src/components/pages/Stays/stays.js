@@ -28,7 +28,6 @@ class Stays extends Component {
                 else return []
             })
             .then(data => {
-                console.log(data);
                 this.setState({ stays: data })
                 if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
@@ -53,6 +52,7 @@ class Stays extends Component {
         const currentLat = coordinates[0]
         const longTraveledDeg = (1 / (111.319 * Math.cos(currentLat))) * distance;
         console.log([latTraveledDeg, longTraveledDeg]);
+        //TODO
     }
 
     //Save coords from address in state and repositon map

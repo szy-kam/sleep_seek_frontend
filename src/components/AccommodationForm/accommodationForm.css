@@ -1,8 +1,7 @@
-.accommodationFormCompoment{
-    display: flex;
+.accommodationFormCompoment {
 }
 
-.accommodationForm{
+.accommodationForm {
     margin: 10px 3px;
     padding: 30px;
     border: 1px solid black;
@@ -12,6 +11,7 @@
     width: 250px;
 }
 
-.addAccommodationButton, .deleteAccommodationButton {
+.addAccommodationButton,
+.deleteAccommodationButton {
     align-self: center;
 }

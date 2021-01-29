@@ -69,6 +69,7 @@ class Register extends Component {
         const { t } = this.props;
         return (
             <div className={style.registerComponent}>
+                <h1>{t('REGISTER')}</h1>
                 {this.message()}
                 <form onSubmit={this.submitForm} className={style.registerForm}>
                     <input

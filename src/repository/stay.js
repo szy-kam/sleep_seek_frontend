@@ -65,6 +65,14 @@ export async function AddStayRepository(stay, files) {
             }
         }
     }
+    // in case of server error
+    if (stay.mainPhoto.slice(0, 4) !== 'http') {
+        stay.mainPhoto = null
+    }
+
+    if (!stay.mainPhoto && images[0]) {
+        stay.mainPhoto = images[0]
+    }
     stay.photos = images
     const url = BACKEND_URL + "/stays"
     return fetchWithAutorization("POST", url, stay)
@@ -107,6 +115,9 @@ export async function EditStayRepository(stay, files) {
                 })
             }
         }
+    }
+    if (stay.mainPhoto.slice(0, 4) !== 'http') {
+        stay.mainPhoto = null
     }
     stay.photos = images
     const url = BACKEND_URL + "/stays/" + stay.id

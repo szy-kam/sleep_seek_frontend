@@ -100,7 +100,7 @@ class Stay extends Component {
                         {this.state.stay.name}
                     </div>
                     <div className={style.address}>
-                        {t("ADDRESS")}: {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
+                        {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
                         {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
                     </div>
                     <div className={style.contact}>

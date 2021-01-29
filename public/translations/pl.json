@@ -28,8 +28,8 @@
     "CLICK_HERE": "Kliknij tutaj",
     "BACK_TO_HOMEPAGE": "Wróc na stronę główną",
     "ORDER_BY": "Sortuj po",
-    "STAY_ID": "Identyfikator obiektu",
-    "ACCOMMODATION_ID": "Identyfikator pokoju",
+    "STAY_ID": "ID obiektu",
+    "ACCOMMODATION_ID": "ID pokoju",
     "CREATED": "Utworzono",
     "RESET_VALUE": "Resetuj",
     "MAX_DISTANCE": "Dystans",
@@ -140,5 +140,9 @@
     "SHOWER": "Prysznic",
     "USER_PLUS": "Możliwa dostawka",
     "SMOKING": "Dla palących",
-    "COOLING": "Klimatyzacja"
+    "COOLING": "Klimatyzacja",
+    "__H1": "Nagówłki stron",
+    "MY_ACCOUNT": "Moje konto",
+    "STAYS": "Obkiety",
+    "SIGN_IN": "Zaloguj się"
 }

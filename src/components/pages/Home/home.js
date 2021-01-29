@@ -8,7 +8,7 @@ import style from './home.css'
 
 const Home = () => {
 
-    const [stays, setStays] = useState(null)
+    const [stays, setStays] = useState([])
 
     useEffect(() => {
         GetStaysRepository(0, 5)
@@ -25,7 +25,7 @@ const Home = () => {
             <div>
                 <StaysMap position={[52.125736, 19.080392]} zoom={6} />
                 <h2>Najczęściej wybierane miasta</h2>
-                <StaysCard stays={stays} template={"photo"} />
+                <StaysCard stays={stays.slice(0, 4)} template={"photo"} />
             </div>
         </div>
     );

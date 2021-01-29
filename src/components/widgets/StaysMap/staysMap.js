@@ -44,7 +44,7 @@ class StaysMap extends Component {
                             <Popup>
                                 <div>
                                     <Link to={`/stays/${item.id}`}><img src={item.mainPhoto} alt={item.name} height="100px" width="auto" /></Link>
-                                    <Link to={`/stays/${item.id}`}><p>{item.name}</p></Link>
+                                    <Link to={`/stays/${item.id}`}><h3>{item.name}</h3></Link>
                                 </div>
                             </Popup>
                         </Marker>

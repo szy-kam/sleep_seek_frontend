@@ -44,7 +44,7 @@ class SignIn extends Component {
                     this.setState({ message: t("LOGGED") });
                 }
             })
-            .catch( err => console.log(err))
+            .catch(err => console.log(err))
     }
 
     redirectUser = () => {
@@ -68,6 +68,7 @@ class SignIn extends Component {
         const { t } = this.props;
         return (
             <div className={style.signInComponent}>
+                <h1>{t('SIGN_IN')}</h1>
                 {this.message()}
                 <form className={style.signInForm} onSubmit={this.submitForm}>
                     <input
