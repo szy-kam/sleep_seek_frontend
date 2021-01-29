@@ -66,6 +66,7 @@ class SignIn extends Component {
 
     render() {
         const { t } = this.props;
+        console.log(process.env);
         return (
             <div className={style.signInComponent}>
                 <h1>{t('SIGN_IN')}</h1>
