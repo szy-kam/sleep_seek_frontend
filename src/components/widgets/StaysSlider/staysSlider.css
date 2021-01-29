@@ -1,3 +1,9 @@
+.staySliderComponent{
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+}
+
 .StaySliderT1 {
     position: relative;
 }
@@ -11,9 +17,10 @@
     position: absolute;
     bottom: 50px;
     left: 50px;
-    font-size: 30px;
+    font-size: 35px;
+    font-weight: 500;
     color: black;
     text-decoration: none;
-    background-color: rgba(162, 168, 125, 0.377);
+    background-color: #278abbad;
     padding: 20px;
 }

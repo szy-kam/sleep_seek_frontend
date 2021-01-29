@@ -50,7 +50,7 @@ class SignIn extends Component {
     redirectUser = () => {
         setTimeout(() => {
             this.props.history.push("/my-account");
-        }, 3000);
+        }, 1500);
     };
 
     message = () => {

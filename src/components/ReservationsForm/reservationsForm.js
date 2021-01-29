@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import style from './reservationsForm.css'
 import { useTranslation } from "react-i18next";
 import ReservationFormEditable from './reservationFormEditable';
@@ -8,48 +8,13 @@ const Reservations = (props) => {
 
     const { t } = useTranslation()
 
-    // const renderButtons = () => {
-    //     if (props.handleSubmit) {
-    //         return (
-    //             <div className={stay.reservationButtons}>
-    //                 <button onClick={props.handleSubmit}>{t('SAVE')}</button>
-    //                 <button onClick={props.handleDelete}>{t('DELETE')}</button>
-    //             </div>
-    //         )
-    //     }
-    // }
-
-    // const renderReservations = () => {
-    //     if (Array.isArray(props.reservations)) {
-    //         return props.reservations.map((item, i) => (
-    //             <div className={style.reservation} key={i}>
-    //                 <form className={style.reservationForm}>
-    //                     <label>{t('STAY_ID')}:</label>
-    //                     <input type="text" disabled={props.handleSubmit ? true : "disabled"} value={item.stayId}></input>
-    //                     <label>{t('ACCOMMODATION_ID')}:</label>
-    //                     <input type="text" disabled={props.handleSubmit ? true : "disabled"} value={item.accommodationId}></input>
-    //                     <label>{t('FROM')}:</label>
-    //                     <input type="text" disabled={props.handleSubmit ? true : "disabled"} value={item.dateFrom}></input>
-    //                     <label>{t('TO')}:</label>
-    //                     <input type="text" disabled={props.handleSubmit ? true : "disabled"} value={item.dateTo}></input>
-    //                     <label>{t('FULL_NAME')}:</label>
-    //                     <input type="text" disabled={props.handleSubmit ? true : "disabled"} value={item.customer.fullName}></input>
-    //                     <label>{t('PHONE_NUMBER')}:</label>
-    //                     <input type="text" disabled={props.handleSubmit ? true : "disabled"} value={item.customer.phoneNumber}></input>
-    //                     {renderButtons()}
-    //                 </form>
-    //             </div>
-    //         ))
-    //     }
-    // }
-
     const renderTable = () => {
         if (Array.isArray(props.reservations)) {
             return <table className={style.reservationsTable}>
                 <thead>
                     <tr>
                         <td>{t('CREATED')}</td>
-                        <td>{t('STAY_ID')}</td>
+                        <td>{t('STAY_ID')}</td> 
                         <td>{t('ACCOMMODATION_ID')}</td>
                         <td>{t('FROM')}</td>
                         <td>{t('TO')}</td>

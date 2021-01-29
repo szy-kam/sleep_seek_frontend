@@ -58,6 +58,8 @@ class AccommodationForm extends Component {
                         onChange={(event) => this.handleInput(event, "sleepersCapacity")}
                         value={this.state.accommodation.sleepersCapacity}
                         type="number"
+                        required
+                        min="1"
                     />
 
                     <label>{t("PRICE")} ({t("CURRENCY_SYMBOL")})</label>
@@ -65,6 +67,8 @@ class AccommodationForm extends Component {
                         onChange={(event) => this.handleInput(event, "price")}
                         value={this.state.accommodation.price}
                         type="number"
+                        required
+                        min="1"
                     />
 
                     <label>{t("ACCOMMODATION_QUANTITY")}</label>
@@ -72,6 +76,8 @@ class AccommodationForm extends Component {
                         onChange={(event) => this.handleInput(event, "quantity")}
                         value={this.state.accommodation.quantity}
                         type="number"
+                        required
+                        min="1"
                     />
                     <PropertiesForm accommodation={true} properties={this.state.accommodation.properties} handleInput={this.handlePropertiesInput} />
 

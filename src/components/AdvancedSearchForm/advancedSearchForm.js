@@ -50,7 +50,7 @@ const AdvancedSearch = (props) => {
     }
 
     const orderByOptions = () => {
-        const options = ["NAME", "PRICE", "RATE"]
+        const options = ["name", "price", "avgRate"]
         return options.map((item, i) => {
             return <option key={i}>{t(item)}</option>;
         });

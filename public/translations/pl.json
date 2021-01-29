@@ -66,7 +66,7 @@
     "SHOW_RESERVATIONS": "Edytuj rezerwacje",
     "NO_RESERVATIONS": "Brak rezerwacji",
     "___FileUploader": "FIle Uploader",
-    "FILE_UPLOADER_DEFAULT": "Kliknij lub upuść pliki tutaj. Akceptujemy pliki do 5 MB.",
+    "FILE_UPLOADER_DEFAULT": "Kliknij lub upuść pliki tutaj. Akceptujemy pliki do 1 MB.",
     "FILE_UPLOADER_DROP_HERE": "Upuść pliki",
     "FILE_UPLOADER_WRONG_FILETYPE": "Nieobsługiwany format pliku",
     "FILE_UPLOADER_TOO_LARGE": "Plik zbyt duży",

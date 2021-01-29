@@ -82,6 +82,20 @@ const StaysCard = (props) => {
                             ))}
                         </div>
                     );
+                case "photo":
+                    return (
+                        <div className={style.staysContainerPhoto}>
+                            {stays.map((item, i) => (
+                                <div key={item.id} className={style.staysCardPhoto}>
+                                    <div className={style.image} style={{ backgroundImage: `url(${item.mainPhoto})` }}>
+                                    </div>
+                                    <div className={style.city}>
+                                        <Link to={`/stays/${item.id}`}>{item.address.city}</Link>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    );
                 case "edit":
                     return (
                         <div className={style.staysContainerT1}>

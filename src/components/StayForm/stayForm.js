@@ -258,6 +258,8 @@ class StayForm extends Component {
                         value={this.state.stay.minPrice}
                         type="number"
                         required
+                        min="1"
+                        
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
@@ -274,7 +276,7 @@ class StayForm extends Component {
                     <textarea
                         onChange={(event) => this.handleInput(event, "description")}
                         value={this.state.stay.description}
-                        maxlength="10000"
+                        maxLength="10000"
                     />
                     <label>{t("PHOTOS")}</label>
                     <div className={style.photos}>{this.renderPhotos()}</div>
