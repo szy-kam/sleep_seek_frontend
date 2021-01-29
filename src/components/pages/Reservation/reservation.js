@@ -102,6 +102,8 @@ const Reservation = (props) => {
                     shouldHighlightWeekends
                     minimumDate={utils().getToday()}
                     locale={myCustomLocale}
+                    colorPrimary="#278abb"
+                    colorPrimaryLight="rgb(23 151 211 / 42%)"
                 />
                 <div className={style.dataInfo}>
                     {selectedDayRange.from ? <div>{t('FROM')} <b>{selectedDayRange.from.day}.{selectedDayRange.from.month}.{selectedDayRange.from.year}</b></div> : null}

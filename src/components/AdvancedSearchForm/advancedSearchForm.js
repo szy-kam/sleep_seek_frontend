@@ -18,6 +18,7 @@ const AdvancedSearch = (props) => {
         category: "Hotel",
         priceFrom: "10",
         priceTo: "1000",
+        maxDistance: "5"
     }
     const [inputs, setInputs] = useState(inputsInit);
     const [properties, setProperties] = useState([]);
@@ -50,9 +51,17 @@ const AdvancedSearch = (props) => {
     }
 
     const orderByOptions = () => {
-        const options = ["name", "price", "avgRate"]
+        const options = [
+            { id: "name ASC", name: "Nazwa rosnąco" },
+            { id: "name DESC", name: "Nazwa malejąco" },
+            { id: "price ASC", name: "Cena rosnąco" },
+            { id: "price DESC", name: "Cena malejąco" },
+            { id: "avgRate ASC", name: "Ocena rosnąco" },
+            { id: "avgRate DESC", name: "Ocena malejąco" },
+        ]
+        //temporarily
         return options.map((item, i) => {
-            return <option key={i}>{t(item)}</option>;
+            return <option key={i} value={item.id}>{item.name}</option>;
         });
     }
 
@@ -73,14 +82,18 @@ const AdvancedSearch = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const searchParams = Object.assign({ propertice: properties }, inputs)
+        let searchParams = Object.assign({ propertice: properties }, inputs)
         if (selectedDayRange.from && selectedDayRange.to) {
             searchParams.dateFrom = myCustomLocale.toNativeDate(selectedDayRange.from)
             searchParams.dateTo = myCustomLocale.toNativeDate(selectedDayRange.to)
         }
+        const order = searchParams.orderBy.split(' ')
+        searchParams.orderBy = order[0] || ""
+        searchParams.order = order[1] || ""
+
+        console.log(searchParams);
         props.handleSubmit(searchParams)
     }
-
 
     const { t } = props;
     return (
@@ -115,6 +128,24 @@ const AdvancedSearch = (props) => {
                     locale={myCustomLocale}
                     inputPlaceholder={t('CLICK_HERE')}
                     calendarClassName={"style.calendar"}
+                    colorPrimary="#278abb"
+                    colorPrimaryLight="rgb(23 151 211 / 42%)"
+                    // renderFooter={renderFooter}
+                    renderFooter={() => (
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSelectedDayRange(null)
+                                }}
+                                style={{
+                                    padding: '10px 28px',
+                                }}
+                            >
+                                {t('RESET_VALUE')}
+                            </button>
+                        </div>
+                    )}
                 />
                 <label>{t("COUNTRY")}</label>
                 <select
@@ -129,15 +160,22 @@ const AdvancedSearch = (props) => {
                     value={inputs.city}
                     type="text"
                 />
+                <label>{t("MAX_DISTANCE")}</label>
+                <div>{inputs.maxDistance} km</div>
+                <input
+                    onChange={(event) => handleInput(event, "maxDistance")}
+                    value={inputs.maxDistance}
+                    type="range" step="1" min="1" max="100"
+                />
                 <label>{t("PRICE_FROM")}</label>
-                <div>{inputs.priceFrom}</div>
+                <div>{inputs.priceFrom} {t("CURRENCY_SYMBOL")}</div>
                 <input
                     onChange={(event) => handleInput(event, "priceFrom")}
                     value={inputs.priceFrom}
                     type="range" step="10" min="10" max="1000"
                 />
                 <label>{t("PRICE_TO")}</label>
-                <div>{inputs.priceTo}</div>
+                <div>{inputs.priceTo}  {t("CURRENCY_SYMBOL")}</div>
                 <input
                     onChange={(event) => handleInput(event, "priceTo")}
                     value={inputs.priceTo}

@@ -113,7 +113,7 @@ class Rewiews extends Component {
         const { t } = this.props
         return (
             <div className={style.addReview}>
-                <textarea onChange={event => this.inputHandler(event, "message")} placeholder={t('ADD_REVIEW_PLACEHOLDER')} value={this.state.newReview.message} maxlength="1000"></textarea>
+                <textarea onChange={event => this.inputHandler(event, "message")} placeholder={t('ADD_REVIEW_PLACEHOLDER')} value={this.state.newReview.message} maxLength="1000"></textarea>
                 <select onChange={(event) => this.inputHandler(event, "rating")}
                     value={this.state.newReview.rating}>
                     <option value="1">★</option>

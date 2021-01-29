@@ -31,6 +31,8 @@
     "STAY_ID": "Identyfikator obiektu",
     "ACCOMMODATION_ID": "Identyfikator pokoju",
     "CREATED": "Utworzono",
+    "RESET_VALUE": "Resetuj",
+    "MAX_DISTANCE": "Dystans",
     "____Nav" : "NavBar",
     "NAV_HOME": "Home",
     "NAV_STAYS": "Obiekty",

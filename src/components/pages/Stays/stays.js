@@ -22,8 +22,13 @@ class Stays extends Component {
 
     componentDidMount() {
         GetStaysWithParamsRepository(this.state.pageNumber, this.state.pageSize, this.state.searchParams)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok)
+                    return response.json()
+                else return []
+            })
             .then(data => {
+                console.log(data);
                 this.setState({ stays: data })
                 if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
@@ -41,6 +46,16 @@ class Stays extends Component {
             });
     };
 
+    // approximate distance in km to degree
+    distanceCalculation = (distance, coordinates) => {
+        let latTraveledDeg = (1 / 110.574) * distance
+
+        const currentLat = coordinates[0]
+        const longTraveledDeg = (1 / (111.319 * Math.cos(currentLat))) * distance;
+        console.log([latTraveledDeg, longTraveledDeg]);
+    }
+
+    //Save coords from address in state and repositon map
     getCordsFromAddress = async (address) => {
         let mapPosition = null
         if (address.length > 5) {
@@ -57,17 +72,15 @@ class Stays extends Component {
                 });
         }
         return mapPosition
-
     }
 
     handleSearchSubmit = async (searchParams) => {
         // this.setState({ stays: [], page: 0, loadMore: true, searchParams: searchParams })
-        const address =
-            searchParams.city +
-            " " +
-            searchParams.country
 
-        searchParams.coordinates = await this.getCordsFromAddress(address);
+        if (searchParams.city) {
+            searchParams.coordinates = await this.getCordsFromAddress(searchParams.city + " " + searchParams.country);
+            this.distanceCalculation(searchParams.maxDistance, searchParams.coordinates)
+        }
 
         GetStaysWithParamsRepository(this.state.pageNumber, this.state.pageSize, searchParams)
             .then(response => response.json())

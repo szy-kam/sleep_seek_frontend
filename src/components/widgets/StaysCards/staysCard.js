@@ -15,6 +15,7 @@ const StaysCard = (props) => {
     }
 
     const renderCards = (template, stays) => {
+        console.log(stays);
         const { t } = props;
         if (stays) {
             switch (template) {
