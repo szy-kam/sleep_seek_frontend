@@ -10,7 +10,7 @@
     margin: 0 auto;
 }
 
-.stayInfo{
+.stayInfo {
     display: flex;
     flex-direction: column;
 }
@@ -28,9 +28,8 @@
 .name {
     font-size: 50px;
 }
-.descriptionAndContact{
+.descriptionAndContact {
     display: flex;
-
 }
 .address {
     font-size: 30px;
@@ -47,7 +46,7 @@
     text-align: justify;
 }
 
-.contact{
+.contact {
     display: flex;
     flex-direction: column;
     border: 1px solid black;
@@ -62,7 +61,7 @@
     margin-top: -90px;
 }
 
-.contacUs{
+.contacUs {
     display: flex;
     font-weight: 900;
     font-size: 27px;
@@ -80,7 +79,7 @@
     margin: 10px 0;
 }
 
-.imageGrid {
+/* .imageGrid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -91,6 +90,42 @@
     margin: 5px;
     flex-shrink: 1;
     max-height: 100px;
+} */
+
+.imageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    grid-gap: 1px;
+    align-items: start;
+    justify-items: center;
+    margin: auto;
+    width: 90%;
+    min-height: 450px;
+}
+.imageGrid img {
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.imageGrid img:nth-child(2) {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+.singleImage {
+    width: 80%;
+    align-self: center;
+}
+
+.singleImage img {
+    max-height: 400px;
+    max-width: 100%;
+    margin: 10px auto;
+    display: flex;
+    align-self: center;
 }
 
 .message {
@@ -104,8 +139,7 @@
     z-index: 4;
 }
 
-.stayEditCompoment{
+.stayEditCompoment {
     display: flex;
     flex-direction: column;
-    
 }

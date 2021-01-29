@@ -15,7 +15,6 @@ const StaysCard = (props) => {
     }
 
     const renderCards = (template, stays) => {
-        console.log(stays);
         const { t } = props;
         if (stays) {
             switch (template) {
@@ -86,16 +85,19 @@ const StaysCard = (props) => {
                 case "photo":
                     return (
                         <div className={style.staysContainerPhoto}>
-                            {stays.map((item, i) => (
-                                <div key={item.id} className={style.staysCardPhoto}>
-                                    <div className={style.image} style={{ backgroundImage: `url(${item.mainPhoto})` }}>
+                            {stays.map((item) => (
+                                <Link to={`/stays/${item.id}`}>
+                                    <div key={item.id} className={style.staysCardPhoto}>
+                                        <div className={style.image} style={{ backgroundImage: `url(${item.mainPhoto})` }}>
+                                        </div>
+                                        {item.address.city ? <div className={style.city}>
+                                            {item.address.city}
+                                        </div> : null}
                                     </div>
-                                    <div className={style.city}>
-                                        <Link to={`/stays/${item.id}`}>{item.address.city}</Link>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                </Link>
+                            ))
+                            }
+                        </div >
                     );
                 case "edit":
                     return (

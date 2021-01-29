@@ -88,12 +88,14 @@ class Stay extends Component {
             const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
             return <div className={style.stayContent}>
                 <div className={style.stayInfo}>
-                    {this.state.stay.mainPhoto && <div
+                    {/* {this.state.stay.mainPhoto && <div
                         className={style.image}
                         style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
                     >
-                    </div>}
-                    <div className={style.imageGrid}>{this.imageGrid()}</div>
+                    </div>} */}
+                    {this.state.stay.photos.length > 1 && <div className={style.imageGrid}>{this.imageGrid()}</div>}
+
+                    {this.state.stay.photos.length === 1 && <div className={style.singleImage}>{this.imageGrid()}</div>}
                     <div className={style.name}>
                         {this.state.stay.name}
                     </div>
@@ -102,21 +104,21 @@ class Stay extends Component {
                         {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
                     </div>
                     <div className={style.contact}>
-                        <div className={style.contacUs}>Skontaktuj się z nami!</div>
-                        <div><span className={style.contactDetail}>Telefon: </span>{this.state.stay.phoneNumber}</div>
-                        <div><span className={style.contactDetail}>E-mail: </span>{this.state.stay.email}</div>
+                        <div className={style.contacUs}>{t('CONTACT_US')}!</div>
+                        <div><span className={style.contactDetail}>{t('PHONE')}:</span>{this.state.stay.phoneNumber}</div>
+                        <div><span className={style.contactDetail}>{t('EMAIL')}:</span>{this.state.stay.email}</div>
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
-                    
+
                 </div>
-                
-                <h3 className={style.title}>UDOGODNIENIA</h3>
+
+                {this.state.stay.properties.length > 0 && <h3 className={style.title}>{t('PROPERTIES')}:</h3>}
                 <Properties properties={this.state.stay.properties} />
-                <h3 className={style.title}>POKOJE</h3>
+                <h3 className={style.title}>{t('ACCOMMODATIONS')}:</h3>
                 <Accommodation stayId={this.props.match.params.id} />
-                <h3 className={style.title}>ZNAJDŹ NAS NA MAPIE</h3>
+                {this.state.stay.address.longitude && <h3 className={style.title}>{t('FIND_US_ON_MAP')}:</h3>}
                 <StayMap position={position} zoom={14} />
-                <h3 className={style.title}>OPINIE</h3>
+                <h3 className={style.title}>{t('REVIEWS')}:</h3>
                 <Reviews stayId={this.props.match.params.id} />
                 {this.lightbox()}
             </div>
@@ -125,6 +127,7 @@ class Stay extends Component {
     }
 
     render() {
+        console.log(this.state.stay);
         return (
             <div className={style.stayComponent}>
                 {this.renderContent()}

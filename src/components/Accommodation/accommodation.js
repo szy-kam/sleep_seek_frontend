@@ -60,7 +60,7 @@ class Accommodation extends Component {
                 </tbody>
             </table>
         }
-        else return null
+        else return t("NO_ACCOMMODATIONS")
     }
 
     render() {
