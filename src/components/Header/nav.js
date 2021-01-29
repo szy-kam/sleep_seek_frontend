@@ -69,7 +69,6 @@ const Nav = (props) => {
         });
     };
 
-    
     return <nav>{showItems()}</nav>;
     
 }

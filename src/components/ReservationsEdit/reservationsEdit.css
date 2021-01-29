@@ -1,0 +1,9 @@
+.reservationsEditComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.goToStayButton {
+    align-self: center;
+}

@@ -2,14 +2,18 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import auth from "./hoc/auth";
 import Layout from "./hoc/Layout/layout";
-import Home from "./components/Home/home";
-import Stays from "./components/Stays/stays";
-import Stay from "./components/Stay/stay";
-import EditStay from "./components/Stay/editStay";
-import SignIn from "./components/SignIn/singIn";
-import Register from "./components/Register/register";
-import MyAccount from "./components/MyAccount/myAccount";
-import AddStay from "./components/Stay/addStay";
+import Home from "./components/pages/Home/home";
+import Stays from "./components/pages/Stays/stays";
+import Stay from "./components/pages/Stay/stay";
+import EditStay from "./components/StayForm/editStay";
+import AddStay from "./components/StayForm/addStay";
+import SignIn from "./components/pages/SignIn/singIn";
+import Register from "./components/pages/Register/register";
+import MyAccount from "./components/pages/MyAccount/myAccount";
+import Reservation from "./components/pages/Reservation/reservation"
+import Component404 from "./components/Component404/component404";
+import AccomodationEdit from "./components/AccomodationEdit/accomodationEdit";
+import ReservationsEdit from "./components/ReservationsEdit/reservationsEdit";
 
 class Routes extends Component {
 
@@ -35,12 +39,17 @@ class Routes extends Component {
                     <Route
                         path="/stays/edit/:id"
                         exact
-                        component={auth(EditStay, 0)}
+                        component={auth(EditStay, 1)}
+                    />
+                    <Route
+                        path="/stays/editAccommodations/:id"
+                        exact
+                        component={auth(AccomodationEdit, 1)}
                     />
                     <Route
                         path="/add-stay"
                         exact
-                        component={auth(AddStay, 0)}
+                        component={auth(AddStay, 1)}
                     />
                     <Route
                         path="/sign-in"
@@ -56,6 +65,19 @@ class Routes extends Component {
                         path="/my-account"
                         exact
                         component={auth(MyAccount, 1)}
+                    />
+                    <Route
+                        path="/reservation/:stayId/:accommodationId"
+                        exact
+                        component={auth(Reservation, 1)}
+                    />
+                    <Route
+                        path="/reservationsEdit/:stayId"
+                        exact
+                        component={auth(ReservationsEdit, 1)}
+                    />
+                    <Route
+                        component={auth(Component404, 0)}
                     />
                 </Switch>
             </Layout>

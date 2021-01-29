@@ -1,0 +1,27 @@
+.advancedSearchComponent {
+
+}
+
+.advancedSearchForm{
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButton {
+    align-self: center;
+}
+
+.DatePicker__input {
+    border: 1px solid black !important
+}
+
+.Calendar__monthArrow{
+    width: 30px!important;
+}
+.DatePicker__calendarContainer{
+    height: 33em;
+
+}

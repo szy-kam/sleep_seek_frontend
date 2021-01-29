@@ -1,0 +1,8 @@
+.myAccountComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+.addStayButton{
+    align-self: center;
+}

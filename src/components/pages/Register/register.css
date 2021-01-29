@@ -1,0 +1,33 @@
+.registerComponent {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+}
+
+.registerForm {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registerForm input {
+    margin: 10px;
+}
+
+.registerForm button {
+    /* border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px; */
+}
+
+.message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    background-color: blue;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+}

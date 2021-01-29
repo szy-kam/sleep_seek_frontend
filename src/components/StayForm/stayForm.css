@@ -1,0 +1,102 @@
+/* *********************************************
+******************   Edit Form **************
+********************************************* */
+
+.editForm {
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 80%;
+    width: 70%;
+}
+
+/* .editForm input,
+.editForm select,
+.editForm textarea {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 6px;
+    width: 80%;
+} */
+
+.editForm textarea {
+    height: 100px;
+}
+.editForm label {
+    font-size: 130%;
+}
+
+.thumbs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.thumbs img {
+    height: auto;
+    max-width: 150px;
+    margin: 10px;
+    object-fit: contain;
+}
+
+.selectedPhoto {
+    border: 4px solid red;
+}
+
+.map {
+    width: 95%;
+}
+
+.properties {
+    height: 250px;
+    margin: 20px 0;
+}
+
+
+.photos {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.photoContainer {
+    position: relative;
+}
+
+.photoContainer  img {
+    max-height: 100px;
+    object-fit: contain;
+    margin: 0 3px;
+}
+
+.deletePhoto {
+    top: 4px;
+    right: 8px;
+    z-index: 2;
+    position: absolute;
+    color: #fff;
+    font-weight: 300;
+    background-color: red;
+    border: 1px solid black;
+    width: 20px;
+    height: 20px;
+    line-height: 17px;
+    text-align: center;
+    font-size: 25px;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.selectMainPhoto{
+    margin: 10px 0;
+    color: rgb(255, 0, 0);
+}
+
+.submitButton, .deleteButton {
+    align-self: center;
+}

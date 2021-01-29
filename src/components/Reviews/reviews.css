@@ -1,0 +1,71 @@
+.reviewsComponent{
+    display: flex;
+    flex-direction: column;
+}
+
+.reviews{
+    display: flex;
+    flex-direction: column;
+}
+
+.review{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 3px 0;
+}
+
+.user{
+    font-weight: bold;
+}
+
+.createdAt {
+    color: #6e6e6e;
+}
+
+.messageContent{
+    font-style: italic;
+    font-size: 17px;
+}
+
+.rating{
+    min-width: 50px;
+    font-size: larger;
+    margin-right: 10px;
+}
+
+.rating strong{
+    font-weight: 700;
+    font-size: 150%;
+    color: #278abb;
+}
+
+.addReview{
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.addReview textarea{
+    padding: 15px;
+    border: 1px solid black;
+    width: 80%;
+}
+.addReview select {
+    width: 10%;
+    margin: 15px;
+}
+
+.addReview button{
+    padding: 15px;
+    width: 10%;
+    
+}
+
+.showMore{
+    padding: 15px;
+    align-self: center;
+}

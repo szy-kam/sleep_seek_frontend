@@ -6,77 +6,97 @@
 .staysContainerT1 {
     display: flex;
     flex-direction: column;
-    min-width: 600px;
+    /* min-width: 600px; */
 }
 
 .staysCardT1 {
-    background-color: #f3f3f3;
-    border: gray 1px solid;
     padding: 15px;
     display: flex;
-    flex-wrap: wrap;
     margin: 10px 0px;
-}
-.staysCardT1 .left {
-    margin-right: 10px;
-    max-width: 30%;
+    max-height: 200px;
+    flex-direction: row;
+    box-shadow: 0px 3px 4px 3px rgba(22,34,42,.15)
+    /* flex: 0 0 auto; */
 }
 
-.staysCardT1 .right {
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    flex-grow: 1;
+.staysCardT1:hover{
+    background-color: #f0f0f0;
 }
 
 .staysCardT1 .image {
-    flex-basis: 100%;
+    min-width: 250px;
 }
 
 .staysCardT1 .image a img {
-    width: 100%;
-    max-width: 400px;
+    max-height: 200px;
+    max-width: 250px;
+    object-position: center;
+    object-fit: cover;
+}
+
+.staysCardT1 .cardBody {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    justify-content: space-between;
+    flex: 1 1 auto;
+}
+
+.staysCardT1 .left {
+
+}
+
+.staysCardT1 .right {
+    align-self: flex-end;
 }
 
 .staysCardT1 .name a {
     font-size: 25px;
     text-decoration: none !important;
     font-weight: 700;
+    color: cornflowerblue
 }
 
 .staysCardT1 .address {
     text-decoration: none;
 }
+.staysCardT1 .avgRateIco {
+    border: 1px solid #00008b;
+    border-radius: 50%;
+    color:#00008b;
+    width: fit-content;
+    padding: 5px;
+    margin-top: 5px;
+    font-weight: 600;
+    background-color: white;
+}
 
 .staysCardT1 .price {
     font-size: 20px;
     text-decoration: none !important;
+    align-self: flex-end;
+}
+
+.staysCardT1 .priceAmount {
+    font-size: 35px;
+    text-decoration: none !important;
     font-weight: 700;
     align-self: flex-end;
+    color: darkblue;
+}
+
+.averageRating{
+    border: darkblue;
 }
 
 .staysCardT1 .itemButton,
 .showMoreButton {
-    border: none;
-    border-radius: 3px;
-    color: white;
-    padding: 15px 32px;
-    margin: 25px auto;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: #008cba;
-    width: 150px;
-    height: 50px;
-    align-self: flex-end;
 }
 
 .staysCardT1 .itemButton {
-    text-decoration: none;
-    color: white;
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
 }
 
 .showMoreButton {
@@ -95,20 +115,18 @@
 }
 
 .staysCardT2 {
-    background-color: #f3f3f3;
-    border: gray 1px solid;
+    border: #003b73 1px solid;
     padding: 15px;
     display: flex;
-    flex-wrap: wrap;
     margin: 10px 0px;
-    flex-direction: row;
-    flex-flow: column;
+    flex-direction: column;
     align-items: center;
-    flex-basis: 100%;
+    max-width: 250px;
 }
 
 .staysCardT2 .image a img {
-    max-width: 400px;
+    max-width: 250px;
+    object-fit: contain;
 }
 
 .staysCardT2 .name {
@@ -117,34 +135,71 @@
 
 .staysCardT2 .name a {
     font-size: 20px;
-    text-decoration: none !important;
+    text-decoration: none!important;
     font-weight: 700;
 }
 
 .staysCardT2 .price {
     flex-basis: 100%;
     font-size: 20px;
-    text-decoration: none !important;
+    text-decoration: none!important;
     font-weight: 700;
 }
 
 .staysCardT2 .itemButton {
-    border: none;
-    border-radius: 3px;
-    color: white;
-    padding: 15px 32px;
-    margin: 25px auto;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: #008cba;
-    width: 150px;
-    height: 50px;
+
 }
 
 .staysCardT2 .itemButton a {
     text-decoration: none;
     color: white;
 }
+
+
+
+/*
+************************************************************************
+*****************    .staysCard   Photo                *****************
+************************************************************************
+*/
+.staysContainerPhoto {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.staysCardPhoto {
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 15px;
+    box-shadow: 0 1px 4px rgba(22,34,42,.15);
+}
+
+.staysCardPhoto .image {
+    height: 250px;
+    width: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.staysCardPhoto .city {
+    padding: 8px 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: absolute;
+    bottom: 17px;
+    left: 0px;
+    right: 0;
+    background: #f3f3f3;
+    width: fit-content;
+}
+
+.staysCardPhoto .city a {
+    font-size: 20px;
+    text-decoration: none!important;
+    font-weight: 700;
+    color: black;
+}
+

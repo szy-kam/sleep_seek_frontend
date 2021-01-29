@@ -1,18 +1,72 @@
 * {
     font: inherit;
-    font-family: "Roboto", sans-serif;
+    font-family: "Quicksand", sans-serif;
     margin: 0;
     padding: 0;
     border: 0;
 }
 
 .mainContainer {
-    font-family: "Roboto", sans-serif;
+    font-family: "Quicksand", sans-serif;
     position: relative;
     min-height: 100vh;
 }
 
 .innerContainer {
     /* po zmianie zmień też w footer.css */
-    padding-bottom: 3rem;
+    padding-bottom: 18rem;
+}
+
+input,
+select,
+textarea {
+    border: 1px solid black;
+    width: 95%;
+    margin: 5px auto;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+textarea{
+    padding: 10px;
+    min-height: 80px;
+}
+
+button{
+  background-color: #278abb; 
+  /* border: none; */
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 15px;
+  margin: 2px 0;
+  width: fit-content;
+  text-decoration: none;
+  height: fit-content;
+}
+button > a{
+    text-decoration: none;
+    color: white;
+}
+
+p {
+    text-decoration : none;
+    color: black;
+    font-family: "Roboto", sans-serif;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #278abb;
+    margin: 10px 0;
+}
+h2{
+    color: #278abb;
+    font-size: 35px;
+    text-align: center;
+    margin: 15px auto;
 }

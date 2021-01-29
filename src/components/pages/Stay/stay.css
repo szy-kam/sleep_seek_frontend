@@ -1,0 +1,145 @@
+.stayComponent {
+    display: flex;
+}
+
+.stayContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    flex-basis: 80%;
+    margin: 0 auto;
+}
+
+.stayInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    flex-basis: 100%;
+    min-height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+
+.name {
+    font-size: 50px;
+}
+.descriptionAndContact {
+    display: flex;
+}
+.address {
+    font-size: 30px;
+}
+
+.price {
+    font-size: 35px;
+    font-weight: bolder;
+    align-self: flex-end;
+}
+
+.description {
+    font-size: 20px;
+    text-align: justify;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background: #278abb;
+    color: white;
+    width: 30%;
+    /* align-self: center;
+    margin: 20px 0; */
+    align-self: flex-end;
+    margin-top: -90px;
+}
+
+.contacUs {
+    display: flex;
+    font-weight: 900;
+    font-size: 27px;
+    /* align-self: center;*/
+}
+
+.contactDetail {
+    font-weight: 900;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #278abb;
+    margin: 10px 0;
+}
+
+/* .imageGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.imageGrid img {
+    margin: 5px;
+    flex-shrink: 1;
+    max-height: 100px;
+} */
+
+.imageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    grid-gap: 1px;
+    align-items: start;
+    justify-items: center;
+    margin: auto;
+    width: 90%;
+    min-height: 450px;
+}
+.imageGrid img {
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.imageGrid img:nth-child(2) {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+.singleImage {
+    width: 80%;
+    align-self: center;
+}
+
+.singleImage img {
+    max-height: 400px;
+    max-width: 100%;
+    margin: 10px auto;
+    display: flex;
+    align-self: center;
+}
+
+.message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    background-color: blue;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    z-index: 4;
+}
+
+.stayEditCompoment {
+    display: flex;
+    flex-direction: column;
+}

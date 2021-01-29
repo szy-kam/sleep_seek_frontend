@@ -1,8 +1,8 @@
 .fileUploaderComponent {
     padding: 35px;
-    border: 2px dashed blue;
-    border-radius: 5px;
-    max-width: 50%;
+    border: 2px dashed #278abb;
+    border-radius: 15px;
+    width: 50%;
     margin: 0 auto;
 }
 

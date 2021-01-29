@@ -1,0 +1,14 @@
+.accommodationEditComponent{
+    display: flex;
+    flex-direction: column;
+}
+
+.accommodationsForms{
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+}
+
+.addAccommodationButton, .goToStayButton {
+    align-self: center;
+}
