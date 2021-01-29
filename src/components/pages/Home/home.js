@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { GetStaysRepository } from "../../../repository/stay.js";
+import { GetStaysRepository } from "../../../repository/stays.js";
 import StaysCard from "../../widgets/StaysCards/staysCard";
 import StaysMap from "../../widgets/StaysMap/staysMap";
 import StaysSlider from "../../widgets/StaysSlider/staysSlider";
