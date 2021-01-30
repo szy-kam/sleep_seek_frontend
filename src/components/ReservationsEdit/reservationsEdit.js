@@ -13,12 +13,22 @@ class ReservationsEdit extends Component {
     getReservations = () => {
         this.setState({ Reservations: null })
         GetReservationsByStayIdRepository(this.props.match.params.stayId)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                }
+                else {
+                    this.props.redirectUser("/my-account")
+                }
+            })
             .then(data => {
                 if (data.length === 0) {
-                    data = null
+                    this.props.history.push("/my-account")
                 }
-                this.setState({ reservations: data })
+                else{
+                    this.setState({ reservations: data })
+                }
+                
             })
             .catch(err => console.log(err));
     }
@@ -31,8 +41,6 @@ class ReservationsEdit extends Component {
         await EditReservationRepository(reservation)
             .then(() => this.getReservations())
             .catch(err => console.log(err))
-
-        // this.getReservations()
     }
 
     handleDelete = async (reservation) => {
@@ -45,13 +53,6 @@ class ReservationsEdit extends Component {
 
     renderForms = () => {
         return <ReservationsForm reservations={this.state.reservations} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} />
-        // if (Array.isArray(this.state.reservations)) {
-        //     return this.state.reservations.map((item, i) => (
-        //     ))
-        // }
-        // else {
-        //     return this.props.t('NO_RESERVATIONS')
-        // }
     }
 
     render() {

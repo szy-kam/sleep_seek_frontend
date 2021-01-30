@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import style from "./myAccount.css";
 import { withTranslation } from "react-i18next";
-import { GetStaysByUserId } from "../../../repository/stays"
+import { GetStaysByUsername } from "../../../repository/stays"
 import StaysCard from "../../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
 import { GetReservationsByUsernameRepository } from "../../../repository/stay";
@@ -22,7 +22,7 @@ class MyAccount extends Component {
         isLoadingReservations: true
     }
     componentDidMount() {
-        GetStaysByUserId(this.props.user.userId, this.state.page, this.state.pageSize)
+        GetStaysByUsername(this.props.user.username, this.state.page, this.state.pageSize)
             .then(response => {
                 this.setState({ stays: response, isLoadingStays: false })
                 if (response.length < this.state.pageSize) this.setState({ loadMore: false });
@@ -32,7 +32,7 @@ class MyAccount extends Component {
                 console.log(err);
             })
 
-        GetReservationsByUsernameRepository(this.props.user.userId)
+        GetReservationsByUsernameRepository(this.props.user.username)
             .then(response => response.json())
             .then(data => {
                 this.setState({ reservations: data, isLoadingReservations: false })
@@ -46,7 +46,7 @@ class MyAccount extends Component {
     }
 
     renderMoreHandler = () => {
-        GetStaysByUserId(this.props.user.userId, this.state.page + 1, this.state.pageSize)
+        GetStaysByUsername(this.props.user.user.username, this.state.page + 1, this.state.pageSize)
             .then((response) => {
                 this.setState({ stays: [...this.state.stays, ...response], page: this.state.page + 1 });
                 if (response.length < this.state.pageSize) this.setState({ loadMore: false });

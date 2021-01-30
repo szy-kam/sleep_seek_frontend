@@ -36,11 +36,11 @@ class Register extends Component {
                 if (response.status === 200) {
                     this.setState({ message: t("ACCOUNT_CREATED") })
                     this.redirectUser()
-                    // GetUserIdByEmail(this.state.form.email)
+                    // GetUsernameByEmail(this.state.form.email)
                     //     .then(data => {
                     //         data.json()
                     //             .then(id => {
-                    //                 this.props.logInUser({ userId: id })
+                    //                 this.props.logInUser({ username: id })
                     //             })
                     //     })
                 }

@@ -1,14 +1,22 @@
-.accommodationEditComponent{
+.accommodationEditComponent {
     display: flex;
     flex-direction: column;
 }
 
-.accommodationsForms{
+.accommodationsForms {
     display: flex;
     flex-wrap: wrap;
     place-content: center;
 }
 
-.addAccommodationButton, .goToStayButton {
+.addAccommodationButton,
+.goToStayButton {
     align-self: center;
+}
+.addAccommodationButton {
+    justify-content: center;
+    margin-left: 20px;
+    height: 80px;
+
+
 }

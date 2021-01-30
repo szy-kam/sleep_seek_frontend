@@ -32,7 +32,7 @@ class Accommodation extends Component {
         const { t } = this.props;
         return this.state.accommodations.map((item, i) => (
             <tr className={style.accommodation} key={i}>
-                <td>{item.sleepersCapacity}</td>
+                <td>{item.sleepersCapacity}{t("ACCOMMODATION_CAPACITY_PERSONS")}</td>
                 <td><Properties properties={item.properties}/></td>
                 <td>{item.quantity}</td>
                 <td>{item.price} {t('CURRENCY_SYMBOL')}</td>
@@ -48,7 +48,7 @@ class Accommodation extends Component {
             return <table className={style.accommodationTable}>
                 <thead>
                     <tr>
-                        <td>{t('SLEEPERS_CAPACITY')}</td>
+                        <td>{t('ROOM')}</td>
                         <td>{t('PROPERTIES')}</td>
                         <td>{t('QUANTITY')}</td>
                         <td>{t('PRICE')}</td>

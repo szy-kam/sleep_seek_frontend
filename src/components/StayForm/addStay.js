@@ -35,14 +35,13 @@ class AddStay extends Component {
             });
     };
 
-    redirectUser = (url = "/") => {
+    redirectUser = (url = "/my-account") => {
         this.props.history.push(url);
     }
 
 
     render() {
         const { t } = this.props;
-        console.log(this.state);
         return (
             <div className={style.addStayCompoment}>
                 {this.state.showPopup && <PopupComponent >
@@ -51,6 +50,7 @@ class AddStay extends Component {
                 </PopupComponent>}
                 <StayForm
                     handleSubmit={this.handleSubmit}
+                    redirectUser={this.redirectUser}
                 />
             </div>
         );

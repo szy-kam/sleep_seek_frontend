@@ -94,14 +94,15 @@ class Stay extends Component {
                     >
                     </div>} */}
                     {this.state.stay.photos.length > 1 && <div className={style.imageGrid}>{this.imageGrid()}</div>}
-
                     {this.state.stay.photos.length === 1 && <div className={style.singleImage}>{this.imageGrid()}</div>}
-                    <div className={style.name}>
-                        {this.state.stay.name}
-                    </div>
-                    <div className={style.address}>
-                        {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
-                        {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
+                    <div className={style.nameAndAddress}>
+                        <div className={style.name}>
+                            {this.state.stay.name}
+                        </div>
+                        <div className={style.address}>
+                            {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
+                            {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
+                        </div>
                     </div>
                     <div className={style.contact}>
                         <div className={style.contacUs}>{t('CONTACT_US')}!</div>

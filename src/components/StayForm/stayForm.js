@@ -8,25 +8,38 @@ import StayMap from "../widgets/StayMap/stayMap";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import countrysList from "../../repository/countrysList";
 import PropertiesForm from "../PropertiesForm/propertiesForm";
+import { connect } from "react-redux";
 
 class StayForm extends Component {
     state = {
         stay: STAY,
-        newPhotos: null,
+        newPhotos: [],
         categories: []
     };
 
     componentDidMount() {
         if (this.props.getStay) {
             GetStayByIdRepository(this.props.getStay)
-                .then(response => response.json())
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    else {
+                        this.props.redirectUser("/my-account")
+                    }
+                })
                 .then(data => {
-                    this.setState({ stay: data })
-                }
-                );
+                    if (this.props.user && this.props.user.username === data.username) {
+                        this.setState({ stay: data })
+                    }
+                    else {
+                        this.props.redirectUser("/my-account")
+                    }
+
+                });
         }
         else {
-            // To set default values in select
+            // To set default values in selects
             const stay = this.state.stay
             stay.address.country = "Polska"
             stay.category = "HOTEL"
@@ -120,7 +133,7 @@ class StayForm extends Component {
         );
 
         this.setState({
-            newPhotos: acceptedFiles,
+            newPhotos: [...this.state.newPhotos, ...acceptedFiles]
         });
     };
 
@@ -260,7 +273,7 @@ class StayForm extends Component {
                         type="number"
                         required
                         min="1"
-                        
+
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
@@ -284,7 +297,7 @@ class StayForm extends Component {
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
-                    {!this.state.stay.mainPhoto  &&  this.state.newPhotos? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
+                    {!this.state.stay.mainPhoto && this.state.newPhotos.length ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
 
                     <label>{t("PROPERTIES")}</label>
                     <div className={style.properties}>
@@ -305,4 +318,8 @@ class StayForm extends Component {
     }
 }
 
-export default withTranslation()(StayForm)
+const mapStateToProps = state => ({
+    user: state.user.user
+})
+
+export default connect(mapStateToProps)(withTranslation()(StayForm))

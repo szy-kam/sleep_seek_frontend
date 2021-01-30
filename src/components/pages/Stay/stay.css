@@ -25,6 +25,10 @@
     object-fit: contain;
 }
 
+.nameAndAddress {
+    width: 67%;
+}
+
 .name {
     font-size: 50px;
 }
@@ -54,7 +58,7 @@
     padding: 20px;
     background: #278abb;
     color: white;
-    width: 30%;
+    width: 32%;
     /* align-self: center;
     margin: 20px 0; */
     align-self: flex-end;
@@ -126,20 +130,4 @@
     margin: 10px auto;
     display: flex;
     align-self: center;
-}
-
-.message {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    background-color: #278abb;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
-    z-index: 4;
-}
-
-.stayEditCompoment {
-    display: flex;
-    flex-direction: column;
 }

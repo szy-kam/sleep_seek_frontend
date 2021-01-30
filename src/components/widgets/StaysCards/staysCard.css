@@ -15,11 +15,11 @@
     margin: 10px 0px;
     max-height: 200px;
     flex-direction: row;
-    box-shadow: 0px 3px 4px 3px rgba(22,34,42,.15)
+    box-shadow: 0px 3px 4px 3px rgba(22, 34, 42, 0.15);
     /* flex: 0 0 auto; */
 }
 
-.staysCardT1:hover{
+.staysCardT1:hover {
     background-color: #f0f0f0;
 }
 
@@ -43,7 +43,6 @@
 }
 
 .staysCardT1 .left {
-
 }
 
 .staysCardT1 .right {
@@ -54,7 +53,7 @@
     font-size: 25px;
     text-decoration: none !important;
     font-weight: 700;
-    color: cornflowerblue
+    color: cornflowerblue;
 }
 
 .staysCardT1 .address {
@@ -63,7 +62,7 @@
 .staysCardT1 .avgRateIco {
     border: 1px solid #00008b;
     border-radius: 50%;
-    color:#00008b;
+    color: #00008b;
     width: fit-content;
     padding: 5px;
     margin-top: 5px;
@@ -85,7 +84,7 @@
     color: darkblue;
 }
 
-.averageRating{
+.averageRating {
     border: darkblue;
 }
 
@@ -135,19 +134,18 @@
 
 .staysCardT2 .name a {
     font-size: 20px;
-    text-decoration: none!important;
+    text-decoration: none !important;
     font-weight: 700;
 }
 
 .staysCardT2 .price {
     flex-basis: 100%;
     font-size: 20px;
-    text-decoration: none!important;
+    text-decoration: none !important;
     font-weight: 700;
 }
 
 .staysCardT2 .itemButton {
-
 }
 
 .staysCardT2 .itemButton a {
@@ -155,25 +153,25 @@
     color: white;
 }
 
-
-
 /*
 ************************************************************************
 *****************    .staysCard   Photo                *****************
 ************************************************************************
 */
+
 .staysContainerPhoto {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .staysCardPhoto {
-
     display: flex;
     flex-direction: column;
     position: relative;
     margin: 15px;
-    box-shadow: 0 1px 4px rgba(22,34,42,.15);
+    box-shadow: 0 1px 4px rgba(22, 34, 42, 0.15);
 }
 
 .staysCardPhoto .image {
@@ -198,8 +196,13 @@
 
 .staysCardPhoto .city a {
     font-size: 20px;
-    text-decoration: none!important;
+    text-decoration: none !important;
     font-weight: 700;
     color: black;
 }
 
+@media only screen and (max-width: 1340px) {
+    .staysContainerPhoto {
+        width: 75%;
+    }
+}

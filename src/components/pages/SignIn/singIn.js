@@ -43,7 +43,7 @@ class SignIn extends Component {
             })
             .then(token => {
                 if (token) {
-                    this.props.logInUser({ userToken: token, userId: this.state.form.username })
+                    this.props.logInUser({ userToken: token, username: this.state.form.username })
                     this.redirectUser()
                 }
             })

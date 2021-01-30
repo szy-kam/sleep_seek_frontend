@@ -39,12 +39,11 @@ export default function PropertiesForm(props) {
                         setAllProperties(data.map(item => {
                             return { name: item, id: item }
                         }))
-                        // setAllProperties(data)
                     })
             }
         }
         getProperties()
-    }, [props.properties]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (e) => {
         handleCheck(e)

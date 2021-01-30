@@ -1,11 +1,11 @@
 .advancedSearchComponent {
-
 }
 
-.advancedSearchForm{
-    margin: 20px auto;
-    padding: 30px;
+.advancedSearchForm {
+    margin: 10px auto;
+    padding: 20px;
     border: 1px solid black;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -15,13 +15,27 @@
 }
 
 .DatePicker__input {
-    border: 1px solid black !important
+    border: 1px solid black !important;
 }
 
-.Calendar__monthArrow{
-    width: 30px!important;
+.Calendar__monthArrow {
+    width: 30px !important;
 }
-.DatePicker__calendarContainer{
+.DatePicker__calendarContainer {
     height: 33em;
+}
 
+.priceContainer{
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.priceInput {
+    border: 2px solid #7f7f7f;
+    border-radius: 5px;
+    width: fit-content;
+    display: flex;
+    margin: unset;
+    margin-right: 5px;
 }

@@ -16,44 +16,32 @@ class EditStay extends Component {
         showPopup: false
     };
 
-    submitForm = (stay, files) => {
+    handleSubmit = (stay, files) => {
         this.setState({ showPopup: true, message: "SAVING_STAY" })
         const { t } = this.props;
         EditStayRepository(stay, files)
             .then((response) => {
                 if (response.ok) {
-                    this.setState({ message: t("STAY_EDITED") })
                     this.redirectUser()
                 }
                 else {
                     console.log(response);
                     this.setState({ message: t(`ERROR_${response.status}`) })
                 }
-            });
+            })
     };
 
     handleDelete = (e) => {
-        const { t } = this.props;
         e.preventDefault();
         DeleteStayByIdRepository(this.props.match.params.id)
             .then(() =>
-                this.setState({ message: t("STAY_DELETED") })
+                this.redirectUser()
             );
     };
 
-    redirectUser = () => {
-        this.props.history.push("/my-account");
+    redirectUser = (url = "/my-account") => {
+        this.props.history.push(url);
     };
-
-    submitAccomodationForm = (accomodationForm) => {
-        console.log(accomodationForm);
-    }
-
-
-    scrollToBottom = () => {
-        const { messageList } = this.refs;
-        messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-    }
 
     render() {
         const { t } = this.props;
@@ -66,9 +54,10 @@ class EditStay extends Component {
                 <StayForm
                     handleInput={this.handleInput}
                     stay={this.state.stay}
-                    handleSubmit={this.submitForm}
+                    handleSubmit={this.handleSubmit}
                     handleDelete={this.handleDelete}
                     getStay={this.props.match.params.id}
+                    redirectUser={this.redirectUser}
                 />
                 <Link to={`/stays/editAccommodations/${this.props.match.params.id}`}><button>{t('EDIT_ACCOMMODATIONS')}</button></Link>
             </div>
