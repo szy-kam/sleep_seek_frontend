@@ -4,6 +4,7 @@ import style from "./register.css";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logInUser } from "../../../redux/user/userActions";
+import PopupComponent from "../../widgets/PopupComponent/popupComponent";
 
 class Register extends Component {
     state = {
@@ -12,7 +13,8 @@ class Register extends Component {
             username: "",
             password: "",
         },
-        message: null,
+        message: "",
+        showPopup: false
     };
 
     handleInput = (event, field) => {
@@ -33,6 +35,7 @@ class Register extends Component {
             .then(response => {
                 if (response.status === 200) {
                     this.setState({ message: t("ACCOUNT_CREATED") })
+                    this.redirectUser()
                     // GetUserIdByEmail(this.state.form.email)
                     //     .then(data => {
                     //         data.json()
@@ -42,27 +45,25 @@ class Register extends Component {
                     //     })
                 }
                 else {
-                    this.setState({ message: t(`USER_ERROR_${response.status}`) });
+                    this.setState({ message: t(`USER_ERROR_${response.status}`), showPopup: true });
+                    this.quickMessage()
                 }
             })
-            .catch(() => this.setState({ message: t("ERROR") }));
+            .catch((err) => {
+                console.log(err);
+                this.setState({ message: t("ERROR"), showPopup: true })
+                this.quickMessage()
+            });
     };
 
     redirectUser = () => {
-        setTimeout(() => {
-            this.props.history.push("/sign-in");
-        }, 1500);
+        this.props.history.push("/sign-in");
     };
 
-    message = () => {
-        if (this.state.message)
-            return (
-                <div className={style.message}>
-                    {this.state.message}
-                    {this.redirectUser()}
-                </div>
-            );
-        else return null;
+    quickMessage = (time = 1500) => {
+        setTimeout(() => {
+            this.setState({ showPopup: false });
+        }, time);
     };
 
     render() {
@@ -70,7 +71,6 @@ class Register extends Component {
         return (
             <div className={style.registerComponent}>
                 <h1>{t('REGISTER')}</h1>
-                {this.message()}
                 <form onSubmit={this.submitForm} className={style.registerForm}>
                     <input
                         type="text"
@@ -92,11 +92,14 @@ class Register extends Component {
                         placeholder={t("PASSWORD")}
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
-                        autoComplete="off"
+                        autoComplete="on"
                         required
                     />
                     <button type="submit">{t("REGISTER")}</button>
                 </form>
+                {this.state.showPopup && <PopupComponent >
+                    <h3>{t(this.state.message)}</h3>
+                </PopupComponent>}
             </div>
         );
     }

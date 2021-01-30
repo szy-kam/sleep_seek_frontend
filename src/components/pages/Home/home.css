@@ -1,0 +1,11 @@
+.smartQuote {
+    margin: 30px auto 20px auto;
+}
+
+.innerSmartQuote {
+    width: fit-content;
+    border-bottom: 3px solid #278abb;
+    border-top: 3px solid #278abb;
+    margin: 0 auto;
+    padding: 0 10px;
+}

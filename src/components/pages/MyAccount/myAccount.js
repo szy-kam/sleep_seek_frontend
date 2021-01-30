@@ -7,6 +7,7 @@ import StaysCard from "../../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
 import { GetReservationsByUsernameRepository } from "../../../repository/stay";
 import ReservationsForm from "../../ReservationsForm/reservationsForm";
+import LoadingComponent from "../../widgets/LoadingComponent/loadingComponent";
 
 
 class MyAccount extends Component {
@@ -16,24 +17,28 @@ class MyAccount extends Component {
         page: 0,
         pageSize: this.defaultStaysQuantity,
         loadMore: true,
-        reservations: []
+        reservations: [],
+        isLoadingStays: true,
+        isLoadingReservations: true
     }
     componentDidMount() {
         GetStaysByUserId(this.props.user.userId, this.state.page, this.state.pageSize)
             .then(response => {
-                this.setState({ stays: response })
+                this.setState({ stays: response, isLoadingStays: false })
                 if (response.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch(err => {
+                this.setState({ isLoadingStays: false })
                 console.log(err);
             })
 
         GetReservationsByUsernameRepository(this.props.user.userId)
             .then(response => response.json())
             .then(data => {
-                this.setState({ reservations: data })
+                this.setState({ reservations: data, isLoadingReservations: false })
             })
             .catch(err => {
+                this.setState({ isLoadingReservations: false })
                 console.log(err);
             })
 
@@ -57,11 +62,11 @@ class MyAccount extends Component {
                 <button className={style.addStayButton}><Link to="/add-stay">{t("ADD_STAY")}</Link></button>
                 <div>
                     <h3>{t("YOURS_RESERVATIONS")}</h3>
-                    {this.state.reservations.length ? <ReservationsForm reservations={this.state.reservations} template="edit" /> : t('NO_RESERVATIONS')}
+                    {!this.state.isLoadingReservations ? this.state.reservations.length ? <ReservationsForm reservations={this.state.reservations} template="edit" /> : t('NO_RESERVATIONS') : <LoadingComponent />}
                 </div>
                 <div>
                     <h3>{t("YOURS_STAYS")}</h3>
-                    <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler} />
+                    {!this.state.isLoadingReservations ? <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler} /> : <LoadingComponent />}
                 </div>
 
             </div>

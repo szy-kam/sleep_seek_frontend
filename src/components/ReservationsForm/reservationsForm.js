@@ -9,13 +9,12 @@ const Reservations = (props) => {
     const { t } = useTranslation()
 
     const renderTable = () => {
-        console.log(props.reservations);
         if (Array.isArray(props.reservations)) {
             return <table className={style.reservationsTable}>
                 <thead>
                     <tr>
                         <td>{t('CREATED')}</td>
-                        <td>{t('STAY_ID')}</td> 
+                        <td>{t('STAY_ID')}</td>
                         <td>{t('ACCOMMODATION_ID')}</td>
                         <td>{t('FROM')}</td>
                         <td>{t('TO')}</td>

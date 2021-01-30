@@ -105,8 +105,8 @@ class Stay extends Component {
                     </div>
                     <div className={style.contact}>
                         <div className={style.contacUs}>{t('CONTACT_US')}!</div>
-                        <div><span className={style.contactDetail}>{t('PHONE')}:</span>{this.state.stay.phoneNumber}</div>
-                        <div><span className={style.contactDetail}>{t('EMAIL')}:</span>{this.state.stay.email}</div>
+                        <div><span className={style.contactDetail}>{t('PHONE')}: </span>{this.state.stay.phoneNumber}</div>
+                        <div><span className={style.contactDetail}>{t('EMAIL')}: </span>{this.state.stay.email}</div>
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
 
@@ -127,7 +127,6 @@ class Stay extends Component {
     }
 
     render() {
-        console.log(this.state.stay);
         return (
             <div className={style.stayComponent}>
                 {this.renderContent()}

@@ -19,14 +19,27 @@ const Home = () => {
             })
     }, [])
 
+    const smartQuote = () => {
+
+        return (
+            <div className={style.smartQuote}>
+                <div className={style.innerSmartQuote}> 
+                <h2>Podążaj za swoimi marzeniami. One znają drogę.</h2>
+
+                </div>
+            </div>
+        )
+    }
+
+
     return (
         <div style={style.homeComponent}>
             <StaysSlider template="default" height="500px" />
-            <div>
-                <StaysMap position={[52.125736, 19.080392]} zoom={6} />
-                <h2>Najczęściej wybierane miasta</h2>
-                <StaysCard stays={stays.slice(0, 4)} template={"photo"} />
-            </div>
+            {smartQuote()}
+            <StaysMap position={[52.125736, 19.080392]} zoom={6} />
+            <h2>Najczęściej wybierane miasta</h2>
+            <StaysCard stays={stays.slice(0, 4)} template={"photo"} />
+
         </div>
     );
 };

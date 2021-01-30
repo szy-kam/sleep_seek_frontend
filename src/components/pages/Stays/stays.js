@@ -6,6 +6,7 @@ import AdvancedSearchForm from "../../AdvancedSearchForm/advancedSearchForm";
 import StaysMap from "../../widgets/StaysMap/staysMap";
 import { withTranslation } from "react-i18next";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
+import LoadingComponent from "../../widgets/LoadingComponent/loadingComponent";
 
 class Stays extends Component {
     defaultStaysQuantity = 10;
@@ -17,7 +18,8 @@ class Stays extends Component {
         loadMore: true,
         searchParams: null,
         mapPosition: [52.125736, 19.080392],
-        mapZoom: 6
+        mapZoom: 6,
+        isLoading: true
     };
 
     componentDidMount() {
@@ -28,10 +30,11 @@ class Stays extends Component {
                 else return []
             })
             .then(data => {
-                this.setState({ stays: data })
+                this.setState({ stays: data, isLoading: false })
                 if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch((err) => {
+                this.setState({ isLoading: false })
                 console.log(err);
             });
     }
@@ -98,10 +101,9 @@ class Stays extends Component {
             <div className={style.staysComponent}>
                 <div className={style.leftColumn}>
                     <AdvancedSearchForm handleSubmit={this.handleSearchSubmit} />
-                    <StaysCard template="mini" loadMore={false} />
                 </div>
                 <div className={style.middleColumn}>
-                    <StaysCard template="default" loadMore={this.state.loadMore} stays={this.state.stays} renderMoreHandler={this.renderMoreHandler} />
+                    {!this.state.isLoading ? <StaysCard template="default" loadMore={this.state.loadMore} stays={this.state.stays} renderMoreHandler={this.renderMoreHandler} /> : <LoadingComponent />}
                     <StaysMap stays={this.state.stays} position={this.state.mapPosition} zoom={this.state.mapZoom} height="500px" />
                 </div>
 

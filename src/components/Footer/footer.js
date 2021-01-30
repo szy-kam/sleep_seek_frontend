@@ -17,7 +17,7 @@ class Footer extends Component {
                         </div>
                     </div>
                     <div className={style.col}>
-                        <h3>Domumenty</h3>
+                        <h3>Dokumenty</h3>
                         <span>Regulamin</span>
                         <span>Polityka prywatności</span>
                     </div>

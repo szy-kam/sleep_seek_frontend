@@ -59,8 +59,8 @@ export async function AddStayRepository(stay, files) {
             else {
                 console.log("IMAGE ERROR");
                 console.log(response);
-                response.json().then(data => {
-                    console.log(data);
+                response.json().then(err => {
+                    console.log(err);
                 })
             }
         }
@@ -119,6 +119,9 @@ export async function EditStayRepository(stay, files) {
     if (stay.mainPhoto.slice(0, 4) !== 'http') {
         stay.mainPhoto = null
     }
+    if (!stay.mainPhoto && images[0]) {
+        stay.mainPhoto = images[0]
+    }
     stay.photos = images
     const url = BACKEND_URL + "/stays/" + stay.id
     return fetchWithAutorization("PUT", url, stay)
@@ -127,7 +130,7 @@ export async function EditStayRepository(stay, files) {
 
 export async function DeleteStayPhotoRepository(photo) {
     // const url = BACKEND_URL + "/photo?url=" + photo
-    console.log("DEL" + photo);
+    // console.log("DEL" + photo);
     // return fetchWithAutorization("DELETE", url)
 }
 

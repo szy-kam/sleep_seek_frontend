@@ -197,7 +197,6 @@ const Reservation = (props) => {
             reservation.customer = { fullName: inputs.fullName, phoneNumber: inputs.phoneNumber }
             reservation.dateFrom = dateFormatter(selectedDayRange.from)
             reservation.dateTo = dateFormatter(selectedDayRange.to)
-            console.log(reservation);
             MakeReservationRepository(reservation)
                 .then(response => {
                     if (response.ok) {

@@ -7,18 +7,23 @@ import StayForm from "./stayForm";
 import style from "./stay.css";
 import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import LoadingComponent from "../widgets/LoadingComponent/loadingComponent";
+import PopupComponent from "../widgets/PopupComponent/popupComponent";
 
 class EditStay extends Component {
     state = {
         message: "",
+        showPopup: false
     };
 
     submitForm = (stay, files) => {
+        this.setState({ showPopup: true, message: "SAVING_STAY" })
         const { t } = this.props;
         EditStayRepository(stay, files)
             .then((response) => {
                 if (response.ok) {
                     this.setState({ message: t("STAY_EDITED") })
+                    this.redirectUser()
                 }
                 else {
                     console.log(response);
@@ -37,25 +42,13 @@ class EditStay extends Component {
     };
 
     redirectUser = () => {
-        setTimeout(() => {
-            this.props.history.push("/my-account");
-        }, 2000);
+        this.props.history.push("/my-account");
     };
 
     submitAccomodationForm = (accomodationForm) => {
         console.log(accomodationForm);
     }
 
-    message = () => {
-        if (this.state.message)
-            return (
-                <div className={style.message}>
-                    {" "}
-                    {this.state.message} {this.redirectUser()}{" "}
-                </div>
-            );
-        else return null;
-    };
 
     scrollToBottom = () => {
         const { messageList } = this.refs;
@@ -66,7 +59,10 @@ class EditStay extends Component {
         const { t } = this.props;
         return (
             <div className={style.editStayCompoment}>
-                {this.message()}
+                {this.state.showPopup && <PopupComponent >
+                    <h3>{t(this.state.message)}</h3>
+                    <LoadingComponent />
+                </PopupComponent>}
                 <StayForm
                     handleInput={this.handleInput}
                     stay={this.state.stay}

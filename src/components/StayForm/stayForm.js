@@ -12,6 +12,7 @@ import PropertiesForm from "../PropertiesForm/propertiesForm";
 class StayForm extends Component {
     state = {
         stay: STAY,
+        newPhotos: null,
         categories: []
     };
 
@@ -283,7 +284,7 @@ class StayForm extends Component {
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
-                    {!this.state.stay.mainPhoto ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
+                    {!this.state.stay.mainPhoto  &&  this.state.newPhotos? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
 
                     <label>{t("PROPERTIES")}</label>
                     <div className={style.properties}>

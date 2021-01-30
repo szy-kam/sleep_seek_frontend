@@ -28,7 +28,6 @@ const ReservationFormEditable = (props) => {
     }
 
     const handleDelete = () => {
-        console.log(reservation);
         props.handleDelete(reservation)
     }
 
