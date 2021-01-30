@@ -130,13 +130,16 @@ const AdvancedSearch = (props) => {
                     calendarClassName={"style.calendar"}
                     colorPrimary="#278abb"
                     colorPrimaryLight="rgb(23 151 211 / 42%)"
-                    // renderFooter={renderFooter}
+                    calendarPopperPosition="bottom"
                     renderFooter={() => (
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <button
                                 type="button"
                                 onClick={() => {
-                                    setSelectedDayRange(null)
+                                    setSelectedDayRange({
+                                        from: null,
+                                        to: null
+                                    })
                                 }}
                                 style={{
                                     padding: '10px 28px',
@@ -175,7 +178,7 @@ const AdvancedSearch = (props) => {
                         type="number" min="10" max="1000"
                         className={style.priceInput}
                     />
-                    <span>{t("CURRENCY_SYMBOL")}</span> 
+                    <span>{t("CURRENCY_SYMBOL")}</span>
                 </div>
                 <input
                     onChange={(event) => handleInput(event, "priceFrom")}
@@ -190,7 +193,7 @@ const AdvancedSearch = (props) => {
                         type="number" min="10" max="1000"
                         className={style.priceInput}
                     />
-                    <span>{t("CURRENCY_SYMBOL")}</span> 
+                    <span>{t("CURRENCY_SYMBOL")}</span>
                 </div>
                 <input
                     onChange={(event) => handleInput(event, "priceTo")}

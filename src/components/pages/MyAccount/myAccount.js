@@ -6,9 +6,10 @@ import { GetStaysByUsername } from "../../../repository/stays"
 import StaysCard from "../../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
 import { GetReservationsByUsernameRepository } from "../../../repository/stay";
+import { GetUsernameByTokenRepository } from '../../../repository/user'
 import ReservationsForm from "../../ReservationsForm/reservationsForm";
 import LoadingComponent from "../../widgets/LoadingComponent/loadingComponent";
-
+import { logOutUser } from "../../../redux/user/userActions";
 
 class MyAccount extends Component {
     defaultStaysQuantity = 10;
@@ -22,6 +23,14 @@ class MyAccount extends Component {
         isLoadingReservations: true
     }
     componentDidMount() {
+
+        GetUsernameByTokenRepository(this.props.user.userToken)
+            .then((response) => {
+                if (!response.ok) {
+                    this.props.logOutUser()
+                }
+            })
+
         GetStaysByUsername(this.props.user.username, this.state.page, this.state.pageSize)
             .then(response => {
                 this.setState({ stays: response, isLoadingStays: false })
@@ -59,7 +68,7 @@ class MyAccount extends Component {
         return (
             <div className={style.myAccountComponent}>
                 <h1>{t("MY_ACCOUNT")}</h1>
-                <button className={style.addStayButton}><Link to="/add-stay">{t("ADD_STAY")}</Link></button>
+                <Link to="/add-stay" className={style.addStayButton}><button >{t("ADD_STAY")}</button></Link>
                 <div>
                     <h3>{t("YOURS_RESERVATIONS")}</h3>
                     {!this.state.isLoadingReservations ? this.state.reservations.length ? <ReservationsForm reservations={this.state.reservations} template="edit" /> : t('NO_RESERVATIONS') : <LoadingComponent />}
@@ -77,4 +86,8 @@ class MyAccount extends Component {
 const mapStateToProps = state => ({
     user: state.user.user
 })
-export default connect(mapStateToProps)(withTranslation()(MyAccount));
+const mapDispatchToProps = (dispatch) => ({
+    logOutUser: () => dispatch(logOutUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(MyAccount));
