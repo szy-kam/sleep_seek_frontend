@@ -149,14 +149,17 @@ class StayForm extends Component {
 
     thumbs = () => {
         if (this.state.newPhotos && this.state.newPhotos.length > 0)
-            return this.state.newPhotos.map((file) => (
-                <img
-                    src={file.preview}
-                    key={file.name}
-                    alt={file.name}
-                    onClick={this.mainPhotoSelected}
-                    className={file.name === this.state.stay.mainPhoto ? style.selectedPhoto : null}
-                />
+            return this.state.newPhotos.map((file , i) => (
+                <div className={style.photoContainer} key={i}>
+                    <div id={file.name} className={style.deletePhoto} onClick={this.handleUndoUpload}>x</div>
+                    <img
+                        src={file.preview}
+                        key={file.name}
+                        alt={file.name}
+                        onClick={this.mainPhotoSelected}
+                        className={file.name === this.state.stay.mainPhoto ? style.selectedPhoto : null}
+                    />
+                </div>
             ));
         else return null;
     };
@@ -174,7 +177,7 @@ class StayForm extends Component {
 
     handleDeletePhoto = (event) => {
 
-        const newStay = {
+        let newStay = {
             ...this.state.stay,
         };
         newStay.photos = newStay.photos.filter(photo => {
@@ -186,6 +189,17 @@ class StayForm extends Component {
 
         DeleteStayPhotoRepository(event.target.id)
             .catch(err => console.log(err))
+    }
+
+    handleUndoUpload = (event) => {
+        let photos = this.state.newPhotos
+        photos = photos.filter(photo => {
+            return photo.name !== event.target.id
+        });
+        console.log(photos);
+        this.setState({
+            newPhotos: photos,
+        });
     }
 
     renderPhotos = () => {
@@ -219,6 +233,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "name")}
                         value={this.state.stay.name}
+                        maxLength="100"
                         required
                     />
                     <label>{t("CATEGORY")}</label>
@@ -240,12 +255,14 @@ class StayForm extends Component {
                         onChange={(event) => this.handleInput(event, "city")}
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.city}
+                        maxLength="100"
                     />
                     <label>{t("STREET")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "street")}
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.street}
+                        maxLength="100"
                     />
                     <label>{t("ZIP_CODE")}</label>
                     <input
@@ -253,6 +270,7 @@ class StayForm extends Component {
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.zipCode}
                         placeholder="00-000"
+                        maxLength="5"
                     />
                     {this.state.stay.address.latitude && (
                         <div className={style.map}>
@@ -273,18 +291,19 @@ class StayForm extends Component {
                         type="number"
                         required
                         min="1"
-
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "phoneNumber")}
                         value={this.state.stay.phoneNumber}
+                        maxLength="15"
                     />
                     <label>{t("EMAIL")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "email")}
                         value={this.state.stay.email}
                         type="emial"
+                        maxLength="50"
                     />
                     <label>{t("DESCRIPTION")}</label>
                     <textarea

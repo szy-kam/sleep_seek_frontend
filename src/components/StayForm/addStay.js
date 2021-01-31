@@ -31,6 +31,7 @@ class AddStay extends Component {
                         console.log(err);
                     })
                     this.setState({ message: t(`ERROR_${response.status}`) })
+                    this.quickMessage()
                 }
             });
     };
@@ -39,6 +40,11 @@ class AddStay extends Component {
         this.props.history.push(url);
     }
 
+    quickMessage = (time = 1500) => {
+        setTimeout(() => {
+            this.setState({ showPopup: false });
+        }, time);
+    };
 
     render() {
         const { t } = this.props;

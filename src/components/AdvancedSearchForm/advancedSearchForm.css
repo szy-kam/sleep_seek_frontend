@@ -39,3 +39,7 @@
     margin: unset;
     margin-right: 5px;
 }
+
+.advancedSearchComponent label {
+    font-weight: bold;
+}

@@ -27,6 +27,7 @@ class EditStay extends Component {
                 else {
                     console.log(response);
                     this.setState({ message: t(`ERROR_${response.status}`) })
+                    this.quickMessage()
                 }
             })
     };
@@ -41,6 +42,12 @@ class EditStay extends Component {
 
     redirectUser = (url = "/my-account") => {
         this.props.history.push(url);
+    };
+
+    quickMessage = (time = 1500) => {
+        setTimeout(() => {
+            this.setState({ showPopup: false });
+        }, time);
     };
 
     render() {

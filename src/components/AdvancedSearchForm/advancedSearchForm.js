@@ -18,7 +18,8 @@ const AdvancedSearch = (props) => {
         category: "Hotel",
         priceFrom: "10",
         priceTo: "1000",
-        maxDistance: "5"
+        maxDistance: "5",
+        numberOfPeople: ""
     }
     const [inputs, setInputs] = useState(inputsInit);
     const [properties, setProperties] = useState([]);
@@ -162,6 +163,14 @@ const AdvancedSearch = (props) => {
                     onChange={(event) => handleInput(event, "city")}
                     value={inputs.city}
                     type="text"
+                />
+                <label>{t("NUMBER_OF_PEOPLE")}</label>
+                <input
+                    onChange={(event) => handleInput(event, "numberOfPeople")}
+                    value={inputs.numberOfPeople}
+                    type="number"
+                    min="1"
+                    max="200"
                 />
                 <label>{t("MAX_DISTANCE")}</label>
                 <div>{inputs.maxDistance} km</div>
