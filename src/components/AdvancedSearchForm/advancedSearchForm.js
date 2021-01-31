@@ -173,7 +173,15 @@ const AdvancedSearch = (props) => {
                     max="200"
                 />
                 <label>{t("MAX_DISTANCE")}</label>
-                <div>{inputs.maxDistance} km</div>
+                <div className={style.priceContainer}>
+                    <input
+                        onChange={(event) => handleInput(event, "maxDistance")}
+                        value={inputs.maxDistance}
+                        type="number" step="1" min="1" max="100"
+                        className={style.priceInput}
+                    />
+                    <span>{t("DISTANCE_SYMBOL")}</span>
+                </div>
                 <input
                     onChange={(event) => handleInput(event, "maxDistance")}
                     value={inputs.maxDistance}

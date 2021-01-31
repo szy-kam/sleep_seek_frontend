@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 class ReservationsEdit extends Component {
     state = {
-        reservations: null
+        reservations: []
     }
 
     getReservations = () => {
@@ -22,13 +22,7 @@ class ReservationsEdit extends Component {
                 }
             })
             .then(data => {
-                if (data.length === 0) {
-                    this.props.history.push("/my-account")
-                }
-                else{
-                    this.setState({ reservations: data })
-                }
-                
+                this.setState({ reservations: data })
             })
             .catch(err => console.log(err));
     }
@@ -66,6 +60,7 @@ class ReservationsEdit extends Component {
                 </div>
 
                 <Link to={`/stays/${this.props.match.params.stayId}`} className={style.goToStayButton}><button >{t('GO_TO_STAY')}</button></Link>
+                <Link to={`/my-account`} className={style.goToStayButton}><button >{t('MY_ACCOUNT')}</button></Link>
             </div>
         )
     }

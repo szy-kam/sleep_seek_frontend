@@ -9,7 +9,7 @@ const Reservations = (props) => {
     const { t } = useTranslation()
 
     const renderTable = () => {
-        if (Array.isArray(props.reservations)) {
+        if (props.reservations.length) {
             return <table className={style.reservationsTable}>
                 <thead>
                     <tr>
@@ -31,7 +31,7 @@ const Reservations = (props) => {
                 </tbody>
             </table>
         }
-        else return null
+        else return t("NO_RESERVATIONS")
     }
 
     const renderReservations = () => {

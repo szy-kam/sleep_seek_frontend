@@ -1,12 +1,14 @@
 .staysComponent {
     display: flex;
     flex-direction: row;
-    padding: 0 7px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 @media only screen and (max-width: 800px) {
     .staysComponent {
-        flex-direction: column;
+        flex-direction: column-reverse;
+        width: 95%;
     }
 
     .leftColumn {
@@ -16,10 +18,10 @@
 }
 
 .leftColumn {
-    flex-basis: 15%;
+    flex-basis: 20%;
     max-width: 300px;
 }
 .middleColumn {
-    flex-basis: 85%;
+    flex-basis: 79%;
     margin-left: 8px;
 }

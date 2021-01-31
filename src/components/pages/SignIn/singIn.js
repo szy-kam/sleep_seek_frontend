@@ -78,6 +78,8 @@ class SignIn extends Component {
                         value={this.state.form.email}
                         onChange={(event) => this.handleInput(event, "username")}
                         autoComplete="on"
+                        minLength="5"
+                        maxLength="64"
                         required
                         autoFocus
                     />
@@ -87,6 +89,8 @@ class SignIn extends Component {
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="on"
+                        minLength="1"
+                        maxLength="32"
                         required
                     />
                     <div className={style.forgerPassword}><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div>

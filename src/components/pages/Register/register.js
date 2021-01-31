@@ -79,6 +79,8 @@ class Register extends Component {
                         onChange={(event) => this.handleInput(event, "displayName")}
                         required
                         autoFocus
+                        minLength="1"
+                        maxLength="64"
                     />
                     <input
                         type="email"
@@ -86,6 +88,8 @@ class Register extends Component {
                         value={this.state.form.username}
                         onChange={(event) => this.handleInput(event, "username")}
                         required
+                        minLength="5"
+                        maxLength="64"
                     />
                     <input
                         type="password"
@@ -93,6 +97,8 @@ class Register extends Component {
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="on"
+                        minLength="1"
+                        maxLength="32"
                         required
                     />
                     <button type="submit">{t("REGISTER")}</button>

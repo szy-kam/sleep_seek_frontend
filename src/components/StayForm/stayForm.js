@@ -149,7 +149,7 @@ class StayForm extends Component {
 
     thumbs = () => {
         if (this.state.newPhotos && this.state.newPhotos.length > 0)
-            return this.state.newPhotos.map((file , i) => (
+            return this.state.newPhotos.map((file, i) => (
                 <div className={style.photoContainer} key={i}>
                     <div id={file.name} className={style.deletePhoto} onClick={this.handleUndoUpload}>x</div>
                     <img
@@ -176,13 +176,18 @@ class StayForm extends Component {
     }
 
     handleDeletePhoto = (event) => {
-
         let newStay = {
             ...this.state.stay,
         };
+
         newStay.photos = newStay.photos.filter(photo => {
             return photo !== event.target.id
         });
+
+        if (event.target.id === this.state.stay.mainPhoto) {
+            newStay.mainPhoto = ""
+        }
+
         this.setState({
             stay: newStay,
         });
@@ -196,10 +201,19 @@ class StayForm extends Component {
         photos = photos.filter(photo => {
             return photo.name !== event.target.id
         });
-        console.log(photos);
-        this.setState({
-            newPhotos: photos,
-        });
+        if (event.target.id === this.state.stay.mainPhoto) {
+            let newStay = { ...this.state.stay }
+            newStay.mainPhoto = ""
+            this.setState({
+                newPhotos: photos,
+                stay: newStay
+            });
+        } else {
+            this.setState({
+                newPhotos: photos,
+            });
+        }
+
     }
 
     renderPhotos = () => {
@@ -216,7 +230,6 @@ class StayForm extends Component {
                             onClick={this.mainPhotoSelected}
                             className={item === this.state.stay.mainPhoto ? style.selectedPhoto : null}
                         />
-
                     </div>
                 )
             })
@@ -225,6 +238,7 @@ class StayForm extends Component {
 
 
     render() {
+        console.log(this.state.stay);
         const { t } = this.props;
         return (
             <div className={style.stayEditCompoment}>
@@ -302,7 +316,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "email")}
                         value={this.state.stay.email}
-                        type="emial"
+                        type="email"
                         maxLength="50"
                     />
                     <label>{t("DESCRIPTION")}</label>
@@ -316,7 +330,7 @@ class StayForm extends Component {
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
-                    {!this.state.stay.mainPhoto && this.state.newPhotos.length ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
+                    {!this.state.stay.mainPhoto && (this.state.newPhotos.length || this.state.stay.photos.length) ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
 
                     <label>{t("PROPERTIES")}</label>
                     <div className={style.properties}>
