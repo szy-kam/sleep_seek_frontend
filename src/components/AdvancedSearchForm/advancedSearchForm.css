@@ -25,7 +25,7 @@
     height: 33em;
 }
 
-.priceContainer{
+.priceContainer {
     display: flex;
     align-items: center;
     margin-top: 3px;
@@ -34,6 +34,7 @@
 .priceInput {
     border: 2px solid #7f7f7f;
     border-radius: 5px;
+    width: max-content;
     width: fit-content;
     display: flex;
     margin: unset;

@@ -1,5 +1,6 @@
 require('dotenv').config()
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+// export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+export const BACKEND_URL = "https://sleepseek-backend.herokuapp.com"
 
 export let STAY = {
     id: null,

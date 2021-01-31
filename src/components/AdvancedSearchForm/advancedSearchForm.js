@@ -15,11 +15,10 @@ const AdvancedSearch = (props) => {
         name: "",
         country: "Polska",
         city: "",
-        category: "Hotel",
+        category: "HOTEL",
         priceFrom: "10",
         priceTo: "1000",
-        maxDistance: "5",
-        numberOfPeople: ""
+        sleepersCapacity: ""
     }
     const [inputs, setInputs] = useState(inputsInit);
     const [properties, setProperties] = useState([]);
@@ -84,15 +83,14 @@ const AdvancedSearch = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let searchParams = Object.assign({ propertice: properties }, inputs)
-        if (selectedDayRange.from && selectedDayRange.to) {
-            searchParams.dateFrom = myCustomLocale.toNativeDate(selectedDayRange.from)
-            searchParams.dateTo = myCustomLocale.toNativeDate(selectedDayRange.to)
-        }
+
+        searchParams.dateFrom = selectedDayRange.from || ""
+        searchParams.dateTo = selectedDayRange.to || ""
+
         const order = searchParams.orderBy.split(' ')
         searchParams.orderBy = order[0] || ""
         searchParams.order = order[1] || ""
 
-        console.log(searchParams);
         props.handleSubmit(searchParams)
     }
 
@@ -166,13 +164,13 @@ const AdvancedSearch = (props) => {
                 />
                 <label>{t("NUMBER_OF_PEOPLE")}</label>
                 <input
-                    onChange={(event) => handleInput(event, "numberOfPeople")}
-                    value={inputs.numberOfPeople}
+                    onChange={(event) => handleInput(event, "sleepersCapacity")}
+                    value={inputs.sleepersCapacity}
                     type="number"
                     min="1"
                     max="200"
                 />
-                <label>{t("MAX_DISTANCE")}</label>
+                {/* <label>{t("MAX_DISTANCE")}</label>
                 <div className={style.priceContainer}>
                     <input
                         onChange={(event) => handleInput(event, "maxDistance")}
@@ -186,7 +184,7 @@ const AdvancedSearch = (props) => {
                     onChange={(event) => handleInput(event, "maxDistance")}
                     value={inputs.maxDistance}
                     type="range" step="1" min="1" max="100"
-                />
+                /> */}
                 <label>{t("PRICE_FROM")}</label>
                 <div className={style.priceContainer}>
                     <input

@@ -148,8 +148,11 @@
     "USER_PLUS": "Możliwa dostawka",
     "SMOKING": "Dla palących",
     "COOLING": "Klimatyzacja",
-    "__H1": "Nagówłki stron",
+    "___H1": "Nagówłki stron",
     "MY_ACCOUNT": "Moje konto",
     "STAYS": "Obkiety",
-    "SIGN_IN": "Zaloguj się"
+    "SIGN_IN": "Zaloguj się",
+    "___POPUPMESSAGES": "",
+    "LOGGING": "Trwa logowanie",
+    "REGISTRATION_IN_PROCESS": "Trwa rejestrowanie"
 }

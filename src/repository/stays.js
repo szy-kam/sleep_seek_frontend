@@ -12,14 +12,53 @@ export async function GetStaysRepository(pageNumber, pageSize) {
 }
 
 export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchParams) {
-    let newUrl
+    const dateFormatter = (date) => {
+        const fixDate = (date) => {
+            if (date < 10) {
+                return "0" + date
+            }
+            else return date
+        }
+        if (date)
+            return `${date.year}-${fixDate(date.month)}-${fixDate(date.day)}`
+        else
+            return ""
+    }
+
+    const propToString = (props) => {
+        let s = ""
+        for (let p of props) {
+            s += "prop=" + p + "&"
+        }
+        return s.slice(0, -1)
+    }
+
+    const getString = (k, v) => {
+        if (k === "dateFrom" || k === "dateTo")
+            v = dateFormatter(v)
+        if (k === "propertice")
+            return ""
+        if (v) {
+            return String.raw`${k}=${v}&`
+        }
+        else return ""
+    }
+
+    let url = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize
     if (searchParams) {
-        newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&s=" + searchParams.name;
+        url += "&"
+        for (const [key, value] of Object.entries(searchParams)) {
+            url += getString(key, value)
+        }
+
+        url = url.slice(0, -1) + "&" + propToString(searchParams.propertice)
     }
-    else {
-        newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize
-    }
-    const response = await fetch(newUrl, {
+
+    // if (url.slice(-1) === "&") {
+    //     url = url.slice(0, -1)
+    // }
+    console.log(url);
+    const response = await fetch(url, {
         headers: {
             Origin: "*",
         },

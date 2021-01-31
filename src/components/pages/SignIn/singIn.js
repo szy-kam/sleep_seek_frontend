@@ -44,6 +44,7 @@ class SignIn extends Component {
             .then(token => {
                 if (token) {
                     this.props.logInUser({ userToken: token, username: this.state.form.username })
+                    this.setState({ message: t("LOGGING"), showPopup: true });
                     this.redirectUser()
                 }
             })
@@ -63,8 +64,6 @@ class SignIn extends Component {
             this.setState({ showPopup: false });
         }, time);
     };
-
-
 
     render() {
         const { t } = this.props;

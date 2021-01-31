@@ -34,15 +34,8 @@ class Register extends Component {
         AddUserRepository(this.state.form)
             .then(response => {
                 if (response.status === 200) {
-                    this.setState({ message: t("ACCOUNT_CREATED") })
+                    this.setState({ message: t("ACCOUNT_CREATED"), showPopup: true })
                     this.redirectUser()
-                    // GetUsernameByEmail(this.state.form.email)
-                    //     .then(data => {
-                    //         data.json()
-                    //             .then(id => {
-                    //                 this.props.logInUser({ username: id })
-                    //             })
-                    //     })
                 }
                 else {
                     this.setState({ message: t(`USER_ERROR_${response.status}`), showPopup: true });

@@ -12,7 +12,7 @@ import LoadingComponent from "../../widgets/LoadingComponent/loadingComponent";
 import { logOutUser } from "../../../redux/user/userActions";
 
 class MyAccount extends Component {
-    defaultStaysQuantity = 10;
+    defaultStaysQuantity = 20;
     state = {
         stays: null,
         page: 0,
@@ -55,7 +55,7 @@ class MyAccount extends Component {
     }
 
     renderMoreHandler = () => {
-        GetStaysByUsername(this.props.user.user.username, this.state.page + 1, this.state.pageSize)
+        GetStaysByUsername(this.props.user.username, this.state.page + 1, this.state.pageSize)
             .then((response) => {
                 this.setState({ stays: [...this.state.stays, ...response], page: this.state.page + 1 });
                 if (response.length < this.state.pageSize) this.setState({ loadMore: false });

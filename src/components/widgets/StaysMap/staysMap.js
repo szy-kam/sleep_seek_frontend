@@ -56,9 +56,13 @@ class StaysMap extends Component {
         else return null
     }
 
-    CentreMap = () => {
+    CentreMapAndSetBounds = () => {
         const map = useMap();
         map.setView(this.props.position, this.props.zoom);
+        if(this.props.bounds){
+            const bounds = map.getBounds()
+            this.props.bounds(bounds)
+        }
         return null;
     }
 
@@ -72,7 +76,8 @@ class StaysMap extends Component {
                     height: this.height,
                 }}
             >
-                <this.CentreMap />
+                <this.CentreMapAndSetBounds />
+
                 <TileLayer
                     url='https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png'
                     attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'

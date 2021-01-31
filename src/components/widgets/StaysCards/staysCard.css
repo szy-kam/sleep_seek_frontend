@@ -63,6 +63,7 @@
     border: 1px solid #00008b;
     border-radius: 50%;
     color: #00008b;
+    width: max-content;
     width: fit-content;
     padding: 5px;
     margin-top: 5px;
@@ -191,7 +192,9 @@
     left: 0px;
     right: 0;
     background: #f3f3f3;
+    width: max-content;
     width: fit-content;
+    color: black;
 }
 
 .staysCardPhoto .city a {
