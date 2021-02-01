@@ -18,7 +18,8 @@ const AdvancedSearch = (props) => {
         category: "ANY",
         priceFrom: "10",
         priceTo: "1000",
-        sleepersCapacity: ""
+        sleepersCapacity: "",
+        lookNearby: false
     }
     const [inputs, setInputs] = useState(inputsInit);
     const [properties, setProperties] = useState([]);
@@ -72,7 +73,12 @@ const AdvancedSearch = (props) => {
             ...inputs
         };
 
-        newInputs[field] = event.target.value;
+        if (field === "lookNearby") {
+            newInputs.lookNearby = !inputs.lookNearby
+        }
+        else {
+            newInputs[field] = event.target.value;
+        }
 
         setInputs(newInputs);
     };
@@ -165,6 +171,14 @@ const AdvancedSearch = (props) => {
                     value={inputs.city}
                     type="text"
                 />
+                <div className={style.lookNearbyContainer}>
+                    <input
+                        type="checkbox"
+                        value={inputs.lookNearby}
+                        onChange={(event) => handleInput(event, "lookNearby")}
+                    />
+                    <span>{t("LOOK_NEARBY")}</span>
+                </div>
                 <label>{t("NUMBER_OF_PEOPLE")}</label>
                 <input
                     onChange={(event) => handleInput(event, "sleepersCapacity")}
@@ -173,21 +187,6 @@ const AdvancedSearch = (props) => {
                     min="1"
                     max="200"
                 />
-                {/* <label>{t("MAX_DISTANCE")}</label>
-                <div className={style.priceContainer}>
-                    <input
-                        onChange={(event) => handleInput(event, "maxDistance")}
-                        value={inputs.maxDistance}
-                        type="number" step="1" min="1" max="100"
-                        className={style.priceInput}
-                    />
-                    <span>{t("DISTANCE_SYMBOL")}</span>
-                </div>
-                <input
-                    onChange={(event) => handleInput(event, "maxDistance")}
-                    value={inputs.maxDistance}
-                    type="range" step="1" min="1" max="100"
-                /> */}
                 <label>{t("PRICE_FROM")}</label>
                 <div className={style.priceContainer}>
                     <input

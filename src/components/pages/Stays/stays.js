@@ -79,12 +79,15 @@ class Stays extends Component {
         if (searchParams && searchParams.city) {
             await this.getCordsFromAddress(searchParams.city + " " + searchParams.country);
 
-            searchParams.southWestLatitude = this.state.mapBounds._southWest.lat
-            searchParams.southWestLongitude = this.state.mapBounds._southWest.lng
-            searchParams.northEastLatitude = this.state.mapBounds._northEast.lat
-            searchParams.northEastLongitude = this.state.mapBounds._northEast.lng
-        }
+            if (searchParams.lookNearby) {
+                searchParams.southWestLatitude = this.state.mapBounds._southWest.lat
+                searchParams.southWestLongitude = this.state.mapBounds._southWest.lng
+                searchParams.northEastLatitude = this.state.mapBounds._northEast.lat
+                searchParams.northEastLongitude = this.state.mapBounds._northEast.lng
+            }
 
+        }
+        searchParams.lookNearby = ""
         GetStaysWithParamsRepository(this.state.pageNumber, this.state.pageSize, searchParams)
             .then(response => {
                 if (response.ok)

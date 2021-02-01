@@ -44,3 +44,14 @@
 .advancedSearchComponent label {
     font-weight: bold;
 }
+
+.lookNearbyContainer{
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.lookNearbyContainer > input{
+    width: 20px;
+    margin: 2px 7px 2px 7px;
+}

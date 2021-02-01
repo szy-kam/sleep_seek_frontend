@@ -238,7 +238,6 @@ class StayForm extends Component {
 
 
     render() {
-        console.log(this.state.stay);
         const { t } = this.props;
         return (
             <div className={style.stayEditCompoment}>
