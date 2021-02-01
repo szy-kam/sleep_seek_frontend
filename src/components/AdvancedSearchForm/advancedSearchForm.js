@@ -15,7 +15,7 @@ const AdvancedSearch = (props) => {
         name: "",
         country: "Polska",
         city: "",
-        category: "HOTEL",
+        category: "ANY",
         priceFrom: "10",
         priceTo: "1000",
         sleepersCapacity: ""
@@ -45,9 +45,11 @@ const AdvancedSearch = (props) => {
     };
 
     const stayCategoryOptions = () => {
-        return categories.map((item, i) => {
+        let options = categories.map((item, i) => {
             return <option key={i} value={item}>{props.t(item)}</option>;
         });
+        options.push(<option key={"ANY"} value={"ANY"}>{props.t("ANY")}</option>)
+        return options
     }
 
     const orderByOptions = () => {
@@ -90,7 +92,8 @@ const AdvancedSearch = (props) => {
         const order = searchParams.orderBy.split(' ')
         searchParams.orderBy = order[0] || ""
         searchParams.order = order[1] || ""
-
+        if (searchParams.category === "ANY")
+            searchParams.category = ""
         props.handleSubmit(searchParams)
     }
 

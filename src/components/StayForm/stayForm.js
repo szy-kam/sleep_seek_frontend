@@ -284,7 +284,7 @@ class StayForm extends Component {
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.zipCode}
                         placeholder="00-000"
-                        maxLength="5"
+                        maxLength="6"
                     />
                     {this.state.stay.address.latitude && (
                         <div className={style.map}>
@@ -298,7 +298,7 @@ class StayForm extends Component {
                         </div>
 
                     )}
-                    <label>{t("MIN_PRICE")}</label>
+                    <label>{t("MIN_PRICE")} ({t("CURRENCY_SYMBOL")})</label>
                     <input
                         onChange={(event) => this.handleInput(event, "minPrice")}
                         value={this.state.stay.minPrice}

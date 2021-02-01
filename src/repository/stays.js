@@ -53,11 +53,6 @@ export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchP
 
         url = url.slice(0, -1) + "&" + propToString(searchParams.propertice)
     }
-
-    // if (url.slice(-1) === "&") {
-    //     url = url.slice(0, -1)
-    // }
-    console.log(url);
     const response = await fetch(url, {
         headers: {
             Origin: "*",

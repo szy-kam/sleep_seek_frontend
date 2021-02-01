@@ -1,7 +1,9 @@
-.staySliderComponent{
-  margin: 0px;
-  padding: 0px;
-  max-width: 100%;
+.staySliderComponent {
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .StaySliderT1 {

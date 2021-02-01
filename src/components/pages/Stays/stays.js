@@ -23,7 +23,7 @@ class Stays extends Component {
         mapBounds: null
     };
 
-    componentDidMount() {
+    getStays = () => {
         GetStaysWithParamsRepository(this.state.pageNumber, this.state.pageSize, this.state.searchParams)
             .then(response => {
                 if (response.ok)
@@ -32,12 +32,17 @@ class Stays extends Component {
             })
             .then(data => {
                 this.setState({ stays: data, isLoading: false })
+                if (this.state.searchParams) this.setState({ searchParams: null });
                 if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch((err) => {
                 console.log(err);
                 this.setState({ isLoading: false })
             });
+    }
+
+    componentDidMount() {
+        this.getStays()
     }
 
     renderMoreHandler = () => {
@@ -69,9 +74,9 @@ class Stays extends Component {
     }
 
     handleSearchSubmit = async (searchParams) => {
-        // this.setState({ stays: [], page: 0, loadMore: true, searchParams: searchParams })
+        this.setState({ stays: [], pageNumber: 0, loadMore: true, searchParams: searchParams, isLoading: true })
 
-        if (searchParams.city) {
+        if (searchParams && searchParams.city) {
             await this.getCordsFromAddress(searchParams.city + " " + searchParams.country);
 
             searchParams.southWestLatitude = this.state.mapBounds._southWest.lat
@@ -79,16 +84,20 @@ class Stays extends Component {
             searchParams.northEastLatitude = this.state.mapBounds._northEast.lat
             searchParams.northEastLongitude = this.state.mapBounds._northEast.lng
         }
-        console.log(searchParams);
 
         GetStaysWithParamsRepository(this.state.pageNumber, this.state.pageSize, searchParams)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok)
+                    return response.json()
+                else return []
+            })
             .then(data => {
-                this.setState({ stays: data, page: 0, loadMore: true, searchParams: searchParams })
+                this.setState({ stays: data, pageNumber: 0, loadMore: true, searchParams: searchParams, isLoading: false })
                 if (data.length < this.state.pageSize) this.setState({ loadMore: false });
             })
             .catch((err) => {
                 console.log(err);
+                this.setState({ isLoading: false })
             });
     }
 

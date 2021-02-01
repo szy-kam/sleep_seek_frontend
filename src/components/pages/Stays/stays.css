@@ -25,3 +25,12 @@
     flex-basis: 79%;
     margin-left: 8px;
 }
+
+.searchMessage {
+    margin: 10px auto;
+}
+
+.searchMessage b {
+    font-weight: bold;
+    color: #278abb;
+}

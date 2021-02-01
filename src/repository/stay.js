@@ -66,7 +66,7 @@ export async function AddStayRepository(stay, files) {
         }
     }
     // in case of server error
-    if (stay.mainPhoto.slice(0, 4) !== 'http') {
+    if (stay.mainPhoto && stay.mainPhoto.slice(0, 4) !== 'http') {
         stay.mainPhoto = null
     }
 
@@ -116,7 +116,7 @@ export async function EditStayRepository(stay, files) {
             }
         }
     }
-    if (stay.mainPhoto.slice(0, 4) !== 'http') {
+    if (stay.mainPhoto && stay.mainPhoto.slice(0, 4) !== 'http') {
         stay.mainPhoto = null
     }
     if (!stay.mainPhoto && images[0]) {
