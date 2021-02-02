@@ -10,6 +10,7 @@ import StayMap from '../../widgets/StayMap/stayMap'
 import Reviews from "../../Reviews/reviews";
 import Accommodation from "../../Accommodation/accommodation";
 import Properties from '../../Properties/properties'
+import DataPicker from '../../widgets/DatePicker/datePicker'
 
 class Stay extends Component {
     state = {
@@ -17,6 +18,7 @@ class Stay extends Component {
         images: [],
         photoIndex: 0,
         isOpen: false,
+        selectedDate: {},
     };
 
     getStay = () => {
@@ -82,17 +84,18 @@ class Stay extends Component {
         );
     }
 
+    handleSelectedDate = (date) => {
+        if (date.from !== this.state.selectedDate.from || date.to !== this.state.selectedDate.to) {
+            this.setState({ selectedDate: date })
+        }
+    }
+
     renderContent = () => {
         const { t } = this.props;
         if (this.state.stay.name) {
             const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
             return <div className={style.stayContent}>
                 <div className={style.stayInfo}>
-                    {/* {this.state.stay.mainPhoto && <div
-                        className={style.image}
-                        style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
-                    >
-                    </div>} */}
                     {this.state.stay.photos.length > 1 && <div className={style.imageGrid}>{this.imageGrid()}</div>}
                     {this.state.stay.photos.length === 1 && <div className={style.singleImage}>{this.imageGrid()}</div>}
                     <div className={style.nameAndAddress}>
@@ -116,6 +119,7 @@ class Stay extends Component {
                 {this.state.stay.properties.length > 0 && <h3 className={style.title}>{t('PROPERTIES')}:</h3>}
                 <Properties properties={this.state.stay.properties} />
                 <h3 className={style.title}>{t('ACCOMMODATIONS')}:</h3>
+                <DataPicker handleSelect={this.handleSelectedDate} />
                 <Accommodation stayId={this.props.match.params.id} />
                 {this.state.stay.address.longitude && <h3 className={style.title}>{t('FIND_US_ON_MAP')}:</h3>}
                 <StayMap position={position} zoom={14} />

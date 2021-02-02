@@ -103,7 +103,7 @@
     grid-gap: 1px;
     align-items: start;
     justify-items: center;
-    margin: auto;
+    margin: 0 auto;
     width: 90%;
     min-height: 450px;
 }

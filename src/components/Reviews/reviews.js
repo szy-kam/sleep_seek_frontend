@@ -142,7 +142,6 @@ class Rewiews extends Component {
     }
 
     render() {
-        console.log(this.state.reviews);
         return <div className={style.reviewsComponent}>
             {this.renderReview()}
             {!this.state.endLoading ? this.renderMore() : null}
