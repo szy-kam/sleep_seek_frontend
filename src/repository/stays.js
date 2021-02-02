@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "../config";
+import {dateFormatterToIso} from '../components/widgets/DatePicker/datePicker'
 
 export async function GetStaysRepository(pageNumber, pageSize) {
     let newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
@@ -12,18 +13,6 @@ export async function GetStaysRepository(pageNumber, pageSize) {
 }
 
 export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchParams) {
-    const dateFormatter = (date) => {
-        const fixDate = (date) => {
-            if (date < 10) {
-                return "0" + date
-            }
-            else return date
-        }
-        if (date)
-            return `${date.year}-${fixDate(date.month)}-${fixDate(date.day)}`
-        else
-            return ""
-    }
 
     const propToString = (props) => {
         let s = ""
@@ -35,7 +24,7 @@ export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchP
 
     const getString = (k, v) => {
         if (k === "dateFrom" || k === "dateTo")
-            v = dateFormatter(v)
+            v = dateFormatterToIso(v)
         if (k === "propertice")
             return ""
         if (v) {

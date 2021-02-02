@@ -3,6 +3,8 @@ import { myCustomLocale } from '../../pages/Reservation/reservation'
 import DataPicker, { utils } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { useTranslation } from "react-i18next";
+import style from './datePicker.css'
+
 const DatePicker = (props) => {
 
     const [selectedDayRange, setSelectedDayRange] = useState({
@@ -14,12 +16,18 @@ const DatePicker = (props) => {
 
     const selectedDate = (date) => {
         setSelectedDayRange(date)
-        if (date.to)
-            props.handleSelect(date)
+
+        let newDate = {}
+        newDate.to = dateFormatterToIso(date.to)
+        newDate.from = dateFormatterToIso(date.from)
+        if (newDate.to || (!newDate.to && !newDate.from))
+            props.handleDateSelect(newDate)
+
     }
 
     return (
-        <div>
+        <div className={style.datePickerComponent}>
+            <span>Aby wyświetlić dostępnośc pokoi, wybierz datę pobytu</span>
             <DataPicker
                 value={selectedDayRange}
                 onChange={selectedDate}
@@ -27,7 +35,6 @@ const DatePicker = (props) => {
                 minimumDate={utils().getToday()}
                 locale={myCustomLocale}
                 inputPlaceholder={t('CLICK_HERE')}
-                calendarClassName={"style.calendar"}
                 colorPrimary="#278abb"
                 colorPrimaryLight="rgb(23 151 211 / 42%)"
                 calendarPopperPosition="bottom"
@@ -56,3 +63,16 @@ const DatePicker = (props) => {
 }
 
 export default DatePicker
+
+export const dateFormatterToIso = (date) => {
+    const fixDate = (date) => {
+        if (date < 10) {
+            return "0" + date
+        }
+        else return date
+    }
+    if (date)
+        return `${date.year}-${fixDate(date.month)}-${fixDate(date.day)}`
+    else
+        return ""
+}

@@ -172,6 +172,10 @@ export async function GetAccommodationByIdRepository(Id) {
         })
 }
 
+export async function GetAvailableAccommodations(stayId, pageNumber = 0, pageSize = 50) {
+    return await fetch(BACKEND_URL + "/accommodations-template?stayId=" + stayId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize)
+}
+
 export async function AddAccommodationRepository(accommodation) {
     const url = BACKEND_URL + "/accommodation?stayId=" + accommodation.stayId
     return fetchWithAutorization("POST", url, accommodation)

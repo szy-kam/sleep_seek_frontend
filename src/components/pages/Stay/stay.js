@@ -10,7 +10,7 @@ import StayMap from '../../widgets/StayMap/stayMap'
 import Reviews from "../../Reviews/reviews";
 import Accommodation from "../../Accommodation/accommodation";
 import Properties from '../../Properties/properties'
-import DataPicker from '../../widgets/DatePicker/datePicker'
+import DatePicker from '../../widgets/DatePicker/datePicker'
 
 class Stay extends Component {
     state = {
@@ -18,7 +18,7 @@ class Stay extends Component {
         images: [],
         photoIndex: 0,
         isOpen: false,
-        selectedDate: {},
+        dateRange: { to: null, from: null },
     };
 
     getStay = () => {
@@ -84,9 +84,9 @@ class Stay extends Component {
         );
     }
 
-    handleSelectedDate = (date) => {
-        if (date.from !== this.state.selectedDate.from || date.to !== this.state.selectedDate.to) {
-            this.setState({ selectedDate: date })
+    handleDateSelect = (date) => {
+        if (date.from !== this.state.dateRange.from || date.to !== this.state.dateRange.to) {
+            this.setState({ dateRange: date })
         }
     }
 
@@ -119,8 +119,8 @@ class Stay extends Component {
                 {this.state.stay.properties.length > 0 && <h3 className={style.title}>{t('PROPERTIES')}:</h3>}
                 <Properties properties={this.state.stay.properties} />
                 <h3 className={style.title}>{t('ACCOMMODATIONS')}:</h3>
-                <DataPicker handleSelect={this.handleSelectedDate} />
-                <Accommodation stayId={this.props.match.params.id} />
+                <DatePicker handleDateSelect={this.handleDateSelect} />
+                <Accommodation stayId={this.props.match.params.id} dateRange={this.state.dateRange} />
                 {this.state.stay.address.longitude && <h3 className={style.title}>{t('FIND_US_ON_MAP')}:</h3>}
                 <StayMap position={position} zoom={14} />
                 <h3 className={style.title}>{t('REVIEWS')}:</h3>

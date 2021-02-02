@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import { GetAccommodationsByStayIdRepository } from '../../repository/stay'
+import { GetAccommodationsByStayIdRepository, GetAvailableAccommodations } from '../../repository/stay'
 import style from './accommodation.css'
 import { withTranslation } from "react-i18next";
 import Properties from '../Properties/properties'
 
 class Accommodation extends Component {
     state = {
-        accommodations: []
+        accommodations: [],
+        dateRange: this.props.dateRange
     }
 
     componentDidMount() {
-        if (this.props.stayId) {
+        if (this.props.dateRange.to) {
+            console.log("this.props.dateRange");
+        }
+        else {
             GetAccommodationsByStayIdRepository(this.props.stayId)
                 .then(response => {
                     if (response.ok) {
@@ -24,8 +28,23 @@ class Accommodation extends Component {
                 })
                 .catch(err => console.log(err))
         }
-        else
-            this.setState({ accommodations: [{}] })
+    }
+
+    componentDidUpdate() {
+        if (this.props.dateRange.to !== this.state.dateRange.to && this.props.dateRange.from !== this.state.dateRange.from) {
+            GetAvailableAccommodations(this.props.stayId)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    else return []
+                })
+                .then(data => {
+                    this.setState({ accommodations: data, dateRange: this.props.dateRange })
+                })
+                .catch(err => console.log(err))
+            console.log(this.props.dateRange);
+        }
     }
 
     renderAccommodation = () => {
@@ -33,7 +52,7 @@ class Accommodation extends Component {
         return this.state.accommodations.map((item, i) => (
             <tr className={style.accommodation} key={i}>
                 <td>{item.sleepersCapacity}{t("ACCOMMODATION_CAPACITY_PERSONS")}</td>
-                <td><Properties properties={item.properties}/></td>
+                <td><Properties properties={item.properties} /></td>
                 <td>{item.quantity}</td>
                 <td>{item.price} {t('CURRENCY_SYMBOL')}</td>
                 <td><Link to={`/reservation/${item.stayId}/${item.id}`}><button className={style.bookButton}>{t('BOOK_IT')}</button></Link></td>
