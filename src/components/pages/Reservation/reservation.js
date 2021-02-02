@@ -261,13 +261,13 @@ export const myCustomLocale = {
             isWeekend: true,
         },
         {
-            short: 'S',
+            short: 'N',
             isWeekend: true,
         }
     ],
 
     // just play around with this number between 0 and 6
-    weekStartingIndex: 1,
+    weekStartingIndex: 6,
 
     from: 'od',
     to: 'do',
