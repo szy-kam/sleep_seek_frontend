@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { GetReviewsByStayIdRepository, AddReviewRepository } from "../../repository/stay";
 import { withTranslation } from "react-i18next";
 import style from './reviews.css'
-import { GetDisplayNameByusername, IsUserLogged } from "../../repository/user";
+import { IsUserLogged } from "../../repository/user";
 import 'font-awesome/css/font-awesome.min.css';
 
 class Rewiews extends Component {
-    defaultPageSize = 4;
+    defaultPageSize = 10;
 
     state = {
         reviews: [],
@@ -21,24 +21,15 @@ class Rewiews extends Component {
         renderAddReview: true
     };
 
-    getReviews  =  () => {
+    getReviews = () => {
         GetReviewsByStayIdRepository(this.props.stayId, this.state.pageNumber, this.state.pageSize)
             .then(response => {
                 if (response.ok)
                     return response.json()
                 else return []
             })
-            .then(  reviews => {
-                for(let review of reviews){
-                     GetDisplayNameByusername(review.username)
-                        .then(response => response.text())
-                        .then(displayName => {
-                            review.displayName = displayName
-                            this.setState({ reviews: reviews });
-                        })
-                        .catch((err) => { console.log(err) })
-                    }
-                
+            .then(reviews => {
+                this.setState({ reviews: reviews });
                 if (reviews.length < this.state.pageSize) {
                     this.setState({ endLoading: true })
                 }

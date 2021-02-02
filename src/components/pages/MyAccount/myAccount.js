@@ -43,8 +43,8 @@ class MyAccount extends Component {
 
         GetReservationsByUsernameRepository(this.props.user.username)
             .then(response => response.json())
-            .then(data => {
-                this.setState({ reservations: data, isLoadingReservations: false })
+            .then(reservations => {
+                this.setState({ reservations: reservations, isLoadingReservations: false })
             })
             .catch(err => {
                 this.setState({ isLoadingReservations: false })

@@ -1,5 +1,4 @@
-import React, { useState} from 'react'
-import { myCustomLocale } from '../../pages/Reservation/reservation'
+import React, { useState } from 'react'
 import DataPicker, { utils } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { useTranslation } from "react-i18next";
@@ -13,8 +12,6 @@ const DatePicker = (props) => {
         from: props.dateRange.from,
         to: props.dateRange.to
     });
-
-
 
     const { t } = useTranslation()
 
@@ -83,4 +80,65 @@ export const dateFormatterToIso = (date) => {
         return `${date.year}-${fixDate(date.month)}-${fixDate(date.day)}`
     else
         return ""
+}
+
+export const myCustomLocale = {
+    // months list by order
+    months: [
+        'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
+    ],
+
+    // week days by order
+    weekDays: [
+        {
+            short: 'P',
+        },
+        {
+            short: 'W',
+        },
+        {
+            short: 'Ś',
+        },
+        {
+            short: 'C',
+        },
+        {
+            short: 'P',
+        },
+        {
+            short: 'S',
+            isWeekend: true,
+        },
+        {
+            short: 'N',
+            isWeekend: true,
+        }
+    ],
+
+    // just play around with this number between 0 and 6
+    weekStartingIndex: 6,
+
+    from: 'od',
+    to: 'do',
+    // return a { year: number, month: number, day: number } object
+    getToday(gregorainTodayObject) {
+        return gregorainTodayObject;
+    },
+
+    // return a native JavaScript date here
+    toNativeDate(date) {
+        return new Date(date.year, date.month - 1, date.day);
+    },
+
+    // return a number for date's month length
+    getMonthLength(date) {
+        return new Date(date.year, date.month, 0).getDate();
+    },
+
+    // return a transformed digit to your locale
+    transformDigit(digit) {
+        return digit;
+    },
+
+    digitSeparator: ',',
 }

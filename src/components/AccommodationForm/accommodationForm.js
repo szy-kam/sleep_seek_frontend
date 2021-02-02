@@ -11,7 +11,8 @@ class AccommodationForm extends Component {
             sleepersCapacity: this.props.accommodation.sleepersCapacity || "",
             quantity: this.props.accommodation.quantity || "",
             price: this.props.accommodation.price || "",
-            properties: this.props.accommodation.properties || []
+            properties: this.props.accommodation.properties || [],
+            prefix: ""
         }
     };
 

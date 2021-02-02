@@ -4,8 +4,13 @@ import { withTranslation } from "react-i18next";
 import { STAY } from '../../../config'
 import { GetStayByIdRepository, GetAccommodationByIdRepository, MakeReservationRepository } from '../../../repository/stay'
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { myCustomLocale } from '../../widgets/DatePicker/datePicker'
 import { Calendar, utils } from "react-modern-calendar-datepicker";
 import Properties from '../../Properties/properties';
+import { dateFormatterToIso } from '../../widgets/DatePicker/datePicker'
+import { connect } from 'react-redux';
+import { dateRangeChange } from "../../../redux/stay/stayActions";
+
 
 const Reservation = (props) => {
 
@@ -23,8 +28,8 @@ const Reservation = (props) => {
     }
 
     const [selectedDayRange, setSelectedDayRange] = useState({
-        from: null,
-        to: null
+        from: props.dateRange.from,
+        to: props.dateRange.to
     });
     const [stay, setStay] = useState(STAY);
     const [accommodation, setAccommodation] = useState(accommodationInit);
@@ -174,29 +179,17 @@ const Reservation = (props) => {
 
     const submitHandler = () => {
 
-        const dateFormatter = (date) => {
-
-            const fixDate = (date) => {
-                if (date < 10) {
-                    return "0" + date
-                }
-                else return date
-            }
-
-            return `${date.year}-${fixDate(date.month)}-${fixDate(date.day)}`
-        }
-
         let reservation = {}
 
-        if (!inputs.fullName || !inputs.phoneNumber || !selectedDayRange.from || !selectedDayRange.to) {
+        if (!inputs.fullName || !inputs.phoneNumber || !selectedDayRange.from || !selectedDayRange.to || calculateDateDifference() === 0) {
             setMessage("FILL_ALL_FIELDS")
         }
         else {
             setMessage("")
-            reservation.accommodationId = props.match.params.accommodationId
+            reservation.accommodationTemplateId = props.match.params.accommodationId
             reservation.customer = { fullName: inputs.fullName, phoneNumber: inputs.phoneNumber }
-            reservation.dateFrom = dateFormatter(selectedDayRange.from)
-            reservation.dateTo = dateFormatter(selectedDayRange.to)
+            reservation.dateFrom = dateFormatterToIso(selectedDayRange.from)
+            reservation.dateTo = dateFormatterToIso(selectedDayRange.to)
             MakeReservationRepository(reservation)
                 .then(response => {
                     if (response.ok) {
@@ -231,65 +224,14 @@ const Reservation = (props) => {
         </div>
     )
 }
-export default withTranslation()(Reservation)
 
-export const myCustomLocale = {
-    // months list by order
-    months: [
-        'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
-    ],
+const mapDispatchToProps = (dispatch) => ({
+    dateRangeChange: (dateRange) => dispatch(dateRangeChange(dateRange)),
+})
 
-    // week days by order
-    weekDays: [
-        {
-            short: 'P',
-        },
-        {
-            short: 'W',
-        },
-        {
-            short: 'Ś',
-        },
-        {
-            short: 'C',
-        },
-        {
-            short: 'P',
-        },
-        {
-            short: 'S',
-            isWeekend: true,
-        },
-        {
-            short: 'N',
-            isWeekend: true,
-        }
-    ],
+const mapStateToProps = state => ({
+    dateRange: state.stay.dateRange
+})
 
-    // just play around with this number between 0 and 6
-    weekStartingIndex: 6,
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Reservation))
 
-    from: 'od',
-    to: 'do',
-    // return a { year: number, month: number, day: number } object
-    getToday(gregorainTodayObject) {
-        return gregorainTodayObject;
-    },
-
-    // return a native JavaScript date here
-    toNativeDate(date) {
-        return new Date(date.year, date.month - 1, date.day);
-    },
-
-    // return a number for date's month length
-    getMonthLength(date) {
-        return new Date(date.year, date.month, 0).getDate();
-    },
-
-    // return a transformed digit to your locale
-    transformDigit(digit) {
-        return digit;
-    },
-
-    digitSeparator: ',',
-}

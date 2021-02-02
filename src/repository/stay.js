@@ -148,19 +148,11 @@ export async function GetAllStayCategories() {
     return await fetch(BACKEND_URL + "/stayCategories")
 }
 
-export async function GetAccommodationByIdRepository(Id) {
-    return await fetch(
-        BACKEND_URL + "/accommodation/" + Id,
-        {
-            method: "GET",
-        }
-    )
-        .catch((err) => {
-            console.log(err);
-        })
+export async function GetAccommodationByIdRepository(id) {
+    return await fetch(BACKEND_URL + "/accommodation-template/" + id)
 }
 
-export async function GetAccommodationsByStayIdRepository(stayId, dateRange, pageNumber = 0, pageSize = 50) {
+export async function GetAccommodationsByStayIdRepository(stayId, dateRange = null, pageNumber = 0, pageSize = 50) {
     let newDate = {}
     if (dateRange) {
         newDate.to = dateFormatterToIso(dateRange.to)
@@ -171,17 +163,17 @@ export async function GetAccommodationsByStayIdRepository(stayId, dateRange, pag
 }
 
 export async function AddAccommodationRepository(accommodation) {
-    const url = BACKEND_URL + "/accommodation?stayId=" + accommodation.stayId
+    const url = BACKEND_URL + "/accommodation-template"
     return fetchWithAutorization("POST", url, accommodation)
 }
 
 export async function EditAccommodationRepository(accommodation) {
-    const url = BACKEND_URL + "/accommodation/" + accommodation.id
+    const url = BACKEND_URL + "/accommodation-template/" + accommodation.id
     return fetchWithAutorization("PUT", url, accommodation)
 }
 
 export async function DeleteAccommodationRepository(accommodationId) {
-    const url = BACKEND_URL + "/accommodation/" + accommodationId
+    const url = BACKEND_URL + "/accommodation-template/" + accommodationId
     return fetchWithAutorization("DELETE", url)
 }
 
@@ -194,17 +186,18 @@ export async function GetAllAccommodationProperties() {
 }
 
 export async function MakeReservationRepository(reservation) {
+    console.log(reservation);
     const url = BACKEND_URL + "/reservation"
     return fetchWithAutorization("POST", url, reservation)
 }
 
-export async function GetReservationsByUsernameRepository(username) {
-    const url = BACKEND_URL + "/reservation?username=" + username;
+export async function GetReservationsByUsernameRepository(username, pageNumber = 0, pageSize = 50) {
+    const url = BACKEND_URL + "/reservation?username=" + username + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize;
     return await fetchWithAutorization("GET", url)
 }
 
-export async function GetReservationsByStayIdRepository(id) {
-    const url = BACKEND_URL + "/reservation?stayId=" + id;
+export async function GetReservationsByStayIdRepository(id, pageNumber = 0, pageSize = 50) {
+    const url = BACKEND_URL + "/reservation?stayId=" + id + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize;
     return await fetchWithAutorization("GET", url)
 }
 

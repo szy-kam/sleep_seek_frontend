@@ -69,7 +69,6 @@ class AccommodationEdit extends Component {
     }
 
     render() {
-        console.log(this.state.accommodations);
         const { t } = this.props;
         return (
             <div className={style.accommodationEditComponent} id={"accommodationEdit"}>

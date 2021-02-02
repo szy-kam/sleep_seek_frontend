@@ -14,14 +14,13 @@ const Reservations = (props) => {
                 <thead>
                     <tr>
                         <td>{t('CREATED')}</td>
-                        <td>{t('STAY_ID')}</td>
+                        <td>{t('STAY_NAME')}</td>
                         <td>{t('ACCOMMODATION_ID')}</td>
                         <td>{t('FROM')}</td>
                         <td>{t('TO')}</td>
                         <td>{t('FULL_NAME')}</td>
                         <td>{t('PHONE_NUMBER')}</td>
-                        <td>{t('CONFIRMED')}</td>
-                        <td>{t('COMPLETED')}</td>
+                        <td>{t('STATUS')}</td>
                         {props.handleSubmit ? <td>{t('SAVE')}</td> : null}
                         {props.handleDelete ? <td>{t('DELETE')}</td> : null}
                     </tr>
@@ -44,14 +43,13 @@ const Reservations = (props) => {
             return props.reservations.map((item, i) => (
                 <tr className={style.reservation} key={i}>
                     <td>{item.createdAt}</td>
-                    <td><Link to={`/stays/${item.stayId}`}>{item.stayId}</Link></td>
+                    <td><Link to={`/stays/${item.stayId}`}>{item.stayName}</Link></td>
                     <td>{item.accommodationId}</td>
                     <td>{item.dateFrom}</td>
                     <td>{item.dateTo}</td>
                     <td>{item.customer.fullName}</td>
                     <td>{item.customer.phoneNumber}</td>
-                    <td><input type="checkbox" disabled checked={item.confirmed}></input></td>
-                    <td><input type="checkbox" disabled checked={item.completed}></input></td>
+                    <td>{item.status}</td>
                 </tr>
             ))
         }
