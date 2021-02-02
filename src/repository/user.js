@@ -49,3 +49,16 @@ export function IsUserLogged() {
     }
     return token !== null
 }
+
+
+export async function GetDisplayNameByusername(username) {
+    const response = await fetch(BACKEND_URL + "/displayName?username=" + username, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+            'Accept': 'application/json'
+        }
+    });
+    return response;
+}

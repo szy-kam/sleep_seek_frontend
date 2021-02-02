@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GetReviewsByStayIdRepository, AddReviewRepository } from "../../repository/stay";
 import { withTranslation } from "react-i18next";
 import style from './reviews.css'
-import { IsUserLogged } from "../../repository/user";
+import { GetDisplayNameByusername, IsUserLogged } from "../../repository/user";
 import 'font-awesome/css/font-awesome.min.css';
 
 class Rewiews extends Component {
@@ -21,11 +21,24 @@ class Rewiews extends Component {
         renderAddReview: true
     };
 
-    getReviews = () => {
+    getReviews  =  () => {
         GetReviewsByStayIdRepository(this.props.stayId, this.state.pageNumber, this.state.pageSize)
-            .then(response => response.json())
-            .then(reviews => {
-                this.setState({ reviews: reviews });
+            .then(response => {
+                if (response.ok)
+                    return response.json()
+                else return []
+            })
+            .then(  reviews => {
+                for(let review of reviews){
+                     GetDisplayNameByusername(review.username)
+                        .then(response => response.text())
+                        .then(displayName => {
+                            review.displayName = displayName
+                            this.setState({ reviews: reviews });
+                        })
+                        .catch((err) => { console.log(err) })
+                    }
+                
                 if (reviews.length < this.state.pageSize) {
                     this.setState({ endLoading: true })
                 }
@@ -68,8 +81,9 @@ class Rewiews extends Component {
                     <div className={style.review} key={i}>
                         <div className={style.rating}><strong>{item.rating}</strong> / 5 </div>
                         <div className={style.message}>
-                            <div className={style.createdAt}>
-                                {item.createdAt.slice(0, 10)}
+                            <div className={style.reviewInfo}>
+                                <span className={style.reviewDate}>{item.createdAt.slice(0, 10)}</span>
+                                <span className={style.reviewDisplayName}>{item.displayName}</span>
                             </div>
                             <div className={style.messageContent}>
                                 {item.message}
@@ -128,6 +142,7 @@ class Rewiews extends Component {
     }
 
     render() {
+        console.log(this.state.reviews);
         return <div className={style.reviewsComponent}>
             {this.renderReview()}
             {!this.state.endLoading ? this.renderMore() : null}
