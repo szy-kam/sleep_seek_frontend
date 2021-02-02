@@ -45,13 +45,20 @@
     font-weight: bold;
 }
 
-.lookNearbyContainer{
+.lookNearbyContainer {
     display: flex;
     align-items: center;
     margin-top: 3px;
 }
 
-.lookNearbyContainer > input{
+.lookNearbyContainer > input {
     width: 20px;
     margin: 2px 7px 2px 7px;
+}
+
+.advancedSearchForm > div > div {
+    width: 100%;
+}
+.advancedSearchForm > div > div > input {
+    font-size: 14px;
 }

@@ -4,9 +4,10 @@ import countrysList from "../../repository/countrysList";
 import { withTranslation } from "react-i18next";
 import PropertiesForm from '../PropertiesForm/propertiesForm'
 import { GetAllStayCategories } from "../../repository/stay";
-import DataPicker, { utils } from "react-modern-calendar-datepicker";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { myCustomLocale } from '../pages/Reservation/reservation'
+import DatePicker from '../widgets/DatePicker/datePicker'
+// import DataPicker, { utils } from "react-modern-calendar-datepicker";
+// import "react-modern-calendar-datepicker/lib/DatePicker.css";
+// import { myCustomLocale } from '../pages/Reservation/reservation'
 
 const AdvancedSearch = (props) => {
 
@@ -128,7 +129,7 @@ const AdvancedSearch = (props) => {
                     {stayCategoryOptions()}
                 </select>
                 <label>{t("DATE_RANGE")}</label>
-                <DataPicker
+                {/* <DataPicker
                     value={selectedDayRange}
                     onChange={setSelectedDayRange}
                     shouldHighlightWeekends
@@ -157,7 +158,8 @@ const AdvancedSearch = (props) => {
                             </button>
                         </div>
                     )}
-                />
+                /> */}
+                {<DatePicker handleDateSelect={setSelectedDayRange} />}
                 <label>{t("COUNTRY")}</label>
                 <select
                     onChange={(event) => handleInput(event, "country")}

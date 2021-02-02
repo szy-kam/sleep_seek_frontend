@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../config";
-
+import { dateFormatterToIso } from '../components/widgets/DatePicker/datePicker'
 async function fetchWithAutorization(method, url, body = null) {
     const ls = JSON.parse(localStorage.getItem('persist:root'))
     const parseUser = JSON.parse(ls.user)
@@ -148,18 +148,6 @@ export async function GetAllStayCategories() {
     return await fetch(BACKEND_URL + "/stayCategories")
 }
 
-export async function GetAccommodationsByStayIdRepository(stayId) {
-    return await fetch(
-        BACKEND_URL + "/accommodation?stayId=" + stayId,
-        {
-            method: "GET",
-        }
-    )
-        .catch((err) => {
-            console.log(err);
-        })
-}
-
 export async function GetAccommodationByIdRepository(Id) {
     return await fetch(
         BACKEND_URL + "/accommodation/" + Id,
@@ -172,8 +160,14 @@ export async function GetAccommodationByIdRepository(Id) {
         })
 }
 
-export async function GetAvailableAccommodations(stayId, pageNumber = 0, pageSize = 50) {
-    return await fetch(BACKEND_URL + "/accommodations-template?stayId=" + stayId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize)
+export async function GetAccommodationsByStayIdRepository(stayId, dateRange, pageNumber = 0, pageSize = 50) {
+    let newDate = {}
+    if (dateRange) {
+        newDate.to = dateFormatterToIso(dateRange.to)
+        newDate.from = dateFormatterToIso(dateRange.from)
+    }
+    console.log(newDate);
+    return await fetch(BACKEND_URL + "/accommodation-template?stayId=" + stayId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize)
 }
 
 export async function AddAccommodationRepository(accommodation) {

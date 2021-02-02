@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import { GetAccommodationsByStayIdRepository, GetAvailableAccommodations } from '../../repository/stay'
+import { GetAccommodationsByStayIdRepository } from '../../repository/stay'
 import style from './accommodation.css'
 import { withTranslation } from "react-i18next";
 import Properties from '../Properties/properties'
@@ -11,40 +11,39 @@ class Accommodation extends Component {
         dateRange: this.props.dateRange
     }
 
+    getAccommodations = (dateRange) => {
+        GetAccommodationsByStayIdRepository(this.props.stayId, dateRange)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                else return []
+            })
+            .then(data => {
+                this.setState({ accommodations: data })
+            })
+            .catch(err => console.log(err))
+    }
+
     componentDidMount() {
         if (this.props.dateRange.to) {
-            console.log("this.props.dateRange");
+            this.getAccommodations(this.props.dateRange)
         }
         else {
-            GetAccommodationsByStayIdRepository(this.props.stayId)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    else return []
-                })
-                .then(data => {
-                    this.setState({ accommodations: data })
-                })
-                .catch(err => console.log(err))
+            this.getAccommodations()
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.dateRange.to !== this.state.dateRange.to && this.props.dateRange.from !== this.state.dateRange.from) {
-            GetAvailableAccommodations(this.props.stayId)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    else return []
-                })
-                .then(data => {
-                    this.setState({ accommodations: data, dateRange: this.props.dateRange })
-                })
-                .catch(err => console.log(err))
-            console.log(this.props.dateRange);
+    componentDidUpdate(prevProps) {
+        if (JSON.stringify(prevProps.dateRange) !== JSON.stringify(this.props.dateRange)) {
+            if (this.props.dateRange.to) {
+                this.getAccommodations(this.props.dateRange)
+            }
+            else {
+                this.getAccommodations()
+            }
         }
+
     }
 
     renderAccommodation = () => {

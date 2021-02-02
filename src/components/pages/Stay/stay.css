@@ -132,3 +132,17 @@
     display: flex;
     align-self: center;
 }
+
+.datePickerContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.datePickerContainer > div> div > input {
+    width: 250px;
+    border-color: #278abb;
+    color: #278abb;
+    font-size: 14px;
+}

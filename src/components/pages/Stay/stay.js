@@ -6,6 +6,7 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { STAY } from "../../../config";
 import { connect } from "react-redux";
+import { dateRangeChange } from "../../../redux/stay/stayActions";
 import StayMap from '../../widgets/StayMap/stayMap'
 import Reviews from "../../Reviews/reviews";
 import Accommodation from "../../Accommodation/accommodation";
@@ -18,7 +19,6 @@ class Stay extends Component {
         images: [],
         photoIndex: 0,
         isOpen: false,
-        dateRange: { to: null, from: null },
     };
 
     getStay = () => {
@@ -85,8 +85,8 @@ class Stay extends Component {
     }
 
     handleDateSelect = (date) => {
-        if (date.from !== this.state.dateRange.from || date.to !== this.state.dateRange.to) {
-            this.setState({ dateRange: date })
+        if (date.from !== this.props.dateRange.from || date.to !== this.props.dateRange.to) {
+            this.props.dateRangeChange(date)
         }
     }
 
@@ -119,8 +119,11 @@ class Stay extends Component {
                 {this.state.stay.properties.length > 0 && <h3 className={style.title}>{t('PROPERTIES')}:</h3>}
                 <Properties properties={this.state.stay.properties} />
                 <h3 className={style.title}>{t('ACCOMMODATIONS')}:</h3>
-                <DatePicker handleDateSelect={this.handleDateSelect} />
-                <Accommodation stayId={this.props.match.params.id} dateRange={this.state.dateRange} />
+                <div className={style.datePickerContainer}>
+                    <span>Aby wyświetlić dostępnośc pokoi, wybierz datę pobytu</span>
+                    <DatePicker handleDateSelect={this.handleDateSelect} />
+                </div>
+                <Accommodation stayId={this.props.match.params.id} dateRange={this.props.dateRange} />
                 {this.state.stay.address.longitude && <h3 className={style.title}>{t('FIND_US_ON_MAP')}:</h3>}
                 <StayMap position={position} zoom={14} />
                 <h3 className={style.title}>{t('REVIEWS')}:</h3>
@@ -139,8 +142,13 @@ class Stay extends Component {
         );
     }
 }
-const mapStateToProps = (state) => ({
-    user: state.user.user,
-});
 
-export default connect(mapStateToProps)(withTranslation()(Stay));
+const mapDispatchToProps = (dispatch) => ({
+    dateRangeChange: (dateRange) => dispatch(dateRangeChange(dateRange)),
+})
+
+const mapStateToProps = state => ({
+    dateRange: state.stay.dateRange
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Stay));

@@ -7,6 +7,8 @@ import StaysMap from "../../widgets/StaysMap/staysMap";
 import { withTranslation } from "react-i18next";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import LoadingComponent from "../../widgets/LoadingComponent/loadingComponent";
+import { connect } from "react-redux";
+import { dateRangeChange } from "../../../redux/stay/stayActions";
 
 class Stays extends Component {
     defaultStaysQuantity = 20;
@@ -126,4 +128,13 @@ class Stays extends Component {
     }
 }
 
-export default withTranslation()(Stays);
+const mapDispatchToProps = (dispatch) => ({
+    dateRangeChange: (dateRange) => dispatch(dateRangeChange(dateRange)),
+})
+
+const mapStateToProps = state => ({
+    dateRange: state.stay.dateRange
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Stays));
+

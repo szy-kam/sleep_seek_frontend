@@ -1,33 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { myCustomLocale } from '../../pages/Reservation/reservation'
 import DataPicker, { utils } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { useTranslation } from "react-i18next";
 import style from './datePicker.css'
+import { connect } from "react-redux";
+import { dateRangeChange } from "../../../redux/stay/stayActions";
 
 const DatePicker = (props) => {
 
     const [selectedDayRange, setSelectedDayRange] = useState({
-        from: null,
-        to: null
+        from: props.dateRange.from,
+        to: props.dateRange.to
     });
+
+
 
     const { t } = useTranslation()
 
     const selectedDate = (date) => {
         setSelectedDayRange(date)
 
-        let newDate = {}
-        newDate.to = dateFormatterToIso(date.to)
-        newDate.from = dateFormatterToIso(date.from)
-        if (newDate.to || (!newDate.to && !newDate.from))
-            props.handleDateSelect(newDate)
-
+        if (date.to || (!date.to && !date.from)) {
+            props.handleDateSelect(date)
+            props.dateRangeChange(date)
+        }
     }
 
     return (
-        <div className={style.datePickerComponent}>
-            <span>Aby wyświetlić dostępnośc pokoi, wybierz datę pobytu</span>
+        <div className={style.datePickerComponent} id="datePickerComponent">
             <DataPicker
                 value={selectedDayRange}
                 onChange={selectedDate}
@@ -56,13 +57,20 @@ const DatePicker = (props) => {
                         </button>
                     </div>
                 )}
-                inputClassName="my-custom-input"
             />
         </div>
     )
 }
 
-export default DatePicker
+const mapDispatchToProps = (dispatch) => ({
+    dateRangeChange: (dateRange) => dispatch(dateRangeChange(dateRange)),
+})
+
+const mapStateToProps = state => ({
+    dateRange: state.stay.dateRange
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DatePicker)
 
 export const dateFormatterToIso = (date) => {
     const fixDate = (date) => {
