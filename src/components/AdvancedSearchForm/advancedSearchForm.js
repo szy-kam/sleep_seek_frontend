@@ -18,7 +18,7 @@ const AdvancedSearch = (props) => {
         city: "",
         category: "ANY",
         priceFrom: "10",
-        priceTo: "1000",
+        priceTo: "2000",
         sleepersCapacity: "",
         lookNearby: false
     }

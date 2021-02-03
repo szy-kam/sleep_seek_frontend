@@ -1,0 +1,7 @@
+.Calendar > :not(.Calendar__footer) button {
+    background: #278abb !important;
+}
+
+.leaflet-pane {
+    z-index: 4 !important;
+}
