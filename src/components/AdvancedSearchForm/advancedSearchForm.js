@@ -196,7 +196,7 @@ const AdvancedSearch = (props) => {
                     <input
                         onChange={(event) => handleInput(event, "priceFrom")}
                         value={inputs.priceFrom}
-                        type="number" min="10" max="1000"
+                        type="number" min="10" max="5000"
                         className={style.priceInput}
                     />
                     <span>{t("CURRENCY_SYMBOL")}</span>
@@ -204,14 +204,14 @@ const AdvancedSearch = (props) => {
                 <input
                     onChange={(event) => handleInput(event, "priceFrom")}
                     value={inputs.priceFrom}
-                    type="range" step="10" min="10" max="1000"
+                    type="range" step="10" min="10" max="2000"
                 />
                 <label>{t("PRICE_TO")}</label>
                 <div className={style.priceContainer}>
                     <input
                         onChange={(event) => handleInput(event, "priceTo")}
                         value={inputs.priceTo}
-                        type="number" min="10" max="1000"
+                        type="number" min="10" max="5000"
                         className={style.priceInput}
                     />
                     <span>{t("CURRENCY_SYMBOL")}</span>
@@ -219,7 +219,7 @@ const AdvancedSearch = (props) => {
                 <input
                     onChange={(event) => handleInput(event, "priceTo")}
                     value={inputs.priceTo}
-                    type="range" step="10" min="10" max="1000"
+                    type="range" step="10" min="10" max="2000"
                 />
 
                 <label>{t("PROPERTIES")}</label>

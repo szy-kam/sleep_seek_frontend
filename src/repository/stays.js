@@ -54,7 +54,7 @@ export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchP
 }
 
 export async function GetStaysByUsername(username, pageNumber, pageSize) {
-    let newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&username=" + username;
+    let newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&username=" + username + "&orderBy=createdAt&order=DESC";
     const response = await fetch(newUrl, {
         headers: {
             Origin: "*",

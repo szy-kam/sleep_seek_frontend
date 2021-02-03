@@ -48,6 +48,7 @@
 .description {
     font-size: 20px;
     text-align: justify;
+    margin-top: 20px;
 }
 
 .contact {
@@ -63,6 +64,10 @@
     margin: 20px 0; */
     align-self: flex-end;
     margin-top: -90px;
+}
+
+.contact div, .contact span{
+    color: white;
 }
 
 .contacUs {
@@ -140,7 +145,7 @@
     align-items: center;
 }
 
-.datePickerContainer > div> div > input {
+.datePickerContainer > div > div > input {
     width: 250px;
     border-color: #278abb;
     color: #278abb;

@@ -110,6 +110,7 @@ const Reservation = (props) => {
                     colorPrimary="#278abb"
                     colorPrimaryLight="rgb(23 151 211 / 42%)"
                 />
+                <p>{t("CALENDAR_INFO")}</p>
                 <div className={style.dataInfo}>
                     {selectedDayRange.from ? <div>{t('FROM')} <b>{selectedDayRange.from.day}.{selectedDayRange.from.month}.{selectedDayRange.from.year}</b></div> : null}
                     {selectedDayRange.to ? <div>{t('TO')}<b> {selectedDayRange.to.day}.{selectedDayRange.to.month}.{selectedDayRange.to.year}</b></div> : null}
@@ -187,7 +188,7 @@ const Reservation = (props) => {
         else {
             setMessage("")
             reservation.accommodationTemplateId = props.match.params.accommodationId
-            reservation.customer = { fullName: inputs.fullName, phoneNumber: inputs.phoneNumber, username: "a@a.pl" }
+            reservation.customer = { fullName: inputs.fullName, phoneNumber: inputs.phoneNumber }
             reservation.dateFrom = dateFormatterToIso(selectedDayRange.from)
             reservation.dateTo = dateFormatterToIso(selectedDayRange.to)
             MakeReservationRepository(reservation)

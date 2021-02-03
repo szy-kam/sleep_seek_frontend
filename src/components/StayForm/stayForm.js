@@ -301,6 +301,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "minPrice")}
                         value={this.state.stay.minPrice}
+                        placeholder={t("MIN_PRICE_INFO")}
                         type="number"
                         required
                         min="1"

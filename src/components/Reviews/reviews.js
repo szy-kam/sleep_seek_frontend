@@ -74,7 +74,7 @@ class Rewiews extends Component {
                         <div className={style.message}>
                             <div className={style.reviewInfo}>
                                 <span className={style.reviewDate}>{item.createdAt.slice(0, 10)}</span>
-                                <span className={style.reviewDisplayName}>{item.displayName}</span>
+                                <span className={style.reviewDisplayName}><span role="img" aria-label="Bust In Silhouette">👤</span>{item.displayName}</span>
                             </div>
                             <div className={style.messageContent}>
                                 {item.message}
