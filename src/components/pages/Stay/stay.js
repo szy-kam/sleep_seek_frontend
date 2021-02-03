@@ -23,7 +23,15 @@ class Stay extends Component {
 
     getStay = () => {
         GetStayByIdRepository(this.props.match.params.id)
-            .then(resp => resp.json())
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                }
+                else {
+                    console.log(resp);
+                    this.props.history.push("/404");
+                }
+            })
             .then((stay) => {
                 if (stay.name) { this.setState({ stay: stay }); }
                 else {
@@ -135,6 +143,7 @@ class Stay extends Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <div className={style.stayComponent}>
                 {this.renderContent()}

@@ -56,12 +56,14 @@ const AdvancedSearch = (props) => {
 
     const orderByOptions = () => {
         const options = [
-            { id: "name ASC", name: "Nazwa rosnąco" },
-            { id: "name DESC", name: "Nazwa malejąco" },
-            { id: "price ASC", name: "Cena rosnąco" },
-            { id: "price DESC", name: "Cena malejąco" },
-            { id: "avgRate ASC", name: "Ocena rosnąco" },
-            { id: "avgRate DESC", name: "Ocena malejąco" },
+            { id: "createdAt DESC", name: "Dacie dodania malejąco" },
+            { id: "createdAt ASC", name: "Dacie dodania rosnąco" },
+            { id: "name DESC", name: "Nazwie malejąco" },
+            { id: "name ASC", name: "Nazwie rosnąco" },
+            { id: "price DESC", name: "Cenie malejąco" },
+            { id: "price ASC", name: "Cenie rosnąco" },
+            { id: "city DESC", name: "Mieście malejąco" },
+            { id: "city ASC", name: "Mieście rosnąco" },
         ]
         //temporarily
         return options.map((item, i) => {

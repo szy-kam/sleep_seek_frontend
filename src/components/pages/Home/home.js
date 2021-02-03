@@ -52,7 +52,7 @@ const Home = () => {
             <StaysMap position={[52.125736, 19.080392]} zoom={6} />
             {welcome()}
             <h2>Najczęściej wybierane miasta</h2>
-            <StaysCard stays={stays.slice(4, 7)} template={"photo"} />
+            <StaysCard stays={stays.slice(4, 8)} template={"photo"} />
         </div>
     );
 };

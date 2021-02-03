@@ -197,7 +197,7 @@ const Reservation = (props) => {
                     }
                     else {
                         console.log(response)
-                        setMessage("ERROR_RESERVATION")
+                        setMessage(`ERROR_${response.status}`)
                         return response.json()
                     }
                 })
