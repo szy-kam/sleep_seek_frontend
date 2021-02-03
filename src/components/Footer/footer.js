@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import style from "./footer.css";
 
@@ -23,7 +24,7 @@ class Footer extends Component {
                     </div>
                     <div className={style.col}>
                         <h3>Dla właścicieli</h3>
-                        <span>Dodaj obiekt</span>
+                        <span><Link to="/add-stay">Dodaj obiekt</Link></span>
                         <span>Współpraca</span>
                     </div>
                     <div className={style.col}>

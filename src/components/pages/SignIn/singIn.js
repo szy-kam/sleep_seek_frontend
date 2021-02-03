@@ -92,7 +92,7 @@ class SignIn extends Component {
                         maxLength="32"
                         required
                     />
-                    <div className={style.forgerPassword}><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div>
+                    {/* <div className={style.forgerPassword}><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div> */}
                     <button type="submit">{t("LOG_IN")}</button>
                 </form>
                 <div>

@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../config";
-import {dateFormatterToIso} from '../components/widgets/DatePicker/datePicker'
+import { dateFormatterToIso } from '../components/widgets/DatePicker/datePicker'
 
 export async function GetStaysRepository(pageNumber, pageSize) {
     let newUrl = BACKEND_URL + "/stays?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
@@ -40,7 +40,10 @@ export async function GetStaysWithParamsRepository(pageNumber, pageSize, searchP
             url += getString(key, value)
         }
 
-        url = url.slice(0, -1) + "&" + propToString(searchParams.propertice)
+        url = url.slice(0, -1)
+        if (searchParams.propertice) {
+            url += "&" + propToString(searchParams.propertice)
+        }
     }
     const response = await fetch(url, {
         headers: {

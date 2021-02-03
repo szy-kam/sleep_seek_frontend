@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { GetStaysRepository } from "../../../repository/stays.js";
+import { GetStaysWithParamsRepository } from "../../../repository/stays.js";
 import StaysCard from "../../widgets/StaysCards/staysCard";
 import StaysMap from "../../widgets/StaysMap/staysMap";
 import StaysSlider from "../../widgets/StaysSlider/staysSlider";
@@ -11,7 +11,8 @@ const Home = () => {
     const [stays, setStays] = useState([])
 
     useEffect(() => {
-        GetStaysRepository(0, 5)
+        GetStaysWithParamsRepository(0, 8, { orderBy: "createdAt", order: "ASC" })
+            .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
                     setStays(data)
@@ -34,7 +35,7 @@ const Home = () => {
         return (
             <div className={style.welcome}>
                 <div className={style.welcomeImage}>
-                    <img src="/images/welcome-people.png" alt={""} />
+                    <img src="/images/welcome-people.png" alt={"welcome"} />
                 </div>
                 <div className={style.welcomeText}>
                     <h1>Witaj na SleepSeek</h1>
@@ -46,12 +47,12 @@ const Home = () => {
 
     return (
         <div style={style.homeComponent}>
-            <StaysSlider template="default" height="500px" />
+            <StaysSlider template="default" height="500px" stays={stays.slice(0, 4)} />
             {smartQuote()}
             <StaysMap position={[52.125736, 19.080392]} zoom={6} />
             {welcome()}
             <h2>Najczęściej wybierane miasta</h2>
-            <StaysCard stays={stays.slice(0, 4)} template={"photo"} />
+            <StaysCard stays={stays.slice(4, 7)} template={"photo"} />
         </div>
     );
 };
