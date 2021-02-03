@@ -129,7 +129,7 @@ class Stay extends Component {
                 <h3 className={style.title}>{t('ACCOMMODATIONS')}:</h3>
                 <div className={style.datePickerContainer}>
                     <span>Aby wyświetlić dostępnośc pokoi, wybierz datę pobytu</span>
-                    {/* <DatePicker handleDateSelect={this.handleDateSelect} /> */}
+                    <DatePicker handleDateSelect={this.handleDateSelect} />
                 </div>
                 <Accommodation stayId={this.props.match.params.id} dateRange={this.props.dateRange} />
                 {this.state.stay.address.longitude && <h3 className={style.title}>{t('FIND_US_ON_MAP')}:</h3>}
@@ -143,7 +143,6 @@ class Stay extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className={style.stayComponent}>
                 {this.renderContent()}

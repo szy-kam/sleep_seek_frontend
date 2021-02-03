@@ -161,7 +161,7 @@ const AdvancedSearch = (props) => {
                         </div>
                     )}
                 /> */}
-                {/* {<DatePicker handleDateSelect={setSelectedDayRange} />} */}
+                {<DatePicker handleDateSelect={setSelectedDayRange} />}
                 <label>{t("COUNTRY")}</label>
                 <select
                     onChange={(event) => handleInput(event, "country")}
