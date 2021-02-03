@@ -5,11 +5,10 @@ import { withTranslation } from "react-i18next";
 import { GetStaysByUsername } from "../../../repository/stays"
 import StaysCard from "../../widgets/StaysCards/staysCard";
 import { connect } from "react-redux";
-import { GetReservationsByUsernameRepository } from "../../../repository/stay";
 import { GetUsernameByTokenRepository } from '../../../repository/user'
-import ReservationsForm from "../../ReservationsForm/reservationsForm";
 import LoadingComponent from "../../widgets/LoadingComponent/loadingComponent";
 import { logOutUser } from "../../../redux/user/userActions";
+import ReservationsEdit from "../../ReservationsEdit/reservationsEdit";
 
 class MyAccount extends Component {
     defaultStaysQuantity = 20;
@@ -20,7 +19,6 @@ class MyAccount extends Component {
         loadMore: true,
         reservations: [],
         isLoadingStays: true,
-        isLoadingReservations: true
     }
     componentDidMount() {
 
@@ -40,18 +38,6 @@ class MyAccount extends Component {
                 this.setState({ isLoadingStays: false })
                 console.log(err);
             })
-
-        GetReservationsByUsernameRepository(this.props.user.username)
-            .then(response => response.json())
-            .then(reservations => {
-                this.setState({ reservations: reservations, isLoadingReservations: false })
-            })
-            .catch(err => {
-                this.setState({ isLoadingReservations: false })
-                console.log(err);
-            })
-
-
     }
 
     renderMoreHandler = () => {
@@ -70,12 +56,12 @@ class MyAccount extends Component {
                 <h1>{t("MY_ACCOUNT")}</h1>
                 <Link to="/add-stay" className={style.addStayButton}><button >{t("ADD_STAY")}</button></Link>
                 <div>
-                    <h3>{t("YOURS_RESERVATIONS")}</h3>
-                    {!this.state.isLoadingReservations ? this.state.reservations.length ? <ReservationsForm reservations={this.state.reservations} template="edit" /> : t('NO_RESERVATIONS') : <LoadingComponent />}
+                    {/* <h3>{t("YOURS_RESERVATIONS")}</h3> */}
+                    {<ReservationsEdit username={this.props.user.username} />}
                 </div>
                 <div>
                     <h3>{t("YOURS_STAYS")}</h3>
-                    {!this.state.isLoadingReservations ? <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler} /> : <LoadingComponent />}
+                    {!this.state.isLoadingStays ? <StaysCard stays={this.state.stays} template="edit" loadMore={this.state.loadMore} renderMoreHandler={this.renderMoreHandler} /> : <LoadingComponent />}
                 </div>
 
             </div>

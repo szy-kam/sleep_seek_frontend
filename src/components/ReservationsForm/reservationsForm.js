@@ -1,65 +1,67 @@
-import React from 'react'
-import style from './reservationsForm.css'
+import React, { useState } from 'react'
 import { useTranslation } from "react-i18next";
-import ReservationFormEditable from './reservationFormEditable';
 import { Link } from 'react-router-dom';
+import style from './reservationsForm.css'
 
-const Reservations = (props) => {
+const ReservationFormEditable = (props) => {
+
+    const [reservation, setReservation] = useState(props.reservation)
 
     const { t } = useTranslation()
 
-    const renderTable = () => {
-        if (props.reservations.length) {
-            return <table className={style.reservationsTable}>
-                <thead>
-                    <tr>
-                        <td>{t('CREATED')}</td>
-                        <td>{t('STAY_NAME')}</td>
-                        <td>{t('ACCOMMODATION_ID')}</td>
-                        <td>{t('FROM')}</td>
-                        <td>{t('TO')}</td>
-                        <td>{t('FULL_NAME')}</td>
-                        <td>{t('PHONE_NUMBER')}</td>
-                        <td>{t('STATUS')}</td>
-                        {props.handleSubmit ? <td>{t('SAVE')}</td> : null}
-                        {props.handleDelete ? <td>{t('DELETE')}</td> : null}
-                    </tr>
-                </thead>
-                <tbody>
-                    {renderReservations()}
-                </tbody>
-            </table>
-        }
-        else return t("NO_RESERVATIONS")
+    const handleInput = (event, field) => {
+        const newInputs = {
+            ...reservation
+        };
+
+        if (["fullName", "phoneNumber"].indexOf(field) >= 0)
+            newInputs.customer[field] = event.target.value;
+
+        else newInputs[field] = event.target.value;
+
+        setReservation(newInputs);
+    };
+
+    const statusOptions = () => {
+        const options = ["PENDING", "CONFIRMED", "DECLINED", "INVALID", "COMPLETED"]
+        //temporarily
+        return options.map((item, i) => {
+            return <option key={i} value={item}>{t(item)}</option>;
+        });
     }
 
-    const renderReservations = () => {
-        if (props.handleSubmit) {
-            return props.reservations.map((item, i) => (
-                <ReservationFormEditable reservation={item} key={i} handleSubmit={props.handleSubmit} handleDelete={props.handleDelete} />
-            ))
+    const handleSubmit = () => {
+        props.handleSubmit(reservation)
+    }
+
+    const handleDelete = () => {
+        props.handleDelete(reservation)
+    }
+
+    const canEdit = () => {
+        return (props.reservation.status === "PENDING" && props.username) || !props.username
+    }
+
+    const renderLine = () => {
+        if (props.reservation) {
+            return <tr className={style.reservation}>
+                <td>{reservation.createdAt}</td>
+                <td><Link to={`/stays/${reservation.stayId}`}>{reservation.stayName}</Link></td>
+                <td>{reservation.accommodationId}</td>
+                <td>{reservation.dateFrom}</td>
+                <td>{reservation.dateTo}</td>
+                {!props.username ? <td><select onChange={(event) => handleInput(event, "status")} value={reservation.status} > {statusOptions()} </select></td> : <td>{t(reservation.status)}</td>}
+                {canEdit() ? <td><input type="text" value={reservation.customer.fullName} onChange={(event) => handleInput(event, "fullName")}></input></td> : <td>{reservation.customer.fullName}</td>}
+                {canEdit() ? <td><input type="text" value={reservation.customer.phoneNumber} onChange={(event) => handleInput(event, "phoneNumber")}></input></td> : <td>{reservation.customer.phoneNumber}</td>}
+                {canEdit() ? <td><button onClick={handleSubmit}>{t('SAVE')}</button></td> : <td></td>}
+                {canEdit() ? <td><button onClick={handleDelete}>{t('DELETE')}</button></td> : <td></td>}
+            </tr >
         }
-        else {
-            return props.reservations.map((item, i) => (
-                <tr className={style.reservation} key={i}>
-                    <td>{item.createdAt}</td>
-                    <td><Link to={`/stays/${item.stayId}`}>{item.stayName}</Link></td>
-                    <td>{item.accommodationId}</td>
-                    <td>{item.dateFrom}</td>
-                    <td>{item.dateTo}</td>
-                    <td>{item.customer.fullName}</td>
-                    <td>{item.customer.phoneNumber}</td>
-                    <td>{item.status}</td>
-                </tr>
-            ))
-        }
+        else return null;
     }
 
     return (
-        <div className={style.reservationsComponent}>
-            {renderTable()}
-        </div>
+        renderLine()
     )
-
 }
-export default Reservations
+export default ReservationFormEditable

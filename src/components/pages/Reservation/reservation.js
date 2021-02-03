@@ -187,7 +187,7 @@ const Reservation = (props) => {
         else {
             setMessage("")
             reservation.accommodationTemplateId = props.match.params.accommodationId
-            reservation.customer = { fullName: inputs.fullName, phoneNumber: inputs.phoneNumber }
+            reservation.customer = { fullName: inputs.fullName, phoneNumber: inputs.phoneNumber, username: "a@a.pl" }
             reservation.dateFrom = dateFormatterToIso(selectedDayRange.from)
             reservation.dateTo = dateFormatterToIso(selectedDayRange.to)
             MakeReservationRepository(reservation)
@@ -198,6 +198,7 @@ const Reservation = (props) => {
                     else {
                         console.log(response)
                         setMessage("ERROR_RESERVATION")
+                        return response.json()
                     }
                 })
                 .catch(err => {

@@ -187,7 +187,7 @@ export async function GetAllAccommodationProperties() {
 
 export async function MakeReservationRepository(reservation) {
     console.log(reservation);
-    const url = BACKEND_URL + "/reservation"
+    const url = BACKEND_URL + "/reservation?accommodationTemplateId=" + reservation.accommodationTemplateId
     return fetchWithAutorization("POST", url, reservation)
 }
 
