@@ -154,12 +154,13 @@ export async function GetAccommodationByIdRepository(id) {
 
 export async function GetAccommodationsByStayIdRepository(stayId, dateRange = null, pageNumber = 0, pageSize = 50) {
     let newDate = {}
+    let url = BACKEND_URL + "/accommodation-template?stayId=" + stayId
     if (dateRange) {
         newDate.to = dateFormatterToIso(dateRange.to)
         newDate.from = dateFormatterToIso(dateRange.from)
+        url += "&dateFrom=" + newDate.from + "&dateTo=" + newDate.to
     }
-    console.log(newDate);
-    return await fetch(BACKEND_URL + "/accommodation-template?stayId=" + stayId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize)
+    return await fetch(url + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize)
 }
 
 export async function AddAccommodationRepository(accommodation) {

@@ -122,7 +122,7 @@
     "__Response Error": "Response status",
     "USER_ERROR_400": "E-mail zajęty",
     "USER_ERROR_403": "Nieprawidłowe hasło",
-    "USER_ERROR_401": "Użytkownika nie znaleziono",
+    "USER_ERROR_404": "Użytkownika nie znaleziono",
     "ERROR_500": "Błąd serwera",
     "ERROR_422": "Błąd danych, sprawdź poprawność pól",
     "___StayCategories": "Categories",
