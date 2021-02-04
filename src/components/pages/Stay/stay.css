@@ -153,6 +153,10 @@
     font-size: 14px;
 }
 
+.datePickerContainer span {
+    margin-right: 10px;
+}
+
 @media only screen and (max-width: 850px) {
     .contact {
         align-self: normal;
