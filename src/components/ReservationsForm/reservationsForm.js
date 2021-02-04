@@ -54,7 +54,7 @@ const ReservationFormEditable = (props) => {
                 {canEdit() ? <td><input type="text" value={reservation.customer.fullName} onChange={(event) => handleInput(event, "fullName")}></input></td> : <td>{reservation.customer.fullName}</td>}
                 {canEdit() ? <td><input type="text" value={reservation.customer.phoneNumber} onChange={(event) => handleInput(event, "phoneNumber")}></input></td> : <td>{reservation.customer.phoneNumber}</td>}
                 {canEdit() ? <td><button onClick={handleSubmit}>{t('SAVE')}</button></td> : <td></td>}
-                {/* {<td><button onClick={handleDelete}>{t('DELETE')}</button></td>} */}
+                {<td><button onClick={handleDelete}>{t('DELETE')}</button></td>}
             </tr >
         }
         else return null;
