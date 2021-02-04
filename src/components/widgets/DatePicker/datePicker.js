@@ -35,7 +35,7 @@ const DatePicker = (props) => {
                 inputPlaceholder={t('CLICK_HERE')}
                 colorPrimary="#278abb"
                 colorPrimaryLight="rgb(23 151 211 / 42%)"
-                calendarPopperPosition="bottom"
+                calendarPopperPosition={props.position || "bottom"}
                 renderFooter={() => (
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <button

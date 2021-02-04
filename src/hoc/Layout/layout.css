@@ -36,7 +36,7 @@ textarea {
     min-height: 80px;
 }
 
-button {
+button{
     background-color: #278abb;
     /* border: none; */
     color: white;
@@ -59,7 +59,7 @@ button > a {
 p {
     text-decoration: none;
     color: black;
-    font-family: "Roboto", sans-serif;
+    font-family: "Quicksand", sans-serif;
 }
 
 h1 {

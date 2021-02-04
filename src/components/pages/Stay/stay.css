@@ -66,7 +66,8 @@
     margin-top: -90px;
 }
 
-.contact div, .contact span{
+.contact div,
+.contact span {
     color: white;
 }
 
@@ -150,4 +151,11 @@
     border-color: #278abb;
     color: #278abb;
     font-size: 14px;
+}
+
+@media only screen and (max-width: 850px) {
+    .contact {
+        align-self: normal;
+        margin-top: unset;
+    }
 }

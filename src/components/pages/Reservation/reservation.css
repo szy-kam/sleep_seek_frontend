@@ -123,3 +123,7 @@
         width: 70%;
     }
 }
+
+.Calendar__header {
+    background: aquamarine;
+}

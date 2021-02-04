@@ -3,6 +3,7 @@ import style from "./layout.css";
 
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
+require('mycss/custom.css')
 
 const Layout = (props) => {
     return (

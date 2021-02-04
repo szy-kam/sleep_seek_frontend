@@ -59,4 +59,6 @@
 }
 .advancedSearchForm > div > div > input {
     font-size: 14px;
+    border: 1px solid black;
+    margin-left: 5px
 }
