@@ -49,12 +49,12 @@ class Accommodation extends Component {
     renderAccommodation = () => {
         const { t } = this.props;
         return this.state.accommodations.map((item, i) => (
-            <tr className={style.accommodation} key={i}>
+            <tr className={item.quantity ? style.accommodation : style.accommodationEmpty} key={i}>
                 <td>{item.sleepersCapacity}{t("ACCOMMODATION_CAPACITY_PERSONS")}</td>
                 <td><Properties properties={item.properties} /></td>
                 <td>{item.quantity}</td>
                 <td>{item.price} {t('CURRENCY_SYMBOL')}</td>
-                <td><Link to={`/reservation/${item.stayId}/${item.id}`}><button className={style.bookButton}>{t('BOOK_IT')}</button></Link></td>
+                {item.quantity ? <td><Link to={`/reservation/${item.stayId}/${item.id}`}><button className={style.bookButton}>{t('BOOK_IT')}</button></Link></td> : <td>{t("UNAVAILABLE")}</td>}
             </tr>
         ))
 
