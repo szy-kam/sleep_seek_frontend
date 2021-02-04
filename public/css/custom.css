@@ -1,0 +1,13 @@
+button.Calendar__monthText,
+button.Calendar__yearText {
+    color: black !important;
+}
+
+
+button.Calendar__monthSelectorItemText {
+    color: black;
+}
+
+button.Calendar__yearSelectorText {
+    color: black;
+}

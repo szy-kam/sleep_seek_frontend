@@ -1,0 +1,19 @@
+.popupComponent {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    padding: 15px;
+    background: white;
+    min-width: 200px;
+    min-height: 100px;
+    border: 5px solid#278abb;
+    border-radius: 15px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    z-index: 300;
+}

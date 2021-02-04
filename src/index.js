@@ -6,7 +6,6 @@ import Routes from "./routes";
 import "./i18n";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
-
 class App extends Component {
     render() {
         return (

@@ -8,24 +8,38 @@ import StayMap from "../widgets/StayMap/stayMap";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import countrysList from "../../repository/countrysList";
 import PropertiesForm from "../PropertiesForm/propertiesForm";
+import { connect } from "react-redux";
 
 class StayForm extends Component {
     state = {
         stay: STAY,
+        newPhotos: [],
         categories: []
     };
 
     componentDidMount() {
         if (this.props.getStay) {
             GetStayByIdRepository(this.props.getStay)
-                .then(response => response.json())
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    else {
+                        this.props.redirectUser("/my-account")
+                    }
+                })
                 .then(data => {
-                    this.setState({ stay: data })
-                }
-                );
+                    if (this.props.user && this.props.user.username === data.username) {
+                        this.setState({ stay: data })
+                    }
+                    else {
+                        this.props.redirectUser("/my-account")
+                    }
+
+                });
         }
         else {
-            // To set default values in select
+            // To set default values in selects
             const stay = this.state.stay
             stay.address.country = "Polska"
             stay.category = "HOTEL"
@@ -119,7 +133,7 @@ class StayForm extends Component {
         );
 
         this.setState({
-            newPhotos: acceptedFiles,
+            newPhotos: [...this.state.newPhotos, ...acceptedFiles]
         });
     };
 
@@ -135,14 +149,17 @@ class StayForm extends Component {
 
     thumbs = () => {
         if (this.state.newPhotos && this.state.newPhotos.length > 0)
-            return this.state.newPhotos.map((file) => (
-                <img
-                    src={file.preview}
-                    key={file.name}
-                    alt={file.name}
-                    onClick={this.mainPhotoSelected}
-                    className={file.name === this.state.stay.mainPhoto ? style.selectedPhoto : null}
-                />
+            return this.state.newPhotos.map((file, i) => (
+                <div className={style.photoContainer} key={i}>
+                    <div id={file.name} className={style.deletePhoto} onClick={this.handleUndoUpload}>x</div>
+                    <img
+                        src={file.preview}
+                        key={file.name}
+                        alt={file.name}
+                        onClick={this.mainPhotoSelected}
+                        className={file.name === this.state.stay.mainPhoto ? style.selectedPhoto : null}
+                    />
+                </div>
             ));
         else return null;
     };
@@ -159,19 +176,44 @@ class StayForm extends Component {
     }
 
     handleDeletePhoto = (event) => {
-
-        const newStay = {
+        let newStay = {
             ...this.state.stay,
         };
+
         newStay.photos = newStay.photos.filter(photo => {
             return photo !== event.target.id
         });
+
+        if (event.target.id === this.state.stay.mainPhoto) {
+            newStay.mainPhoto = ""
+        }
+
         this.setState({
             stay: newStay,
         });
 
         DeleteStayPhotoRepository(event.target.id)
             .catch(err => console.log(err))
+    }
+
+    handleUndoUpload = (event) => {
+        let photos = this.state.newPhotos
+        photos = photos.filter(photo => {
+            return photo.name !== event.target.id
+        });
+        if (event.target.id === this.state.stay.mainPhoto) {
+            let newStay = { ...this.state.stay }
+            newStay.mainPhoto = ""
+            this.setState({
+                newPhotos: photos,
+                stay: newStay
+            });
+        } else {
+            this.setState({
+                newPhotos: photos,
+            });
+        }
+
     }
 
     renderPhotos = () => {
@@ -188,7 +230,6 @@ class StayForm extends Component {
                             onClick={this.mainPhotoSelected}
                             className={item === this.state.stay.mainPhoto ? style.selectedPhoto : null}
                         />
-
                     </div>
                 )
             })
@@ -205,6 +246,7 @@ class StayForm extends Component {
                     <input
                         onChange={(event) => this.handleInput(event, "name")}
                         value={this.state.stay.name}
+                        maxLength="100"
                         required
                     />
                     <label>{t("CATEGORY")}</label>
@@ -226,12 +268,16 @@ class StayForm extends Component {
                         onChange={(event) => this.handleInput(event, "city")}
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.city}
+                        maxLength="100"
+                        required
                     />
                     <label>{t("STREET")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "street")}
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.street}
+                        maxLength="100"
+                        required
                     />
                     <label>{t("ZIP_CODE")}</label>
                     <input
@@ -239,6 +285,7 @@ class StayForm extends Component {
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.zipCode}
                         placeholder="00-000"
+                        maxLength="6"
                     />
                     {this.state.stay.address.latitude && (
                         <div className={style.map}>
@@ -252,25 +299,27 @@ class StayForm extends Component {
                         </div>
 
                     )}
-                    <label>{t("MIN_PRICE")}</label>
+                    <label>{t("MIN_PRICE")} ({t("CURRENCY_SYMBOL")})</label>
                     <input
                         onChange={(event) => this.handleInput(event, "minPrice")}
                         value={this.state.stay.minPrice}
+                        placeholder={t("MIN_PRICE_INFO")}
                         type="number"
                         required
                         min="1"
-                        
                     />
                     <label>{t("PHONE_NUMBER")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "phoneNumber")}
                         value={this.state.stay.phoneNumber}
+                        maxLength="15"
                     />
                     <label>{t("EMAIL")}</label>
                     <input
                         onChange={(event) => this.handleInput(event, "email")}
                         value={this.state.stay.email}
-                        type="emial"
+                        type="email"
+                        maxLength="50"
                     />
                     <label>{t("DESCRIPTION")}</label>
                     <textarea
@@ -283,7 +332,7 @@ class StayForm extends Component {
                     <FileUploader onDrop={this.onDrop} files={this.state.stay.photos} />
                     <div className={style.thumbs}>{this.thumbs()}</div>
 
-                    {!this.state.stay.mainPhoto ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
+                    {!this.state.stay.mainPhoto && (this.state.newPhotos.length || this.state.stay.photos.length) ? <div className={style.selectMainPhoto}>{t("SELECT_MAIN_PHOTO")}</div> : null}
 
                     <label>{t("PROPERTIES")}</label>
                     <div className={style.properties}>
@@ -304,4 +353,8 @@ class StayForm extends Component {
     }
 }
 
-export default withTranslation()(StayForm)
+const mapStateToProps = state => ({
+    user: state.user.user
+})
+
+export default connect(mapStateToProps)(withTranslation()(StayForm))

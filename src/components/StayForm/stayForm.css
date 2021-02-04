@@ -100,3 +100,7 @@
 .submitButton, .deleteButton {
     align-self: center;
 }
+
+.editForm label {
+    font-weight: bold;
+}

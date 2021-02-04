@@ -4,6 +4,8 @@
     margin: 0;
     padding: 0;
     border: 0;
+    text-decoration: none;
+    color: black;
 }
 
 .mainContainer {
@@ -14,7 +16,7 @@
 
 .innerContainer {
     /* po zmianie zmień też w footer.css */
-    padding-bottom: 18rem;
+    padding-bottom: 19rem;
 }
 
 input,
@@ -29,33 +31,42 @@ textarea {
     box-sizing: border-box;
 }
 
-textarea{
+textarea {
     padding: 10px;
     min-height: 80px;
 }
 
 button{
-  background-color: #278abb; 
-  /* border: none; */
-  color: white;
-  padding: 10px 28px;
-  text-align: center;
-  font-size: 16px;
-  border-radius: 15px;
-  margin: 2px 0;
-  width: fit-content;
-  text-decoration: none;
-  height: fit-content;
+    background-color: #278abb;
+    /* border: none; */
+    color: white;
+    padding: 10px 28px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 15px;
+    margin: 2px 0;
+    width: max-content;
+    width: fit-content;
+    text-decoration: none;
+    height: max-content;
+    height: fit-content;
 }
-button > a{
+button > a {
     text-decoration: none;
     color: white;
 }
 
 p {
-    text-decoration : none;
+    text-decoration: none;
     color: black;
-    font-family: "Roboto", sans-serif;
+    font-family: "Quicksand", sans-serif;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 900;
+    color: #278abb;
+    margin: 10px 0;
 }
 
 h3 {
@@ -64,7 +75,7 @@ h3 {
     color: #278abb;
     margin: 10px 0;
 }
-h2{
+h2 {
     color: #278abb;
     font-size: 35px;
     text-align: center;

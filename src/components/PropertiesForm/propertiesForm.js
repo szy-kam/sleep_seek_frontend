@@ -16,13 +16,14 @@ export default function PropertiesForm(props) {
 
     useEffect(() => {
         const getProperties = () => {
+
             if (Array.isArray(props.properties)) {
                 for (let item of props.properties) {
                     checkedItems.add(item)
                 }
             }
 
-            if (props.stay && allProperties !== []) {
+            if (props.stay && !allProperties.length) {
                 GetAllStayProperties()
                     .then(resposne => resposne.json())
                     .then(data => {
@@ -32,17 +33,17 @@ export default function PropertiesForm(props) {
                     })
             }
 
-            if (props.accommodation && allProperties !== []) {
+            if (props.accommodation && !allProperties.length) {
                 GetAllAccommodationProperties()
                     .then(resposne => resposne.json())
                     .then(data => {
                         setAllProperties(data.map(item => {
                             return { name: item, id: item }
                         }))
-                        // setAllProperties(data)
                     })
             }
         }
+
         getProperties()
     }, [props.properties]) // eslint-disable-line react-hooks/exhaustive-deps
 

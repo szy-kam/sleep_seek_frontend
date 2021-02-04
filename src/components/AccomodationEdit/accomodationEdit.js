@@ -14,12 +14,20 @@ class AccommodationEdit extends Component {
     getAccomodations = () => {
         this.setState({ accommodations: null })
         GetAccommodationsByStayIdRepository(this.props.match.params.id)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                }
+                else {
+                    this.props.history.push("/my-account")
+                }
+            })
             .then(data => {
                 if (data.length === 0) {
                     data = [{}]
                 }
-                this.setState({ accommodations: data })
+                if (data[0])
+                    this.setState({ accommodations: data })
             })
             .catch(err => console.log(err));
     }
@@ -70,9 +78,10 @@ class AccommodationEdit extends Component {
                     {Array.isArray(this.state.accommodations) && this.state.accommodations.map((item, i) => (
                         <AccommodationForm accommodation={item} key={i} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} stayId={this.props.match.params.id} />
                     ))}
+                    <button onClick={this.addForm} className={style.addAccommodationButton}>{t('ADD_ACCOMMODATION')}</button>
                 </div>
 
-                <button onClick={this.addForm} className={style.addAccommodationButton}>{t('ADD_ACCOMMODATION')}</button>
+                
                 <Link to={`/stays/${this.props.match.params.id}`} className={style.goToStayButton}><button >{t('GO_TO_STAY')}</button></Link>
             </div>
         )

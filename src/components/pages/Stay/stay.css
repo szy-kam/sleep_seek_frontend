@@ -25,6 +25,10 @@
     object-fit: contain;
 }
 
+.nameAndAddress {
+    width: 67%;
+}
+
 .name {
     font-size: 50px;
 }
@@ -44,6 +48,7 @@
 .description {
     font-size: 20px;
     text-align: justify;
+    margin-top: 20px;
 }
 
 .contact {
@@ -54,11 +59,16 @@
     padding: 20px;
     background: #278abb;
     color: white;
-    width: 30%;
+    width: 32%;
     /* align-self: center;
     margin: 20px 0; */
     align-self: flex-end;
     margin-top: -90px;
+}
+
+.contact div,
+.contact span {
+    color: white;
 }
 
 .contacUs {
@@ -94,11 +104,12 @@
 
 .imageGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
+    /* grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); */
     grid-gap: 1px;
     align-items: start;
     justify-items: center;
-    margin: auto;
+    margin: 0 auto;
     width: 90%;
     min-height: 450px;
 }
@@ -128,18 +139,27 @@
     align-self: center;
 }
 
-.message {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    background-color: blue;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
-    z-index: 4;
+.datePickerContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
 }
 
-.stayEditCompoment {
-    display: flex;
-    flex-direction: column;
+.datePickerContainer > div > div > input {
+    width: 250px;
+    border-color: #278abb;
+    color: #278abb;
+    font-size: 14px;
+}
+
+.datePickerContainer span {
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 850px) {
+    .contact {
+        align-self: normal;
+        margin-top: unset;
+    }
 }

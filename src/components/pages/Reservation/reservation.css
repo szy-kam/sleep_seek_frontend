@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.stay{
+.stay {
     display: flex;
     flex-direction: column;
     max-width: 33%;
@@ -30,16 +30,16 @@
     font-weight: 900;
 }
 
-.Calendar__monthArrow{
-    width: 30px!important;
+.Calendar__monthArrow {
+    width: 30px !important;
 }
 
 .properties div {
-    font-size: 16px!important;
+    font-size: 16px !important;
 }
 
 .name {
-    font-size: 40px!important;
+    font-size: 40px !important;
     color: #278abb;
     font-weight: 900;
 }
@@ -53,6 +53,9 @@
     display: flex;
     flex-direction: column;
     max-width: 33%;
+}
+.dateInputs p {
+    margin-top: 5px;
 }
 
 .dataInfo {
@@ -70,7 +73,7 @@
     max-width: 33%;
 }
 
-.numberInCircleContainer{
+.numberInCircleContainer {
     display: flex;
     align-self: center;
 }
@@ -93,21 +96,34 @@
     font-size: 25px;
 }
 
-.message{
+.message {
     color: tomato;
     font-size: 25px;
 }
 
-@media screen and (max-width: 1300px){
+.datePickerContainer > div > div > input {
+    margin: 0 auto;
+    width: 250px;
+    font-size: 14px;
+}
 
+.datePickerContainer {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1300px) {
     .reservationContent {
         width: 95%;
     }
 }
-@media screen and (max-width: 1100px){
-
+@media screen and (max-width: 1100px) {
     .reservationContent {
         flex-direction: column;
         width: 70%;
     }
+}
+
+.Calendar__header {
+    background: aquamarine;
 }

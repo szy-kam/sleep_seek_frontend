@@ -6,10 +6,12 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { STAY } from "../../../config";
 import { connect } from "react-redux";
+import { dateRangeChange } from "../../../redux/stay/stayActions";
 import StayMap from '../../widgets/StayMap/stayMap'
 import Reviews from "../../Reviews/reviews";
 import Accommodation from "../../Accommodation/accommodation";
 import Properties from '../../Properties/properties'
+import DatePicker from '../../widgets/DatePicker/datePicker'
 
 class Stay extends Component {
     state = {
@@ -21,7 +23,15 @@ class Stay extends Component {
 
     getStay = () => {
         GetStayByIdRepository(this.props.match.params.id)
-            .then(resp => resp.json())
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                }
+                else {
+                    console.log(resp);
+                    this.props.history.push("/404");
+                }
+            })
             .then((stay) => {
                 if (stay.name) { this.setState({ stay: stay }); }
                 else {
@@ -82,31 +92,33 @@ class Stay extends Component {
         );
     }
 
+    handleDateSelect = (date) => {
+        if (date.from !== this.props.dateRange.from || date.to !== this.props.dateRange.to) {
+            this.props.dateRangeChange(date)
+        }
+    }
+
     renderContent = () => {
         const { t } = this.props;
         if (this.state.stay.name) {
             const position = [this.state.stay.address.latitude, this.state.stay.address.longitude];
             return <div className={style.stayContent}>
                 <div className={style.stayInfo}>
-                    {/* {this.state.stay.mainPhoto && <div
-                        className={style.image}
-                        style={{ backgroundImage: `url(${this.state.stay.mainPhoto})` }}
-                    >
-                    </div>} */}
                     {this.state.stay.photos.length > 1 && <div className={style.imageGrid}>{this.imageGrid()}</div>}
-
                     {this.state.stay.photos.length === 1 && <div className={style.singleImage}>{this.imageGrid()}</div>}
-                    <div className={style.name}>
-                        {this.state.stay.name}
-                    </div>
-                    <div className={style.address}>
-                        {t("ADDRESS")}: {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
-                        {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
+                    <div className={style.nameAndAddress}>
+                        <div className={style.name}>
+                            {this.state.stay.name}
+                        </div>
+                        <div className={style.address}>
+                            {this.state.stay.address.street}{" "}{this.state.stay.address.city},{" "}
+                            {this.state.stay.address.zipCode}{" "}{this.state.stay.address.country}
+                        </div>
                     </div>
                     <div className={style.contact}>
                         <div className={style.contacUs}>{t('CONTACT_US')}!</div>
-                        <div><span className={style.contactDetail}>{t('PHONE')}:</span>{this.state.stay.phoneNumber}</div>
-                        <div><span className={style.contactDetail}>{t('EMAIL')}:</span>{this.state.stay.email}</div>
+                        <div><span className={style.contactDetail}>{t('PHONE')}: </span>{this.state.stay.phoneNumber}</div>
+                        <div><span className={style.contactDetail}>{t('EMAIL')}: </span>{this.state.stay.email}</div>
                     </div>
                     <div className={style.description}>{this.state.stay.description}</div>
 
@@ -115,7 +127,11 @@ class Stay extends Component {
                 {this.state.stay.properties.length > 0 && <h3 className={style.title}>{t('PROPERTIES')}:</h3>}
                 <Properties properties={this.state.stay.properties} />
                 <h3 className={style.title}>{t('ACCOMMODATIONS')}:</h3>
-                <Accommodation stayId={this.props.match.params.id} />
+                <div className={style.datePickerContainer}>
+                    <span>Aby wyświetlić dostępnośc pokoi, wybierz datę pobytu</span>
+                    <DatePicker handleDateSelect={this.handleDateSelect} position="top"/>
+                </div>
+                <Accommodation stayId={this.props.match.params.id} dateRange={this.props.dateRange} />
                 {this.state.stay.address.longitude && <h3 className={style.title}>{t('FIND_US_ON_MAP')}:</h3>}
                 <StayMap position={position} zoom={14} />
                 <h3 className={style.title}>{t('REVIEWS')}:</h3>
@@ -127,7 +143,6 @@ class Stay extends Component {
     }
 
     render() {
-        console.log(this.state.stay);
         return (
             <div className={style.stayComponent}>
                 {this.renderContent()}
@@ -135,8 +150,13 @@ class Stay extends Component {
         );
     }
 }
-const mapStateToProps = (state) => ({
-    user: state.user.user,
-});
 
-export default connect(mapStateToProps)(withTranslation()(Stay));
+const mapDispatchToProps = (dispatch) => ({
+    dateRangeChange: (dateRange) => dispatch(dateRangeChange(dateRange)),
+})
+
+const mapStateToProps = state => ({
+    dateRange: state.stay.dateRange
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Stay));

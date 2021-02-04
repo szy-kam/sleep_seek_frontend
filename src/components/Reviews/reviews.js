@@ -6,7 +6,7 @@ import { IsUserLogged } from "../../repository/user";
 import 'font-awesome/css/font-awesome.min.css';
 
 class Rewiews extends Component {
-    defaultPageSize = 4;
+    defaultPageSize = 10;
 
     state = {
         reviews: [],
@@ -23,7 +23,11 @@ class Rewiews extends Component {
 
     getReviews = () => {
         GetReviewsByStayIdRepository(this.props.stayId, this.state.pageNumber, this.state.pageSize)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok)
+                    return response.json()
+                else return []
+            })
             .then(reviews => {
                 this.setState({ reviews: reviews });
                 if (reviews.length < this.state.pageSize) {
@@ -68,8 +72,9 @@ class Rewiews extends Component {
                     <div className={style.review} key={i}>
                         <div className={style.rating}><strong>{item.rating}</strong> / 5 </div>
                         <div className={style.message}>
-                            <div className={style.createdAt}>
-                                {item.createdAt.slice(0, 10)}
+                            <div className={style.reviewInfo}>
+                                <span className={style.reviewDate}>{item.createdAt.slice(0, 10)}</span>
+                                <span className={style.reviewDisplayName}><span role="img" aria-label="Bust In Silhouette">👤</span>{item.displayName}</span>
                             </div>
                             <div className={style.messageContent}>
                                 {item.message}

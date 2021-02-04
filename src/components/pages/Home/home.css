@@ -1,0 +1,53 @@
+.smartQuote {
+    margin: 30px auto 20px auto;
+}
+
+.innerSmartQuote {
+    width: max-content;
+    width: fit-content;
+    border-bottom: 3px solid #278abb;
+    border-top: 3px solid #278abb;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.welcome {
+    display: flex;
+    flex-direction: row;
+    max-height: 50vh;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.welcomeImage {
+    width: 40%;
+}
+
+.welcome img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.welcomeText {
+    width: 60%;
+}
+.welcomeText > h1 {
+    font-size: 12vh;
+}
+
+.welcomeText > p {
+    font-size: 1.4vw;
+    line-height: 2.3vw;
+}
+
+@media only screen and (max-width: 1200px) {
+    .welcomeText > h1 {
+        font-size: 95px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .welcomeText > h1 {
+        font-size: 65px;
+    }
+}

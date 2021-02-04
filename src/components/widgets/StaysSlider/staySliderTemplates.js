@@ -29,6 +29,7 @@ const StaySliderTemplates = (props) => {
                             style={{
                                 background: `url(${item.mainPhoto})`,
                                 height: height,
+                                backgroundPosition: "bottom"
                             }}
                         ></div>
                         <Link to={`/stays/${item.id}`}>

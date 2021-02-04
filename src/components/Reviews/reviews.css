@@ -1,14 +1,14 @@
-.reviewsComponent{
+.reviewsComponent {
     display: flex;
     flex-direction: column;
 }
 
-.reviews{
+.reviews {
     display: flex;
     flex-direction: column;
 }
 
-.review{
+.review {
     display: flex;
     flex-direction: row;
     border: 1px solid black;
@@ -17,39 +17,43 @@
     margin: 3px 0;
 }
 
-.user{
+.user {
     font-weight: bold;
 }
 
-.createdAt {
+.reviewDate {
     color: #6e6e6e;
 }
 
-.messageContent{
+.reviewDisplayName {
+    margin-left: 10px;
+}
+
+.messageContent {
     font-style: italic;
     font-size: 17px;
 }
 
-.rating{
+.rating {
     min-width: 50px;
     font-size: larger;
     margin-right: 10px;
 }
 
-.rating strong{
+.rating strong {
     font-weight: 700;
     font-size: 150%;
     color: #278abb;
 }
 
-.addReview{
+.addReview {
     padding: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.addReview textarea{
+.addReview textarea {
     padding: 15px;
     border: 1px solid black;
     width: 80%;
@@ -59,13 +63,12 @@
     margin: 15px;
 }
 
-.addReview button{
+.addReview button {
     padding: 15px;
     width: 10%;
-    
 }
 
-.showMore{
+.showMore {
     padding: 15px;
     align-self: center;
 }

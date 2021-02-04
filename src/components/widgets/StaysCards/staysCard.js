@@ -24,8 +24,10 @@ const StaysCard = (props) => {
                             {stays.map((item, i) => (
                                 <div key={i} className={style.staysCardT1}>
                                     <div className={style.image}>
-                                        {item.mainPhoto && <Link to={`/stays/${item.id}`}>
+                                        {item.mainPhoto ? <Link to={`/stays/${item.id}`}>
                                             <img src={item.mainPhoto} alt={item.name}></img>
+                                        </Link>: <Link to={`/stays/${item.id}`}>
+                                            <img src={"/images/placeholder1.png"} alt={"item placeholder sleepseek"}></img>
                                         </Link>}
                                     </div>
                                     <div className={style.cardBody}>
@@ -86,8 +88,8 @@ const StaysCard = (props) => {
                     return (
                         <div className={style.staysContainerPhoto}>
                             {stays.map((item) => (
-                                <Link to={`/stays/${item.id}`}>
-                                    <div key={item.id} className={style.staysCardPhoto}>
+                                <Link to={`/stays/${item.id}`} key={item.id}>
+                                    <div className={style.staysCardPhoto}>
                                         <div className={style.image} style={{ backgroundImage: `url(${item.mainPhoto})` }}>
                                         </div>
                                         {item.address.city ? <div className={style.city}>

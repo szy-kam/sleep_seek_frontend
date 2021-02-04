@@ -3,12 +3,16 @@
     padding: 3px;
 }
 
-.accomodation{
+.accommodation{
     padding: 3px;
 }
 
 .accommodationTable {
     width: 100%;
+}
+
+.accommodationEmpty{
+    background-color: #0000009e;
 }
 
 .accommodationTable > thead {

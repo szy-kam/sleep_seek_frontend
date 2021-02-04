@@ -1,27 +1,36 @@
 .staysComponent {
     display: flex;
     flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
 }
 
 @media only screen and (max-width: 800px) {
-
     .staysComponent {
-        flex-direction: column;
+        flex-direction: column-reverse;
+        width: 95%;
     }
 
     .leftColumn {
         flex-basis: 85%;
-        max-width: none!important;
+        max-width: none !important;
     }
-
 }
 
 .leftColumn {
-    flex-basis: 15%;
-    padding: 20px;
+    flex-basis: 20%;
     max-width: 300px;
 }
 .middleColumn {
-    flex-basis: 85%;
+    flex-basis: 79%;
+    margin-left: 8px;
 }
 
+.searchMessage {
+    margin: 10px auto;
+}
+
+.searchMessage b {
+    font-weight: bold;
+    color: #278abb;
+}

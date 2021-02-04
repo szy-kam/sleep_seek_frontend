@@ -1,31 +1,29 @@
-.propertiesFormComponent{
+.propertiesFormComponent {
     border: 3px solid black;
     margin: 5px;
     border-radius: 15px;
     height: 100%;
-    padding: 5px;
+    padding: 10px;
     box-sizing: border-box;
 }
-.propertiesFormComponent ul{
+.propertiesFormComponent ul {
     list-style: none;
-    /* height: 200px; */
     max-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding: 15px;
 }
-.propertiesFormComponent ul li{
+.propertiesFormComponent ul li {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* width: 300px; */
     width: 100%;
     max-width: 300px;
     flex-grow: 1;
+    margin-bottom: 2px;
 }
-.propertiesFormComponent ul li input{
+.propertiesFormComponent ul li input {
     width: 15px;
     height: 15px;
     margin: 8px;

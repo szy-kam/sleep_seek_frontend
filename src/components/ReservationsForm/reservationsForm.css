@@ -22,37 +22,3 @@
     align-self: center;
 }
 
-
-.reservationsTable {
-    width: 100%;
-}
-
-.reservationsTable > thead {
-    background-color:rgb(23 151 211 / 42%);
-    height: 25px;
-    font-size: 20px;
-    text-transform: uppercase;
-    padding: 5px 0;
-}
-
-.reservationsTable > thead > tr {
-    height: 35px;
-    
-}
-
-.reservationsTable > thead > tr > td{
-    padding-left: 5px;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-
-/* .accommodationTable > tbody > tr > td:last-child{
-    text-align: center;
-} */
-
-.reservationsTable td{
-    text-align: center;
-}

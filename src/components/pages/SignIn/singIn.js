@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logInUser } from "../../../redux/user/userActions";
 import { SignInUserRepository } from "../../../repository/user";
 import { Link } from "react-router-dom";
+import PopupComponent from "../../widgets/PopupComponent/popupComponent";
 
 class SignIn extends Component {
     state = {
@@ -12,7 +13,8 @@ class SignIn extends Component {
             username: "",
             password: "",
         },
-        message: null,
+        message: "",
+        showPopup: false
     };
 
     handleInput = (event, field) => {
@@ -35,47 +37,48 @@ class SignIn extends Component {
                     return response.text()
                 }
                 else {
-                    this.setState({ message: t(`USER_ERROR_${response.status}`) });
+                    this.setState({ message: t(`USER_ERROR_${response.status}`), showPopup: true });
+                    this.quickMessage()
                 }
             })
             .then(token => {
                 if (token) {
-                    this.props.logInUser({ userToken: token, userId: this.state.form.username })
-                    this.setState({ message: t("LOGGED") });
+                    this.props.logInUser({ userToken: token, username: this.state.form.username })
+                    this.setState({ message: t("LOGGING"), showPopup: true });
+                    this.redirectUser()
                 }
             })
-            .catch( err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                this.setState({ message: t(`ERROR`), showPopup: true });
+                this.quickMessage()
+            })
     }
 
     redirectUser = () => {
-        setTimeout(() => {
-            this.props.history.push("/my-account");
-        }, 1500);
+        this.props.history.push("/my-account");
     };
 
-    message = () => {
-        if (this.state.message)
-            return (
-                <div className={style.message}>
-                    {this.state.message}
-                    {this.redirectUser()}
-                </div>
-            );
-        else return null;
+    quickMessage = (time = 1500) => {
+        setTimeout(() => {
+            this.setState({ showPopup: false });
+        }, time);
     };
 
     render() {
         const { t } = this.props;
         return (
             <div className={style.signInComponent}>
-                {this.message()}
+                <h1>{t('SIGN_IN')}</h1>
                 <form className={style.signInForm} onSubmit={this.submitForm}>
                     <input
-                        type="text"
+                        type="email"
                         placeholder={t("EMAIL")}
                         value={this.state.form.email}
                         onChange={(event) => this.handleInput(event, "username")}
                         autoComplete="on"
+                        minLength="5"
+                        maxLength="64"
                         required
                         autoFocus
                     />
@@ -85,14 +88,19 @@ class SignIn extends Component {
                         value={this.state.form.password}
                         onChange={(event) => this.handleInput(event, "password")}
                         autoComplete="on"
+                        minLength="1"
+                        maxLength="32"
                         required
                     />
-                    <div><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div>
+                    {/* <div className={style.forgerPassword}><Link to="/forget-password">{t("FORGOT_PASSWORD")}</Link></div> */}
                     <button type="submit">{t("LOG_IN")}</button>
                 </form>
                 <div>
                     <div><Link to="/register"><button>{t("CREATE_ACCOUNT")}</button></Link></div>
                 </div>
+                {this.state.showPopup && <PopupComponent >
+                    <h3>{t(this.state.message)}</h3>
+                </PopupComponent>}
             </div>
         );
     }
