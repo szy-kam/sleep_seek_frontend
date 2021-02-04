@@ -88,7 +88,7 @@ class ReservationsEdit extends Component {
                         <td>{t('FULL_NAME')}</td>
                         <td>{t('PHONE_NUMBER')}</td>
                         <td>{t('SAVE')}</td>
-                        {/* <td>{t('DELETE')}</td> */}
+                        <td>{t('DELETE')}</td>
                     </tr>
                 </thead>
                 <tbody>
