@@ -269,6 +269,7 @@ class StayForm extends Component {
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.city}
                         maxLength="100"
+                        required
                     />
                     <label>{t("STREET")}</label>
                     <input
@@ -276,6 +277,7 @@ class StayForm extends Component {
                         onBlur={this.mapReposition}
                         value={this.state.stay.address.street}
                         maxLength="100"
+                        required
                     />
                     <label>{t("ZIP_CODE")}</label>
                     <input
